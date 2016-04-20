@@ -1,0 +1,25 @@
+{
+  "name": "monitoring-prototype-lambda",
+  "version": "1.0.0",
+  "description": "Can we create a lambda for monitoring APIs?",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@stash.ops.aol.com:2022/~kurtfmoeller2/monitoring-prototype-lambda.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.3.4",
+    "fs": "0.0.2",
+    "hapi": "^13.3.0",
+    "js-yaml": "^3.5.5",
+    "json5": "^0.4.0",
+    "lodash": "^4.6.1",
+    "mongodb": "^2.1.14",
+    "newman": "^2.0.7"
+  }
+}

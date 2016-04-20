@@ -1,0 +1,14 @@
+supported_monitors: [ brandapis-prod ]
+output_folder: /outputs/
+newman_folder: /src/main/resources/newman/
+api_monitor: /src/com/aol/identity/monitor/api/
+test_file: tests.json
+env_file: env.json
+global_file: globals.json
+report_file_end: -report.json
+html_results_file_end: -results.html
+xml_results_file_end: -results.xml
+env_export_file_end: -env.json
+verbose_file_end: -debug
+mongo_db: mongodb://localhost:27017/apimonitor
+default_server_port: 30099

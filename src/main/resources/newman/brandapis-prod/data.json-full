@@ -1,0 +1,20 @@
+[
+{
+    "brand_api_server": "https://bapi-a01.white.aol.com:13443/brandapi/api/",
+},
+{
+    "brand_api_server": "https://bapi-a02.white.aol.com:13443/brandapi/api/",
+},
+{
+    "brand_api_server": "https://bapi-a03.white.aol.com:13443/brandapi/api/",
+},
+{
+    "brand_api_server": "https://bapi-a04.white.aol.com:13443/brandapi/api/",
+},
+{
+    "brand_api_server": "https://bapi-m01.white.aol.com:13443/brandapi/api/",
+},
+{
+    "brand_api_server": "https://bapi-m02.white.aol.com:13443/brandapi/api/",
+},
+]
