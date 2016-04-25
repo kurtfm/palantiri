@@ -11,10 +11,14 @@
 * build front end page on AMP site to pull data
 * host somewhere the AMP site can reach
 
-# API Debugging
+# API Debugging 
 * monitor APIs via newman
 * convert output of newman into database
 * make accessible via UI
+
+# UI monitoring
+* monitor APIs via ? selenium + phantomjs or jmeter?
+* convert output and pipe into argus
 
 # prototype --> real deal
 * aws
