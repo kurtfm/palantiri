@@ -1,4 +1,4 @@
-supported_monitors: [ brandapis-prod ]
+supported_monitors: [ brandapi-user ]
 output_folder: /outputs/
 newman_folder: /src/main/resources/newman/
 api_monitor: /src/com/aol/identity/monitor/api/

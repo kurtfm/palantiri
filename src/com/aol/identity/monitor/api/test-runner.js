@@ -10,11 +10,11 @@ module.exports = function(conf){
     const target = conf.target;
     const time = Date.now();
     const outputId = target + "." + time + "." +  (Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000);
-    const newmanFolder = conf.application_root + conf.newman_folder + target + '/';
+    const newmanFolder = conf.application_root + conf.newman_folder + target + '-';
     const outputFolder = conf.application_root + conf.output_folder + outputId;
     return new Promise(function(resolve,reject){
         
-        var tests = JSON5.parse(fs.readFileSync( newmanFolder + conf.test_file + "-short", 'utf8'));
+        var tests = JSON5.parse(fs.readFileSync( newmanFolder + conf.test_file, 'utf8'));
         var jsonReport =  outputFolder + conf.report_file_end;
         var htmlSummary = outputFolder + conf.html_results_file_end;
         var debugLog = outputFolder +  conf.verbose_file_end;

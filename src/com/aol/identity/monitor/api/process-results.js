@@ -27,21 +27,21 @@ module.exports = function(data){
 
 	//clean up files
 
-	//fs.unlink(data.htmlSummary, function(err){
-	   //if (err) throw err;
-	   //console.log(data.htmlSummary + " deleted");
-	//});
-	//fs.unlink(data.xmlSummary, function(err){
-	   //if (err) throw err;
-	   //console.log(data.xmlSummary + " deleted");
-	//});
-	//fs.unlink(data.jsonReport, function(err){
-	 //  if (err) throw err;
-	  // console.log(data.jsonReport + " deleted");
-	//});
-	//fs.unlink(data.debugLog, function(err){
-	  // if (err) throw err;
-	  // console.log(data.debugLog + " deleted");
-	//});
+	fs.unlink(data.htmlSummary, function(err){
+	   if (err) throw err;
+	   console.log(data.htmlSummary + " deleted");
+	});
+	fs.unlink(data.xmlSummary, function(err){
+	   if (err) throw err;
+	   console.log(data.xmlSummary + " deleted");
+	});
+	fs.unlink(data.jsonReport, function(err){
+	   if (err) throw err;
+	   console.log(data.jsonReport + " deleted");
+	});
+	fs.unlink(data.debugLog, function(err){
+	   if (err) throw err;
+	   console.log(data.debugLog + " deleted");
+	});
 
 };

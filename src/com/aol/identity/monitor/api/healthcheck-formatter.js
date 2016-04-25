@@ -9,24 +9,39 @@ module.exports = function(report){
 	var healthcheck = {};
 	healthcheck.timestamp = report.timestamp;
 
-	healthcheck.details = [];
+	healthcheck.folders = [];
 
+	var folders = report.collection.folders;
 	var requests = report.collection.requests;
 	var results = report.results;
 
-	for (var i = 0, len = requests.length; i < len; i++) {
-		var testId = requests[i].id;
-		for (var c = 0, len = results.length; c < len; c++) {
-			if(report.results[c].id ==  testId){
-	  			passes += results[c].totalPassFailCounts.pass;
-	  			fails += results[c].totalPassFailCounts.fail;
+	for (var f = 0, flen = folders.length; f < flen; f++) {
+		healthcheck.folders[f] = {};
+		healthcheck.folders[f].name = folders[f].name;
+		healthcheck.folders[f].tests = [];
+		var order = folders[f].order;
+		for (var o = 0, olen = order.length; o < olen; o++) {
+			healthcheck.folders[f].tests[o] = {};
 
-			  	healthcheck.details[i] = {
-			  		"name" : requests[i].name, 
-			  		"description":requests[i].description, 
-			  		"totalPassFailCounts": results[c].totalPassFailCounts, 
-			  		"testPassFailCounts": results[c].testPassFailCounts
-			  	}		
+			for (var r = 0, rlen = results.length; r < rlen; r++) {
+				if(report.results[r].id ===  order[o]){
+		  			passes += results[r].totalPassFailCounts.pass;
+		  			fails += results[r].totalPassFailCounts.fail;
+
+				  	healthcheck.folders[f].tests[o] = {
+				  		"name": results[r].name, 
+				  		"totalPassFailCounts": results[r].totalPassFailCounts, 
+				  		"testPassFailCounts": results[r].testPassFailCounts
+				  	};
+
+				  	for(var s = 0, slen = requests.length; s < slen; s++){
+				  		if(requests[s].id === results[r].id){
+				  			healthcheck.folders[f].tests[o].description = requests[s].description;
+				  			//break; 
+				  		}
+				  	}
+				  	//break; 
+				}
 			}
 		}
 	}
