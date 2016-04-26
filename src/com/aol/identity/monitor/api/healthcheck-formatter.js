@@ -8,6 +8,7 @@ module.exports = function(report){
 	var testcount = 0;
 	var healthcheck = {};
 	healthcheck.monitor = report.collection.name;
+	healthcheck.id = report.collection.id;
 	healthcheck.timestamp = report.timestamp;
 
 	healthcheck.folders = [];
