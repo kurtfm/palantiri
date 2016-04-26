@@ -18,6 +18,7 @@ module.exports = function(report){
 
 	for (var f = 0, flen = folders.length; f < flen; f++) {
 		healthcheck.folders[f] = {};
+		healthcheck.folders[f].id = folders[f].id;
 		healthcheck.folders[f].name = folders[f].name;
 		healthcheck.folders[f].tests = [];
 		var order = folders[f].order;

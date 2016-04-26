@@ -39,6 +39,7 @@ module.exports = function(data){
 	   if (err) throw err;
 	   console.log(data.jsonReport + " deleted");
 	});
+	
 	fs.unlink(data.debugLog, function(err){
 	   if (err) throw err;
 	   console.log(data.debugLog + " deleted");
