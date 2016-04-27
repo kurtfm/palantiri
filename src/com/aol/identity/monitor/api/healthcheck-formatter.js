@@ -31,24 +31,28 @@ module.exports = function(report){
 
 			for (var r = 0, rlen = results.length; r < rlen; r++) {
 				if(report.results[r].id ===  order[o]){
-					healthcheck.folders[f].passes += results[r].totalPassFailCounts.pass;
-					healthcheck.folders[f].fails += results[r].totalPassFailCounts.fail;
-		  			passes += results[r].totalPassFailCounts.pass;
-		  			fails += results[r].totalPassFailCounts.fail;
+					//folder and collection stats
+					var testPasses = healthcheck.folders[f].tests[o].passes = results[r].totalPassFailCounts.pass;
+					var testFails = healthcheck.folders[f].tests[o].passes = results[r].totalPassFailCounts.fail;
 
-				  	healthcheck.folders[f].tests[o] = {
-				  		"name": results[r].name, 
-				  		"totalPassFailCounts": results[r].totalPassFailCounts, 
-				  		"testPassFailCounts": results[r].testPassFailCounts
-				  	};
+					healthcheck.folders[f].passes += testPasses;
+					healthcheck.folders[f].fails += testFails;
+		  			passes += testPasses;
+		  			fails += testFails;
 
+		  			//test stats
+				  	healthcheck.folders[f].tests[o].name = results[r].name;
+				  	healthcheck.folders[f].tests[o].passes = testPasses;
+				  	healthcheck.folders[f].tests[o].fails = testFails;
+				  	healthcheck.folders[f].tests[o].score = (testPasses/(testPasses+testFails))*100;
+				  	healthcheck.folders[f].tests[o].testPassFailCounts = results[r].testPassFailCounts;
+				  	
+				  	//painfully find the folder description buried in the requests
 				  	for(var s = 0, slen = requests.length; s < slen; s++){
 				  		if(requests[s].id === results[r].id){
-				  			healthcheck.folders[f].tests[o].description = requests[s].description;
-				  			//break; 
+				  			healthcheck.folders[f].tests[o].description = requests[s].description; 
 				  		}
 				  	}
-				  	//break; 
 				}
 			}
 			healthcheck.folders[f].score = (healthcheck.folders[f].passes / (healthcheck.folders[f].passes + healthcheck.folders[f].fails)) * 100;
