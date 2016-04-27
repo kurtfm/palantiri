@@ -41,12 +41,13 @@ module.exports = function(report){
 		  			fails += testFails;
 
 		  			//test stats
+		  			healthcheck.folders[f].tests[o].id = report.results[r].id;
 				  	healthcheck.folders[f].tests[o].name = results[r].name;
 				  	healthcheck.folders[f].tests[o].passes = testPasses;
 				  	healthcheck.folders[f].tests[o].fails = testFails;
 				  	healthcheck.folders[f].tests[o].score = (testPasses/(testPasses+testFails))*100;
 				  	healthcheck.folders[f].tests[o].testPassFailCounts = results[r].testPassFailCounts;
-				  	
+
 				  	//painfully find the folder description buried in the requests
 				  	for(var s = 0, slen = requests.length; s < slen; s++){
 				  		if(requests[s].id === results[r].id){
