@@ -51,6 +51,7 @@ module.exports = function(report){
 				  	//break; 
 				}
 			}
+			healthcheck.folders[f].score = (healthcheck.folders[f].passes / (healthcheck.folders[f].passes + healthcheck.folders[f].fails)) * 100;
 		}
 	}
 	healthcheck.testcount = fails + passes;
