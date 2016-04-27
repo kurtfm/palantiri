@@ -21,6 +21,9 @@ module.exports = function(report){
 		healthcheck.folders[f] = {};
 		healthcheck.folders[f].id = folders[f].id;
 		healthcheck.folders[f].name = folders[f].name;
+		healthcheck.folders[f].description = folders[f].description;
+		healthcheck.folders[f].fails = 0;
+		healthcheck.folders[f].passes = 0;
 		healthcheck.folders[f].tests = [];
 		var order = folders[f].order;
 		for (var o = 0, olen = order.length; o < olen; o++) {
@@ -28,6 +31,8 @@ module.exports = function(report){
 
 			for (var r = 0, rlen = results.length; r < rlen; r++) {
 				if(report.results[r].id ===  order[o]){
+					healthcheck.folders[f].passes += results[r].totalPassFailCounts.pass;
+					healthcheck.folders[f].fails += results[r].totalPassFailCounts.fail;
 		  			passes += results[r].totalPassFailCounts.pass;
 		  			fails += results[r].totalPassFailCounts.fail;
 
