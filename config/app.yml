@@ -18,6 +18,6 @@ slack_message_options:
   pretty: 1
   link_names: 1
 slack_upload_options:
-  channels:  "#identity-site-tester"
+  channels:  "#identity-site-alerts"
   token: xoxp-2183958609-2788202419-18650436896-f187031cc7
   fileType: log
