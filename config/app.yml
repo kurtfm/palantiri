@@ -12,7 +12,7 @@ env_export_file_end: -env.json
 verbose_file_end: -debug
 slack_api: https://slack.com/api/
 slack_message_options:
-  channel:  "#identity-site-tester"
+  channel:  "#identity-site-alerts"
   token: xoxp-2183958609-2788202419-18650436896-f187031cc7
   icon_emoji: ":loudspeaker:"
   pretty: 1
