@@ -1,3 +1,4 @@
+rest_server_port: 30099
 output_folder: /outputs/
 newman_folder: /app/resources/newman/
 api_monitor: /app/monitors/api/

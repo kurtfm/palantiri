@@ -6,7 +6,7 @@ const fs = require('fs');
 const JSON5 = require('json5');
 var config = require('../config/load');
 
-server.connection({ port: process.env.SERVER_PORT ? process.env.SERVER_PORT : config.default_server_port});
+server.connection({ port: process.env.SERVER_PORT ? process.env.SERVER_PORT : config.rest_server_port});
 
 //move these into source? separate out handlers
 server.route({
