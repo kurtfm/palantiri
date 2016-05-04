@@ -1,18 +1,14 @@
 'use strict';
 
 const Hapi = require('hapi');
-
 const server = new Hapi.Server();
-
 const fs = require('fs');
-
 const JSON5 = require('json5');
-
-var config = require('../src/main/resources/config/load');
+var config = require('../config/load');
 
 server.connection({ port: process.env.SERVER_PORT ? process.env.SERVER_PORT : config.default_server_port});
 
-
+//move these into source? separate out handlers
 server.route({
     method: 'GET',
     path: '/',
@@ -23,9 +19,9 @@ server.route({
 
 server.route({
     method: 'GET',
-    path: '/{category}/{target}',
+    path: '/healthcheck/{target}',
     handler: function (request, reply) {
-    	var results = JSON5.parse(fs.readFileSync(config.application_root + config.output_folder + request.params.category + '/' + request.params.target + '.json'));
+    	var results = JSON5.parse(fs.readFileSync(config.application_root + config.output_folder + 'healthcheck/' + request.params.target + '.json'));
         reply(results);
     }
 });

@@ -1,0 +1,3 @@
+supported_monitors: [ brandapi-user, brandapi-support, brandapi-migration]
+mongo_db: mongodb://localhost:27017/apimonitor
+rest_server_port: 30099

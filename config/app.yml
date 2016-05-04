@@ -1,0 +1,23 @@
+output_folder: /outputs/
+newman_folder: /app/resources/newman/
+api_monitor: /app/monitors/api/
+rest_controllers: /app/controllers/
+test_file: tests.json
+env_file: env.json
+global_file: globals.json
+report_file_end: -report.json
+html_results_file_end: -results.html
+xml_results_file_end: -results.xml
+env_export_file_end: -env.json
+verbose_file_end: -debug
+slack_api: https://slack.com/api/
+slack_message_options:
+  channel:  "#identity-site-tester"
+  token: xoxp-2183958609-2788202419-18650436896-f187031cc7
+  icon_emoji: ":loudspeaker:"
+  pretty: 1
+  link_names: 1
+slack_upload_options:
+  channels:  "#identity-site-tester"
+  token: xoxp-2183958609-2788202419-18650436896-f187031cc7
+  fileType: log

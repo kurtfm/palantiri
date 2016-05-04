@@ -6,6 +6,7 @@ module.exports = function(report){
 	var passes = 0;
 	var fails = 0;
 	var testcount = 0;
+	var error = '';
 	var healthcheck = {};
 	healthcheck.monitor = report.collection.name;
 	healthcheck.id = report.collection.id;
@@ -64,7 +65,6 @@ module.exports = function(report){
 	healthcheck.fails = fails;
 	healthcheck.score = (healthcheck.passes / healthcheck.testcount) * 100;
    	
-   	// reject(error);
     resolve(healthcheck);
 	});
 };

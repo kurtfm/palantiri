@@ -1,7 +1,7 @@
 #! /usr/bin/env node
 'use strict';
 
-var config = require('../src/main/resources/config/load');
+var config = require('../config/load');
 
 const assert = require('assert');
 const app = config.application_root + config.api_monitor;
