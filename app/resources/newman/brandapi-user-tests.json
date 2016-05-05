@@ -359,15 +359,15 @@
 			"data": [],
 			"dataMode": "raw",
 			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Updated correct user\"] = response.data.id === postman.getEnvironmentVariable('new_user_id');\ntests[\"Updated data shows in profile\"] = response.data.profile.postCode === postman.getEnvironmentVariable('user_update_postal');",
+			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n//tests\n\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Updated correct user\"] = response.data.id === postman.getEnvironmentVariable('new_user_id');\ntests[\"Updated data shows in profile\"] = response.data.profile.postCode === postman.getEnvironmentVariable('user_update_postal');",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1462411575111,
+			"time": 1462412655197,
 			"name": "updateUser",
 			"description": "updateUser data with access_token",
 			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6",
 			"responses": [],
-			"rawModeData": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{user_id}}\",\"postCode\":\"{{user_update_postal}}\"}"
+			"rawModeData": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{new_user_id}}\",\"postCode\":\"{{user_update_postal}}\"}"
 		},
 		{
 			"id": "5f0c4064-1d1e-c89b-9c9c-2a389f26d1f1",
@@ -439,15 +439,15 @@
 			"data": [],
 			"dataMode": "raw",
 			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = response.data.id !== 'undefined' ? response.data.id : 0;\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"unlink shows correct user\"] = userId === postman.getEnvironmentVariable('user_id');\ntests[\"unlink successful\"] = !responseBody.has(postman.getEnvironmentVariable('link_social_user'));",
+			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = response.data.id !== 'undefined' ? response.data.id : 0;\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"unlink shows correct user\"] = userId === postman.getEnvironmentVariable('new_user_id');\ntests[\"unlink successful\"] = !responseBody.has(postman.getEnvironmentVariable('link_social_user'));",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1461629565748,
+			"time": 1462412767188,
 			"name": "unlinkSocialUser",
 			"description": "updateUser data with access_token",
 			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6",
 			"responses": [],
-			"rawModeData": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{user_id}}\",\"socialPid\":\"{{social_user_provider}}\",\"socialUsername\":\"{{link_social_user}}\"}"
+			"rawModeData": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{new_user_id}}\",\"socialPid\":\"{{social_user_provider}}\",\"socialUsername\":\"{{link_social_user}}\"}"
 		},
 		{
 			"id": "82212443-0a97-e0dc-c971-b26adcf7ad37",
@@ -630,21 +630,21 @@
 			"id": "b0d7d5e3-2a30-7b78-e92b-1471eeb4cef7",
 			"headers": "Authorization: Bearer {{user_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}linkSocialUser",
-			"preRequestScript": "var getRandomNum = function(min, max) {\n        return Math.floor(Math.random() * (max - min + 1)) + min;\n    };\npostman.setEnvironmentVariable(\"link_social_user\", getRandomNum(20000000, 100));",
+			"preRequestScript": "postman.setEnvironmentVariable(\"link_social_user\", _.random(20000000, 100));",
 			"pathVariables": {},
 			"method": "POST",
 			"data": [],
 			"dataMode": "raw",
 			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : '';\nvar socialUserExists = typeof response.data.social[0].puid !== 'undefined';\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Got user data\"] = response.status === 'success';\ntests[\"Link response correct user\"] = userId === postman.getEnvironmentVariable('user_id');\ntests[\"Social User set in social array\"] =socialUserExists;\ntests[\"Link success! Social user showing up in data.\"] = responseBody.has(postman.getEnvironmentVariable('link_social_user'));\n\n",
+			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : '';\nvar socialUserExists = typeof response.data.social[0].puid !== 'undefined';\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Got user data\"] = response.status === 'success';\ntests[\"Link response correct user\"] = userId === postman.getEnvironmentVariable('new_user_id');\ntests[\"Social User set in social array\"] =socialUserExists;\ntests[\"Link success! Social user showing up in data.\"] = responseBody.has(postman.getEnvironmentVariable('link_social_user'));\n\n",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1461629550335,
+			"time": 1462413773577,
 			"name": "linkSocialUser",
 			"description": "updateUser data with access_token",
 			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6",
 			"responses": [],
-			"rawModeData": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{user_id}}\",\"socialPid\":\"{{social_user_provider}}\",\"socialUsername\":\"{{link_social_user}}\"}"
+			"rawModeData": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{new_user_id}}\",\"socialPid\":\"{{social_user_provider}}\",\"socialUsername\":\"{{link_social_user}}\"}"
 		},
 		{
 			"id": "b27cce18-4f6a-543f-82eb-9a270ac6ef7d",
@@ -883,15 +883,15 @@
 			"data": [],
 			"dataMode": "raw",
 			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Updated correct user\"] = response.data.id === postman.getEnvironmentVariable('user_id');\ntests[\"Updated data shows in profile\"] = response.data.profile.postCode === '';",
+			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Updated correct user\"] = response.data.id === postman.getEnvironmentVariable('new_user_id');\ntests[\"Updated data shows in profile\"] = response.data.profile.postCode === '';",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1461629540784,
+			"time": 1462413759474,
 			"name": "updateUser clear values",
 			"description": "updateUser data with access_token",
 			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6",
 			"responses": [],
-			"rawModeData": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{user_id}}\",\"postCode\":\"\"}"
+			"rawModeData": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{new_user_id}}\",\"postCode\":\"\"}"
 		}
 	]
 }
