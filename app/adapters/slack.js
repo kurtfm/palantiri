@@ -25,7 +25,7 @@ module.exports = function(){
 			var filePathArr = file.split('/');
 			slackParams.fileName = filePathArr[filePathArr.length-1];
 			slackParams.title = message;
-
+			slackParams.token = config.slack_token;
 			var options = {
 				method: 'POST',
 				uri: config.slack_api + 'files.upload',
