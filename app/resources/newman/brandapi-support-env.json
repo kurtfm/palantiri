@@ -1,6 +1,8 @@
 {
 	"id": "58870794-d1f3-aa7f-3654-7f00a0f276ec",
 	"name": "brandapi-prod-monitor",
+	"team": null,
+	"timestamp": 1462558064379,
 	"values": [
 		{
 			"key": "brand_api_server",
@@ -43,10 +45,14 @@
 			"value": "poorsoddy",
 			"type": "text",
 			"enabled": true
+		},
+		{
+			"key": "generate_password",
+			"value": "((Math.random()*1e32).toString(36)+_.random(20000,100)+_.sample(['&','&', '$','#','!','$','#','!','&','$','#','!','&','$','#','!'])+_.sample(['&','$','&','$','#','!','#','&','$', '#','!','!','&','$','#','!'])+Math.floor(_.random(500)*(_.random(200,400)-_.random(0,40)+ 1) + _.random(5,100))).toString().substring(0,32)",
+			"type": "text",
+			"enabled": true
 		}
 	],
-	"team": null,
-	"timestamp": 1461609086253,
 	"synced": false,
 	"syncedFilename": "",
 	"isDeleted": false
