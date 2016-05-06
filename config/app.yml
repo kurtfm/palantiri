@@ -21,4 +21,4 @@ slack_message_options:
 slack_upload_options:
   channels:  "#identity-site-alerts"
   fileType: log
-  initial_comment: ':loudspeaker: yo @channel some bad news'
+  initial_comment: ':loudspeaker: yo, some errors in here'
