@@ -2,7 +2,7 @@
 	"id": "58870794-d1f3-aa7f-3654-7f00a0f276ec",
 	"name": "brandapi-prod-monitor",
 	"team": null,
-	"timestamp": 1462558064379,
+	"timestamp": 1462575776339,
 	"values": [
 		{
 			"key": "brand_api_server",
@@ -48,7 +48,13 @@
 		},
 		{
 			"key": "generate_password",
-			"value": "((Math.random()*1e32).toString(36)+_.random(20000,100)+_.sample(['&','&', '$','#','!','$','#','!','&','$','#','!','&','$','#','!'])+_.sample(['&','$','&','$','#','!','#','&','$', '#','!','!','&','$','#','!'])+Math.floor(_.random(500)*(_.random(200,400)-_.random(0,40)+ 1) + _.random(5,100))).toString().substring(0,32)",
+			"value": "(Math.random().toString(36).substring(2)+_.sample(['&','&', '$','#','!','$','#','!','&','$','#','!','&','$','#','!'])+_.sample(['&','$','&','$','#','!','#','&','$', '#','!','!','&','$','#','!'])+Math.floor(_.random(500)*(_.random(200,400)-_.random(0,40)+ 1) + _.random(5,100))).toString().substring(0,32)",
+			"type": "text",
+			"enabled": true
+		},
+		{
+			"key": "create_user_displayname",
+			"value": "1phwlrj3lx3i8uxr-8168",
 			"type": "text",
 			"enabled": true
 		}
