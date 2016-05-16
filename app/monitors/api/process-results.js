@@ -23,22 +23,42 @@ module.exports = function(data){
 				);
 
 		},
-		//slack
+		//get errors 
 		function(results,callback){
-			console.log('slack notifications');
-
+			console.log('checking for errors');
 			if(results.score < 100){
-				var message = results.monitor + " just failed " + results.fails + " out of " + results.testcount + " tests";
-				var slack = new Slack();
-				var slackPostFile = slack.postFile(message, data.debugLog)
-				.then(function(){
-					callback(null);
-					return null;
+				var title = results.monitor + " just failed " + results.fails + " out of " + results.testcount + " assertions";
+				var errors = "These requests had failed assertions:\n";
+				var lineReader = require('readline').createInterface({
+					input: require('fs').createReadStream(data.debugLog)
+				});
+				lineReader.on('line', function (line) {
+					if(line.match(/^[0-9]+ /) && !line.match(/^200 /) ){
+						errors += line + "\n";
+					}
+				});
+				lineReader.on('close', function(){
+					callback(null,title,errors);
 				});
 			}
 			else{
 				callback(null);
 				return null;
+			}
+		},
+		//slack notifications
+		function(title,message,callback){
+			console.log('slack notifications');
+			if(!title && !message){
+				callback(null);
+			}
+			else{
+				var slack = new Slack();
+				var slackPostFile = slack.postFile(title,message, data.debugLog)
+				.then(function(){
+					callback(null);
+					return null;
+				});
 			}
 		},
 		//clean up

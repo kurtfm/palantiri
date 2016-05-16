@@ -18,13 +18,14 @@ module.exports = function(){
 			}
 	    });
 	};
-	this.postFile = function(message,file){
+	this.postFile = function(title,message,file){
 		return new Promise(function(resolve,reject){
 			var slackParams = config.slack_upload_options;
+			slackParams.initial_comment = message;
 			slackParams.file = fs.createReadStream( file );
 			var filePathArr = file.split('/');
 			slackParams.fileName = filePathArr[filePathArr.length-1];
-			slackParams.title = message;
+			slackParams.title = title;
 			slackParams.token = config.slack_token;
 			var options = {
 				method: 'POST',

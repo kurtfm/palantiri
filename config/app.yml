@@ -19,6 +19,5 @@ slack_message_options:
   pretty: 1
   link_names: 1
 slack_upload_options:
-  channels:  "#identity-site-alerts"
+  channels:  "#identity-alarms"
   fileType: log
-  initial_comment: ':loudspeaker: yo, some errors in here'
