@@ -20,7 +20,10 @@
     "js-yaml": "^3.5.5",
     "json5": "^0.4.0",
     "lodash": "^4.6.1",
+<<<<<<< 126250b252a0c198507a89cc8a47813c53149efc
     "mongodb": "^2.1.14",
+=======
+>>>>>>> build out test environment
     "newman": "^2.0.9",
     "request": "^2.72.0"
   }

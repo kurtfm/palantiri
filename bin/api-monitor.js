@@ -5,7 +5,7 @@ var config = require('../config/load');
 
 const assert = require('assert');
 const app = config.application_root + config.api_monitor;
-const runTests = require(app + 'test-runner');
+const runTests = require(app + 'runner');
 const processResults = require(app + 'process-results');
 const _ = require('lodash');
 

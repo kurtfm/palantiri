@@ -1,27 +1,19 @@
-# Build monitoring tool
+#monitoring agent
+Written in node mainly to take advantage of loading newman as a library to get a callback when it's finished with a test run.
 
-# API Uptime Requirements:
-* monitor APIs via newman
-* convert output of newman pipe into argus API
-* notify via slack/email when there is a failure
+#dependencies
+Install NodeJs / npm
 
-# API Healthcheck/Status Requirements
-* monitor APIs via newman
-* convert output of newman and make available via REST API (?)
-* build front end page on AMP site to pull data
-* host somewhere the AMP site can reach
+#local setup
+Clone this repo and cd into it.
+Install dependencies...
 
-# API Debugging 
-* monitor APIs via newman
-* convert output of newman into database
-* make accessible via UI
+```
+npm install
+```
 
-# UI monitoring
-* monitor APIs via ? selenium + phantomjs or jmeter?
-* convert output and pipe into argus
+#run
 
-# prototype --> real deal
-* aws
-* deployment via jenkins
-* database in aws
-
+```
+API=brandapi-migration bin/api-monitor.js
+```
