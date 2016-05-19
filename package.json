@@ -26,5 +26,12 @@
 >>>>>>> build out test environment
     "newman": "^2.0.9",
     "request": "^2.72.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "gulp": "^3.9.1",
+    "gulp-mocha": "^2.2.0",
+    "mocha-generators": "^1.2.0",
+    "sinon": "^1.17.4"
   }
 }
