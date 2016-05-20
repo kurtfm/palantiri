@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@stash.ops.aol.com:2022/~kurtfmoeller2/monitoring-prototype-lambda.git"
+    "url": "ssh://git@stash.ops.aol.com:2022/~kurtfmoeller2/monitor-prototype.git"
   },
   "author": "",
   "license": "ISC",
