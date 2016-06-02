@@ -1,0 +1,39 @@
+{
+	"ok":true,
+	"file":{
+		"id":"F1ABKN21J",
+		"created":1463696567,
+		"timestamp":1463696567,
+		"name":"onetest-debug",
+		"title":"One Test Title",
+		"mimetype":"text\/plain",
+		"filetype":"text",
+		"pretty_type":"Plain Text",
+		"user":"U169D1CNL",
+		"editable":true,
+		"size":481,
+		"mode":"snippet",
+		"is_external":false,
+		"external_type":"",
+		"is_public":false,
+		"public_url_shared":false,
+		"display_as_bot":false,
+		"username":"",
+		"url_private":"https:\/\/files.slack.com\/files-pri\/T025DU6HX-F1ABKN21J\/onetest-debug",
+		"url_private_download":"https:\/\/files.slack.com\/files-pri\/T025DU6HX-F1ABKN21J\/download\/onetest-debug",
+		"permalink":"https:\/\/aol.slack.com\/files\/identity-monitor\/F1ABKN21J\/onetest-debug",
+		"permalink_public":"https:\/\/slack-files.com\/T025DU6HX-F1ABKN21J-6de76287a4",
+		"edit_link":"https:\/\/aol.slack.com\/files\/identity-monitor\/F1ABKN21J\/onetest-debug\/edit",
+		"preview":"-------------------------------------------------------------------------------------------\n200 542ms One Test [POST] https:\/\/localhost:33688\/one\n------------------------------------------------------------\nRequest headers:\n{","preview_highlight":"<div class=\"CodeMirror cm-s-default CodeMirrorServer\">\n<div class=\"CodeMirror-code\">\n<div><pre>-------------------------------------------------------------------------------------------<\/pre><\/div>\n<div><pre>200 542ms getServiceToken (OAuth) for auth [POST] https:\/\/localhost:33688\/one<\/pre><\/div>\n<div><pre>------------------------------------------------------------<\/pre><\/div>\n<div><pre>Request headers:<\/pre><\/div>\n<div><pre>{<\/pre><\/div>\n<\/div>\n<\/div>\n",
+		"lines":15,"lines_more":10,"channels":[],"groups":["G1ABW5YG7"],"ims":[],"comments_count":1,
+		"initial_comment":{
+			"id":"Fc1ABSBZ8Q",
+			"created":1463696567,
+			"timestamp":1463696567,
+			"user":"U169D1CNL",
+			"is_intro":true,
+			"comment":"One Test Message",
+			"channel":""
+		}
+	}
+}
