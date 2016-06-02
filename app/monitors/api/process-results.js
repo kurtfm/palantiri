@@ -42,14 +42,16 @@ module.exports = function(data){
 				});
 			}
 			else{
-				callback(null);
+				callback(null,null,null);
 				return null;
 			}
 		},
 		//slack notifications
 		function(title,message,callback){
+			console.log('title: ', title, ' message: ',message );
 			console.log('slack notifications');
 			if(!title && !message){
+				console.log('got here');
 				callback(null);
 			}
 			else{

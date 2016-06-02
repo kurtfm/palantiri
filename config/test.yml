@@ -1,24 +1,12 @@
-supported_monitors: [ test-monitor ]
-rest_server_port: 30088
-output_folder: /test/outputs/
+supported_monitors: [ onetest ]
 newman_folder: /test/app/resources/newman/
-api_monitor: /test/app/monitors/api/
-rest_controllers: /test/app/controllers/
-test_file: tests.json
-env_file: env.json
-global_file: globals.json
-report_file_end: -report.json
-html_results_file_end: -results.html
-xml_results_file_end: -results.xml
-env_export_file_end: -env.json
-verbose_file_end: -debug
-slack_api: https://slack.com/api/
-slack_token: xoxb-40319046768-RsDQAkXW989SZmBfoXAVk3R2
+output_folder: /test/outputs/
+test_data: /test/app/resources/data/
 slack_message_options:
   channel:  "#identity-monitor-tests"
   icon_emoji: ":loudspeaker:"
   pretty: 1
   link_names: 1
 slack_upload_options:
-  channels:  "#identity-monitor-tests"
+  channels:  "#id-monitor-test"
   fileType: log

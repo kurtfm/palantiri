@@ -1,10 +1,11 @@
 
 'use strict';
+const assert = require('assert');
 const JSON5 = require('json5');
 const fs = require('fs');
 const Promise = require('bluebird');
 const Newman = require('newman');
-
+const _ = require('lodash');
 
 module.exports = function(conf){
     const target = conf.target;
@@ -12,8 +13,16 @@ module.exports = function(conf){
     const outputId = target + "." + time + "." +  (Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000);
     const newmanFolder = conf.application_root + conf.newman_folder + target + '-';
     const outputFolder = conf.application_root + conf.output_folder + outputId;
-    return new Promise(function(resolve,reject){
-        
+
+    assert.strictEqual(
+        typeof target, 
+        "string", 
+        "Pass API environment when starting monitor example: API=brandapis-prod node bin/api-monitor.js")
+    assert(
+        _.includes(conf.supported_monitors,target), 
+        "The API you pass in must be setup to run with this monitor.");
+
+    return new Promise(function(resolve,reject){ 
         var tests = JSON5.parse(fs.readFileSync( newmanFolder + conf.test_file, 'utf8'));
         var jsonReport =  outputFolder + conf.report_file_end;
         var htmlSummary = outputFolder + conf.html_results_file_end;

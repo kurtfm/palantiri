@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@stash.ops.aol.com:2022/~kurtfmoeller2/monitoring-prototype-lambda.git"
+    "url": "ssh://git@stash.ops.aol.com:2022/~kurtfmoeller2/monitor-prototype.git"
   },
   "author": "",
   "license": "ISC",
@@ -20,10 +20,6 @@
     "js-yaml": "^3.5.5",
     "json5": "^0.4.0",
     "lodash": "^4.6.1",
-<<<<<<< 126250b252a0c198507a89cc8a47813c53149efc
-    "mongodb": "^2.1.14",
-=======
->>>>>>> build out test environment
     "newman": "^2.0.9",
     "request": "^2.72.0"
   },
@@ -32,6 +28,6 @@
     "gulp": "^3.9.1",
     "gulp-mocha": "^2.2.0",
     "mocha-generators": "^1.2.0",
-    "sinon": "^1.17.4"
+    "nock": "^8.0.0"
   }
 }
