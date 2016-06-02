@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 supported_monitors: [ onetest ]
 newman_folder: /test/app/resources/newman/
 output_folder: /test/outputs/
