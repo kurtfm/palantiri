@@ -5,14 +5,14 @@ const _ = require('lodash');
 var env = process.env.NODE_ENV ? process.env.NODE_ENV : 'dev';
 
 try {
-  conf =  yaml.safeLoad(fs.readFileSync(__dirname+'/'+env+'.yml', 'utf8'));
+  var conf =  yaml.safeLoad(fs.readFileSync(__dirname+'/'+env+'.yml', 'utf8'));
   //console.log(conf);
 } catch (e) {
   console.log(e);
 }
 
 try {
-  app =  yaml.safeLoad(fs.readFileSync(__dirname+'/app.yml', 'utf8'));
+  var app =  yaml.safeLoad(fs.readFileSync(__dirname+'/app.yml', 'utf8'));
   //console.log(conf);
 } catch (e) {
   console.log(e);
@@ -27,6 +27,10 @@ var appRoot = function(){
 };
 
 conf.application_root = appRoot();
+conf.health_status = typeof process.env.HEALTHSTATUS !== 'undefined' && process.env.HEALTHSTATUS.toLowerCase() === 'false' ? false : true;
+conf.slack_notifications = typeof process.env.SLACK !== 'undefined' && process.env.SLACK.toLowerCase() === 'false' ? false : true;
+conf.env = env;
+conf.target = process.env.API ? process.env.API : null;
 
 var properties = _.merge(app, conf);
 
