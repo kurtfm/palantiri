@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="monitoring-agent-tests">
+	<testsuite name="one test" id="c438beca-6cc7-5bff-5f7f-dbe11af342e8" timestamp="2016-06-09T04:54:59.084Z" time="126.00 ms" tests="1" failures="0">
+		<testcase name="Status code is 200" />
+	</testsuite>
+</testsuites>
