@@ -1,11 +1,7 @@
 {
-  "name": "monitoring-prototype-lambda",
+  "name": "monitoring-agent",
   "version": "1.0.0",
-  "description": "Can we create a lambda for monitoring APIs?",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "description": "A monitoring agent that runs tests and pushes the results data where it needs to go",
   "repository": {
     "type": "git",
     "url": "ssh://git@stash.ops.aol.com:2022/~kurtfmoeller2/monitor-prototype.git"
@@ -29,9 +25,9 @@
     "glob": "^7.0.3",
     "gulp": "^3.9.1",
     "gulp-mocha": "^2.2.0",
-    "gulp-notify": "^2.2.0",
     "gulp-zip": "^3.2.0",
     "mocha-generators": "^1.2.0",
-    "nock": "^8.0.0"
+    "nock": "^8.0.0",
+    "xunit-file": "0.0.11"
   }
 }
