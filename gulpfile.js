@@ -33,6 +33,12 @@ gulp.task('setup-snapshot', function(){
   .pipe(gulp.dest('./'));
 });
 
+gulp.task('setup-patch-release', function(){
+  return gulp.src('./package.json')
+  .pipe(bump({type: "patch"}))
+  .pipe(gulp.dest('./'));
+});
+
 gulp.task('setup-minor-release', function(){
   return gulp.src('./package.json')
   .pipe(bump({type: "minor"}))
