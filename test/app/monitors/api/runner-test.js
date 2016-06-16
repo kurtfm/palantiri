@@ -9,6 +9,7 @@ const expect = chai.expect; // jshint ignore:line
 const should = chai.should();
 const chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
+
 var config = require('../../../../config/load');
 const app = config.application_root + config.api_monitor;
 const runTests = require(app + 'runner');

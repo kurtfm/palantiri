@@ -10,6 +10,9 @@ chai.use(chaiAsPromised);
 const _ = require('lodash');
 
 var config = require('../../../../config/load');
+
+console.log(config.env);
+
 const app = config.application_root + config.api_monitor;
 const healthcheckProcessor = require(app + 'healthcheck-processor');
 const target = 'onetest';

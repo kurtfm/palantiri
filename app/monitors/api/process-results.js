@@ -20,7 +20,7 @@ module.exports = function(data, config){
 				healthcheckFormatter(report)
 					.then(
 						function(results){
-							if(config.health_status){
+							if(!config.disable_health_status){
 								fs.writeFileSync( data.outputFolder + '/healthcheck/' + data.target + '.json', JSON5.stringify(results) );
 							}
 							eventLog.healthcheck.finished = true;
@@ -62,7 +62,7 @@ module.exports = function(data, config){
 			//slack notifications
 			function(title,message,callback){
 				eventLog.slack.started = true;
-				if(config.slack_notifications){
+				if(!config.disable_slack_notifications){
 					eventLog.slack.enabled = true;
 					if(!title && !message){
 						eventLog.slack.needed = false;
