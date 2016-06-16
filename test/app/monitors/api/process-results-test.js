@@ -1,6 +1,7 @@
 'use strict';
 const Promise = require('bluebird');
 const fs = Promise.promisifyAll(require("fs"));
+const glob = require('glob');
 require('mocha-generators').install();
 const chai = require('chai');
 const expect = chai.expect; // jshint ignore:line
@@ -68,7 +69,12 @@ describe('Result Processor Tests', function() {
 				if (err) throw err;
 			}).catch(function(error){
 				console.log(error.name,":",error.message);
-			});	
+			});
+		glob(config.application_root + config.output_folder + '*-*', function (er, files) {
+		  for (var i = files.length - 1; i >= 0; i--) {
+		  	fs.unlink(files[i]);
+		  }
+		});
 		
 	});
 

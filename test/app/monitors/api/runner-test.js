@@ -1,7 +1,8 @@
 'use strict';
 const nock = require('nock');
 const glob = require('glob');
-const fs = require("fs");
+const Promise = require('bluebird');
+const fs = Promise.promisifyAll(require("fs"));
 require('mocha-generators').install();
 const chai = require('chai');
 const expect = chai.expect; // jshint ignore:line
@@ -28,11 +29,31 @@ describe('Runner Tests', function() {
 	});
 
 	after(function(){
-		glob(config.application_root + config.output_folder + '*-*', function (er, files) {
-		  for (var i = files.length - 1; i >= 0; i--) {
-		  	fs.unlink(files[i]);
-		  }
-		});
+		fs.unlinkAsync(data.htmlSummary)
+			.then(function(err){
+	   			if (err) throw err;
+			}).catch(function(error){
+				console.log(error.name,":",error.message);
+			});
+		fs.unlinkAsync(data.xmlSummary)
+			.then(function(err){
+	   			if (err) throw err;
+			}).catch(function(error){
+				console.log(error.name,":",error.message);
+			});
+		fs.unlinkAsync(data.jsonReport)
+			.then(function(err){
+		   		if (err) throw err;
+			}).catch(function(error){
+				console.log(error.name,":",error.message);
+			});
+		
+		fs.unlinkAsync(data.debugLog)
+			.then(function(err){
+		   		if (err) throw err;
+			}).catch(function(error){
+				console.log(error.name,":",error.message);
+			});
 	});
 				
 	it('should run tests and return something', function() {
