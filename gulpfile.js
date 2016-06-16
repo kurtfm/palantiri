@@ -8,6 +8,7 @@ const bump = require('gulp-bump');
 const fs = require('fs');
 const install = require("gulp-install");
 const del = require('del');
+const yargs = require('yargs');
 
 gulp.task('test', function () {
 	process.env.NODE_ENV = 'test';
@@ -27,28 +28,22 @@ gulp.task('package',['clean'],function(){
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('setup-snapshot', function(){
-  return gulp.src('./package.json')
-  .pipe(bump({type: "prerelease"}))
-  .pipe(gulp.dest('./'));
+gulp.task('prepare-release', function(){
+	var argv = yargs.argv;
+	var validBumpTypes = "major|minor|patch|prerelease".split("|");
+	var ver = (argv.ver || 'patch').toLowerCase();
+	var isRelease = argv.release ? true : false;
+
+	if (validBumpTypes.indexOf(ver) === -1) {
+	  throw new Error('Unrecognized version "' + ver + '".');
+	}
+	else{
+	  return gulp.src('./package.json')
+	  .pipe(bump({type: argv.ver}))
+	  .pipe(gulp.dest('./'));
+	}
+
 });
 
-gulp.task('setup-patch, function(){
-  return gulp.src('./package.json')
-  .pipe(bump({type: "patch"}))
-  .pipe(gulp.dest('./'));
-});
-
-gulp.task('setup-minor', function(){
-  return gulp.src('./package.json')
-  .pipe(bump({type: "minor"}))
-  .pipe(gulp.dest('./'));
-});
-
-gulp.task('setup-major', function(){
-  return gulp.src('./package.json')
-  .pipe(bump({type: "major"}))
-  .pipe(gulp.dest('./'));
-});
 
 gulp.task('dist', ['clean','test','package']);
