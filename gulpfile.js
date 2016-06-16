@@ -33,19 +33,19 @@ gulp.task('setup-snapshot', function(){
   .pipe(gulp.dest('./'));
 });
 
-gulp.task('setup-patch-release', function(){
+gulp.task('setup-patch, function(){
   return gulp.src('./package.json')
   .pipe(bump({type: "patch"}))
   .pipe(gulp.dest('./'));
 });
 
-gulp.task('setup-minor-release', function(){
+gulp.task('setup-minor', function(){
   return gulp.src('./package.json')
   .pipe(bump({type: "minor"}))
   .pipe(gulp.dest('./'));
 });
 
-gulp.task('setup-major-release', function(){
+gulp.task('setup-major', function(){
   return gulp.src('./package.json')
   .pipe(bump({type: "major"}))
   .pipe(gulp.dest('./'));
