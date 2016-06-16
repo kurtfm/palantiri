@@ -1,8 +1,10 @@
 const yaml = require('js-yaml');
 const fs   = require('fs');
 const _ = require('lodash');
+const yargs = require('yargs');
 
-var env = process.env.NODE_ENV ? process.env.NODE_ENV : 'dev';
+var argv = yargs.argv;
+var env = argv.environment ? argv.environment : 'dev';
 
 try {
   var conf =  yaml.safeLoad(fs.readFileSync(__dirname+'/'+env+'.yml', 'utf8'));
@@ -27,10 +29,10 @@ var appRoot = function(){
 };
 
 conf.application_root = appRoot();
-conf.health_status = typeof process.env.HEALTHSTATUS !== 'undefined' && process.env.HEALTHSTATUS.toLowerCase() === 'false' ? false : true;
-conf.slack_notifications = typeof process.env.SLACK !== 'undefined' && process.env.SLACK.toLowerCase() === 'false' ? false : true;
+conf.health_status = argv.healthstatus &&  argv.healthstatus === 'false' ? false : true;
+conf.slack_notifications = argv.slack && argv.slack === 'false' ? false : true;
 conf.env = env;
-conf.target = process.env.API ? process.env.API : null;
+conf.target = argv.target ? argv.target : null;
 
 var properties = _.merge(app, conf);
 
