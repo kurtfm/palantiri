@@ -17,15 +17,21 @@ gulp.task('test', function () {
 });
 
 gulp.task('clean', function() {
-    return del(['dist/**/*', 'dist/*.zip']);
+    return del(['dist/**/*', 'dist/*.tar.gz']);
 });
 
-gulp.task('package',['clean'],function(){
+gulp.task('source',['clean'],function(){
 	var pkg = JSON.parse(fs.readFileSync('./package.json'));
 	return gulp.src(['**/*','!test','!test/**','!dist','!dist/**','!.*','!*.*'])
-    .pipe(tar('monitor-agent-' + pkg.version + '.tar'))
+    .pipe(gulp.dest('dist/monitor-agent-' + pkg.version+'/'));
+});
+
+gulp.task('package',['source','clean'],function(){
+	var pkg = JSON.parse(fs.readFileSync('./package.json'));
+	return gulp.src('dist/**/*')
+	.pipe(tar('monitor-agent-' + pkg.version + '.tar'))
     .pipe(gzip())
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('prepare-release', function(){
@@ -42,7 +48,6 @@ gulp.task('prepare-release', function(){
 	  .pipe(bump({type: argv.ver}))
 	  .pipe(gulp.dest('./'));
 	}
-
 });
 
 
