@@ -29,7 +29,7 @@ bin/api-monitor.js --target=brandapi-user
 Easiest way to run this ... via cron, crontab -e
 
 ```
-* * * * * /data/servers/monitor-agent/bin/api-monitor.js --evironment="prod" --target=brandapi-user >/dev/null
-* * * * * /data/servers/monitor-agent/bin/api-monitor.js --environment="prod" --target=brandapi-support >/dev/null
-* * * * * /data/servers/monitor-agent/bin/api-monitor.js --environment="prod" --target=brandapi-migration >/dev/null
+* * * * * /data/servers/monitor-agent/bin/api-monitor.js --evironment=prod --target=brandapi-user >/dev/null
+* * * * * /data/servers/monitor-agent/bin/api-monitor.js --environment=prod --target=brandapi-support >/dev/null
+* * * * * /data/servers/monitor-agent/bin/api-monitor.js --environment=prod --target=brandapi-migration >/dev/null
 ```
