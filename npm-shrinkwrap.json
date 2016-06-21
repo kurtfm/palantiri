@@ -1310,7 +1310,8 @@
       "dependencies": {
         "lodash.keys": {
           "version": "2.4.1",
-          "from": "lodash.keys@>=2.4.1 <2.5.0"
+          "from": "lodash.keys@2.4.1",
+          "resolved": "https://registry.npmjs.org/lodash.keys/-/lodash.keys-2.4.1.tgz"
         }
       }
     },
@@ -1474,6 +1475,16 @@
           "resolved": "https://registry.npmjs.org/supports-color/-/supports-color-1.2.0.tgz"
         }
       }
+    },
+    "moment": {
+      "version": "2.13.0",
+      "from": "moment@>=2.6.0",
+      "resolved": "https://registry.npmjs.org/moment/-/moment-2.13.0.tgz"
+    },
+    "moment-timezone": {
+      "version": "0.3.1",
+      "from": "moment-timezone@>=0.3.0 <0.4.0",
+      "resolved": "https://registry.npmjs.org/moment-timezone/-/moment-timezone-0.3.1.tgz"
     },
     "ms": {
       "version": "0.7.1",

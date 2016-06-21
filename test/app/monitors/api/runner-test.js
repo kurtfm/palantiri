@@ -84,7 +84,7 @@ describe('Runner Tests', function() {
 
 	it('should take an invalid target and throw and exception', function() {
 		config.target = 'bogus';
-		expect(function(){runTests(config)}).to.throw("AssertionError: The API you pass in must be setup to run with this monitor.");
+		expect(function(){runTests(config)}).to.throw("AssertionError: The API you pass in must be setup to run with this monitor: " + config.target + " is unsupported.");
 
 	});
 	it('should fail with missing test file', function*() {
