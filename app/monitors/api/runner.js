@@ -17,10 +17,10 @@ module.exports = function(conf){
     assert.strictEqual(
         typeof target, 
         "string", 
-        "Pass API environment when starting monitor example: API=brandapis-prod node bin/api-monitor.js")
+        "Pass API target when starting monitor example: --target=brandapi-user")
     assert(
-        _.includes(conf.supported_monitors,target), 
-        "The API you pass in must be setup to run with this monitor.");
+        _.includes(conf.supported_api_monitors,target),
+        "The API you pass in must be setup to run with this monitor: "+target+ " is unsupported.");
 
     return new Promise(function(resolve,reject){
         var jsonReport =  outputFolder + conf.report_file_end;

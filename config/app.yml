@@ -11,6 +11,8 @@ html_results_file_end: -results.html
 xml_results_file_end: -results.xml
 env_export_file_end: -env.json
 verbose_file_end: -debug
+monitor_schedule:
+  default: "* * * * *"
 slack_api: https://slack.com/api/
 slack_token: xoxb-40319046768-RsDQAkXW989SZmBfoXAVk3R2
 slack_message_options:

@@ -6,6 +6,7 @@ const app = config.application_root + config.api_monitor;
 const runTests = require(app + 'runner');
 const processResults = require(app + 'process-results');
 
+console.log(process.argv);
 runTests(config)
 	.then(
 		function(data,err){

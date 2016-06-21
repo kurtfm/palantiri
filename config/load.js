@@ -65,7 +65,6 @@ conf.disable_health_status = argv.disablehealth;
 conf.disable_slack_notifications = argv.disableslack;
 conf.env = env;
 conf.target = argv.target ? argv.target : null;
-
 var properties = _.merge(app, conf);
 
 module.exports = properties;

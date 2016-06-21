@@ -1,4 +1,4 @@
-supported_monitors: [ onetest , badtest]
+supported_api_monitors: [ onetest , badtest]
 newman_folder: /test/app/resources/newman/
 output_folder: /test/outputs/
 test_data: /test/app/resources/data/
