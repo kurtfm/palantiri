@@ -47,7 +47,7 @@ gulp dist
 This will run the tests and bundle the core app and dependencies for distribution.
 
 
-## getting ready to bunlde for a release
+## getting ready to bundle for a release
 When you feel you have something ready to roll (tests look good).  Run this:
 
 ```
