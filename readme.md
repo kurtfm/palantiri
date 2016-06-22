@@ -44,10 +44,11 @@ This will bump the version in the package.json using semver... so no getting wei
 gulp dist
 ```
 
-This will run the tests and bundle the core app and dependencies for distribution.  When you feel you have something ready to roll (tests look good).  Run this:
+This will run the tests and bundle the core app and dependencies for distribution.
 
 
 ## getting ready to bunlde for a release
+When you feel you have something ready to roll (tests look good).  Run this:
 
 ```
 npm shrinkwrap
