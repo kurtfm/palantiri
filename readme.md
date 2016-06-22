@@ -59,14 +59,19 @@ Then delete the `node_modules` directory, then run
 ```
 npm install
 ```
+This will pick up your shrinkwrapped versions.
 
-This will pick up your shrinkwrapped versions.  Then run with whatever version that is appropriate.
+```
+gulp test
+```
+
+If the tests look good then run with whatever version that is appropriate.
 
 ```
 gulp pre-release ver=prerelease
 ```
 
-then bundle it...
+Use git to commit these changes and push them to the remote branch, then bundle it...
 
 ```
 gulp dist
