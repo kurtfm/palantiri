@@ -19,17 +19,75 @@ npm install
 bin/api-monitor.js --target=brandapi-user
 ```
 
-## build
+## local task runner
+
+### run tests
 
 ```
-bin/api-monitor.js --target=brandapi-user
+gulp test
 ```
+
+This will run all the tests in test directory.
+
+### setup new version
+
+```
+gulp prepare-release [ver=major|minor|patch|prerelease]
+
+```
+
+This will bump the version in the package.json using semver... so no getting weird versions. Default if no `ver` arg is passed in is `patch`
+
+### bundle up for distribution
+
+```
+gulp dist
+```
+
+This will run the tests and bundle the core app and dependencies for distribution.  When you feel you have something ready to roll (tests look good).  Run this:
+
+
+## getting ready to bunlde for a release
+
+```
+npm shrinkwrap
+```
+
+Then delete the `node_modules` directory, then run
+
+```
+npm install
+```
+
+This will pick up your shrinkwrapped versions.  Then run with whatever version that is appropriate.
+
+```
+gulp pre-release ver=prerelease
+```
+
+then bundle it...
+
+```
+gulp dist
+```
+
+Later I will figure out how to bundle that all into one task.
 
 ## cron setup
-Easiest way to run this ... via cron, crontab -e
+You can run each monitor individually
 
 ```
 * * * * * /data/servers/monitor-agent/bin/api-monitor.js --evironment=prod --target=brandapi-user >/dev/null
 * * * * * /data/servers/monitor-agent/bin/api-monitor.js --environment=prod --target=brandapi-support >/dev/null
 * * * * * /data/servers/monitor-agent/bin/api-monitor.js --environment=prod --target=brandapi-migration >/dev/null
 ```
+
+## start all supported monitors
+You can start all the supported monitors using the start-all script...
+
+```
+bin/start-all-monitors.js
+``
+
+This will use the configuration from the YAML config supported_api_monitors and supported_ui_monitors.  It will look for the schedule for that monitor specifically in monitor_schedule or if not there use the 'default'.  The schedule is cron format.
+
