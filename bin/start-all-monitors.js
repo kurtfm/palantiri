@@ -20,17 +20,19 @@ for (var i = 0, total = apiMonitors.length; i < total; i++) {
     //mini Monitor Job class to spawn a new process and kick of run for that monitor
     var MonitorJob = function(target,schedule){
         return cron.schedule(schedule,function(){
-            console.log(target);
+            console.log(target + ": monitor started running.");
             var monitor = spawn(appRoot + '/bin/api-monitor.js', ['--environment=' + env,'--target=' + target ]);
+            /*
             monitor.stdout.on('data', function (data) {
-                console.log(""+data);
+                console.log(target + " verbose: " + data);
             });
+            */
             monitor.on('error', function (data) {
-                console.log(" error: "+ data);
+                console.log(target + " error: " + data);
             });
 
             monitor.on('exit', function (exitCode) {
-                console.log("monitor finished running.");
+                console.log(target + ": monitor finished running.");
             });
 
         }, false);
@@ -38,6 +40,7 @@ for (var i = 0, total = apiMonitors.length; i < total; i++) {
 
     var monitorJob = new MonitorJob(apiMonitors[i],monitorSchedule);
 
-    setTimeout(monitorJob.start(), i * 5000);
+    //setTimeout(function(){monitorJob.start();}, i == 0 ? 1 : i * 5000);
+    monitorJob.start();
 
 }
