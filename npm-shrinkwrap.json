@@ -1092,6 +1092,11 @@
         }
       }
     },
+    "jmespath": {
+      "version": "0.15.0",
+      "from": "jmespath@0.15.0",
+      "resolved": "https://registry.npmjs.org/jmespath/-/jmespath-0.15.0.tgz"
+    },
     "jodid25519": {
       "version": "1.0.2",
       "from": "jodid25519@>=1.0.0 <2.0.0",
@@ -1512,6 +1517,11 @@
       "version": "0.1.0",
       "from": "next-tick@>=0.1.0 <0.2.0",
       "resolved": "https://registry.npmjs.org/next-tick/-/next-tick-0.1.0.tgz"
+    },
+    "node-cron": {
+      "version": "1.1.1",
+      "from": "node-cron@latest",
+      "resolved": "https://registry.npmjs.org/node-cron/-/node-cron-1.1.1.tgz"
     },
     "node-int64": {
       "version": "0.4.0",
