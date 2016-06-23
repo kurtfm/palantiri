@@ -38,6 +38,6 @@ for (var i = 0, total = apiMonitors.length; i < total; i++) {
 
     var monitorJob = new MonitorJob(apiMonitors[i],monitorSchedule);
 
-    monitorJob.start();
+    setTimeout(monitorJob.start(), i * 5000);
 
 }
