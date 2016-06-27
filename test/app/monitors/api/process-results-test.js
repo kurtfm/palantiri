@@ -25,8 +25,6 @@ var setupData = function(target){
 	testData = { target: target,
 	  id: target,
 	  outputFolder: config.application_root + config.output_folder,
-	  htmlSummary: outputBase + config.html_results_file_end,
-	  xmlSummary: outputBase + config.xml_results_file_end,
 	  jsonReport: outputBase + config.report_file_end,
 	  debugLog:  outputBase + config.verbose_file_end};
 };
@@ -36,14 +34,9 @@ describe('Result Processor Tests', function() {
 	var data;
 	before(function(done){
 		setupData(target);
-		var htmlFileStream, xmlFileStream, jsonFileStream, verboseFileStream;
-		htmlFileStream = fs.createReadStream(dataFolder + target + config.html_results_file_end)
-		    .pipe(fs.createWriteStream(outputBase + config.html_results_file_end));
-		xmlFileStream = fs.createReadStream(dataFolder + target + config.xml_results_file_end)
-		    .pipe(fs.createWriteStream(outputBase + config.xml_results_file_end));
-		jsonFileStream = fs.createReadStream(dataFolder + target + config.report_file_end)
+		var jsonFileStream = fs.createReadStream(dataFolder + target + config.report_file_end)
 		    .pipe(fs.createWriteStream(outputBase + config.report_file_end));
-		verboseFileStream = fs.createReadStream(dataFolder + target + config.verbose_file_end)
+		var verboseFileStream = fs.createReadStream(dataFolder + target + config.verbose_file_end)
 		    .pipe(fs.createWriteStream(outputBase + config.verbose_file_end));
 
 		jsonFileStream.on('finish', function () {
@@ -64,7 +57,7 @@ describe('Result Processor Tests', function() {
 	});
 
 	after(function(){
-		fs.unlinkAsync(config.application_root + config.output_folder + "healthcheck/" + target + ".json")
+		/*fs.unlinkAsync(config.application_root + config.output_folder + "healthcheck/" + target + ".json")
 			.then(function(err){
 				if (err) throw err;
 			}).catch(function(error){
@@ -74,7 +67,7 @@ describe('Result Processor Tests', function() {
 		  for (var i = files.length - 1; i >= 0; i--) {
 		  	fs.unlink(files[i]);
 		  }
-		});
+		});*/
 		
 	});
 
@@ -124,18 +117,8 @@ describe('Result Processor Tests', function() {
 			expect(err.code).to.eql('ENOENT');
 		});
 	});
-	it('should have removed xml results',function(){
-		fs.stat(outputBase + config.xml_results_file_end, function(err,stats){
-			expect(err.code).to.eql('ENOENT');
-		});
-	});
 	it('should have removed verbose debug log',function(){
 		fs.stat(outputBase + config.verbose_file_end, function(err,stats){
-			expect(err.code).to.eql('ENOENT');
-		});
-	});
-	it('should have removed html report',function(){
-		fs.stat(outputBase + config.html_results_file_end, function(err,stats){
 			expect(err.code).to.eql('ENOENT');
 		});
 	});

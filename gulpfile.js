@@ -10,10 +10,16 @@ const install = require("gulp-install");
 const del = require('del');
 const yargs = require('yargs');
 
-gulp.task('test', function () {
+gulp.task('test-xunit', function () {
 	process.env.NODE_ENV = 'test';
 	return gulp.src(['test/app/**/*.js','!test/app/resources/**','!test/outputs/**'], {read: false})
 		.pipe(mocha({reporter:"xunit-file"}));
+});
+
+gulp.task('test', function () {
+	process.env.NODE_ENV = 'test';
+	return gulp.src(['test/app/**/*.js','!test/app/resources/**','!test/outputs/**'], {read: false})
+		.pipe(mocha());
 });
 
 gulp.task('clean', function() {

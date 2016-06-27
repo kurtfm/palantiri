@@ -1,4 +1,6 @@
 'use strict';
+const fs = require("fs");
+const JSON5 = require('json5');
 
 module.exports = function(report){
 	return new Promise(function(resolve,reject){
@@ -64,7 +66,6 @@ module.exports = function(report){
 	healthcheck.passes = passes;
 	healthcheck.fails = fails;
 	healthcheck.score = (healthcheck.passes / healthcheck.testcount) * 100;
-   	
     resolve(healthcheck);
 	});
 };

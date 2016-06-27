@@ -1,7 +1,8 @@
 'use strict';
 const JSON5 = require('json5');
 const Promise = require('bluebird');
-const healthcheckFormatter = require('./healthcheck-processor');
+const healthcheckProcessor = require('./healthcheck-processor');
+const errorProcessor = require('./error-summary-processor');
 const Slack = require('../../adapters/slack');
 const async = require('async');
 const fs = Promise.promisifyAll(require("fs"));
@@ -17,13 +18,15 @@ module.exports = function(data, config){
 				eventLog.healthcheck.started = true;
 				var report = require(data.jsonReport);
 
-				healthcheckFormatter(report)
+				healthcheckProcessor(report)
 					.then(
 						function(results){
-							if(!config.disable_health_status){
+							eventLog.healthcheck.finished = true;
+
+							if(!config.disable_health_statu){
 								fs.writeFileSync( data.outputFolder + '/healthcheck/' + data.target + '.json', JSON5.stringify(results) );
 							}
-							eventLog.healthcheck.finished = true;
+
 							callback(null,results);
 							return;
 						}
@@ -32,24 +35,21 @@ module.exports = function(data, config){
 						console.log(error.name,":",error.message);
 					});
 			},
-			//get errors 
+			//error processing
 			function(results,callback){
 				eventLog.checkErrors.started = true;
 				if(results.score < 100){
 					eventLog.checkErrors.hasErrors = true;
-					var title = results.monitor + " just failed " + results.fails + " out of " + results.testcount + " assertions";
-					var errors = "These requests had failed assertions:\n";
-					var lineReader = require('readline').createInterface({
-						input: require('fs').createReadStream(data.debugLog)
-					});
-					lineReader.on('line', function (line) {
-						if(line.match(/^[0-9]+ /) && !line.match(/^200 /) ){
-							errors += line + "\n";
-						}
-					});
-					lineReader.on('close', function(){
-						eventLog.checkErrors.finished = true;
-						callback(null,title,errors);
+					errorProcessor(data.debugLog)
+						.then(
+							function(results){
+								eventLog.errorCheck.finished = true;
+								callback(null,results.title,results.message);
+								return;
+							}
+						).catch(function(error){
+						eventLog.checkErrors.error = error.name,":",error.message;
+						console.log(error.name,":",error.message);
 					});
 				}
 				else{
@@ -95,27 +95,14 @@ module.exports = function(data, config){
 				}
 
 			},
+			/*/build merged report
+			function(callback){
+
+
+			},*/
 			//clean up
 			function(callback){
 				eventLog.cleanUp.started = true;
-					fs.unlinkAsync(data.htmlSummary)
-						.then(function(err){
-				   			if (err) throw err;
-				   			eventLog.cleanUp.htmlDeleted = true;
-						}).catch(function(error){
-							eventLog.cleanUp.htmlDeleted = false;
-							eventLog.cleanUp.htmlDeleteError = error.name,":",error.message;
-							console.log(error.name,":",error.message);
-						});
-					fs.unlinkAsync(data.xmlSummary)
-						.then(function(err){
-				   			if (err) throw err;
-				   			eventLog.xmldelete = true;
-						}).catch(function(error){
-							eventLog.cleanUp.xmlDeleted = false;
-							eventLog.cleanUp.xmlDeleteError = error.name,":",error.message;
-							console.log(error.name,":",error.message);
-						});
 					fs.unlinkAsync(data.jsonReport)
 						.then(function(err){
 					   		if (err) throw err;

@@ -8,36 +8,33 @@ const Newman = require('newman');
 const _ = require('lodash');
 
 module.exports = function(conf){
-    const target = conf.target;
-    const time = Date.now();
-    const outputId = target + "." + time + "." +  (Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000);
-    const newmanFolder = conf.application_root + conf.newman_folder + target + '-';
-    const outputFolder = conf.application_root + conf.output_folder + outputId;
-
-    assert.strictEqual(
-        typeof target, 
-        "string", 
-        "Pass API target when starting monitor example: --target=brandapi-user")
-    assert(
-        _.includes(conf.supported_api_monitors,target),
-        "The API you pass in must be setup to run with this monitor: "+target+ " is unsupported.");
-
     return new Promise(function(resolve,reject){
+        const target = conf.target;
+        const time = Date.now();
+        const outputId = target + "." + time + "." +  (Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000);
+        const newmanFolder = conf.application_root + conf.newman_folder + target + '-';
+        const outputFolder = conf.application_root + conf.output_folder + outputId;
+
+        assert.strictEqual(
+            typeof target,
+            "string",
+            "Pass API target when starting monitor example: --target=brandapi-user");
+        assert(
+            _.includes(conf.supported_api_monitors,target),
+            "The API passed in must be configured in the " + conf.env + " environment: "+target+ " is unsupported.");
+
+
         var jsonReport =  outputFolder + conf.report_file_end;
-        var htmlSummary = outputFolder + conf.html_results_file_end;
         var debugLog = outputFolder +  conf.verbose_file_end;
-        var xmlSummary = outputFolder +  conf.xml_results_file_end;
         var testFile = newmanFolder + conf.test_file;
         var envFile = newmanFolder + conf.env_file;
         var globalFile = newmanFolder + conf.global_file;
-
 
         function fileExists(path) {
           try  {
             return fs.statSync(path).isFile();
           }
           catch (e) {
-
             if (e.code == 'ENOENT') { 
               return false;
             }
@@ -54,6 +51,7 @@ module.exports = function(conf){
         var globals = fileExists(globalFile) ?
             JSON5.parse(fs.readFileSync( globalFile, 'utf8')) : {};
 
+
         var newmanOptions = {
             envJson: environment,
             global: globals,
@@ -61,9 +59,7 @@ module.exports = function(conf){
             asLibrary: true,
             stopOnError: false,
             outputFileVerbose: debugLog,
-            html: htmlSummary,
             outputFile: jsonReport,
-            testReportFile: xmlSummary,
             insecure: true,
             noSummary: true,
             noTestSymbols: true,
@@ -71,7 +67,7 @@ module.exports = function(conf){
         };
 
         Newman.execute(tests, newmanOptions,function(e){
-            var testOptions = Newman.getOptions();
+            //var testOptions = Newman.getOptions();
             if(e){
                 reject(e);
             }
@@ -80,8 +76,6 @@ module.exports = function(conf){
                     "target":target,
                     "id":outputId,
                     "outputFolder":conf.application_root + conf.output_folder,
-                    "htmlSummary":htmlSummary,
-                    "xmlSummary":xmlSummary,
                     "jsonReport":jsonReport,
                     "debugLog":debugLog}
                     );

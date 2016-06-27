@@ -30,18 +30,7 @@ describe('Runner Tests', function() {
 	});
 
 	after(function(){
-		fs.unlinkAsync(data.htmlSummary)
-			.then(function(err){
-	   			if (err) throw err;
-			}).catch(function(error){
-				console.log(error.name,":",error.message);
-			});
-		fs.unlinkAsync(data.xmlSummary)
-			.then(function(err){
-	   			if (err) throw err;
-			}).catch(function(error){
-				console.log(error.name,":",error.message);
-			});
+
 		fs.unlinkAsync(data.jsonReport)
 			.then(function(err){
 		   		if (err) throw err;
@@ -69,12 +58,6 @@ describe('Runner Tests', function() {
 	it('should run tests and return outputFolder', function*() {
 		expect(data.outputFolder).to.not.be.undefined;
 	});
-	it('should run tests and return htmlSummary', function*() {
-		expect(data.htmlSummary).to.not.be.undefined;
-	});
-	it('should run tests and return xmlSummary', function*() {
-		expect(data.xmlSummary).to.not.be.undefined;
-	});
 	it('should run tests and return jsonReport', function*() {
 		expect(data.jsonReport).to.not.be.undefined;
 	});
@@ -84,9 +67,14 @@ describe('Runner Tests', function() {
 
 	it('should take an invalid target and throw and exception', function() {
 		config.target = 'bogus';
-		expect(function(){runTests(config)}).to.throw(
-			"AssertionError: The API you pass in must be setup to run with this monitor: "
-			+ config.target + " is unsupported.");
+
+
+		return runTests(config).catch(
+			function(error){
+				expect(error.name).to.equal("AssertionError");
+				expect(error.message).to.equal("The API passed in must be configured in the " + config.env + " environment: "
+				+ config.target + " is unsupported.");
+			});
 
 	});
 	it('should fail with missing test file', function*() {
@@ -96,6 +84,7 @@ describe('Runner Tests', function() {
 				expect(error.name).to.equal("AssertionError");
 				expect(error.message).to.contain("Could not find test file");
 			});
+
 	});
 
 });
