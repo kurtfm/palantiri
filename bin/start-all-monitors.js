@@ -10,6 +10,8 @@ var apiMonitors = config.supported_api_monitors;
 
 const appRoot = config.application_root;
 
+var apiMonitorStarter = appRoot + '/bin/api-monitor.js';
+
 var env = process.env.NODE_ENV ? process.env.NODE_ENV : 'prod';
 
 for (var i = 0, total = apiMonitors.length; i < total; i++) {
@@ -21,7 +23,7 @@ for (var i = 0, total = apiMonitors.length; i < total; i++) {
     var MonitorJob = function(target,schedule){
         return cron.schedule(schedule,function(){
             console.log(target + ": monitor started running.");
-            var monitor = spawn(appRoot + '/bin/api-monitor.js', ['--environment=' + env,'--target=' + target ]);
+            var monitor = spawn(apiMonitorStarter, ['--environment=' + env,'--target=' + target ]);
             /*
             monitor.stdout.on('data', function (data) {
                 console.log(target + " verbose: " + data);

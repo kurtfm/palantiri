@@ -67,8 +67,6 @@ describe('Runner Tests', function() {
 
 	it('should take an invalid target and throw and exception', function() {
 		config.target = 'bogus';
-
-
 		return runTests(config).catch(
 			function(error){
 				expect(error.name).to.equal("AssertionError");
