@@ -4,7 +4,7 @@ const config = require('../../config/load');
 const request = require('request');
 
 module.exports = function(){
-	this.sendMessage = function(message){
+	this.sendMessage = (message) => {
 		var slackParams = config.slack_message_options;
 		slackParams.text = message;
 		var options = {
@@ -18,8 +18,8 @@ module.exports = function(){
 			}
 	    });
 	};
-	this.postFile = function(title,message,file){
-		return new Promise(function(resolve,reject){
+	this.postFile = (title,message,file) =>{
+		return new Promise((resolve,reject) => {
 			var slackParams = config.slack_upload_options;
 			slackParams.initial_comment = message;
 			slackParams.file = fs.createReadStream( file );
@@ -32,7 +32,7 @@ module.exports = function(){
 				uri: config.slack_api + 'files.upload',
 				formData: slackParams
 			};
-			request(options, function (error, response, body) {
+			request(options, (error, response, body) => {
 				resolve({'body':body,'error':error});
 		    });
 		});

@@ -6,9 +6,10 @@ const fs = require('fs');
 const Promise = require('bluebird');
 const Newman = require('newman');
 const _ = require('lodash');
+const configureTests = require('./prepare-collections');
 
-module.exports = function(conf){
-    return new Promise(function(resolve,reject){
+module.exports = (conf) => {
+    return new Promise((resolve,reject) => {
         const target = conf.target;
         const time = Date.now();
         const outputId = target + "." + time + "." +  (Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000);
@@ -43,14 +44,17 @@ module.exports = function(conf){
           }
         }
 
-        var tests = fileExists(testFile) ?
+        var testsData = fileExists(testFile) ?
             JSON5.parse(fs.readFileSync( testFile, 'utf8')) : 
             assert(false, "Could not find test file: " + testFile);
+
+        var configuredTests = configureTests(testsData);
+
+
         var environment = fileExists(envFile) ?
             JSON5.parse(fs.readFileSync( envFile, 'utf8')) : {};
         var globals = fileExists(globalFile) ?
             JSON5.parse(fs.readFileSync( globalFile, 'utf8')) : {};
-
 
         var newmanOptions = {
             envJson: environment,
@@ -66,21 +70,28 @@ module.exports = function(conf){
             noColor: true
         };
 
-        Newman.execute(tests, newmanOptions,function(e){
-            //var testOptions = Newman.getOptions();
-            if(e){
-                reject(e);
-            }
-            else{
-                resolve({
-                    "target":target,
-                    "id":outputId,
-                    "outputFolder":conf.application_root + conf.output_folder,
-                    "jsonReport":jsonReport,
-                    "debugLog":debugLog}
+
+        configuredTests.then((data) => {
+
+            Newman.execute(data.tests, newmanOptions,(e) => {
+                //var testOptions = Newman.getOptions();
+                if(e){
+                    reject(e);
+                }
+                else{
+                    resolve({
+                        "target":target,
+                        "id":outputId,
+                        "outputFolder":conf.application_root + conf.output_folder,
+                        "jsonReport":jsonReport,
+                        "debugLog":debugLog}
                     );
-            }
-        });  
+                }
+            });
+
+
+        });
+
     });
   
 };

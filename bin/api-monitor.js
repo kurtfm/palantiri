@@ -3,19 +3,18 @@
 var config = require('../config/load');
 const _ = require('lodash');
 const app = config.application_root + config.api_monitor;
-const runTests = require(app + 'runner');
+const runTests = require(app + 'run-tests');
 const processResults = require(app + 'process-results');
 
 runTests(config)
-	.then(
-		function(data,err){
+	.then((data,err) => {
 			return processResults(data,config);
 		}
-	).catch(function(error){
+	).catch((error) => {
 		console.log(error.name,":",error.message);
 	})
 	.then(
-		function(log,err){
+		(log,err) => {
 			if(err){
 				console.log("processing error: ",err);
 			}
@@ -26,6 +25,6 @@ runTests(config)
 					});
 				}
 			}
-	}).catch(function(error){
+	}).catch( (error) => {
 		console.log(error.name,":",error.message);
 	});

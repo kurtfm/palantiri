@@ -16,7 +16,7 @@
 		},
 		{
 			"id": "7f45b39b-b19d-70df-aaaf-503fe407fb15",
-			"name": "1 Setup Accounts",
+			"name": "1. Setup Accounts",
 			"description": "Call createUser with password to create an account.",
 			"order": [
 				"dfc13001-23fd-b1eb-bee0-75323bffa1d0",

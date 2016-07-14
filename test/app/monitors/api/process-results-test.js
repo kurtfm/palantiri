@@ -1,10 +1,11 @@
 'use strict';
+
+require('mocha-generators').install();
 const Promise = require('bluebird');
 const fs = Promise.promisifyAll(require("fs"));
 const glob = require('glob');
-require('mocha-generators').install();
 const chai = require('chai');
-const expect = chai.expect; // jshint ignore:line
+const expect = chai.expect;
 const should = chai.should();
 const chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
@@ -30,7 +31,7 @@ var setupData = function(target){
 };
 
 
-describe('Result Processor Tests', function() {
+describe('Process Results Test', function() {
 	var data;
 	before(function(done){
 		setupData(target);
@@ -57,7 +58,7 @@ describe('Result Processor Tests', function() {
 	});
 
 	after(function(){
-		/*fs.unlinkAsync(config.application_root + config.output_folder + "healthcheck/" + target + ".json")
+		fs.unlinkAsync(config.application_root + config.output_folder + "healthcheck/" + target + ".json")
 			.then(function(err){
 				if (err) throw err;
 			}).catch(function(error){
@@ -67,7 +68,7 @@ describe('Result Processor Tests', function() {
 		  for (var i = files.length - 1; i >= 0; i--) {
 		  	fs.unlink(files[i]);
 		  }
-		});*/
+		});
 		
 	});
 

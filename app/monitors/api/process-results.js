@@ -1,24 +1,23 @@
 'use strict';
 const JSON5 = require('json5');
 const Promise = require('bluebird');
-const healthcheckProcessor = require('./healthcheck-processor');
-const errorProcessor = require('./error-summary-processor');
+const healthcheckProcessor = require('./process-healthcheck');
+const errorProcessor = require('./process-error-summary');
+const buildReport = require('./build-report');
 const Slack = require('../../adapters/slack');
 const async = require('async');
 const fs = Promise.promisifyAll(require("fs"));
 
-var eventLog = {'healthcheck':{},'checkErrors':{},'slack':{},'cleanUp':{}};
+var eventLog = {'healthcheck':{},'checkErrors':{},'slack':{},'buildReport':{},'cleanUp':{}};
 
-module.exports = function(data, config){
-	return new Promise(
-		function(resolve,reject){
+
+module.exports = (data, config) => {
+	return new Promise((resolve,reject) => {
 			async.waterfall([
 			//healthcheck
-			function(callback){
+			(callback) => {
 				eventLog.healthcheck.started = true;
-				var report = require(data.jsonReport);
-
-				healthcheckProcessor(report)
+				healthcheckProcessor(data.jsonReport)
 					.then(
 						function(results){
 							eventLog.healthcheck.finished = true;
@@ -30,24 +29,23 @@ module.exports = function(data, config){
 							callback(null,results);
 							return;
 						}
-					).catch(function(error){
+					).catch((error) => {
 						eventLog.healthcheck.error = error.name,":",error.message;
-						console.log(error.name,":",error.message);
+						console.log('process-healthcheck ',error.name,":",error.message, error);
 					});
 			},
 			//error processing
-			function(results,callback){
+			(results,callback) => {
 				eventLog.checkErrors.started = true;
 				if(results.score < 100){
 					eventLog.checkErrors.hasErrors = true;
 					errorProcessor(data.debugLog)
-						.then(
-							function(results){
+						.then((results) => {
 								eventLog.errorCheck.finished = true;
 								callback(null,results.title,results.message);
 								return;
 							}
-						).catch(function(error){
+						).catch((error) => {
 						eventLog.checkErrors.error = error.name,":",error.message;
 						console.log(error.name,":",error.message);
 					});
@@ -60,7 +58,7 @@ module.exports = function(data, config){
 				}
 			},
 			//slack notifications
-			function(title,message,callback){
+			(title,message,callback) => {
 				eventLog.slack.started = true;
 				if(!config.disable_slack_notifications){
 					eventLog.slack.enabled = true;
@@ -73,14 +71,14 @@ module.exports = function(data, config){
 						eventLog.slack.needed = true;
 						var slack = new Slack();
 						var slackPostFile = slack.postFile(title,message, data.debugLog)
-						.then(function(){
+						.then(() => {
 							eventLog.slack.sent = true;
 							eventLog.slack.finished = true;
 							callback(null);
 							return null;
-						}).catch(function(error){
+						}).catch((error) => {
 							eventLog.slack.sent = false;
-							console.log(error.name,":",error.message);
+							console.log('slack ',error.name,":",error.message);
 							eventLog.slack.error = error.name,":",error.message;
 							eventLog.slack.finished = true;
 							callback(null);
@@ -95,38 +93,54 @@ module.exports = function(data, config){
 				}
 
 			},
-			/*/build merged report
-			function(callback){
+			//build merged report
+			(callback) => {
+				eventLog.buildReport.started = true;
+				buildReport(data.jsonReport,data.debugLog)
+					.then((report) => {
+						eventLog.buildReport.gotFullReport = true;
+						fs.writeFileSync( data.outputFolder + data.target + '-full-report.json', JSON5.stringify(report) );
+						callback(null);
 
+					}).catch((error)=>{
+						eventLog.buildReport = false;
+						console.log('build-report ',error.name,":",error.message);
+						eventLog.buildReport.error = error.name,":",error.message;
+						eventLog.buildReport.finished = true;
+						callback(null);
+						return null;
+				});
+				
 
-			},*/
+			},
 			//clean up
-			function(callback){
+			(callback) => {
 				eventLog.cleanUp.started = true;
 					fs.unlinkAsync(data.jsonReport)
-						.then(function(err){
+						.then((err) => {
 					   		if (err) throw err;
 				   			eventLog.jsonDeleted = true;
-						}).catch(function(error){
+						}).catch((error) => {
 							eventLog.cleanUp.jsonDeleted = false;
 							eventLog.cleanUp.jsonDeleteError = error.name,":",error.message;
 							console.log(error.name,":",error.message);
 						});
 					
 					fs.unlinkAsync(data.debugLog)
-						.then(function(err){
+						.then((err) => {
 					   		if (err) throw err;
 					   		eventLog.debugDeleted = true;
-						}).catch(function(error){
+						}).catch((error) => {
 							eventLog.cleanUp.debugDeleted = false;
 							eventLog.cleanUp.debugDeleteError = error.name,":",error.message;
 							console.log(error.name,":",error.message);
 						});
+			   
 					eventLog.cleanUp.finished = true;
 					callback(null);
 					return null;
 			}
-		],function(err){
+		],(err) => {
 			if(err){
 				reject(err);
 			}

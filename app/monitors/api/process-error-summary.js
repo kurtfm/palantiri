@@ -2,8 +2,8 @@
 const fs = require("fs");
 const readline = require('readline');
 
-module.exports = function(debugLog){
-    return new Promise(function(resolve,reject){
+module.exports = (debugLog) => {
+    return new Promise((resolve,reject) => {
         var title = results.monitor + " just failed " + results.fails + " out of " + results.testcount + " assertions";
         var errors = "These requests had failed assertions:\n";
         var lineReader = readline.createInterface({

@@ -1,9 +1,7 @@
 #! /usr/bin/env node
 'use strict';
 var config = require('../config/load');
-const spawn = require('child_process').spawn;
-const exec = require('child_process').exec;
-const execFile = require('child_process').execFile;
+const spawn = require('child_process').spawn;;
 const cron = require('node-cron');
 
 var apiMonitors = config.supported_api_monitors;
@@ -20,20 +18,20 @@ for (var i = 0, total = apiMonitors.length; i < total; i++) {
     var monitorSchedule = typeof targetSchedule !== 'undefined' ? targetSchedule : config.monitor_schedule.default;
 
     //mini Monitor Job class to spawn a new process and kick of run for that monitor
-    var MonitorJob = function(target,schedule){
-        return cron.schedule(schedule,function(){
+    var MonitorJob = function(target,schedule) {
+        return cron.schedule(schedule, function() {
             console.log(target + ": monitor started running.");
             var monitor = spawn(apiMonitorStarter, ['--environment=' + env,'--target=' + target ]);
             /*
-            monitor.stdout.on('data', function (data) {
+            monitor.stdout.on('data', (data) => {
                 console.log(target + " verbose: " + data);
             });
             */
-            monitor.on('error', function (data) {
+            monitor.on('error', (data) => {
                 console.log(target + " error: " + data);
             });
 
-            monitor.on('exit', function (exitCode) {
+            monitor.on('exit', (exitCode) => {
                 console.log(target + ": monitor finished running.");
             });
 

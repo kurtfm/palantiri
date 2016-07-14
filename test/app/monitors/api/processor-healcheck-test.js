@@ -11,19 +11,17 @@ const _ = require('lodash');
 
 var config = require('../../../../config/load');
 
-console.log(config.env);
-
 const app = config.application_root + config.api_monitor;
-const healthcheckProcessor = require(app + 'healthcheck-processor');
+const healthcheckProcessor = require(app + 'process-healthcheck');
 const target = 'onetest';
 
-var reportData = require(config.application_root + config.test_data + target + config.report_file_end);
+var reportLocation = config.application_root + config.test_data + target + config.report_file_end;
 
 describe('Healthcheck Processor Tests', function() {
 	var data;
 	before(function(done){
 
-			healthcheckProcessor(reportData).then(
+			healthcheckProcessor(reportLocation).then(
 					function(results,err){
 						if(err){
 							console.log("processing error: ",err);

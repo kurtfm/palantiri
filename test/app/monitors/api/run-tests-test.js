@@ -12,7 +12,7 @@ chai.use(chaiAsPromised);
 
 var config = require('../../../../config/load');
 const app = config.application_root + config.api_monitor;
-const runTests = require(app + 'runner');
+const runTests = require(app + 'run-tests');
 	
 describe('Runner Tests', function() {
 	var data;
