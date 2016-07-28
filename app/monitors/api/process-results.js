@@ -12,7 +12,7 @@ const fs = Promise.promisifyAll(require("fs"));
 var eventLog = {'healthcheck': {}, 'pushMetrics':{},'checkErrors': {}, 'slack': {}, 'buildReport': {}, 'cleanUp': {}};
 
 
-module.exports = (data, config) => {
+module.exports = (data, conf) => {
     return new Promise((resolve, reject) => {
         async.waterfall([
             //build merged report
@@ -21,7 +21,7 @@ module.exports = (data, config) => {
                 buildReport(data.jsonReport, data.debugLog)
                         .then((response) => {
                             eventLog.buildReport.gotFullReport = true;
-                            fs.writeFileSync(data.outputFolder + data.target + config.full_report_file_end, JSON5.stringify(response.report));
+                            fs.writeFileSync(data.outputFolder + data.target + conf.full_report_file_end, JSON5.stringify(response.report));
                             callback(null,response.health);
 
                         }).catch((error) => {
@@ -35,7 +35,7 @@ module.exports = (data, config) => {
             //healthcheck output
             (results,callback) => {
                 eventLog.healthcheck.started = true;
-                if (!config.disable_health_status) {
+                if (!conf.disable_health_status) {
                     eventLog.healthcheck.writeOutput = true;
                     fs.writeFileSync(data.outputFolder + '/healthcheck/' + data.target + '.json', JSON5.stringify(results));
                 }
@@ -46,7 +46,7 @@ module.exports = (data, config) => {
             //status processing
             (results, callback) => {
                 eventLog.pushMetrics.started = true;
-                if(config.disable_metrics){
+                if(conf.disable_metrics){
                      eventLog.pushMetrics.disabled = true;
                     callback(null,results);
                     return null;
@@ -87,7 +87,7 @@ module.exports = (data, config) => {
             //notifications
             (title, message, callback) => {
                 eventLog.slack.started = true;
-                if (!config.disable_slack_notifications) {
+                if (!conf.disable_slack_notifications) {
                     eventLog.slack.enabled = true;
                     if (!title && !message) {
                         eventLog.slack.needed = false;

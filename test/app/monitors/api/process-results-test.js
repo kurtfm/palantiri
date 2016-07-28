@@ -10,9 +10,9 @@ const should = chai.should();
 const chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 
-var config = require('../../../../config/load');
-const app = config.application_root + config.api_monitor;
-const processResults = require(app + 'process-results');
+var conf = require('../../../../config/load');
+const app = conf.application_root + conf.api_monitor;
+const processResults = require( app + 'process-results' );
 const target = 'onetest';
 
 var time, outputId, outputBase, dataFolder, healthcheckOutputFile, testData;
@@ -20,14 +20,14 @@ var time, outputId, outputBase, dataFolder, healthcheckOutputFile, testData;
 var setupData = function (target) {
     time = Date.now();
     outputId = target + "." + time + "." + (Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000);
-    outputBase = config.application_root + config.output_folder + outputId;
-    dataFolder = config.application_root + config.test_data;
-    healthcheckOutputFile = config.application_root + config.output_folder + "healthcheck/" + target + ".json";
+    outputBase = conf.application_root + conf.output_folder + outputId;
+    dataFolder = conf.application_root + conf.test_data;
+    healthcheckOutputFile = conf.application_root + conf.output_folder + "healthcheck/" + target + ".json";
     testData = {target: target,
         id: target,
-        outputFolder: config.application_root + config.output_folder,
-        jsonReport: outputBase + config.report_file_end,
-        debugLog: outputBase + config.verbose_file_end};
+        outputFolder: conf.application_root + conf.output_folder,
+        jsonReport: outputBase + conf.report_file_end,
+        debugLog: outputBase + conf.verbose_file_end};
 };
 
 
@@ -35,13 +35,13 @@ describe('Process Results Test', function () {
     var data;
     before(function (done) {
         setupData(target);
-        var jsonFileStream = fs.createReadStream(dataFolder + target + config.report_file_end)
-                .pipe(fs.createWriteStream(outputBase + config.report_file_end));
-        var verboseFileStream = fs.createReadStream(dataFolder + target + config.verbose_file_end)
-                .pipe(fs.createWriteStream(outputBase + config.verbose_file_end));
+        var jsonFileStream = fs.createReadStream(dataFolder + target + conf.report_file_end)
+                .pipe(fs.createWriteStream(outputBase + conf.report_file_end));
+        var verboseFileStream = fs.createReadStream(dataFolder + target + conf.verbose_file_end)
+                .pipe(fs.createWriteStream(outputBase + conf.verbose_file_end));
 
         jsonFileStream.on('finish', function () {
-            processResults(testData, config).then(
+            processResults(testData, conf).then(
                     function (log, err) {
                         if (err) {
                             console.log("processing error: ", err);
@@ -57,14 +57,14 @@ describe('Process Results Test', function () {
     });
 
     after(function () {
-        fs.unlinkAsync(config.application_root + config.output_folder + "healthcheck/" + target + ".json")
+        fs.unlinkAsync(conf.application_root + conf.output_folder + "healthcheck/" + target + ".json")
                 .then(function (err) {
                     if (err)
                         throw err;
                 }).catch(function (error) {
             console.log(error.name, ":", error.message);
         });
-        glob(config.application_root + config.output_folder + '*-*', function (er, files) {
+        glob(conf.application_root + conf.output_folder + '*-*', function (er, files) {
             for (var i = files.length - 1; i >= 0; i--) {
                 fs.unlink(files[i]);
             }
@@ -114,12 +114,12 @@ describe('Process Results Test', function () {
         expect(data.cleanUp.finished).to.be.true;
     });
     it('should have removed json report', function () {
-        fs.stat(outputBase + config.report_file_end, function (err, stats) {
+        fs.stat(outputBase + conf.report_file_end, function (err, stats) {
             expect(err.code).to.eql('ENOENT');
         });
     });
     it('should have removed verbose debug log', function () {
-        fs.stat(outputBase + config.verbose_file_end, function (err, stats) {
+        fs.stat(outputBase + conf.verbose_file_end, function (err, stats) {
             expect(err.code).to.eql('ENOENT');
         });
     });

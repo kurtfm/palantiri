@@ -14,7 +14,7 @@ module.exports = function(jsonReport,debugLog) {
                 report.collection.debugInfo = debugInfo;
                 var processedHealthCheck = processHealthCheck(report);
                 processedHealthCheck.then(function(healthSummary){
-                    report.collection.heathSummary = healthSummary;
+                    report.collection.healthSummary = healthSummary;
                     resolve({"report":report,"health":healthSummary});
                 }).catch((error) => {
                     console.error( error.name, " : ",error.message);

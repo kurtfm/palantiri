@@ -15,45 +15,11 @@ metricsNames.requestPasses = "requestPasses";
 metricsNames.requestFailures = "requestFailures";
 
 module.exports = function () {
-    var client = new StatsD('dd-agent');
     
-    /*
-var client = new StatsD('dd-agent');
-
-client.socket.on('error', function (error) {
-    console.error("Error in socket for metrics: ", error);
-});
-
-client.increment('kurt.test.counter', Math.floor((Math.random() * 100) + 1), function (error, bytes) {
-    //this only gets called once after all messages have been sent
-    if (error) {
-        console.error('Error sending metrics:', error);
-    } else {
-        console.log('Metrics sent: '+ bytes +' bytes')
-    }
-});
-
-client.histogram('kurt.test.histogram', 300 + Math.floor((Math.random() * 200) + 100), function (error, bytes) {
-    //this only gets called once after all messages have been sent
-    if (error) {
-        console.error('Error sending metrics:', error);
-    } else {
-        console.log('Metrics sent: '+ bytes +' bytes')
-    }
-});
-
-client.gauge('kurt.test.gauge', Math.floor((Math.random() * 100) + 80), function (error, bytes) {
-    //this only gets called once after all messages have been sent
-    if (error) {
-        console.error('Error sending metrics:', error);
-        client.close();
-    } else {
-        console.log('Metrics sent: '+ bytes +' bytes')
-        client.close();
-    }
-});
-*/
-
+    var mock = process.env.NODE_ENV === 'test' ? true : false;
+    
+    var client = new StatsD('dd-agent',8125,'', '', false,false,mock);
+    
     client.socket.on('error', function (error) {
         throw error;
         console.error("Error in socket for metrics: ", error);
@@ -61,6 +27,7 @@ client.gauge('kurt.test.gauge', Math.floor((Math.random() * 100) + 80), function
     
     //metric name: <target>.<runName>.<metric> e.g. brandapis.UserMigrationAPIs.totalTests
     //tags: target, runName, requestName, folderName,metric
+    
     this.sendRunTotalTests = (target,runName,total) => {
         var metric = target + '.' + runName + '.' + metricsNames.runTotalTests;
         var tags = [target,runName,metricsNames.runTotalTests];

@@ -6,7 +6,7 @@ module.exports = (target,report) => {
     return new Promise((resolve, reject) => {
         var datadog = new Datadog();
         var reg = new RegExp("^.*: | ", "g");
-        var name = report.monitor.replace(reg, "");
+        var name =   report.monitor.indexOf(':') !== -1 ? report.monitor.replace(reg, "") : report.monitor;
          var runTotal =  datadog.sendRunTotalTests(target,name,report.testcount),
             runScore = datadog.sendRunTotalScore(target,name,report.score),
             runPasses = datadog.sendRunTotalPasses(target,name,report.passes),
@@ -23,20 +23,20 @@ module.exports = (target,report) => {
                var requestName = test.name.replace(/ /g,'');    
                 
                var requestCode = datadog.sendRequestResponseCode(target,name,requestName,folderName,test.statusCode),
-               requestTime = datadog.sendRequestResponseTime(target,name,requestName,folderName,test.responseTime),
-               requestPasses = datadog.sendRequestPasses(target,name,requestName,folderName,test.passes),
-               requestFailures = datadog.sendRequestFailures(target,name,requestName,folderName,test.fails)
-                  datadogCommands.push(requestCode,requestTime,requestPasses,requestFailures);
+                   requestTime = datadog.sendRequestResponseTime(target,name,requestName,folderName,test.responseTime),
+                   requestPasses = datadog.sendRequestPasses(target,name,requestName,folderName,test.passes),
+                   requestFailures = datadog.sendRequestFailures(target,name,requestName,folderName,test.fails);
+               datadogCommands.push(requestCode,requestTime,requestPasses,requestFailures);
             }
         }
         Promise.all(datadogCommands)
                 .then(res =>{
                     console.log('all finished: ');
-                    datadog.finishedSendingMetrics().then( () => {resolve();} );
+                    datadog.finishedSendingMetrics().then( () => {resolve({'finished':true});} );
                 }
                 ).catch( error => {
                     console.log('error: ', error);
-                    datadog.finishedSendingMetrics().then( () => {resolve();} );
+                    datadog.finishedSendingMetrics().then( () => {resolve({'finished':false});} );
                 });
 
         

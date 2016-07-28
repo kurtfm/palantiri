@@ -24,7 +24,6 @@ describe('Process Debug Log Tests', function () {
         var processedVerboseLog = processVerboseLog(verboseLog);
         processedVerboseLog.then(function(debugInfo){
             data = debugInfo;
-            console.log(data);
             done();
             }).catch((error) => {
                 console.error( error.name, " : ",error.message);
