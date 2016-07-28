@@ -58,7 +58,7 @@ module.exports = (log) => {
                     var endpoint = info[info.length - 1];
                     var nameId = info.slice(2, info.length - 2).join(' ').split('|');
                     var name = nameId[0];
-                    var id = nameId[1];
+                    var id = nameId[1].trim();
                     var requestInfo = reqArray[1].split('Request data:');
                     var requestData = JSON5.parse(requestInfo[1] !== '' ? requestInfo[1] : '{}');
                     var requestHeaders = JSON5.parse(requestInfo[0].replace(/Request headers:/, ''));

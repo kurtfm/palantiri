@@ -25,13 +25,18 @@ var argv = require('yargs')
     	describe: 'disable slack notifications',
      	default: false
     })
+    .option('disablemetrics', {
+    	example: 'bin/api-monitor.js --disablemetrics',
+    	describe: 'disable sending metrics to datadog',
+     	default: false
+    })
     .help('help')
     .alias('h','help')
     .argv;
 
 //limitation of how I am loading the configuration for automated tests
 var env;
-if(process.env.NODE_ENV == 'test'){
+if(process.env.NODE_ENV === 'test'){
 	env = 'test';
 }
 else{
@@ -62,7 +67,12 @@ var appRoot = function(){
 
 conf.application_root = appRoot();
 conf.disable_health_status = argv.disablehealth;
-conf.disable_slack_notifications = argv.disableslack;
+if(argv.disableslack){
+    conf.disable_slack_notifications = argv.disableslack;
+}
+if(argv.disablemetrics){
+    conf.disable_metrics = argv.disablemetrics;
+}
 conf.env = env;
 conf.target = argv.target ? argv.target : null;
 var properties = _.merge(app, conf);

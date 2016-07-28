@@ -8,15 +8,17 @@ module.exports = function(jsonReport,debugLog) {
         function (resolve, reject) {
             var report = require(jsonReport);
             var processedVerboseLog = processVerboseLog(debugLog);
-            var processedHealthCheck = processHealthCheck(jsonReport);
+            
 
             processedVerboseLog.then(function(debugInfo){
                 report.collection.debugInfo = debugInfo;
+                var processedHealthCheck = processHealthCheck(report);
                 processedHealthCheck.then(function(healthSummary){
                     report.collection.heathSummary = healthSummary;
-                    resolve(report);
+                    resolve({"report":report,"health":healthSummary});
+                }).catch((error) => {
+                    console.error( error.name, " : ",error.message);
                 });
-
             });
             
         }

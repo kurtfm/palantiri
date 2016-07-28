@@ -9,6 +9,7 @@ global_file: globals.json
 report_file_end: -report.json
 env_export_file_end: -env.json
 verbose_file_end: -debug
+full_report_file_end: -full-report.json
 monitor_schedule:
   default: "* * * * *"
 slack_api: https://slack.com/api/
@@ -21,3 +22,5 @@ slack_message_options:
 slack_upload_options:
   channels:  "#identity-alarms"
   fileType: log
+disable_slack_notifications: false
+disable_metrics: false

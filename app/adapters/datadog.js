@@ -1,59 +1,192 @@
 'use strict';
-//api
-//b7a02fe70ddff721f6ca3a548ea991ec
-//app
-//bf9199ad0fe8754c333f8dd454426970e039e814
-
-const dogapi = require("dogapi");
-//const config = require('../../config/load');
-//const request = require('request');
-
-var options = {
-    api_key: "e2fece0d6d8693b5135a7779dc3c80fc",
-    app_key: "c3c06b3cb7cbc3bc587496b59b9b7a5a4a477967",
-};
-
-var now = parseInt(new Date().getTime() / 1000);
-
-dogapi.initialize(options);
-
-//https://app.datadoghq.com/api/v1/series
-//[{'metric':'my.series', 'points':15}, {'metric':'my1.series', 'points':16}]
-//metrics names
-//target.foldername.success
-//target.foldername.fail
-//Palanteer.brandapis.foldername.success
-
-//UserMigrationAPIs.ApplicationAccess
-//tag name
-//[target:brandapis,environment:prod]
 
 
-//dogapi.metric.send("Test.SendSuccess",[now,2],(err,result)=>{
-//    console.log("err: ",err," result: ",result);
-//});
+var StatsD = require('hot-shots');
+const Promise = require('bluebird');
 
-var metrics = [
-    {
-        metric: ".SendSuccess",
-        points: [[now, 0]],
-        tags: ["target:tester","env:prod"]
-    },
-    {
-        metric: "Test.SendFailure",
-        points: [now, 8],
-        tags: ["target:tester","env:prod"]
+var metricsNames = {};
+metricsNames.runTotalTests = "runTotalTests";
+metricsNames.runTotalPasses = "runTotalPasses";
+metricsNames.runTotalFailures = "runTotalFailures";
+metricsNames.runTotalScore = "runTotalScore";
+metricsNames.requestResponseCode = "requestResponseCode";
+metricsNames.requestResponseTime = "requestResponseTime";
+metricsNames.requestPasses = "requestPasses";
+metricsNames.requestFailures = "requestFailures";
+
+module.exports = function () {
+    var client = new StatsD('dd-agent');
+    
+    /*
+var client = new StatsD('dd-agent');
+
+client.socket.on('error', function (error) {
+    console.error("Error in socket for metrics: ", error);
+});
+
+client.increment('kurt.test.counter', Math.floor((Math.random() * 100) + 1), function (error, bytes) {
+    //this only gets called once after all messages have been sent
+    if (error) {
+        console.error('Error sending metrics:', error);
+    } else {
+        console.log('Metrics sent: '+ bytes +' bytes')
     }
-];
-
-dogapi.metric.send_all(metrics, (err,result)=>{
-    console.log("err: ",err," result: ",result);
 });
 
-var properties = {
-    tags: ["env:prod","target:tester"],
-    alert_type: "error"
+client.histogram('kurt.test.histogram', 300 + Math.floor((Math.random() * 200) + 100), function (error, bytes) {
+    //this only gets called once after all messages have been sent
+    if (error) {
+        console.error('Error sending metrics:', error);
+    } else {
+        console.log('Metrics sent: '+ bytes +' bytes')
+    }
+});
+
+client.gauge('kurt.test.gauge', Math.floor((Math.random() * 100) + 80), function (error, bytes) {
+    //this only gets called once after all messages have been sent
+    if (error) {
+        console.error('Error sending metrics:', error);
+        client.close();
+    } else {
+        console.log('Metrics sent: '+ bytes +' bytes')
+        client.close();
+    }
+});
+*/
+
+    client.socket.on('error', function (error) {
+        throw error;
+        console.error("Error in socket for metrics: ", error);
+    });
+    
+    //metric name: <target>.<runName>.<metric> e.g. brandapis.UserMigrationAPIs.totalTests
+    //tags: target, runName, requestName, folderName,metric
+    this.sendRunTotalTests = (target,runName,total) => {
+        var metric = target + '.' + runName + '.' + metricsNames.runTotalTests;
+        var tags = [target,runName,metricsNames.runTotalTests];
+        return new Promise((resolve, reject) => {
+            client.increment(metric, total,tags,(err,bytes)=>{
+                if(err){
+                    reject({"error":err});
+                }
+                else{
+                    resolve({"bytes":bytes});
+                }
+            });
+        });
+    };
+    this.sendRunTotalPasses = (target,runName,passes) => {
+        var metric = target + '.' + runName + '.' + metricsNames.runTotalPasses;
+        var tags = [target,runName,metricsNames.runTotalPasses];
+        return new Promise((resolve, reject) => {
+            client.increment(metric, passes,tags,(err,bytes)=>{
+                if(err){
+                    reject({"error":err});
+                }
+                else{
+                    resolve({"bytes":bytes});
+                }
+            });
+        });
+    };
+    this.sendRunTotalFailures = (target,runName,fails) => {
+        var metric = target + '.' + runName + '.' + metricsNames.runTotalFailures;
+        var tags = [target,runName,metricsNames.runTotalFailures];
+        return new Promise((resolve, reject) => {
+            client.increment(metric, fails,tags,(err,bytes)=>{
+                if(err){
+                    reject({"error":err});
+                }
+                else{
+                    resolve({"bytes":bytes});
+                }
+            });
+        });
+    };
+    this.sendRunTotalScore = (target,runName,score) => {
+        var metric = target + '.' + runName + '.' + metricsNames.runTotalScore;
+        var tags = [target,runName,metricsNames.runTotalScore];
+        return new Promise((resolve, reject) => {
+            client.gauge(metric, score,tags,(err,bytes)=>{
+                if(err){
+                    reject({"error":err});
+                }
+                else{
+                    resolve({"bytes":bytes});
+                }
+            });
+        });
+    };
+    this.sendRequestResponseCode = (target,runName,requestName,folderName,code) => {
+        var metric = target + '.' + runName + '.' + metricsNames.requestResponseCode + '.' + code;
+        var tags = [target,runName,requestName,folderName,metricsNames.requestResponseCode];
+        return new Promise((resolve, reject) => {
+            client.increment(metric,1,tags,(err,bytes)=>{
+                if(err){
+                    reject({"error":err});
+                }
+                else{
+                    resolve({"bytes":bytes});
+                }
+            });
+        });
+    };
+    this.sendRequestResponseTime = (target,runName,requestName,folderName,time) => {
+        var metric = target + '.' + runName + '.' + metricsNames.requestResponseTime;
+        var tags = [target,runName,requestName,folderName,metricsNames.requestResponsTime];
+        return new Promise((resolve, reject) => {
+            client.histogram(metric, time,tags,(err,bytes)=>{
+                if(err){
+                    reject({"error":err});
+                }
+                else{
+                    resolve({"bytes":bytes});
+                }
+            });
+        });
+    };
+    this.sendRequestPasses = (target,runName,requestName,folderName,passes) => {
+        var metric = target + '.' + runName + '.' + metricsNames.requestPasses;
+        var tags = [target,runName,requestName,folderName,metricsNames.requestPasses];
+        return new Promise((resolve, reject) => {
+            client.increment(metric, passes,tags,(err,bytes)=>{
+                if(err){
+                    reject({"error":err});
+                }
+                else{
+                    resolve({"bytes":bytes});
+                }
+            });
+        });
+    };
+    this.sendRequestFailures = (target,runName,requestName,folderName,fails) => {
+        var metric = target + '.' + runName + '.' + metricsNames.requestFailures;
+        var tags = [target,runName,requestName,folderName,metricsNames.requestFailures];
+        return new Promise((resolve, reject) => {
+            client.increment(metric, fails,tags,(err,bytes)=>{
+                if(err){
+                    reject({"error":err});
+                }
+                else{
+                    resolve({"bytes":bytes});
+                }
+            });
+        });
+    };
+    this.sendErrorEvent = (name,type,message,runName,requestName,folderName,debugData) => {
+        return new Promise((resolve, reject) => {
+            
+        });
+     };
+    this.sendEvent = (name,type,message,runName) => {
+        return new Promise((resolve, reject) => {
+            
+        });
+     };
+    this.finishedSendingMetrics = () => {
+        return new Promise((resolve, reject) => {
+            client.close( () => {resolve();} );
+        });
+    };
+
 };
-dogapi.event.create("tester error", "Encountered errors during Application Access details: s3 link?", properties, function(err, res){
-    console.dir(res);
-});

@@ -1,7 +1,7 @@
 {
     "id": "",
     "name": "Default",
-    "timestamp": 1465448099083,
+    "timestamp": 1469581632663,
     "collection_id": "2e885deb-a9c7-7758-8685-4bfb6cdc036f",
     "folder_id": 0,
     "target_type": "collection",
@@ -40,7 +40,7 @@
                 "currentHelper": "normal",
                 "helperAttributes": {},
                 "time": 1463694316434,
-                "name": "one test",
+                "name": "one test | c438beca-6cc7-5bff-5f7f-dbe11af342e8",
                 "description": "one test for testing",
                 "collectionId": "2e885deb-a9c7-7758-8685-4bfb6cdc036f",
                 "responses": []
@@ -54,9 +54,9 @@
     "results": [
         {
             "id": "c438beca-6cc7-5bff-5f7f-dbe11af342e8",
-            "name": "one test",
+            "name": "one test | c438beca-6cc7-5bff-5f7f-dbe11af342e8",
             "url": "localhost:33688/one",
-            "totalTime": 126,
+            "totalTime": 137,
             "responseCode": {
                 "code": 200,
                 "name": "",
@@ -81,8 +81,8 @@
                     "Status code is 200": true
                 }
             ],
-            "time": 126,
-            "meanResponseTime": 126
+            "time": 137,
+            "meanResponseTime": 137
         }
     ],
     "environment": {

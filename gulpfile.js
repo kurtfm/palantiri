@@ -29,7 +29,7 @@ gulp.task('clean', function() {
 gulp.task('source',['clean'],function(){
 	var pkg = JSON.parse(fs.readFileSync('./package.json'));
 	return gulp.src(['**/*','!test','!test/**','!dist','!dist/**','!.*','!*.*'])
-    .pipe(gulp.dest('dist/monitor-agent-' + pkg.version+'/'));
+    .pipe(gulp.dest('dist/monitor-agent'));
 });
 
 gulp.task('package',['source','clean'],function(){

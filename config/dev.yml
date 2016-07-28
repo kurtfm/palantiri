@@ -1,4 +1,3 @@
 supported_api_monitors: [ brandapi-user, brandapi-support, brandapi-migration]
-mongo_db: mongodb://localhost:27017/apimonitor
 slack_upload_options:
   channels:  "#identity-site-tester"

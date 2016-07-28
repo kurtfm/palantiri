@@ -1,0 +1,116 @@
+{
+  "id": "",
+  "name": "Default",
+  "timestamp": 1469581632663,
+  "collection_id": "2e885deb-a9c7-7758-8685-4bfb6cdc036f",
+  "folder_id": 0,
+  "target_type": "collection",
+  "count": 1,
+  "collection": {
+    "id": "2e885deb-a9c7-7758-8685-4bfb6cdc036f",
+    "name": "monitoring-agent-tests",
+    "description": "Simple test for mocking newman tests in monitoring tool.",
+    "order": [],
+    "folders": [
+      {
+        "id": "c16d054c-43df-2547-812e-200543b03e6f",
+        "name": "One Folder",
+        "description": "One folder",
+        "order": [
+          "c438beca-6cc7-5bff-5f7f-dbe11af342e8"
+        ],
+        "owner": "197134"
+      }
+    ],
+    "timestamp": 1463694088994,
+    "owner": "197134",
+    "remoteLink": "",
+    "public": false,
+    "requests": [
+      {
+        "id": "c438beca-6cc7-5bff-5f7f-dbe11af342e8",
+        "headers": "",
+        "url": "localhost:33688/one",
+        "preRequestScript": null,
+        "pathVariables": {},
+        "method": "POST",
+        "data": null,
+        "dataMode": "params",
+        "tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
+        "currentHelper": "normal",
+        "helperAttributes": {},
+        "time": 1463694316434,
+        "name": "one test | c438beca-6cc7-5bff-5f7f-dbe11af342e8",
+        "description": "one test for testing",
+        "collectionId": "2e885deb-a9c7-7758-8685-4bfb6cdc036f",
+        "responses": []
+      }
+    ],
+    "debugInfo": [
+      {
+        "name": "one test ",
+        "id": "c438beca-6cc7-5bff-5f7f-dbe11af342e8",
+        "statusCode": "200",
+        "totalTime": "137ms",
+        "method": "[POST]",
+        "endpoint": "http://localhost:33688/one",
+        "requestHeaders": {
+          "host": "localhost:33688",
+          "accept-encoding": "gzip, deflate",
+          "content-length": 0
+        },
+        "requestData": null,
+        "responseHeaders": {
+          "cache-control": "no-cache",
+          "content-length": "0",
+          "vary": "accept-encoding",
+          "date": "Wed, 27 Jul 2016 01:07:12 GMT",
+          "connection": "close"
+        },
+        "responseBody": {}
+      }
+    ]
+  },
+  "folder": null,
+  "globals": {
+    "values": []
+  },
+  "results": [
+    {
+      "id": "c438beca-6cc7-5bff-5f7f-dbe11af342e8",
+      "name": "one test | c438beca-6cc7-5bff-5f7f-dbe11af342e8",
+      "url": "localhost:33688/one",
+      "totalTime": 137,
+      "responseCode": {
+        "code": 200,
+        "name": "",
+        "detail": ""
+      },
+      "tests": {
+        "Status code is 200": true
+      },
+      "totalPassFailCounts": {
+        "pass": 1,
+        "fail": 0
+      },
+      "testPassFailCounts": {
+        "Status code is 200": {
+          "pass": 1,
+          "fail": 0
+        }
+      },
+      "times": [],
+      "allTests": [
+        {
+          "Status code is 200": true
+        }
+      ],
+      "time": 137,
+      "meanResponseTime": 137
+    }
+  ],
+  "environment": {
+    "values": []
+  },
+  "delay": 0
+}

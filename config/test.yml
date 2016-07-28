@@ -10,3 +10,4 @@ slack_message_options:
 slack_upload_options:
   channels:  "#id-monitor-test"
   fileType: log
+disable_metrics: true

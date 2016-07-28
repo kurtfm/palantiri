@@ -15,35 +15,35 @@ var slackResponseBody = JSON5.parse(fs.readFileSync(config.application_root + co
 var title = slackResponseBody.file.title;
 var message = slackResponseBody.file.initial_comment.comment;
 
-describe('Slack Tests', function() {
-	beforeEach(function(){
-	var slackResponse = nock('https://slack.com')
-	            .post('/api/files.upload')
-	            .reply(200, slackResponseBody);
-	});
-	it('should take title,message and file path and return results', function*() {
-	return slack.postFile(title,message, debug)
-		.then(function(results){
-			expect(results).to.not.be.undefined;
-			expect(results).to.not.be.null;
-			expect(results).to.not.be.empty;
-		});
-	});
-	it('should return the title sent', function*() {
-	return slack.postFile(title,message, debug)
-		.then(function(results){
-			slackBody = JSON5.parse(results.body);
-			expect(slackBody.file.title).to.equal(title);
-		});
+describe('Slack Tests', function () {
+    beforeEach(function () {
+        var slackResponse = nock('https://slack.com')
+                .post('/api/files.upload')
+                .reply(200, slackResponseBody);
+    });
+    it('should take title,message and file path and return results', function* () {
+        return slack.postFile(title, message, debug)
+                .then(function (results) {
+                    expect(results).to.not.be.undefined;
+                    expect(results).to.not.be.null;
+                    expect(results).to.not.be.empty;
+                });
+    });
+    it('should return the title sent', function* () {
+        return slack.postFile(title, message, debug)
+                .then(function (results) {
+                    slackBody = JSON5.parse(results.body);
+                    expect(slackBody.file.title).to.equal(title);
+                });
 
-	});
-	it('should return the message sent', function*() {
-	return slack.postFile(title,message, debug)
-		.then(function(results){
-			slackBody = JSON5.parse(results.body);
-			expect(slackBody.file.initial_comment.comment).to.equal(message);
+    });
+    it('should return the message sent', function* () {
+        return slack.postFile(title, message, debug)
+                .then(function (results) {
+                    slackBody = JSON5.parse(results.body);
+                    expect(slackBody.file.initial_comment.comment).to.equal(message);
 
-		});
-  	});
+                });
+    });
 
 });

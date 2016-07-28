@@ -36,7 +36,7 @@ module.exports = (conf) => {
             return fs.statSync(path).isFile();
           }
           catch (e) {
-            if (e.code == 'ENOENT') { 
+            if (e.code === 'ENOENT') { 
               return false;
             }
             console.log("Exception fs.statSync (" + path + "): " + e);

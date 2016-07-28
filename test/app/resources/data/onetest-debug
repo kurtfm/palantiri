@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------------------------
-200 126ms one test [POST] http://localhost:33688/one
+200 137ms one test | c438beca-6cc7-5bff-5f7f-dbe11af342e8 [POST] http://localhost:33688/one
 ------------------------------------------------------------
 Request headers:
 {
@@ -15,7 +15,7 @@ Response headers:
  "cache-control": "no-cache",
  "content-length": "0",
  "vary": "accept-encoding",
- "date": "Thu, 09 Jun 2016 04:54:59 GMT",
+ "date": "Wed, 27 Jul 2016 01:07:12 GMT",
  "connection": "close"
 }
 Response body:

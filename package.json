@@ -9,17 +9,20 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@grove/dogstatsd": "^1.0.0",
     "async": "^2.0.0-rc.3",
     "bluebird": "^3.3.4",
-    "dogapi": "^2.3.0",
     "fs": "0.0.2",
     "hapi": "^13.3.0",
+    "hot-shots": "^4.1.1",
     "js-yaml": "^3.5.5",
     "json5": "^0.4.0",
     "lodash": "^4.6.1",
     "newman": "^2.0.9",
     "node-cron": "^1.1.1",
-    "request": "^2.72.0"
+    "node-dogstatsd": "0.0.6",
+    "request": "^2.72.0",
+    "tracer": "^0.8.3"
   },
   "devDependencies": {
     "aws-sdk": "^2.4.1",
@@ -40,5 +43,9 @@
     "nock": "^8.0.0",
     "xunit-file": "0.0.11",
     "yargs": "^4.7.1"
-  }
+  },
+    "scripts": {
+        "start": "node gulpfile.js"
+    }
+
 }
