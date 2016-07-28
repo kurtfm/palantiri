@@ -9,7 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@grove/dogstatsd": "^1.0.0",
     "async": "^2.0.0-rc.3",
     "bluebird": "^3.3.4",
     "fs": "0.0.2",
@@ -19,16 +18,14 @@
     "json5": "^0.4.0",
     "lodash": "^4.6.1",
     "newman": "^2.0.9",
-    "node-cron": "^1.1.1",
-    "node-dogstatsd": "0.0.6",
     "request": "^2.72.0",
-    "tracer": "^0.8.3"
+    "yargs": "^4.7.1",
+     "aws-sdk": "^2.4.1",
+    "del": "^2.2.0"
   },
   "devDependencies": {
-    "aws-sdk": "^2.4.1",
     "chai": "^3.5.0",
     "chai-as-promised": "^5.3.0",
-    "del": "^2.2.0",
     "eslint": "^2.13.1",
     "eslint-plugin-mocha": "^3.0.0",
     "glob": "^7.0.3",
@@ -41,8 +38,7 @@
     "gulp-tar": "^1.9.0",
     "mocha-generators": "^1.2.0",
     "nock": "^8.0.0",
-    "xunit-file": "0.0.11",
-    "yargs": "^4.7.1"
+    "xunit-file": "0.0.11"
   },
     "scripts": {
         "start": "node gulpfile.js"
