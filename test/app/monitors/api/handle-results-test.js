@@ -12,7 +12,7 @@ chai.use(chaiAsPromised);
 
 var conf = require('../../../../config/load');
 const app = conf.application_root + conf.api_monitor;
-const processResults = require( app + 'process-results' );
+const processResults = require( app + 'handle-results' );
 const target = 'onetest';
 
 var time, outputId, outputBase, dataFolder, healthcheckOutputFile, testData;
@@ -31,7 +31,7 @@ var setupData = function (target) {
 };
 
 
-describe('Process Results Test', function () {
+describe('Handle Results Test', function () {
     var data;
     before(function (done) {
         setupData(target);

@@ -1,12 +1,12 @@
 #! /usr/bin/env node
 'use strict';
-var config = require('../config/load');
+var conf = require('../config/load');
 const spawn = require('child_process').spawn;;
 const cron = require('node-cron');
 
-var apiMonitors = config.supported_api_monitors;
+var apiMonitors = conf.supported_api_monitors;
 
-const appRoot = config.application_root;
+const appRoot = conf.application_root;
 
 var apiMonitorStarter = appRoot + '/bin/api-monitor.js';
 
@@ -14,8 +14,8 @@ var env = process.env.NODE_ENV ? process.env.NODE_ENV : 'prod';
 
 for (var i = 0, total = apiMonitors.length; i < total; i++) {
 
-    var targetSchedule = config.monitor_schedule[ apiMonitors[i] ];
-    var monitorSchedule = typeof targetSchedule !== 'undefined' ? targetSchedule : config.monitor_schedule.default;
+    var targetSchedule = conf.monitor_schedule[ apiMonitors[i] ];
+    var monitorSchedule = typeof targetSchedule !== 'undefined' ? targetSchedule : conf.monitor_schedule.default;
 
     //mini Monitor Job class to spawn a new process and kick of run for that monitor
     var MonitorJob = function(target,schedule) {

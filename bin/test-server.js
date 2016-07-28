@@ -2,7 +2,6 @@
 
 const Hapi = require('hapi');
 const server = new Hapi.Server();
-var config = require('../config/load');
 
 //localhost:33688/one
 

@@ -1,14 +1,14 @@
 #! /usr/bin/env node
 'use strict';
-var config = require('../config/load');
+var conf = require('../config/load');
 const _ = require('lodash');
-const app = config.application_root + config.api_monitor;
-const runTests = require(app + 'run-tests');
-const processResults = require(app + 'process-results');
+const app = conf.application_root + conf.api_monitor;
+const runTests = require(app + 'start-run');
+const processResults = require(app + 'handle-results');
 
-runTests(config)
+runTests(conf)
         .then((data, err) => {
-            return processResults(data, config);
+            return processResults(data, conf);
         }
         ).catch((error) => {
     console.log(error.name, ":", error.message);
@@ -18,7 +18,7 @@ runTests(config)
             if (err) {
                 console.log("processing error: ", err);
             } else {
-                if (config.env != 'prod') {
+                if (conf.env !== 'prod') {
                     _.forEach(log, function (value, key) {
                         console.log(key, " : ", value);
                     });
