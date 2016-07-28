@@ -30,6 +30,11 @@ var argv = require('yargs')
     	describe: 'disable sending metrics to datadog',
      	default: false
     })
+    .option('metricsprefix', {
+    	example: 'bin/api-monitor.js --metricsprefix=beta',
+    	describe: 'add a metrics prefix to datadog metrics for testing',
+     	default: ''
+    })
     .help('help')
     .alias('h','help')
     .argv;
@@ -73,6 +78,7 @@ if(argv.disableslack){
 if(argv.disablemetrics){
     conf.disable_metrics = argv.disablemetrics;
 }
+conf.metrics_prefix = argv.metrics_prefix;
 conf.env = env;
 conf.target = argv.target ? argv.target : null;
 var properties = _.merge(app, conf);

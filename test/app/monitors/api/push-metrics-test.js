@@ -21,7 +21,7 @@ var report= JSON5.parse(fs.readFileSync( conf.application_root + conf.test_data 
 describe('Push Metrics Test', function () {
     var data;
     before(function (done) {
-        pushMetrics(target,report.collection.healthSummary).then(
+        pushMetrics(target,conf.metricsPrefix,report.collection.healthSummary).then(
                 function (results, err) {
                     if (err) {
                         console.log("processing error: ", err);

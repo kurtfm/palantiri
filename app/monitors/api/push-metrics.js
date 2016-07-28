@@ -2,9 +2,9 @@
 var Datadog = require('../../adapters/datadog');
 const Promise = require('bluebird');
 
-module.exports = (target,report) => {
+module.exports = (target,metricsPrefix,report) => {
     return new Promise((resolve, reject) => {
-        var datadog = new Datadog();
+        var datadog = new Datadog(metricsPrefix);
         var reg = new RegExp("^.*: | ", "g");
         var name =   report.monitor.indexOf(':') !== -1 ? report.monitor.replace(reg, "") : report.monitor;
          var runTotal =  datadog.sendRunTotalTests(target,name,report.testcount),

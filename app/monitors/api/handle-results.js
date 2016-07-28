@@ -52,7 +52,7 @@ module.exports = (data, conf) => {
                     return null;
                 }
                 else{
-                    pushMetrics(data.target,results)
+                    pushMetrics(data.target,conf.metrics_prefix,results)
                         .then(() => {
                                 eventLog.pushMetrics.finished = true;
                                 callback(null,results);

@@ -14,11 +14,11 @@ metricsNames.requestResponseTime = "requestResponseTime";
 metricsNames.requestPasses = "requestPasses";
 metricsNames.requestFailures = "requestFailures";
 
-module.exports = function () {
+module.exports = function (metricsPrefix) {
     
     var mock = process.env.NODE_ENV === 'test' ? true : false;
     
-    var client = new StatsD('dd-agent',8125,'', '', false,false,mock);
+    var client = new StatsD('dd-agent',8125,metricsPrefix, '', false,false,mock);
     
     client.socket.on('error', function (error) {
         throw error;
