@@ -15,7 +15,7 @@ metricsNames.requestPasses = "requestPasses";
 metricsNames.requestFailures = "requestFailures";
 
 module.exports = function (metricsPrefix) {
-    
+    console.log(metricsPrefix);
     var mock = process.env.NODE_ENV === 'test' ? true : false;
     
     var client = new StatsD('dd-agent',8125,metricsPrefix, '', false,false,mock);
@@ -140,16 +140,25 @@ module.exports = function (metricsPrefix) {
             });
         });
     };
-    this.sendErrorEvent = (name,type,message,runName,requestName,folderName,debugData) => {
+    
+    this.sendEvent = (title,message,target,runName,priority,alertType) => {
+        options = {
+            alert_type: alertType,
+            aggregation_key:target + '.' + runName,
+            priority: priority
+        };
         return new Promise((resolve, reject) => {
-            
+            client.event(title, message,options,(err,bytes)=>{
+                if(err){
+                    reject({"error":err});
+                }
+                else{
+                     client.close( () => {resolve();} );
+                }
+            });
         });
      };
-    this.sendEvent = (name,type,message,runName) => {
-        return new Promise((resolve, reject) => {
-            
-        });
-     };
+
     this.finishedSendingMetrics = () => {
         return new Promise((resolve, reject) => {
             client.close( () => {resolve();} );

@@ -78,7 +78,7 @@ if(argv.disableslack){
 if(argv.disablemetrics){
     conf.disable_metrics = argv.disablemetrics;
 }
-conf.metrics_prefix = argv.metrics_prefix;
+conf.metrics_prefix = argv.metricsprefix;
 conf.env = env;
 conf.target = argv.target ? argv.target : null;
 var properties = _.merge(app, conf);

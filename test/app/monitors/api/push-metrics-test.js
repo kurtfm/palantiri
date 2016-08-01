@@ -47,5 +47,3 @@ describe('Push Metrics Test', function () {
         expect(data.finished).to.be.true;
     });
 });
-
-
