@@ -5,11 +5,12 @@ const healthcheckProcessor = require('./process-healthcheck');
 const errorProcessor = require('./process-error-summary');
 const buildReport = require('./build-report');
 const pushMetrics = require('./push-metrics');
+const sendNotifications = require('./send-notifications');
 const Slack = require('../../adapters/slack');
 const async = require('async');
 const fs = Promise.promisifyAll(require("fs"));
 
-var eventLog = {'healthcheck': {}, 'pushMetrics':{},'checkErrors': {}, 'slack': {}, 'buildReport': {}, 'cleanUp': {}};
+var eventLog = {'healthcheck': {}, 'pushMetrics':{},'sendNotices':{},'checkErrors': {},  'buildReport': {}, 'cleanUp': {}};
 
 
 module.exports = (data, conf) => {
@@ -59,67 +60,30 @@ module.exports = (data, conf) => {
                                 return null;
                             }
                         ).catch((error) => {
+                            console.log(error);
                             eventLog.pushMetrics.error = error.name + ":" + error.message;
 
                         });
                 }
             },
             (results,callback) => {
-                eventLog.checkErrors.started = true;
-                    if (results.score < 100) {
-                        eventLog.checkErrors.hasErrors = true;
-                        errorProcessor(data.debugLog)
-                                .then((results) => {
-                                    eventLog.errorCheck.finished = true;
-                                    callback(null,results.title, results.message);
-                                    return;
-                                }
-                                ).catch((error) => {
-                            eventLog.checkErrors.error = error.name + ":" + error.message;
-                        });
-                    } else {
-                        eventLog.checkErrors.noErrors = true;
-                        eventLog.checkErrors.finished = true;
-                        callback(null, null, null);
-                        return null;
-                    }
-            },
-            //notifications
-            (title, message, callback) => {
-                eventLog.slack.started = true;
-                if (!conf.disable_slack_notifications) {
-                    eventLog.slack.enabled = true;
-                    if (!title && !message) {
-                        eventLog.slack.needed = false;
-                        eventLog.slack.finished = true;
-                        callback(null);
-                        return null;
-                    } else {
-                        eventLog.slack.needed = true;
-                        var slack = new Slack();
-                        var slackPostFile = slack.postFile(title, message, data.debugLog)
-                                .then(() => {
-                                    eventLog.slack.sent = true;
-                                    eventLog.slack.finished = true;
-                                    callback(null);
-                                    return null;
-                                }).catch((error) => {
-                            eventLog.slack.sent = false;
-                            eventLog.slack.error = error.name + ":" + error.message;
-                            eventLog.slack.finished = true;
+                eventLog.sendNotices.started = true;
+                    sendNotifications(conf.metrics_prefix,conf.disable_info_notices,results)
+                        .then((res) => {
+                                eventLog.sendNotices.finished = true;
+                                callback(null);
+                                return null;
+                            }
+                        )
+                        .catch((error) => {
+                            console.log(error);
+                            eventLog.sendNotices.error = error.name + ":" + error.message;
                             callback(null);
                             return null;
                         });
-                    }
-                } else {
-                    eventLog.slack.enabled = false;
-                    eventLog.slack.finished = true;
-                    callback(null);
-                }
-
+           
             },
-            //clean up
-            
+            //clean up           
             (callback) => {
                 eventLog.cleanUp.started = true;
                 fs.unlinkAsync(data.jsonReport)

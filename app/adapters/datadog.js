@@ -4,16 +4,6 @@
 var StatsD = require('hot-shots');
 const Promise = require('bluebird');
 
-var metricsNames = {};
-metricsNames.runTotalTests = "runTotalTests";
-metricsNames.runTotalPasses = "runTotalPasses";
-metricsNames.runTotalFailures = "runTotalFailures";
-metricsNames.runTotalScore = "runTotalScore";
-metricsNames.requestResponseCode = "requestResponseCode";
-metricsNames.requestResponseTime = "requestResponseTime";
-metricsNames.requestPasses = "requestPasses";
-metricsNames.requestFailures = "requestFailures";
-
 module.exports = function (metricsPrefix) {
     console.log(metricsPrefix);
     var mock = process.env.NODE_ENV === 'test' ? true : false;
@@ -25,14 +15,11 @@ module.exports = function (metricsPrefix) {
         console.error("Error in socket for metrics: ", error);
     });
     
-    //metric name: <target>.<runName>.<metric> e.g. brandapis.UserMigrationAPIs.totalTests
-    //tags: target, runName, requestName, folderName,metric
+
     
-    this.sendRunTotalTests = (target,runName,total) => {
-        var metric = target + '.' + runName + '.' + metricsNames.runTotalTests;
-        var tags = [target,runName,metricsNames.runTotalTests];
+    this.sendCount = (metric,count,tags) => {
         return new Promise((resolve, reject) => {
-            client.increment(metric, total,tags,(err,bytes)=>{
+            client.increment(metric, count,tags,(err,bytes)=>{
                 if(err){
                     reject({"error":err});
                 }
@@ -42,11 +29,9 @@ module.exports = function (metricsPrefix) {
             });
         });
     };
-    this.sendRunTotalPasses = (target,runName,passes) => {
-        var metric = target + '.' + runName + '.' + metricsNames.runTotalPasses;
-        var tags = [target,runName,metricsNames.runTotalPasses];
+    this.sendGauge = (metric,level,tags) => {
         return new Promise((resolve, reject) => {
-            client.increment(metric, passes,tags,(err,bytes)=>{
+            client.gauge(metric, level,tags,(err,bytes)=>{
                 if(err){
                     reject({"error":err});
                 }
@@ -56,11 +41,9 @@ module.exports = function (metricsPrefix) {
             });
         });
     };
-    this.sendRunTotalFailures = (target,runName,fails) => {
-        var metric = target + '.' + runName + '.' + metricsNames.runTotalFailures;
-        var tags = [target,runName,metricsNames.runTotalFailures];
+    this.sendHistogram = (metric,count,tags) => {
         return new Promise((resolve, reject) => {
-            client.increment(metric, fails,tags,(err,bytes)=>{
+            client.histogram(metric, count,tags,(err,bytes)=>{
                 if(err){
                     reject({"error":err});
                 }
@@ -70,11 +53,9 @@ module.exports = function (metricsPrefix) {
             });
         });
     };
-    this.sendRunTotalScore = (target,runName,score) => {
-        var metric = target + '.' + runName + '.' + metricsNames.runTotalScore;
-        var tags = [target,runName,metricsNames.runTotalScore];
+    this.sendSet = (metric,unique,tags) => {
         return new Promise((resolve, reject) => {
-            client.gauge(metric, score,tags,(err,bytes)=>{
+            client.set(metric, unique,tags,(err,bytes)=>{
                 if(err){
                     reject({"error":err});
                 }
@@ -84,75 +65,20 @@ module.exports = function (metricsPrefix) {
             });
         });
     };
-    this.sendRequestResponseCode = (target,runName,requestName,folderName,code) => {
-        var metric = target + '.' + runName + '.' + metricsNames.requestResponseCode + '.' + code;
-        var tags = [target,runName,requestName,folderName,metricsNames.requestResponseCode];
-        return new Promise((resolve, reject) => {
-            client.increment(metric,1,tags,(err,bytes)=>{
-                if(err){
-                    reject({"error":err});
-                }
-                else{
-                    resolve({"bytes":bytes});
-                }
-            });
-        });
-    };
-    this.sendRequestResponseTime = (target,runName,requestName,folderName,time) => {
-        var metric = target + '.' + runName + '.' + metricsNames.requestResponseTime;
-        var tags = [target,runName,requestName,folderName,metricsNames.requestResponsTime];
-        return new Promise((resolve, reject) => {
-            client.histogram(metric, time,tags,(err,bytes)=>{
-                if(err){
-                    reject({"error":err});
-                }
-                else{
-                    resolve({"bytes":bytes});
-                }
-            });
-        });
-    };
-    this.sendRequestPasses = (target,runName,requestName,folderName,passes) => {
-        var metric = target + '.' + runName + '.' + metricsNames.requestPasses;
-        var tags = [target,runName,requestName,folderName,metricsNames.requestPasses];
-        return new Promise((resolve, reject) => {
-            client.increment(metric, passes,tags,(err,bytes)=>{
-                if(err){
-                    reject({"error":err});
-                }
-                else{
-                    resolve({"bytes":bytes});
-                }
-            });
-        });
-    };
-    this.sendRequestFailures = (target,runName,requestName,folderName,fails) => {
-        var metric = target + '.' + runName + '.' + metricsNames.requestFailures;
-        var tags = [target,runName,requestName,folderName,metricsNames.requestFailures];
-        return new Promise((resolve, reject) => {
-            client.increment(metric, fails,tags,(err,bytes)=>{
-                if(err){
-                    reject({"error":err});
-                }
-                else{
-                    resolve({"bytes":bytes});
-                }
-            });
-        });
-    };
-    
-    this.sendEvent = (title,message,target,runName,priority,alertType) => {
-        options = {
+    this.sendEvent = (title,message,runName,priority,alertType) => {
+        var options = {
             alert_type: alertType,
-            aggregation_key:target + '.' + runName,
+            aggregation_key:runName,
             priority: priority
         };
         return new Promise((resolve, reject) => {
-            client.event(title, message,options,(err,bytes)=>{
+            client.event(title, message,options,(err,resp)=>{
                 if(err){
+                    console.log(err);
                     reject({"error":err});
                 }
                 else{
+                    console.log('client.event response: ', resp);
                      client.close( () => {resolve();} );
                 }
             });

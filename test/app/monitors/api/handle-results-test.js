@@ -45,6 +45,7 @@ describe('Handle Results Test', function () {
                     function (log, err) {
                         if (err) {
                             console.log("processing error: ", err);
+                            done();
                         } else {
                             data = log;
                             done();
@@ -82,29 +83,6 @@ describe('Handle Results Test', function () {
     it('should have started and finished healthcheck', function () {
         expect(data.healthcheck.started).to.be.true;
         expect(data.healthcheck.finished).to.be.true;
-    });
-    it('should have run checkerrors', function () {
-        expect(data.checkErrors).to.not.be.undefined;
-    });
-    it('should have started and finished checkErrors', function () {
-        expect(data.checkErrors.started).to.be.true;
-        expect(data.checkErrors.finished).to.be.true;
-    });
-    it('should not find errors', function () {
-        expect(data.checkErrors.hasErrors).to.not.be.true;
-    });
-    it('should have run slack', function () {
-        expect(data.slack).to.not.be.undefined;
-    });
-    it('should have started and finished slack', function () {
-        expect(data.slack.started).to.be.true;
-        expect(data.slack.finished).to.be.true;
-    });
-    it('should run with slack enabled', function () {
-        expect(data.slack.enabled).to.be.true;
-    });
-    it('should not be needed', function () {
-        expect(data.slack.needed).to.not.be.true;
     });
     it('should have run cleanUp', function () {
         expect(data.cleanUp).to.not.be.undefined;

@@ -24,3 +24,4 @@ slack_upload_options:
   fileType: log
 disable_slack_notifications: false
 disable_metrics: false
+disable_info_notices: true

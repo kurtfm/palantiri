@@ -16,7 +16,7 @@ const app = config.application_root + config.api_monitor;
 const healthcheckProcessor = require(app + 'process-healthcheck');
 const target = 'onetest';
 
-var report= JSON5.parse(fs.readFileSync( config.application_root + config.test_data + target + '-forhealthcheck.json', 'utf8'));
+var report= JSON5.parse(fs.readFileSync( config.application_root + config.test_data + target + '-forhealthcheck', 'utf8'));
         
 describe('Healthcheck Processor Tests', function () {
     var data;
