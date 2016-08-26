@@ -1,897 +1,1456 @@
 {
-	"id": "861ac7f4-c7bc-71ca-57bf-0d60176468a6",
-	"name": "brandapis: User Registration, Update and Authentication APIs",
-	"description": "User action based APis.",
-	"order": [],
-	"folders": [
+	"variables": [],
+	"info": {
+		"name": "Brand APIs: User Flows",
+		"_postman_id": "6673b7fe-2a80-b190-481f-454447d95573",
+		"description": "user_flows|monitor.brandapi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
 		{
-			"id": "56176a7b-7a89-3a29-5554-b2182dc9d35d",
 			"name": "0. Application Access",
-			"description": "Get service access_token.",
-			"order": [
-				"114ee1ee-2d06-3abc-b12b-f2a2be5962fe"
-			],
-			"owner": "197134",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6"
-		},
-		{
-			"id": "bf8d0f49-bc11-7982-f599-7f2baa0b35b6",
-			"name": "1 User Registration",
-			"description": "Call createUser with password to create an account.",
-			"order": [
-				"bd0f7bcc-2dab-8389-076e-697409e36e8d",
-				"b9cd1d06-4fb2-f278-157c-65fd069f6e61",
-				"b69154cc-69e2-6270-0941-db03efd587c6",
-				"2f0067a9-cd8c-b6ac-be74-c0199523dbe3",
-				"5f0c4064-1d1e-c89b-9c9c-2a389f26d1f1",
-				"ad57496a-b73c-37fa-9bd5-42ec744772eb",
-				"b27cce18-4f6a-543f-82eb-9a270ac6ef7d"
-			],
-			"owner": "197134",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6"
-		},
-		{
-			"id": "baba1b73-70c9-73eb-3001-06523071b84b",
-			"name": "2. Social User Registration",
-			"description": "Register social user. Authenticate after registration and get user data.",
-			"order": [
-				"2da783e5-56f5-7f8f-015e-6d7cf3a8c04e"
-			],
-			"owner": "197134",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6"
-		},
-		{
-			"id": "4c8ef32a-0d1b-4680-4e9b-3bff9732b3fd",
-			"name": "3. User Authentication and Access",
-			"description": "tests related to authentication of Brand API users",
-			"order": [
-				"388cc910-d46e-9294-ae09-66317eef00cf",
-				"194d18df-b0c8-acc7-d824-e7007d766c41",
-				"00fb2ecb-9d7f-7371-abe2-c6de56adc30c",
-				"cd1a6328-c39d-16bd-a907-9143eb4a7dc2",
-				"9e61b74b-6fcc-0415-9dc8-7d0f01da8a14",
-				"3182ed18-7dee-717e-5ac9-179785dcb305"
-			],
-			"owner": "197134",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6"
-		},
-		{
-			"id": "ae4e6b08-5d64-966a-b73d-9397e74b0cd4",
-			"name": "4. Updating User Data",
-			"description": "update Brand API user",
-			"order": [
-				"8ff4c702-3676-e174-a6d3-9eb07d8578ce",
-				"475664b6-1dd4-e4cd-664a-6ebea5c80a67",
-				"61c37094-f27d-7eae-457a-59469331bd9d",
-				"f5809b5d-7380-cbbe-9f6a-b3992d999f27"
-			],
-			"owner": "197134",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6"
-		},
-		{
-			"id": "854ab189-e389-6bb5-045f-f8747b0b2514",
-			"name": "5. Account LInking",
-			"description": "Link and unlink social user to another account.",
-			"order": [
-				"b0d7d5e3-2a30-7b78-e92b-1471eeb4cef7",
-				"15de199d-f57a-dd77-f6aa-b5f98ada77bc",
-				"6c72e2c4-260d-25f9-7176-0f26058b67e5",
-				"cfde0840-44b0-a5e5-f94b-cddd278b385d"
-			],
-			"owner": "197134",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6"
-		},
-		{
-			"id": "30e753b9-9cf2-b304-2ee5-f5a6fe3a5c80",
-			"name": "7. Reset Password Reset",
-			"description": "Testing reset password flows.",
-			"order": [
-				"82212443-0a97-e0dc-c971-b26adcf7ad37",
-				"a0a15186-d7c5-ab13-ef86-bea4045d8269",
-				"e4677c8b-c490-f823-671d-80ba484a6f36",
-				"b9521849-985a-195a-aa96-576d8dc49a45"
-			],
-			"owner": "197134",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6"
-		},
-		{
-			"id": "cf91e75a-3dc6-eeba-80ea-a2396df569e7",
-			"name": "8. Confirmation Email",
-			"description": "Send user confirmation email again and confirm account.",
-			"order": [
-				"a78afe92-7cd3-9ab3-8d41-a27d2692ab70",
-				"ac2d800a-efaa-9a45-6995-4677ee2eff26",
-				"66ecd699-280e-450e-8b09-46dd0736f0b3"
-			],
-			"owner": "197134",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6"
-		},
-		{
-			"id": "0c559bda-9710-73c0-660f-144a0fe017d5",
-			"name": "9. Delete User",
-			"description": "Delete created users.",
-			"order": [
-				"c5f279f0-3b95-7992-3920-6d32a733e7f4",
-				"9749f99e-9f82-5a88-4252-0424b1b767c5"
-			],
-			"owner": "197134",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6"
-		}
-	],
-	"timestamp": 1446065243882,
-	"owner": "197134",
-	"remoteLink": "",
-	"public": false,
-	"requests": [
-		{
-			"id": "00fb2ecb-9d7f-7371-abe2-c6de56adc30c",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\n",
-			"url": "{{oauth_server}}",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [
+			"description": " application_access",
+			"item": [
 				{
-					"key": "refresh_token",
-					"value": "{{user_refresh_token}}",
-					"type": "text",
-					"enabled": true
-				},
-				{
-					"key": "grant_type",
-					"value": "refresh_token",
-					"type": "text",
-					"enabled": true
-				},
-				{
-					"key": "scope",
-					"value": "brand_api",
-					"type": "text",
-					"enabled": true
+					"name": "authorize service",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar serviceAccessToken = typeof response.access_token !== 'undefined' ? response.access_token : 0;\npostman.setEnvironmentVariable(\"service_access_token\", serviceAccessToken);\n\n\n//tests\ntests[\"Success Response\"] = responseCode.code === 200;\ntests[\"Got Service access_token\"] = serviceAccessToken ? 1:0;"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "function base64url(source) {\n  encodedSource = CryptoJS.enc.Base64.stringify(source);\n  encodedSource = encodedSource.replace(/=+$/, '');\n  encodedSource = encodedSource.replace(/\\+/g, '-');\n  encodedSource = encodedSource.replace(/\\//g, '_');\n  \n  return encodedSource;\n}\nvar header = {\n  \"alg\": \"HS256\",\n  \"typ\": \"JWT\"\n};\nvar stringifiedHeader = CryptoJS.enc.Utf8.parse(JSON.stringify(header));\nvar encodedHeader = base64url(stringifiedHeader);\nvar now = new Date() / 1000;\n//var jwsLife = ( 24 * 60 * 60 );\nvar jwsLife = 10;\nvar body = {\n    \"iss\": postman.getEnvironmentVariable(\"client_id\"),\n    \"sub\": postman.getEnvironmentVariable(\"client_id\"),\n    \"aud\": postman.getEnvironmentVariable(\"oauth_server\"),\n    \"iat\": now,\n    \"exp\": now + jwsLife,\n};\n\nvar stringifiedBody = CryptoJS.enc.Utf8.parse(JSON.stringify(body));\nvar encodedBody = base64url(stringifiedBody);\nvar token = encodedHeader + \".\" + encodedBody;\nvar signature = CryptoJS.HmacSHA256(token, postman.getEnvironmentVariable(\"client_secret\"));\nsignature = base64url(signature);\nvar signedToken = token + \".\" + signature;\npostman.setEnvironmentVariable(\"jws\", signedToken);"
+							}
+						}
+					],
+					"request": {
+						"url": "{{oauth_server}}",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "client_assertion_type",
+									"value": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "scope",
+									"value": "brand_api ropc brand_api_customer_support brand_api_migration",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "client_assertion",
+									"value": "{{jws}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": "oauth2,service_access_token"
+					},
+					"response": []
 				}
-			],
-			"dataMode": "urlencoded",
-			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n\n//tests\ntests[\"Success Response\"] = responseCode.code === 200;\ntests[\"Got user access_token\"] = typeof response.access_token !== 'undefined';\ntests[\"Got user refresh_token\"] = typeof response.refresh_token !== 'undefined';",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1461630772095,
-			"name": "local_user refreshAuthToken (OAuth)",
-			"description": "Refresh an OAuth2 access_token for a user using local login for use with some Brand APIs",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6",
-			"responses": []
+			]
 		},
 		{
-			"id": "114ee1ee-2d06-3abc-b12b-f2a2be5962fe",
-			"headers": "",
-			"url": "{{oauth_server}}",
-			"preRequestScript": "function base64url(source) {\n  encodedSource = CryptoJS.enc.Base64.stringify(source);\n  encodedSource = encodedSource.replace(/=+$/, '');\n  encodedSource = encodedSource.replace(/\\+/g, '-');\n  encodedSource = encodedSource.replace(/\\//g, '_');\n  \n  return encodedSource;\n}\nvar header = {\n  \"alg\": \"HS256\",\n  \"typ\": \"JWT\"\n};\nvar stringifiedHeader = CryptoJS.enc.Utf8.parse(JSON.stringify(header));\nvar encodedHeader = base64url(stringifiedHeader);\nvar now = new Date() / 1000;\n//var jwsLife = ( 24 * 60 * 60 );\nvar jwsLife = 10;\nvar body = {\n    \"iss\": postman.getEnvironmentVariable(\"client_id\"),\n    \"sub\": postman.getEnvironmentVariable(\"client_id\"),\n    \"aud\": postman.getEnvironmentVariable(\"oauth_server\"),\n    \"iat\": now,\n    \"exp\": now + jwsLife,\n};\n\nvar stringifiedBody = CryptoJS.enc.Utf8.parse(JSON.stringify(body));\nvar encodedBody = base64url(stringifiedBody);\nvar token = encodedHeader + \".\" + encodedBody;\nvar signature = CryptoJS.HmacSHA256(token, postman.getEnvironmentVariable(\"client_secret\"));\nsignature = base64url(signature);\nvar signedToken = token + \".\" + signature;\npostman.setEnvironmentVariable(\"jws\", signedToken);",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [
+			"name": "1. Register user with password",
+			"description": "register_users_flow",
+			"item": [
 				{
-					"key": "grant_type",
-					"value": "client_credentials",
-					"type": "text",
-					"enabled": true
+					"name": "doesUserExist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\n\nif(response.data.doesExist === 'true'){\npostman.setEnvironmentVariable(\"create_user_email\", postman.getEnvironmentVariable(\"gmail_user\") \n    + \"+\" + postman.getEnvironmentVariable(\"namespace\") \n    + \".\" + Math.random().toString(36).substring(2) + _.random(20000, 100) + '@gmail.com');\n}\n"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"create_user_email\", postman.getEnvironmentVariable(\"gmail_user\") \n    + \"+\" + postman.getEnvironmentVariable(\"namespace\") \n    + \".\" + Math.random().toString(36).substring(2) + _.random(20000, 100) + '@gmail.com');"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}doesUserExist",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "X-AOL-API-CTX",
+								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"email\":\"{{create_user_email}}\"}"
+						},
+						"description": "does_user_exist"
+					},
+					"response": []
 				},
 				{
-					"key": "client_assertion_type",
-					"value": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
-					"type": "text",
-					"enabled": true
+					"name": "validateEmail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\n"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}validateEmail",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "X-AOL-API-CTX",
+								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"email\":\"{{create_user_email}}\"}"
+						},
+						"description": "validate_email"
+					},
+					"response": []
 				},
 				{
-					"key": "scope",
-					"value": "brand_api ropc brand_api_customer_support brand_api_migration",
-					"type": "text",
-					"enabled": true
+					"name": "validateDisplayName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar resId = typeof response.data.reservationId !== 'undefined' ? response.data.reservationId : '';\npostman.setEnvironmentVariable('create_user_reservationid', resId);\nif(resId === '' ){\n    postman.setEnvironmentVariable(\"create_user_displayname\",Math.random().toString(36).substring(2)\n+ '-' +  (Math.floor(Math.random()* (_.random(20000,4000) - _.random(200,400)+ 1) + _.random(5,1000))) );\n}\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"create_user_displayname\",Math.random().toString(36).substring(2)\n+ '-' +  (Math.floor(Math.random()* (_.random(20000,4000) - _.random(200,400)+ 1) + _.random(5,1000))) );"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}validateDisplayName",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "X-AOL-API-CTX",
+								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"displayName\":\"{{create_user_displayname}}\"}"
+						},
+						"description": "validate_display_name"
+					},
+					"response": []
 				},
 				{
-					"key": "client_assertion",
-					"value": "{{jws}}",
-					"type": "text",
-					"enabled": true
+					"name": "validatePassword",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\nif(response.status === 'fail'){\n    postman.setEnvironmentVariable(\"create_user_password\",\"hy%%%123\");\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"create_user_password\",\"nm###123\");"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}validatePassword",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "X-AOL-API-CTX",
+								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"username\":\"{{create_user_email}}\",\"password\":\"{{create_user_password}}\"}"
+						},
+						"description": "validate_password"
+					},
+					"response": []
+				},
+				{
+					"name": "createUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\n\npostman.setEnvironmentVariable('new_user_id', userId);\n\npostman.setEnvironmentVariable(\"txnid\", postman.getResponseHeader(\"X-AOL-IDENTITY-TX-ID\"));\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\n\n//recovery\nvar count = typeof postman.getEnvironmentVariable('createUserTries') !== 'undefined' ? postman.getEnvironmentVariable('createUserTries') : 1;\n\nif(response.status !== 'success' && count < 3){\n    postman.setEnvironmentVariable('createUserTries', count++);\n    \n   postman.setEnvironmentVariable(\"create_user_email\", postman.getEnvironmentVariable(\"gmail_user\") \n    + \"+\" + postman.getEnvironmentVariable(\"namespace\") \n    + \".\" + Math.random().toString(36).substring(2) + _.random(20000, 100) + '@gmail.com');\n    \n    postman.setEnvironmentVariable(\"create_user_displayname\",Math.random().toString(36).substring(2)\n+ '-' +  (Math.floor(Math.random()* (_.random(20000,4000) - _.random(200,400)+ 1) + _.random(5,1000))) );\n\n    postman.setEnvironmentVariable(\"create_user_password\",\"nm###\" + _.random(100,900) );\n    \n    postman.setNextRequest('create_user');\n}"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}createUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "X-AOL-API-CTX",
+								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"email\":\"{{create_user_email}}\",\"password\":\"{{create_user_password}}\",\"displayName\":\"{{create_user_displayname}}\",\"displayNameReservationId\":\"{{create_user_reservationid}}\"}"
+						},
+						"description": "create_user,user_with_password"
+					},
+					"response": []
+				},
+				{
+					"name": "getTokenByTxnId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar token = typeof response.data !== 'undefined' ? response.data : 0;\n\npostman.setEnvironmentVariable('register_email_token', token);\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\n\n//recovery\nvar count = typeof postman.getEnvironmentVariable('regGetTokenByTxnIdTries') !== 'undefined' ? postman.getEnvironmentVariable('regGetTokenByTxnIdTries') : 1;\n\nif(response.status !== 'success' && count < 3){\n    postman.setNextRequest('get_token_by_txn_id_reg_flow');\n    \n}\n\n"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}getTokenByTxnId",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "X-AOL-API-CTX",
+								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\n  \"transactionId\": \"{{txnid}}\"\n}"
+						},
+						"description": "get_token_by_txn_id"
+					},
+					"response": []
+				},
+				{
+					"name": "confirmEmail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\n"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}confirmEmail",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "X-AOL-API-CTX",
+								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\n  \"token\": \"{{register_email_token}}\",\n  \"username\":\"{{create_user_email}}\"\n}"
+						},
+						"description": "confirm_email"
+					},
+					"response": []
 				}
-			],
-			"dataMode": "urlencoded",
-			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar serviceAccessToken = typeof response.access_token !== 'undefined' ? response.access_token : 0;\npostman.setEnvironmentVariable(\"service_access_token\", serviceAccessToken);\n\n\n//tests\ntests[\"Success Response\"] = responseCode.code === 200;\ntests[\"Got Service access_token\"] = serviceAccessToken ? 1:0;",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1461630176515,
-			"name": "getServiceToken (OAuth) for auth",
-			"description": "Obtain a Brand API service access token from the AOL OAuth2 endpoint",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6",
-			"responses": []
+			]
 		},
 		{
-			"id": "15de199d-f57a-dd77-f6aa-b5f98ada77bc",
-			"headers": "Authorization: Bearer {{user_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
-			"url": "{{brand_api_server}}getUser",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Link staying! Social user showing up in data.\"] = responseBody.has(postman.getEnvironmentVariable('link_social_user'));",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1461629557141,
-			"name": "getUser verify social",
-			"description": "getUser data from access_token",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6",
-			"responses": [],
-			"rawModeData": "{\"namespace\":\"{{namespace}}\"}"
-		},
-		{
-			"id": "194d18df-b0c8-acc7-d824-e7007d766c41",
-			"headers": "Authorization: Bearer {{user_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
-			"url": "{{brand_api_server}}getUser",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Got user data\"] = userId ? 1 : 0;",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1461629485242,
-			"name": "getUser",
-			"description": "getUser data from access_token",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6",
-			"responses": [],
-			"rawModeData": "{\"namespace\":\"{{namespace}}\"}"
-		},
-		{
-			"id": "2da783e5-56f5-7f8f-015e-6d7cf3a8c04e",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
-			"url": "{{brand_api_server}}createUser",
-			"preRequestScript": "postman.setEnvironmentVariable(\"create_social_user\", Math.random().toString(36).substring(2) + _.random(2000, 100));\n\npostman.setEnvironmentVariable(\"create_social_email\", postman.getEnvironmentVariable(\"gmail_user\") \n    + \"+\" + postman.getEnvironmentVariable(\"namespace\") \n    + \".\" + Math.random().toString(36).substring(2) + _.random(20000, 100) + '@gmail.com');",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\npostman.setEnvironmentVariable(\"social_user_id\", userId);\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"New user created\"] = typeof response.status !== 'undefined' && response.status === 'success';",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1462629825135,
-			"name": "createSocialUser",
-			"description": "updateUser data with access_token",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6",
-			"responses": [],
-			"rawModeData": "{\"namespace\":\"{{namespace}}\",\"email\":\"{{create_social_email}}\",\"socialUser\":\"{{create_social_user}}\",\"socialPid\":\"{{social_user_provider}}\",\"confirmedEmail\":\"T\" }"
-		},
-		{
-			"id": "2f0067a9-cd8c-b6ac-be74-c0199523dbe3",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
-			"url": "{{brand_api_server}}validatePassword",
-			"preRequestScript": "postman.setEnvironmentVariable(\"create_user_password\",\"nm###123\");",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\n",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1462629808867,
-			"name": "validatePassword",
-			"description": "validate potential password for createUser",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6",
-			"responses": [],
-			"rawModeData": "{\"namespace\":\"{{namespace}}\",\"username\":\"{{create_user_email}}\",\"password\":\"{{create_user_password}}\"}"
-		},
-		{
-			"id": "3182ed18-7dee-717e-5ac9-179785dcb305",
-			"headers": "Authorization: Bearer {{social_user_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
-			"url": "{{brand_api_server}}getUser",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Got user data\"] = userId ? 1 : 0;\n",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1461629511128,
-			"name": "getUser",
-			"description": "getUser data from access_token",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6",
-			"responses": [],
-			"rawModeData": "{\"namespace\":\"{{namespace}}\"}"
-		},
-		{
-			"id": "388cc910-d46e-9294-ae09-66317eef00cf",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\n",
-			"url": "{{oauth_server}}",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [
+			"name": "2. Register social user",
+			"description": "register_social_flow",
+			"item": [
 				{
-					"key": "username",
-					"value": "{{create_user_email}}",
-					"type": "text",
-					"enabled": true
-				},
-				{
-					"key": "grant_type",
-					"value": "password",
-					"type": "text",
-					"enabled": true
-				},
-				{
-					"key": "scope",
-					"value": "brand_api",
-					"type": "text",
-					"enabled": true
-				},
-				{
-					"key": "password",
-					"value": "{{create_user_password}}",
-					"type": "text",
-					"enabled": true
+					"name": "createUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\npostman.setEnvironmentVariable(\"social_user_id\", userId);\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"New user created\"] = typeof response.status !== 'undefined' && response.status === 'success';"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"create_social_user\", Math.random().toString(36).substring(2) + _.random(2000, 100));\n\npostman.setEnvironmentVariable(\"create_social_email\", postman.getEnvironmentVariable(\"gmail_user\") \n    + \"+\" + postman.getEnvironmentVariable(\"namespace\") \n    + \".\" + Math.random().toString(36).substring(2) + _.random(20000, 100) + '@gmail.com');"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}createUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "X-AOL-API-CTX",
+								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"email\":\"{{create_social_email}}\",\"socialUser\":\"{{create_social_user}}\",\"socialPid\":\"{{social_user_provider}}\",\"confirmedEmail\":\"T\" }"
+						},
+						"description": "create_user,social_user"
+					},
+					"response": []
 				}
-			],
-			"dataMode": "urlencoded",
-			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userAccessToken = typeof response.access_token !== 'undefined' ? response.access_token : 0;\nvar userRefreshToken = typeof response.refresh_token !== 'undefined' ? response.refresh_token : 0;\npostman.setEnvironmentVariable(\"user_access_token\", userAccessToken);\npostman.setEnvironmentVariable(\"user_refresh_token\", userRefreshToken);\n\n//tests\ntests[\"Success Response\"] = responseCode.code === 200;\ntests[\"Got user access_token\"] = userAccessToken ? 1 : 0;\ntests[\"Got user refresh_token\"] = userRefreshToken ? 1 : 0;\n",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1461630169022,
-			"name": "authLocalUser (OAuth)",
-			"description": "Obtain an OAuth2 access_token for a user using local login for use with some Brand APIs",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6",
-			"responses": []
+			]
 		},
 		{
-			"id": "475664b6-1dd4-e4cd-664a-6ebea5c80a67",
-			"headers": "Authorization: Bearer {{user_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
-			"url": "{{brand_api_server}}updateUser",
-			"preRequestScript": "postman.setEnvironmentVariable(\"user_update_postal\",\"94301\");",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n//tests\n\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Updated correct user\"] = response.data.id === postman.getEnvironmentVariable('new_user_id');\ntests[\"Updated data shows in profile\"] = response.data.profile.postCode === postman.getEnvironmentVariable('user_update_postal');",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1462412655197,
-			"name": "updateUser",
-			"description": "updateUser data with access_token",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6",
-			"responses": [],
-			"rawModeData": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{new_user_id}}\",\"postCode\":\"{{user_update_postal}}\"}"
-		},
-		{
-			"id": "5f0c4064-1d1e-c89b-9c9c-2a389f26d1f1",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
-			"url": "{{brand_api_server}}createUser",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\n\npostman.setEnvironmentVariable('new_user_id', userId);\n\npostman.setEnvironmentVariable(\"txnid\", postman.getResponseHeader(\"X-AOL-IDENTITY-TX-ID\"));\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\n",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1461629447779,
-			"name": "createUser",
-			"description": "updateUser data with access_token",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6",
-			"responses": [],
-			"rawModeData": "{\"namespace\":\"{{namespace}}\",\"email\":\"{{create_user_email}}\",\"password\":\"{{create_user_password}}\",\"displayName\":\"{{create_user_displayname}}\",\"displayNameReservationId\":\"{{create_user_reservationid}}\"}"
-		},
-		{
-			"id": "61c37094-f27d-7eae-457a-59469331bd9d",
-			"headers": "Authorization: Bearer {{user_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
-			"url": "{{brand_api_server}}getUser",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\nvar postCode = typeof response.data.profile.postCode !== 'undefined' ? response.data.profile.postCode : 0;\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Got user data\"] = userId ? 1 : 0;\ntests[\"Got updated data\"] = postCode === postman.getEnvironmentVariable('user_update_postal');",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1462411597152,
-			"name": "getUser after update",
-			"description": "getUser data from access_token",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6",
-			"responses": [],
-			"rawModeData": "{\"namespace\":\"{{namespace}}\"}"
-		},
-		{
-			"id": "66ecd699-280e-450e-8b09-46dd0736f0b3",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
-			"url": "{{brand_api_server}}confirmEmail",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1461629618792,
-			"name": "confirmEmail",
-			"description": "use email token to confirm email",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6",
-			"responses": [],
-			"rawModeData": "{\"namespace\":\"{{namespace}}\",\n  \"token\": \"{{email_confirm_token}}\",\n  \"username\":\"{{create_user_email}}\"\n}"
-		},
-		{
-			"id": "6c72e2c4-260d-25f9-7176-0f26058b67e5",
-			"headers": "Authorization: Bearer {{user_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
-			"url": "{{brand_api_server}}unlinkSocialUser",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = response.data.id !== 'undefined' ? response.data.id : 0;\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"unlink shows correct user\"] = userId === postman.getEnvironmentVariable('new_user_id');\ntests[\"unlink successful\"] = !responseBody.has(postman.getEnvironmentVariable('link_social_user'));",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1462412767188,
-			"name": "unlinkSocialUser",
-			"description": "updateUser data with access_token",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6",
-			"responses": [],
-			"rawModeData": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{new_user_id}}\",\"socialPid\":\"{{social_user_provider}}\",\"socialUsername\":\"{{link_social_user}}\"}"
-		},
-		{
-			"id": "82212443-0a97-e0dc-c971-b26adcf7ad37",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
-			"url": "{{brand_api_server}}sendPasswordReset",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\npostman.setEnvironmentVariable(\"pwd_txnid\", postman.getResponseHeader(\"X-AOL-IDENTITY-TX-ID\"));\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\n\n",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1462558304895,
-			"name": "sendPasswordReset",
-			"description": "send password reset request",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6",
-			"responses": [],
-			"rawModeData": "{\"namespace\":\"{{namespace}}\",\"username\":\"{{create_user_email}}\"}"
-		},
-		{
-			"id": "8ff4c702-3676-e174-a6d3-9eb07d8578ce",
-			"headers": "Authorization: Bearer {{user_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
-			"url": "{{brand_api_server}}getUser",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Got user data\"] = userId ? 1 : 0;",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1462411539661,
-			"name": "getUser",
-			"description": "getUser data from access_token",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6",
-			"responses": [],
-			"rawModeData": "{\"namespace\":\"{{namespace}}\"}"
-		},
-		{
-			"id": "9749f99e-9f82-5a88-4252-0424b1b767c5",
-			"headers": "Authorization: Bearer {{social_user_access_token}}\nContent-Type: application/json\n",
-			"url": "{{brand_api_server}}deleteUser",
-			"preRequestScript": null,
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1461629632562,
-			"name": "deleteUser social",
-			"description": "Delete user.",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6",
-			"responses": [],
-			"rawModeData": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{social_user_id}}\"\n}"
-		},
-		{
-			"id": "9e61b74b-6fcc-0415-9dc8-7d0f01da8a14",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\n",
-			"url": "{{oauth_server}}",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [
+			"name": "3. OAuth2 user authentication",
+			"description": "authentication_flow",
+			"item": [
 				{
-					"key": "refresh_token",
-					"value": "{{social_user_refresh_token}}",
-					"type": "text",
-					"enabled": true
+					"name": "auth user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userAccessToken = typeof response.access_token !== 'undefined' ? response.access_token : 0;\nvar userRefreshToken = typeof response.refresh_token !== 'undefined' ? response.refresh_token : 0;\npostman.setEnvironmentVariable(\"user_access_token\", userAccessToken);\npostman.setEnvironmentVariable(\"user_refresh_token\", userRefreshToken);\n\n//tests\ntests[\"Success Response\"] = responseCode.code === 200;\ntests[\"Got user access_token\"] = userAccessToken ? 1 : 0;\ntests[\"Got user refresh_token\"] = userRefreshToken ? 1 : 0;\n"
+							}
+						}
+					],
+					"request": {
+						"url": "{{oauth_server}}",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "X-AOL-API-CTX",
+								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "{{create_user_email}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "scope",
+									"value": "brand_api",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "password",
+									"value": "{{create_user_password}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": "oauth2,user_with_password"
+					},
+					"response": []
 				},
 				{
-					"key": "grant_type",
-					"value": "refresh_token",
-					"type": "text",
-					"enabled": true
+					"name": "getUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Got user data\"] = userId ? 1 : 0;"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}getUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "X-AOL-API-CTX",
+								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\"}"
+						},
+						"description": "get_user"
+					},
+					"response": []
 				},
 				{
-					"key": "scope",
-					"value": "brand_api",
-					"type": "text",
-					"enabled": true
+					"name": "refresh user token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n\n//tests\ntests[\"Success Response\"] = responseCode.code === 200;\ntests[\"Got user access_token\"] = typeof response.access_token !== 'undefined';\ntests[\"Got user refresh_token\"] = typeof response.refresh_token !== 'undefined';"
+							}
+						}
+					],
+					"request": {
+						"url": "{{oauth_server}}",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "X-AOL-API-CTX",
+								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "refresh_token",
+									"value": "{{user_refresh_token}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "grant_type",
+									"value": "refresh_token",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "scope",
+									"value": "brand_api",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": "oauth2,refresh_token"
+					},
+					"response": []
+				},
+				{
+					"name": "auth social user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userAccessToken = typeof response.access_token !== 'undefined' ? response.access_token : 0;\nvar userRefreshToken = typeof response.refresh_token !== 'undefined' ? response.refresh_token : 0;\npostman.setEnvironmentVariable(\"social_user_access_token\", userAccessToken);\npostman.setEnvironmentVariable(\"social_user_refresh_token\", userRefreshToken);\n//tests\ntests[\"Success Response\"] = responseCode.code === 200;\ntests[\"Got user access_token\"] = userAccessToken ? 1 : 0;\ntests[\"Got user refresh_token\"] = userRefreshToken ? 1 : 0;"
+							}
+						}
+					],
+					"request": {
+						"url": "{{oauth_server}}",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "X-AOL-API-CTX",
+								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "{{create_social_user}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "grant_type",
+									"value": "urn:x-aol:social:login",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "scope",
+									"value": "brand_api",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "provider",
+									"value": "{{social_user_provider}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": "oauth2,social_user"
+					},
+					"response": []
+				},
+				{
+					"name": "refresh social user token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n//tests\ntests[\"Success Response\"] = responseCode.code === 200;\ntests[\"Got user access_token\"] = typeof response.access_token !== 'undefined';\ntests[\"Got user refresh_token\"] = typeof response.refresh_token !== 'undefined';"
+							}
+						}
+					],
+					"request": {
+						"url": "{{oauth_server}}",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "X-AOL-API-CTX",
+								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "refresh_token",
+									"value": "{{social_user_refresh_token}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "grant_type",
+									"value": "refresh_token",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "scope",
+									"value": "brand_api",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": "oauth2,social_user,refresh_token"
+					},
+					"response": []
+				},
+				{
+					"name": "getUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Got user data\"] = userId ? 1 : 0;\n"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}getUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{social_user_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "X-AOL-API-CTX",
+								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\"}"
+						},
+						"description": "get_user"
+					},
+					"response": []
 				}
-			],
-			"dataMode": "urlencoded",
-			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n//tests\ntests[\"Success Response\"] = responseCode.code === 200;\ntests[\"Got user access_token\"] = typeof response.access_token !== 'undefined';\ntests[\"Got user refresh_token\"] = typeof response.refresh_token !== 'undefined';",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1461630199960,
-			"name": "social_user refreshAuthToken (OAuth)",
-			"description": "Refresh an OAuth2 access_token for a user using local login for use with some Brand APIs",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6",
-			"responses": []
+			]
 		},
 		{
-			"id": "a0a15186-d7c5-ab13-ef86-bea4045d8269",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
-			"url": "{{brand_api_server}}getTokenByTxnId",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar token = typeof response.data !== 'undefined' ? response.data : 0;\n\npostman.setEnvironmentVariable('password_reset_token', token);\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests['got password reset token'] = token ? 1 : 0;\n",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1461629583287,
-			"name": "getTokenByTxnId",
-			"description": "get password reset token from transaction id header",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6",
-			"responses": [],
-			"rawModeData": "{\"namespace\":\"{{namespace}}\",\n  \"transactionId\": \"{{pwd_txnid}}\"\n}"
-		},
-		{
-			"id": "a78afe92-7cd3-9ab3-8d41-a27d2692ab70",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
-			"url": "{{brand_api_server}}sendConfirmEmail",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\npostman.setEnvironmentVariable(\"email_txnid\", postman.getResponseHeader(\"X-AOL-IDENTITY-TX-ID\"));\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1461629605213,
-			"name": "sendConfirmEmail",
-			"description": "send email confirmation",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6",
-			"responses": [],
-			"rawModeData": "{\"namespace\":\"{{namespace}}\",\"username\":\"{{create_user_email}}\"}"
-		},
-		{
-			"id": "ac2d800a-efaa-9a45-6995-4677ee2eff26",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
-			"url": "{{brand_api_server}}getTokenByTxnId",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar token = typeof response.data !== 'undefined' ? response.data : 0;\n\npostman.setEnvironmentVariable('email_confirm_token', token);\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests['got email token'] = token ? 1 : 0;\n",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1461629612369,
-			"name": "getTokenByTxnId",
-			"description": "get email confirmation token from transaction id header",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6",
-			"responses": [],
-			"rawModeData": "{\"namespace\":\"{{namespace}}\",\n  \"transactionId\": \"{{email_txnid}}\"\n}"
-		},
-		{
-			"id": "ad57496a-b73c-37fa-9bd5-42ec744772eb",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
-			"url": "{{brand_api_server}}getTokenByTxnId",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar token = typeof response.data !== 'undefined' ? response.data : 0;\n\npostman.setEnvironmentVariable('register_email_token', token);\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests['got confirmation token'] = token ? 1 : 0;\n",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1461629455463,
-			"name": "getTokenByTxnId",
-			"description": "get email confirmation token from transaction id header",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6",
-			"responses": [],
-			"rawModeData": "{\"namespace\":\"{{namespace}}\",\n  \"transactionId\": \"{{txnid}}\"\n}"
-		},
-		{
-			"id": "b0d7d5e3-2a30-7b78-e92b-1471eeb4cef7",
-			"headers": "Authorization: Bearer {{user_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
-			"url": "{{brand_api_server}}linkSocialUser",
-			"preRequestScript": "postman.setEnvironmentVariable(\"link_social_user\", Math.random().toString(36).substring(2) + _.random(2000, 100));",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : '';\nvar socialUserExists = typeof response.data.social[0].puid !== 'undefined';\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Got user data\"] = response.status === 'success';\ntests[\"Link response correct user\"] = userId === postman.getEnvironmentVariable('new_user_id');\ntests[\"Social User set in social array\"] =socialUserExists;\ntests[\"Link success! Social user showing up in data.\"] = responseBody.has(postman.getEnvironmentVariable('link_social_user'));\n\n",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1462576146615,
-			"name": "linkSocialUser",
-			"description": "updateUser data with access_token",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6",
-			"responses": [],
-			"rawModeData": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{new_user_id}}\",\"socialPid\":\"{{social_user_provider}}\",\"socialUsername\":\"{{link_social_user}}\"}"
-		},
-		{
-			"id": "b27cce18-4f6a-543f-82eb-9a270ac6ef7d",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
-			"url": "{{brand_api_server}}confirmEmail",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\n",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1461629462360,
-			"name": "confirmEmail",
-			"description": "confirm email after registration",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6",
-			"responses": [],
-			"rawModeData": "{\"namespace\":\"{{namespace}}\",\n  \"token\": \"{{register_email_token}}\",\n  \"username\":\"{{create_user_email}}\"\n}"
-		},
-		{
-			"id": "b69154cc-69e2-6270-0941-db03efd587c6",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
-			"url": "{{brand_api_server}}validateDisplayName",
-			"preRequestScript": "postman.setEnvironmentVariable(\"create_user_displayname\",Math.random().toString(36).substring(2)\n+ '-' +  (Math.floor(Math.random()* (_.random(20000,4000) - _.random(200,400)+ 1) + _.random(5,1000))) );",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar resId = typeof response.data.reservationId !== 'undefined' ? response.data.reservationId : 0;\npostman.setEnvironmentVariable('create_user_reservationid', resId);\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\n",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1462575964239,
-			"name": "validateDisplayName",
-			"description": "validate potential display Name",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6",
-			"responses": [],
-			"rawModeData": "{\"namespace\":\"{{namespace}}\",\"displayName\":\"{{create_user_displayname}}\"}"
-		},
-		{
-			"id": "b9521849-985a-195a-aa96-576d8dc49a45",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\n",
-			"url": "{{oauth_server}}",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [
+			"name": "4. Update user data",
+			"description": "update_user_flow",
+			"item": [
 				{
-					"key": "username",
-					"value": "{{create_user_email}}",
-					"type": "text",
-					"enabled": true
+					"name": "getUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Got user data\"] = userId ? 1 : 0;"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}getUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "X-AOL-API-CTX",
+								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\"}"
+						},
+						"description": "get_user"
+					},
+					"response": []
 				},
 				{
-					"key": "grant_type",
-					"value": "password",
-					"type": "text",
-					"enabled": true
+					"name": "updateUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n//tests\n\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Updated correct user\"] = response.data.id === postman.getEnvironmentVariable('new_user_id');\ntests[\"Updated data shows in profile\"] = response.data.profile.postCode === postman.getEnvironmentVariable('user_update_postal');"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"user_update_postal\",\"94301\");"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}updateUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "X-AOL-API-CTX",
+								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{new_user_id}}\",\"postCode\":\"{{user_update_postal}}\"}"
+						},
+						"description": "update_user"
+					},
+					"response": []
 				},
 				{
-					"key": "scope",
-					"value": "brand_api",
-					"type": "text",
-					"enabled": true
+					"name": "getUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\nvar postCode = typeof response.data.profile.postCode !== 'undefined' ? response.data.profile.postCode : 0;\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Got user data\"] = userId ? 1 : 0;\ntests[\"Got updated data\"] = postCode === postman.getEnvironmentVariable('user_update_postal');"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}getUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "X-AOL-API-CTX",
+								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\"}"
+						},
+						"description": "get_user"
+					},
+					"response": []
 				},
 				{
-					"key": "password",
-					"value": "{{reset_user_password}}",
-					"type": "text",
-					"enabled": true
+					"name": "updateUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Updated correct user\"] = response.data.id === postman.getEnvironmentVariable('new_user_id');\ntests[\"Updated data shows in profile\"] = response.data.profile.postCode === '';"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}updateUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "X-AOL-API-CTX",
+								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{new_user_id}}\",\"postCode\":\"\"}"
+						},
+						"description": "update_user"
+					},
+					"response": []
 				}
-			],
-			"dataMode": "urlencoded",
-			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userAccessToken = typeof response.access_token !== 'undefined' ? response.access_token : 0;\npostman.setEnvironmentVariable(\"user_access_token\", userAccessToken);\n//tests\ntests[\"Success Response\"] = responseCode.code === 200;\ntests[\"Got user access_token\"] = userAccessToken ? 1 : 0;\n",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1461630215585,
-			"name": "authLocalUser (OAuth) after password reset",
-			"description": "Obtain an OAuth2 access_token for a user using local login for use with some Brand APIs",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6",
-			"responses": []
+			]
 		},
 		{
-			"id": "b9cd1d06-4fb2-f278-157c-65fd069f6e61",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
-			"url": "{{brand_api_server}}validateEmail",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\n",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1461629428485,
-			"name": "validateEmail",
-			"description": "validate email for namespace",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6",
-			"responses": [],
-			"rawModeData": "{\"namespace\":\"{{namespace}}\",\"email\":\"{{create_user_email}}\"}"
-		},
-		{
-			"id": "bd0f7bcc-2dab-8389-076e-697409e36e8d",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
-			"url": "{{brand_api_server}}doesUserExist",
-			"preRequestScript": "postman.setEnvironmentVariable(\"create_user_email\", postman.getEnvironmentVariable(\"gmail_user\") \n    + \"+\" + postman.getEnvironmentVariable(\"namespace\") \n    + \".\" + Math.random().toString(36).substring(2) + _.random(20000, 100) + '@gmail.com');",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\n",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1462629764951,
-			"name": "doesUserExist",
-			"description": "check if email exists in namespace",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6",
-			"responses": [],
-			"rawModeData": "{\"namespace\":\"{{namespace}}\",\"email\":\"{{create_user_email}}\"}"
-		},
-		{
-			"id": "c5f279f0-3b95-7992-3920-6d32a733e7f4",
-			"headers": "Authorization: Bearer {{user_access_token}}\nContent-Type: application/json\n",
-			"url": "{{brand_api_server}}deleteUser",
-			"preRequestScript": null,
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1462411579274,
-			"name": "deleteUser with password",
-			"description": "Delete user.",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6",
-			"responses": [],
-			"rawModeData": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{new_user_id}}\"\n}"
-		},
-		{
-			"id": "cd1a6328-c39d-16bd-a907-9143eb4a7dc2",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\n",
-			"url": "{{oauth_server}}",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [
+			"name": "5. Link Social User",
+			"description": "link_social_flow",
+			"item": [
 				{
-					"key": "username",
-					"value": "{{create_social_user}}",
-					"type": "text",
-					"enabled": true
+					"name": "linkSocialUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : '';\nvar socialUserExists = typeof response.data.social[0].puid !== 'undefined';\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Got user data\"] = response.status === 'success';\ntests[\"Link response correct user\"] = userId === postman.getEnvironmentVariable('new_user_id');\ntests[\"Social User set in social array\"] =socialUserExists;\ntests[\"Link success! Social user showing up in data.\"] = responseBody.has(postman.getEnvironmentVariable('link_social_user'));\n\n"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"link_social_user\", Math.random().toString(36).substring(2) + _.random(2000, 100));"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}linkSocialUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "X-AOL-API-CTX",
+								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{new_user_id}}\",\"socialPid\":\"{{social_user_provider}}\",\"socialUsername\":\"{{link_social_user}}\"}"
+						},
+						"description": "link_social_user"
+					},
+					"response": []
 				},
 				{
-					"key": "grant_type",
-					"value": "urn:x-aol:social:login",
-					"type": "text",
-					"enabled": true
+					"name": "getUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Link staying! Social user showing up in data.\"] = responseBody.has(postman.getEnvironmentVariable('link_social_user'));"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}getUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "X-AOL-API-CTX",
+								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\"}"
+						},
+						"description": "get_user"
+					},
+					"response": []
 				},
 				{
-					"key": "scope",
-					"value": "brand_api",
-					"type": "text",
-					"enabled": true
+					"name": "unlinkSocialUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = response.data.id !== 'undefined' ? response.data.id : 0;\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"unlink shows correct user\"] = userId === postman.getEnvironmentVariable('new_user_id');\ntests[\"unlink successful\"] = !responseBody.has(postman.getEnvironmentVariable('link_social_user'));"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}unlinkSocialUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "X-AOL-API-CTX",
+								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{new_user_id}}\",\"socialPid\":\"{{social_user_provider}}\",\"socialUsername\":\"{{link_social_user}}\"}"
+						},
+						"description": "unlink_social_user"
+					},
+					"response": []
 				},
 				{
-					"key": "provider",
-					"value": "{{social_user_provider}}",
-					"type": "text",
-					"enabled": true
+					"name": "getUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Got user data\"] = userId ? 1 : 0;\n"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}getUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "X-AOL-API-CTX",
+								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\"}"
+						},
+						"description": "get_user"
+					},
+					"response": []
 				}
-			],
-			"dataMode": "urlencoded",
-			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userAccessToken = typeof response.access_token !== 'undefined' ? response.access_token : 0;\nvar userRefreshToken = typeof response.refresh_token !== 'undefined' ? response.refresh_token : 0;\npostman.setEnvironmentVariable(\"social_user_access_token\", userAccessToken);\npostman.setEnvironmentVariable(\"social_user_refresh_token\", userRefreshToken);\n//tests\ntests[\"Success Response\"] = responseCode.code === 200;\ntests[\"Got user access_token\"] = userAccessToken ? 1 : 0;\ntests[\"Got user refresh_token\"] = userRefreshToken ? 1 : 0;",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1461630190476,
-			"name": "authSocialUser (OAuth)",
-			"description": "Obtain an OAuth2 access_token for a user using social login for use with some Brand APIs",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6",
-			"responses": []
+			]
 		},
 		{
-			"id": "cfde0840-44b0-a5e5-f94b-cddd278b385d",
-			"headers": "Authorization: Bearer {{user_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
-			"url": "{{brand_api_server}}getUser",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Got user data\"] = userId ? 1 : 0;\n",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1461629571902,
-			"name": "getUser",
-			"description": "getUser data from access_token",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6",
-			"responses": [],
-			"rawModeData": "{\"namespace\":\"{{namespace}}\"}"
+			"name": "7. passwordReset",
+			"description": "password_reset_flow",
+			"item": [
+				{
+					"name": "sendPasswordReset",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\npostman.setEnvironmentVariable(\"pwd_txnid\", postman.getResponseHeader(\"X-AOL-IDENTITY-TX-ID\"));\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\n\n"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}sendPasswordReset",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "X-AOL-API-CTX",
+								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"username\":\"{{create_user_email}}\"}"
+						},
+						"description": "send_password_reset"
+					},
+					"response": []
+				},
+				{
+					"name": "getTokenByTxnId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar token = typeof response.data !== 'undefined' ? response.data : 0;\n\npostman.setEnvironmentVariable('password_reset_token', token);\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests['got password reset token'] = token ? 1 : 0;\n//recovery\nvar count = typeof postman.getEnvironmentVariable('pwdGetTokenByTxnIdTries') !== 'undefined' ? postman.getEnvironmentVariable('pwdGetTokenByTxnIdTries') : 1;\n\nif(response.status !== 'success' && count < 3){\n    postman.setNextRequest('get_token_by_txn_id_pwd_reset_flow');\n    \n}"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}getTokenByTxnId",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "X-AOL-API-CTX",
+								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\n  \"transactionId\": \"{{pwd_txnid}}\"\n}"
+						},
+						"description": "get_token_by_txn_id"
+					},
+					"response": []
+				},
+				{
+					"name": "confirmPasswordReset",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\n"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"reset_user_password\",eval(postman.getEnvironmentVariable(\"generate_password\")));"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}confirmPasswordReset",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "X-AOL-API-CTX",
+								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\n  \"token\": \"{{password_reset_token}}\",\n  \"username\":\"{{create_user_email}}\",\n  \"password\":\"{{reset_user_password}}\"\n}"
+						},
+						"description": "confirm_password_reset"
+					},
+					"response": []
+				},
+				{
+					"name": "authenticate user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userAccessToken = typeof response.access_token !== 'undefined' ? response.access_token : 0;\nif(userAccessToken){\n    postman.setEnvironmentVariable(\"user_access_token\", userAccessToken);\n}\n//tests\ntests[\"Success Response\"] = responseCode.code === 200;\ntests[\"Got user access_token\"] = userAccessToken ? 1 : 0;\n"
+							}
+						}
+					],
+					"request": {
+						"url": "{{oauth_server}}",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "X-AOL-API-CTX",
+								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "{{create_user_email}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "scope",
+									"value": "brand_api",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "password",
+									"value": "{{reset_user_password}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": "oauth2,access_token"
+					},
+					"response": []
+				}
+			]
 		},
 		{
-			"id": "e4677c8b-c490-f823-671d-80ba484a6f36",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
-			"url": "{{brand_api_server}}confirmPasswordReset",
-			"preRequestScript": "postman.setEnvironmentVariable(\"reset_user_password\",eval(postman.getEnvironmentVariable(\"generate_password\")));",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\n",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1462629859076,
-			"name": "confirmPasswordReset",
-			"description": "use email token to reset password",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6",
-			"responses": [],
-			"rawModeData": "{\"namespace\":\"{{namespace}}\",\n  \"token\": \"{{password_reset_token}}\",\n  \"username\":\"{{create_user_email}}\",\n  \"password\":\"{{reset_user_password}}\"\n}"
+			"name": "8. Confirm Email",
+			"description": "confirm_email_flow",
+			"item": [
+				{
+					"name": "sendEmailConfirmation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\npostman.setEnvironmentVariable(\"email_txnid\", postman.getResponseHeader(\"X-AOL-IDENTITY-TX-ID\"));\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}sendConfirmEmail",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "X-AOL-API-CTX",
+								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"username\":\"{{create_user_email}}\"}"
+						},
+						"description": "send_confirm_email"
+					},
+					"response": []
+				},
+				{
+					"name": "getTokenByTxnId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar token = typeof response.data !== 'undefined' ? response.data : 0;\n\npostman.setEnvironmentVariable('email_confirm_token', token);\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests['got email token'] = token ? 1 : 0;\n\n//recovery\nvar count = typeof postman.getEnvironmentVariable('emailGetTokenByTxnIdTries') !== 'undefined' ? postman.getEnvironmentVariable('emailGetTokenByTxnIdTries') : 1;\n\nif(response.status !== 'success' && count < 3){\n    postman.setNextRequest('get_token_by_txn_id_email_confirmation_flow');\n    \n}"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}getTokenByTxnId",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "X-AOL-API-CTX",
+								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\n  \"transactionId\": \"{{email_txnid}}\"\n}"
+						},
+						"description": "get_token_by_txn_id"
+					},
+					"response": []
+				},
+				{
+					"name": "confirm_email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}confirmEmail",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "X-AOL-API-CTX",
+								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\n  \"token\": \"{{email_confirm_token}}\",\n  \"username\":\"{{create_user_email}}\"\n}"
+						},
+						"description": "confirmEmail"
+					},
+					"response": []
+				}
+			]
 		},
 		{
-			"id": "f5809b5d-7380-cbbe-9f6a-b3992d999f27",
-			"headers": "Authorization: Bearer {{user_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
-			"url": "{{brand_api_server}}updateUser",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Updated correct user\"] = response.data.id === postman.getEnvironmentVariable('new_user_id');\ntests[\"Updated data shows in profile\"] = response.data.profile.postCode === '';",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1462413759474,
-			"name": "updateUser clear values",
-			"description": "updateUser data with access_token",
-			"collectionId": "861ac7f4-c7bc-71ca-57bf-0d60176468a6",
-			"responses": [],
-			"rawModeData": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{new_user_id}}\",\"postCode\":\"\"}"
+			"name": "9. Delete Accounts",
+			"description": "delete_user_flow",
+			"item": [
+				{
+					"name": "deleteUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}deleteUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{new_user_id}}\"\n}"
+						},
+						"description": "delete_user"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}deleteUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{social_user_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{social_user_id}}\"\n}"
+						},
+						"description": "delete_user,social_user"
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

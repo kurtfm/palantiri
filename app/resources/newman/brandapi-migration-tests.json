@@ -1,218 +1,313 @@
 {
-	"id": "b60f70a5-b6fc-a745-effd-7abad9f2f3bf",
-	"name": "brandapis: User Migration APIs",
-	"description": "APIs related to user migration flows.",
-	"order": [],
-	"folders": [
+	"variables": [],
+	"info": {
+		"name": "Migrate user APIs",
+		"_postman_id": "709112d7-b72e-b519-e1c2-54f088abf73f",
+		"description": "metric: monitor.brandapi\ntags: [user_migration]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
 		{
-			"id": "4bae2665-3238-eea0-5690-d3869f640f29",
 			"name": "0. Application Access",
-			"description": "Get service access_token.",
-			"order": [
-				"e5786dbb-877b-f70a-0791-2a4509bb5bfb"
-			],
-			"owner": "197134",
-			"collectionId": "b60f70a5-b6fc-a745-effd-7abad9f2f3bf"
-		},
-		{
-			"id": "7f45b39b-b19d-70df-aaaf-503fe407fb15",
-			"name": "1. Setup Accounts",
-			"description": "Call createUser with password to create an account.",
-			"order": [
-				"dfc13001-23fd-b1eb-bee0-75323bffa1d0",
-				"77e13532-a877-fbc4-f490-bb233e5266b8",
-				"84356908-75cf-55d7-cccb-98d7aeb9d38a"
-			],
-			"owner": "197134",
-			"collectionId": "b60f70a5-b6fc-a745-effd-7abad9f2f3bf"
-		},
-		{
-			"id": "e6a41f54-ad8c-e2c6-c4d2-3c9fbc78dc3d",
-			"name": "2. Update Password During Migration",
-			"description": "Allows site to make a trusted password update call assuming the previous credentials have been validated through pre-existing flows.",
-			"order": [
-				"84ed0b73-81fc-c56e-0d06-72e5fffbbf75",
-				"f7244d43-c8c8-0b31-6c4b-0d4e294f5d9b"
-			],
-			"owner": "197134",
-			"collectionId": "b60f70a5-b6fc-a745-effd-7abad9f2f3bf"
-		}
-	],
-	"timestamp": 1461693426848,
-	"owner": "197134",
-	"remoteLink": "",
-	"public": false,
-	"requests": [
-		{
-			"id": "77e13532-a877-fbc4-f490-bb233e5266b8",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
-			"url": "{{brand_api_server}}getTokenByTxnId",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar token = typeof response.data !== 'undefined' ? response.data : 0;\n\npostman.setEnvironmentVariable('register_email_token', token);\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests['got confirmation token'] = token ? 1 : 0;\n",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1461629455463,
-			"name": "getTokenByTxnId",
-			"description": "get email confirmation token from transaction id header",
-			"collectionId": "b60f70a5-b6fc-a745-effd-7abad9f2f3bf",
-			"responses": [],
-			"folder": "7f45b39b-b19d-70df-aaaf-503fe407fb15",
-			"rawModeData": "{\"namespace\":\"{{namespace}}\",\n  \"transactionId\": \"{{txnid}}\"\n}"
-		},
-		{
-			"id": "84356908-75cf-55d7-cccb-98d7aeb9d38a",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
-			"url": "{{brand_api_server}}confirmEmail",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\n",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1461629462360,
-			"name": "confirmEmail",
-			"description": "confirm email after registration",
-			"collectionId": "b60f70a5-b6fc-a745-effd-7abad9f2f3bf",
-			"responses": [],
-			"folder": "7f45b39b-b19d-70df-aaaf-503fe407fb15",
-			"rawModeData": "{\"namespace\":\"{{namespace}}\",\n  \"token\": \"{{register_email_token}}\",\n  \"username\":\"{{create_user_email}}\"\n}"
-		},
-		{
-			"id": "84ed0b73-81fc-c56e-0d06-72e5fffbbf75",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
-			"url": "{{brand_api_server}}migrationPasswordUpdate",
-			"preRequestScript": "postman.setEnvironmentVariable(\"migration_user_password\",eval(postman.getEnvironmentVariable(\"generate_password\")));",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"response code\"] = responseCode.code === 200;\ntests[\"response status\"] = response.status === \"success\";\n",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1462629739097,
-			"name": "migrationPasswordUpdate",
-			"description": "Success",
-			"collectionId": "b60f70a5-b6fc-a745-effd-7abad9f2f3bf",
-			"responses": [],
-			"rawModeData": "{\"namespace\":\"{{namespace}}\",\"username\":\"{{create_user_email}}\",\"newPassword\":\"{{migration_user_password}}\"}"
-		},
-		{
-			"id": "dfc13001-23fd-b1eb-bee0-75323bffa1d0",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
-			"url": "{{brand_api_server}}createUser",
-			"preRequestScript": "postman.setEnvironmentVariable(\"create_user_displayname\",Math.random().toString(36).substring(2)\n+ '-' +  (Math.floor(Math.random()* (_.random(20000,4000) - _.random(200,400)+ 1) + _.random(5,1000))) );\n\npostman.setEnvironmentVariable(\"create_user_password\",\"nm###123\");\n\npostman.setEnvironmentVariable(\"create_user_email\", postman.getEnvironmentVariable(\"gmail_user\") \n    + \"+\" + postman.getEnvironmentVariable(\"namespace\") \n    + \".\" + Math.random().toString(36).substring(2) + _.random(20000, 100) + '@gmail.com');",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\n\npostman.setEnvironmentVariable('new_user_id', userId);\n\npostman.setEnvironmentVariable('publicId', response.data.pubId);\n\npostman.setEnvironmentVariable(\"txnid\", postman.getResponseHeader(\"X-AOL-IDENTITY-TX-ID\"));\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\n",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1462629779812,
-			"name": "createUser",
-			"description": "updateUser data with access_token",
-			"collectionId": "b60f70a5-b6fc-a745-effd-7abad9f2f3bf",
-			"responses": [],
-			"rawModeData": "{\"namespace\":\"{{namespace}}\",\"email\":\"{{create_user_email}}\",\"password\":\"{{create_user_password}}\",\"displayName\":\"{{create_user_displayname}}\"}"
-		},
-		{
-			"id": "e5786dbb-877b-f70a-0791-2a4509bb5bfb",
-			"headers": "",
-			"url": "{{oauth_server}}",
-			"preRequestScript": "function base64url(source) {\n  encodedSource = CryptoJS.enc.Base64.stringify(source);\n  encodedSource = encodedSource.replace(/=+$/, '');\n  encodedSource = encodedSource.replace(/\\+/g, '-');\n  encodedSource = encodedSource.replace(/\\//g, '_');\n  \n  return encodedSource;\n}\nvar header = {\n  \"alg\": \"HS256\",\n  \"typ\": \"JWT\"\n};\nvar stringifiedHeader = CryptoJS.enc.Utf8.parse(JSON.stringify(header));\nvar encodedHeader = base64url(stringifiedHeader);\nvar now = new Date() / 1000;\n//var jwsLife = ( 24 * 60 * 60 );\nvar jwsLife = 10;\nvar body = {\n    \"iss\": postman.getEnvironmentVariable(\"client_id\"),\n    \"sub\": postman.getEnvironmentVariable(\"client_id\"),\n    \"aud\": postman.getEnvironmentVariable(\"oauth_server\"),\n    \"iat\": now,\n    \"exp\": now + jwsLife,\n};\n\nvar stringifiedBody = CryptoJS.enc.Utf8.parse(JSON.stringify(body));\nvar encodedBody = base64url(stringifiedBody);\nvar token = encodedHeader + \".\" + encodedBody;\nvar signature = CryptoJS.HmacSHA256(token, postman.getEnvironmentVariable(\"client_secret\"));\nsignature = base64url(signature);\nvar signedToken = token + \".\" + signature;\npostman.setEnvironmentVariable(\"jws\", signedToken);",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [
+			"description": "tags: [application_access]",
+			"item": [
 				{
-					"key": "grant_type",
-					"value": "client_credentials",
-					"type": "text",
-					"enabled": true
-				},
-				{
-					"key": "client_assertion_type",
-					"value": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
-					"type": "text",
-					"enabled": true
-				},
-				{
-					"key": "scope",
-					"value": "brand_api ropc brand_api_customer_support brand_api_migration",
-					"type": "text",
-					"enabled": true
-				},
-				{
-					"key": "client_assertion",
-					"value": "{{jws}}",
-					"type": "text",
-					"enabled": true
+					"name": "authorize service",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar serviceAccessToken = typeof response.access_token !== 'undefined' ? response.access_token : 0;\npostman.setEnvironmentVariable(\"service_access_token\", serviceAccessToken);\n\n\n//tests\ntests[\"Success Response\"] = responseCode.code === 200;\ntests[\"Got Service access_token\"] = serviceAccessToken ? 1:0;"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "function base64url(source) {\n  encodedSource = CryptoJS.enc.Base64.stringify(source);\n  encodedSource = encodedSource.replace(/=+$/, '');\n  encodedSource = encodedSource.replace(/\\+/g, '-');\n  encodedSource = encodedSource.replace(/\\//g, '_');\n  \n  return encodedSource;\n}\nvar header = {\n  \"alg\": \"HS256\",\n  \"typ\": \"JWT\"\n};\nvar stringifiedHeader = CryptoJS.enc.Utf8.parse(JSON.stringify(header));\nvar encodedHeader = base64url(stringifiedHeader);\nvar now = new Date() / 1000;\n//var jwsLife = ( 24 * 60 * 60 );\nvar jwsLife = 10;\nvar body = {\n    \"iss\": postman.getEnvironmentVariable(\"client_id\"),\n    \"sub\": postman.getEnvironmentVariable(\"client_id\"),\n    \"aud\": postman.getEnvironmentVariable(\"oauth_server\"),\n    \"iat\": now,\n    \"exp\": now + jwsLife,\n};\n\nvar stringifiedBody = CryptoJS.enc.Utf8.parse(JSON.stringify(body));\nvar encodedBody = base64url(stringifiedBody);\nvar token = encodedHeader + \".\" + encodedBody;\nvar signature = CryptoJS.HmacSHA256(token, postman.getEnvironmentVariable(\"client_secret\"));\nsignature = base64url(signature);\nvar signedToken = token + \".\" + signature;\npostman.setEnvironmentVariable(\"jws\", signedToken);"
+							}
+						}
+					],
+					"request": {
+						"url": "{{oauth_server}}",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "client_assertion_type",
+									"value": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "scope",
+									"value": "brand_api ropc brand_api_customer_support brand_api_migration",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "client_assertion",
+									"value": "{{jws}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": "tags: [oauth2,service_access_token]"
+					},
+					"response": []
 				}
-			],
-			"dataMode": "urlencoded",
-			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar serviceAccessToken = typeof response.access_token !== 'undefined' ? response.access_token : 0;\npostman.setEnvironmentVariable(\"service_access_token\", serviceAccessToken);\n\n\n//tests\ntests[\"Success Response\"] = responseCode.code === 200;\ntests[\"Got Service access_token\"] = serviceAccessToken ? 1:0;",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1461630176515,
-			"name": "getServiceToken (OAuth) for auth",
-			"description": "Obtain a Brand API service access token from the AOL OAuth2 endpoint",
-			"collectionId": "b60f70a5-b6fc-a745-effd-7abad9f2f3bf",
-			"responses": [],
-			"folder": "4bae2665-3238-eea0-5690-d3869f640f29"
+			]
 		},
 		{
-			"id": "f7244d43-c8c8-0b31-6c4b-0d4e294f5d9b",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\n",
-			"url": "{{oauth_server}}",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [
+			"name": "1. Account Setup",
+			"description": "tags: [account_setup]",
+			"item": [
 				{
-					"key": "username",
-					"value": "{{create_user_email}}",
-					"type": "text",
-					"enabled": true
+					"name": "createUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\n\npostman.setEnvironmentVariable('new_user_id', userId);\n\npostman.setEnvironmentVariable('publicId', response.data.pubId);\n\npostman.setEnvironmentVariable(\"txnid\", postman.getResponseHeader(\"X-AOL-IDENTITY-TX-ID\"));\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\n\n//recovery\nvar count = typeof postman.getEnvironmentVariable('createUserTries') !== 'undefined' ? postman.getEnvironmentVariable('createUserTries') : 1;\n\nif(response.status !== 'success' && count < 3){\n    postman.setEnvironmentVariable('createUserTries', count++);\n    \n   postman.setEnvironmentVariable(\"create_user_email\", postman.getEnvironmentVariable(\"gmail_user\") \n    + \"+\" + postman.getEnvironmentVariable(\"namespace\") \n    + \".\" + Math.random().toString(36).substring(2) + _.random(20000, 100) + '@gmail.com');\n    \n    postman.setEnvironmentVariable(\"create_user_displayname\",Math.random().toString(36).substring(2)\n+ '-' +  (Math.floor(Math.random()* (_.random(20000,4000) - _.random(200,400)+ 1) + _.random(5,1000))) );\n\n    postman.setEnvironmentVariable(\"create_user_password\",\"nm###\" + _.random(100,900) );\n    \n    postman.setNextRequest('create_user');\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"create_user_displayname\",Math.random().toString(36).substring(2)\n+ '-' +  (Math.floor(Math.random()* (_.random(20000,4000) - _.random(200,400)+ 1) + _.random(5,1000))) );\n\npostman.setEnvironmentVariable(\"create_user_password\",\"nm###123\");\n\npostman.setEnvironmentVariable(\"create_user_email\", postman.getEnvironmentVariable(\"gmail_user\") \n    + \"+\" + postman.getEnvironmentVariable(\"namespace\") \n    + \".\" + Math.random().toString(36).substring(2) + _.random(20000, 100) + '@gmail.com');"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}createUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "X-AOL-API-CTX",
+								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"email\":\"{{create_user_email}}\",\"password\":\"{{create_user_password}}\",\"displayName\":\"{{create_user_displayname}}\"}"
+						},
+						"description": "tags: [create_user]"
+					},
+					"response": []
 				},
 				{
-					"key": "grant_type",
-					"value": "password",
-					"type": "text",
-					"enabled": true
+					"name": "getTokenByTxnId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar token = typeof response.data !== 'undefined' ? response.data : 0;\n\npostman.setEnvironmentVariable('register_email_token', token);\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests['got confirmation token'] = token ? 1 : 0;\n\n//recovery\nvar count = typeof postman.getEnvironmentVariable('regGetTokenByTxnIdTries') !== 'undefined' ? postman.getEnvironmentVariable('regGetTokenByTxnIdTries') : 1;\n\nif(response.status !== 'success' && count < 3){\n    postman.setNextRequest('get_token_by_txn_id_reg_flow');\n    \n}"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}getTokenByTxnId",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "X-AOL-API-CTX",
+								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\n  \"transactionId\": \"{{txnid}}\"\n}"
+						},
+						"description": "tags: [get_token_by_txn_id]"
+					},
+					"response": []
 				},
 				{
-					"key": "scope",
-					"value": "brand_api",
-					"type": "text",
-					"enabled": true
-				},
-				{
-					"key": "password",
-					"value": "{{migration_user_password}}",
-					"type": "text",
-					"enabled": true
+					"name": "confirmEmail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\n"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}confirmEmail",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "X-AOL-API-CTX",
+								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\n  \"token\": \"{{register_email_token}}\",\n  \"username\":\"{{create_user_email}}\"\n}"
+						},
+						"description": "tags: [confirm_email]"
+					},
+					"response": []
 				}
-			],
-			"dataMode": "urlencoded",
-			"version": 2,
-			"tests": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userAccessToken = typeof response.access_token !== 'undefined' ? response.access_token : 0;\nvar userRefreshToken = typeof response.refresh_token !== 'undefined' ? response.refresh_token : 0;\npostman.setEnvironmentVariable(\"user_access_token\", userAccessToken);\npostman.setEnvironmentVariable(\"user_refresh_token\", userRefreshToken);\n\n//tests\ntests[\"Success Response\"] = responseCode.code === 200;\ntests[\"Got user access_token\"] = userAccessToken ? 1 : 0;\ntests[\"Got user refresh_token\"] = userRefreshToken ? 1 : 0;\n",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1461694054344,
-			"name": "authLocalUser (OAuth)",
-			"description": "Obtain an OAuth2 access_token for a user using local login for use with some Brand APIs",
-			"collectionId": "b60f70a5-b6fc-a745-effd-7abad9f2f3bf",
-			"responses": []
+			]
+		},
+		{
+			"name": "2. Migrate User",
+			"description": "tags: [migration_flow]",
+			"item": [
+				{
+					"name": "migrationPasswordUpdate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"response code\"] = responseCode.code === 200;"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"migration_user_password\",eval(postman.getEnvironmentVariable(\"generate_password\")));"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}migrationPasswordUpdate",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "X-AOL-API-CTX",
+								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"username\":\"{{create_user_email}}\",\"newPassword\":\"{{migration_user_password}}\"}"
+						},
+						"description": "tags: [migration_password_update]"
+					},
+					"response": []
+				},
+				{
+					"name": "authenticate migrated user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userAccessToken = typeof response.access_token !== 'undefined' ? response.access_token : 0;\nvar userRefreshToken = typeof response.refresh_token !== 'undefined' ? response.refresh_token : 0;\npostman.setEnvironmentVariable(\"user_access_token\", userAccessToken);\npostman.setEnvironmentVariable(\"user_refresh_token\", userRefreshToken);\n\n//tests\ntests[\"Success Response\"] = responseCode.code === 200;\ntests[\"Got user access_token\"] = userAccessToken ? 1 : 0;\ntests[\"Got user refresh_token\"] = userRefreshToken ? 1 : 0;\n"
+							}
+						}
+					],
+					"request": {
+						"url": "{{oauth_server}}",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "X-AOL-API-CTX",
+								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "{{create_user_email}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "scope",
+									"value": "brand_api",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "password",
+									"value": "{{migration_user_password}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": "tags: [oauth2,access_token]"
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

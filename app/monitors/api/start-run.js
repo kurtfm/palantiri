@@ -44,53 +44,36 @@ module.exports = (conf) => {
           }
         }
 
-        var testsData = fileExists(testFile) ?
-            JSON5.parse(fs.readFileSync( testFile, 'utf8')) : 
+        var tests = fileExists(testFile) ?
+            testFile: 
             assert(false, "Could not find test file: " + testFile);
 
-        var configuredTests = configureTests(testsData);
-
-
         var environment = fileExists(envFile) ?
-            JSON5.parse(fs.readFileSync( envFile, 'utf8')) : {};
+            envFile : {};
         var globals = fileExists(globalFile) ?
-            JSON5.parse(fs.readFileSync( globalFile, 'utf8')) : {};
-
+            globalFile : {};
+       
         var newmanOptions = {
-            envJson: environment,
+            collection: tests,
+            environment: environment,
             global: globals,
-            responseHandler: "TestResponseHandler",
-            asLibrary: true,
             stopOnError: false,
-            outputFileVerbose: debugLog,
-            outputFile: jsonReport,
-            insecure: true,
-            noSummary: true,
-            noTestSymbols: true,
-            noColor: true
+            reporters:['cli']
         };
-
-
-        configuredTests.then((data) => {
-
-            Newman.execute(data.tests, newmanOptions,(e) => {
-                //var testOptions = Newman.getOptions();
-                if(e){
-                    reject(e);
-                }
-                else{
-                    resolve({
-                        "target":target,
-                        "id":outputId,
-                        "outputFolder":conf.application_root + conf.output_folder,
-                        "jsonReport":jsonReport,
-                        "debugLog":debugLog}
-                    );
-                }
-            });
-
-
+        Newman.run(newmanOptions).on('done',(err,summary) => {
+            if(err){
+                console.log(err);
+                reject(err);
+            }
+            else{
+                resolve({
+                    "target":target,
+                    "summary":summary}
+                );
+            }
         });
+
+
 
     });
   
