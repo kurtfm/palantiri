@@ -71,7 +71,7 @@
 	"requests": [
 		{
 			"id": "04d824ed-ad2b-34a2-1940-67fb56cc3043",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}getTokenByTxnId",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -111,7 +111,7 @@
 		},
 		{
 			"id": "26ab6cc1-8b91-bc39-9ce3-af52ec6561a1",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}confirmEmail",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -132,7 +132,7 @@
 		},
 		{
 			"id": "34c03c06-7d17-1a65-17d0-22a37a970069",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}createUser",
 			"preRequestScript": "postman.setEnvironmentVariable(\"create_user_displayname\",Math.random().toString(36).substring(2)\n+ '-' +  (Math.floor(Math.random()* (_.random(20000,4000) - _.random(200,400)+ 1) + _.random(5,1000))) );\n\npostman.setEnvironmentVariable(\"create_user_password\",\"nm###123\");\n\npostman.setEnvironmentVariable(\"create_user_email\", postman.getEnvironmentVariable('gmail_user') \n    + \"+\" + postman.getEnvironmentVariable(\"namespace\") \n    + \".\" + Math.random().toString(36).substring(2) + _.random(20000, 100) + '@gmail.com');",
 			"pathVariables": {},
@@ -152,7 +152,7 @@
 		},
 		{
 			"id": "3d412ab1-cee8-636e-0630-e3fb998dc74e",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}getUserByPubId",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -172,7 +172,7 @@
 		},
 		{
 			"id": "41295b5f-4ebf-2935-4870-cb76c4a1bb27",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}updateUserById",
 			"preRequestScript": "postman.setEnvironmentVariable(\"user_update_postal\",\"94301\");",
 			"pathVariables": {},
@@ -192,7 +192,7 @@
 		},
 		{
 			"id": "46c7d7b0-e118-83a6-3341-f026a26ddae7",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}getUserByDisplayName",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -212,7 +212,7 @@
 		},
 		{
 			"id": "4adaf929-5a35-8552-ce0d-3c436f7a5300",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}getUserById",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -277,7 +277,7 @@
 		},
 		{
 			"id": "6038e0fe-3b9c-82ee-66aa-bd11ff8c4a2b",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}getUserBySocialUser",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -297,7 +297,7 @@
 		},
 		{
 			"id": "70890fcc-b09e-1c3c-ba5f-1696ebba2c22",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}getUserById",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -317,7 +317,7 @@
 		},
 		{
 			"id": "bc1cbae9-39de-c4d0-814b-465f5a644254",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}createUser",
 			"preRequestScript": "postman.setEnvironmentVariable(\"create_social_email\", postman.getEnvironmentVariable('gmail_user') \n    + \"+\" + postman.getEnvironmentVariable(\"namespace\") \n    + \".\" + Math.random().toString(36).substring(2) + _.random(20000, 100) + '@gmail.com');\n    \npostman.setEnvironmentVariable(\"create_social_user\", Math.random().toString(36).substring(2) + _.random(2000, 100));",
 			"pathVariables": {},
@@ -337,7 +337,7 @@
 		},
 		{
 			"id": "c5096437-4fd7-33f4-20cf-c13dbf3cc8f1",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}getUserByEmail",
 			"preRequestScript": "",
 			"pathVariables": {},

@@ -45,7 +45,7 @@
 	"requests": [
 		{
 			"id": "77e13532-a877-fbc4-f490-bb233e5266b8",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}getTokenByTxnId",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -66,7 +66,7 @@
 		},
 		{
 			"id": "84356908-75cf-55d7-cccb-98d7aeb9d38a",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}confirmEmail",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -87,7 +87,7 @@
 		},
 		{
 			"id": "84ed0b73-81fc-c56e-0d06-72e5fffbbf75",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}migrationPasswordUpdate",
 			"preRequestScript": "postman.setEnvironmentVariable(\"migration_user_password\",eval(postman.getEnvironmentVariable(\"generate_password\")));",
 			"pathVariables": {},
@@ -107,7 +107,7 @@
 		},
 		{
 			"id": "dfc13001-23fd-b1eb-bee0-75323bffa1d0",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}createUser",
 			"preRequestScript": "postman.setEnvironmentVariable(\"create_user_displayname\",Math.random().toString(36).substring(2)\n+ '-' +  (Math.floor(Math.random()* (_.random(20000,4000) - _.random(200,400)+ 1) + _.random(5,1000))) );\n\npostman.setEnvironmentVariable(\"create_user_password\",\"nm###123\");\n\npostman.setEnvironmentVariable(\"create_user_email\", postman.getEnvironmentVariable(\"gmail_user\") \n    + \"+\" + postman.getEnvironmentVariable(\"namespace\") \n    + \".\" + Math.random().toString(36).substring(2) + _.random(20000, 100) + '@gmail.com');",
 			"pathVariables": {},
@@ -172,7 +172,7 @@
 		},
 		{
 			"id": "f7244d43-c8c8-0b31-6c4b-0d4e294f5d9b",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\n",
+			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\n",
 			"url": "{{oauth_server}}",
 			"preRequestScript": "",
 			"pathVariables": {},

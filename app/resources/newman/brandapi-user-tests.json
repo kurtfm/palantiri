@@ -125,7 +125,7 @@
 	"requests": [
 		{
 			"id": "00fb2ecb-9d7f-7371-abe2-c6de56adc30c",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\n",
+			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\n",
 			"url": "{{oauth_server}}",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -207,7 +207,7 @@
 		},
 		{
 			"id": "15de199d-f57a-dd77-f6aa-b5f98ada77bc",
-			"headers": "Authorization: Bearer {{user_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{user_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}getUser",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -227,7 +227,7 @@
 		},
 		{
 			"id": "194d18df-b0c8-acc7-d824-e7007d766c41",
-			"headers": "Authorization: Bearer {{user_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{user_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}getUser",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -247,7 +247,7 @@
 		},
 		{
 			"id": "2da783e5-56f5-7f8f-015e-6d7cf3a8c04e",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}createUser",
 			"preRequestScript": "postman.setEnvironmentVariable(\"create_social_user\", Math.random().toString(36).substring(2) + _.random(2000, 100));\n\npostman.setEnvironmentVariable(\"create_social_email\", postman.getEnvironmentVariable(\"gmail_user\") \n    + \"+\" + postman.getEnvironmentVariable(\"namespace\") \n    + \".\" + Math.random().toString(36).substring(2) + _.random(20000, 100) + '@gmail.com');",
 			"pathVariables": {},
@@ -267,7 +267,7 @@
 		},
 		{
 			"id": "2f0067a9-cd8c-b6ac-be74-c0199523dbe3",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}validatePassword",
 			"preRequestScript": "postman.setEnvironmentVariable(\"create_user_password\",\"nm###123\");",
 			"pathVariables": {},
@@ -287,7 +287,7 @@
 		},
 		{
 			"id": "3182ed18-7dee-717e-5ac9-179785dcb305",
-			"headers": "Authorization: Bearer {{social_user_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{social_user_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}getUser",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -307,7 +307,7 @@
 		},
 		{
 			"id": "388cc910-d46e-9294-ae09-66317eef00cf",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\n",
+			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\n",
 			"url": "{{oauth_server}}",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -351,7 +351,7 @@
 		},
 		{
 			"id": "475664b6-1dd4-e4cd-664a-6ebea5c80a67",
-			"headers": "Authorization: Bearer {{user_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{user_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}updateUser",
 			"preRequestScript": "postman.setEnvironmentVariable(\"user_update_postal\",\"94301\");",
 			"pathVariables": {},
@@ -371,7 +371,7 @@
 		},
 		{
 			"id": "5f0c4064-1d1e-c89b-9c9c-2a389f26d1f1",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}createUser",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -391,7 +391,7 @@
 		},
 		{
 			"id": "61c37094-f27d-7eae-457a-59469331bd9d",
-			"headers": "Authorization: Bearer {{user_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{user_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}getUser",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -411,7 +411,7 @@
 		},
 		{
 			"id": "66ecd699-280e-450e-8b09-46dd0736f0b3",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}confirmEmail",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -431,7 +431,7 @@
 		},
 		{
 			"id": "6c72e2c4-260d-25f9-7176-0f26058b67e5",
-			"headers": "Authorization: Bearer {{user_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{user_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}unlinkSocialUser",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -451,7 +451,7 @@
 		},
 		{
 			"id": "82212443-0a97-e0dc-c971-b26adcf7ad37",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}sendPasswordReset",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -471,7 +471,7 @@
 		},
 		{
 			"id": "8ff4c702-3676-e174-a6d3-9eb07d8578ce",
-			"headers": "Authorization: Bearer {{user_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{user_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}getUser",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -510,7 +510,7 @@
 		},
 		{
 			"id": "9e61b74b-6fcc-0415-9dc8-7d0f01da8a14",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\n",
+			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\n",
 			"url": "{{oauth_server}}",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -548,7 +548,7 @@
 		},
 		{
 			"id": "a0a15186-d7c5-ab13-ef86-bea4045d8269",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}getTokenByTxnId",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -568,7 +568,7 @@
 		},
 		{
 			"id": "a78afe92-7cd3-9ab3-8d41-a27d2692ab70",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}sendConfirmEmail",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -588,7 +588,7 @@
 		},
 		{
 			"id": "ac2d800a-efaa-9a45-6995-4677ee2eff26",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}getTokenByTxnId",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -608,7 +608,7 @@
 		},
 		{
 			"id": "ad57496a-b73c-37fa-9bd5-42ec744772eb",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}getTokenByTxnId",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -628,7 +628,7 @@
 		},
 		{
 			"id": "b0d7d5e3-2a30-7b78-e92b-1471eeb4cef7",
-			"headers": "Authorization: Bearer {{user_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{user_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}linkSocialUser",
 			"preRequestScript": "postman.setEnvironmentVariable(\"link_social_user\", Math.random().toString(36).substring(2) + _.random(2000, 100));",
 			"pathVariables": {},
@@ -648,7 +648,7 @@
 		},
 		{
 			"id": "b27cce18-4f6a-543f-82eb-9a270ac6ef7d",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}confirmEmail",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -668,7 +668,7 @@
 		},
 		{
 			"id": "b69154cc-69e2-6270-0941-db03efd587c6",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}validateDisplayName",
 			"preRequestScript": "postman.setEnvironmentVariable(\"create_user_displayname\",Math.random().toString(36).substring(2)\n+ '-' +  (Math.floor(Math.random()* (_.random(20000,4000) - _.random(200,400)+ 1) + _.random(5,1000))) );",
 			"pathVariables": {},
@@ -688,7 +688,7 @@
 		},
 		{
 			"id": "b9521849-985a-195a-aa96-576d8dc49a45",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\n",
+			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\n",
 			"url": "{{oauth_server}}",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -732,7 +732,7 @@
 		},
 		{
 			"id": "b9cd1d06-4fb2-f278-157c-65fd069f6e61",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}validateEmail",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -752,7 +752,7 @@
 		},
 		{
 			"id": "bd0f7bcc-2dab-8389-076e-697409e36e8d",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}doesUserExist",
 			"preRequestScript": "postman.setEnvironmentVariable(\"create_user_email\", postman.getEnvironmentVariable(\"gmail_user\") \n    + \"+\" + postman.getEnvironmentVariable(\"namespace\") \n    + \".\" + Math.random().toString(36).substring(2) + _.random(20000, 100) + '@gmail.com');",
 			"pathVariables": {},
@@ -791,7 +791,7 @@
 		},
 		{
 			"id": "cd1a6328-c39d-16bd-a907-9143eb4a7dc2",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\n",
+			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\n",
 			"url": "{{oauth_server}}",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -835,7 +835,7 @@
 		},
 		{
 			"id": "cfde0840-44b0-a5e5-f94b-cddd278b385d",
-			"headers": "Authorization: Bearer {{user_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{user_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}getUser",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -855,7 +855,7 @@
 		},
 		{
 			"id": "e4677c8b-c490-f823-671d-80ba484a6f36",
-			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{service_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}confirmPasswordReset",
 			"preRequestScript": "postman.setEnvironmentVariable(\"reset_user_password\",eval(postman.getEnvironmentVariable(\"generate_password\")));",
 			"pathVariables": {},
@@ -875,7 +875,7 @@
 		},
 		{
 			"id": "f5809b5d-7380-cbbe-9f6a-b3992d999f27",
-			"headers": "Authorization: Bearer {{user_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer {{user_access_token}}\nX-AOL-API-CTX: eyJwZWVyX2lwIjoiMTAuNzIuMjkuMTk4IiwiY2hhZCI6ImFzZmFzZGYiLCJyZWZlcnJlciI6Imh0dHBzOi8vZGV2ZWxvcGVyLmlkZW50aXR5LmFvbC5jb20iLCJ1YXV0aGlkIjoiMzQ1d3c0NTM0IiwiZ3Jhdml0eSI6Inh4eHgifQ\nContent-Type: application/json\n",
 			"url": "{{brand_api_server}}updateUser",
 			"preRequestScript": "",
 			"pathVariables": {},
