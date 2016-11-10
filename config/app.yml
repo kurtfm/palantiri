@@ -25,3 +25,4 @@ slack_upload_options:
 disable_slack_notifications: false
 disable_metrics: false
 disable_info_notices: true
+metrics_prefix: test.

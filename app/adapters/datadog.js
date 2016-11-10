@@ -7,17 +7,18 @@ const Promise = require('bluebird');
 module.exports = function (metricsPrefix) {
     console.log(metricsPrefix);
     var mock = process.env.NODE_ENV === 'test' ? true : false;
-    
-    var client = new StatsD('dd-agent',8125,metricsPrefix, '', false,false,mock);
-    
+    //var mock = true;
+    var client = new StatsD('localhost',8125,metricsPrefix, '', false,false,mock);
+
     client.socket.on('error', function (error) {
         throw error;
         console.error("Error in socket for metrics: ", error);
     });
-    
 
-    
+
+
     this.sendCount = (metric,count,tags) => {
+      console.log('count metric: ',metric,' count: ',count,' tags: ',tags);
         return new Promise((resolve, reject) => {
             client.increment(metric, count,tags,(err,bytes)=>{
                 if(err){
@@ -42,6 +43,7 @@ module.exports = function (metricsPrefix) {
         });
     };
     this.sendHistogram = (metric,count,tags) => {
+      console.log('histo metric: ',metric,' count: ',count,' tags: ',tags);
         return new Promise((resolve, reject) => {
             client.histogram(metric, count,tags,(err,bytes)=>{
                 if(err){

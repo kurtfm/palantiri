@@ -4,9 +4,11 @@ const assert = require('assert');
 const JSON5 = require('json5');
 const fs = require('fs');
 const Promise = require('bluebird');
-const Newman = require('newman');
+const newman = require('newman');
 const _ = require('lodash');
-const configureTests = require('./prepare-collections');
+const util = require('util');
+
+const reportResults = require('./report-results');
 
 module.exports = (conf) => {
     return new Promise((resolve,reject) => {
@@ -16,6 +18,9 @@ module.exports = (conf) => {
         const newmanFolder = conf.application_root + conf.newman_folder + target + '-';
         const outputFolder = conf.application_root + conf.output_folder + outputId;
 
+        var log = {};
+
+        log.start = 'assert target value is present';
         assert.strictEqual(
             typeof target,
             "string",
@@ -26,17 +31,21 @@ module.exports = (conf) => {
 
 
         var jsonReport =  outputFolder + conf.report_file_end;
-        var debugLog = outputFolder +  conf.verbose_file_end;
+        log.jsonReport = `json report file location set to: ${jsonReport}`;
         var testFile = newmanFolder + conf.test_file;
+        log.testFile = `test file location set to: ${testFile}`;
         var envFile = newmanFolder + conf.env_file;
+        log.envFile = `environment file location set to: ${envFile}`;
         var globalFile = newmanFolder + conf.global_file;
+        log.globalFile = `global file location set to: ${globalFile}`;
 
         function fileExists(path) {
           try  {
+            log.fileExists = `file ${path} exists`
             return fs.statSync(path).isFile();
           }
           catch (e) {
-            if (e.code === 'ENOENT') { 
+            if (e.code === 'ENOENT') {
               return false;
             }
             console.log("Exception fs.statSync (" + path + "): " + e);
@@ -45,36 +54,58 @@ module.exports = (conf) => {
         }
 
         var tests = fileExists(testFile) ?
-            testFile: 
+            require(testFile):
             assert(false, "Could not find test file: " + testFile);
 
         var environment = fileExists(envFile) ?
-            envFile : {};
+            require(envFile) : {};
         var globals = fileExists(globalFile) ?
-            globalFile : {};
-       
+            require(globalFile) : {};
+
         var newmanOptions = {
             collection: tests,
             environment: environment,
-            global: globals,
-            stopOnError: false,
-            reporters:['cli']
+            globals: globals,
+            reporters: ['json'],
+            reporter: {
+                json: {export: jsonReport}
+            }
         };
-        Newman.run(newmanOptions).on('done',(err,summary) => {
+        log.newmanOptions = newmanOptions;
+
+        newman.run(newmanOptions)
+        .on('start', function (err, args) {
             if(err){
                 console.log(err);
-                reject(err);
+                reject(err,log);
             }
-            else{
-                resolve({
-                    "target":target,
-                    "summary":summary}
-                );
+            log.startSummary = `Running ${args.cursor.length} request(s) and ${args.cursor.cycles} iteration(s)`;
+
+        })
+        .on('test', function (err, testInstanceResults) {
+            if (err) {
+                reject(err,log);
             }
+            //console.log(util.inspect(testInstanceResults, {depth: 15, colors: true}));
+            log.reportResults = `sending test metrics: ${testInstanceResults.item.name}`;
+            reportResults.tests(conf.metrics_prefix,target,testInstanceResults);
+
+        })
+        .once('done', function (err, summary) {
+            if(err) {
+              reject(err,log);
+            }
+            log.reportResults = `sending total metrics`;
+            reportResults.totals(conf.metrics_prefix,target,summary.run.stats);
+            resolve({
+                "target":target,
+                "jsonReport":jsonReport,
+                "log":log}
+            );
         });
 
 
 
     });
-  
+
 };

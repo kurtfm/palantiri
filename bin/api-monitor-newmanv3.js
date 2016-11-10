@@ -45,11 +45,11 @@ newman.run({
         })
         .once('done', function (err, summary) {
              console.info(`The collection run completed ${err ? 'with' : 'without'} error(s).`);
-     
+
             console.log('---------------------------------------------------');
             console.log(summary.run.stats);
             console.log('---------------------------------------------------');
-           
+
             console.log('debug output');
             console.log('---------------------------------------------------');
 

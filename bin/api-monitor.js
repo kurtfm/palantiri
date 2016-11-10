@@ -3,12 +3,13 @@
 var conf = require('../config/load');
 const _ = require('lodash');
 const app = conf.application_root + conf.api_monitor;
-const runTests = require(app + 'start-run');
-const processResults = require(app + 'handle-results');
+const runTests = require(app + 'run-controller');
+//const processResults = require(app + 'handle-results');
 
 runTests(conf)
         .then((data, err) => {
-            return processResults(data, conf);
+            //(data, conf);
+            console.log(data);
         }
         ).catch((error) => {
     console.log(error.name, ":", error.message);
