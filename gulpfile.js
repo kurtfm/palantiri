@@ -47,7 +47,7 @@ gulp.task('source', ['clean'], function() {
 gulp.task('package', ['source', 'clean'], function() {
 	var pkg = JSON.parse(fs.readFileSync('./package.json'));
 	return gulp.src('dist/**/*')
-		.pipe(tar('monitor-agent-' + pkg.version + '.tar'))
+		.pipe(tar('monitor-' + pkg.version + '.tar'))
 		.pipe(gzip())
 		.pipe(gulp.dest('dist/'));
 });

@@ -4,7 +4,8 @@
  const yaml = require('js-yaml');
 
  module.exports = {
-   tests: (metricsPrefix, name, target, testResults) => {
+   tests: (metricsPrefix, metricsAgentHost, metricsAgentPort, name, target,
+     testResults) => {
      var log = {};
      log.testsMethodInvoked = true;
      return new Promise((resolve, reject) => {
@@ -50,7 +51,8 @@
 
      });
    },
-   totals: (metricsPrefix, name, target, testTotals) => {
+   totals: (metricsPrefix, metricsAgentHost, metricsAgentPort, name, target,
+     testTotals) => {
      var log = {};
      log.totalsInitialized = true;
      return new Promise((resolve, reject) => {

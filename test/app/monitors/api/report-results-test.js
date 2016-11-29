@@ -52,11 +52,13 @@ describe('Report Results Tests', () => {
   var testsData;
   var totalsData;
   before((done) => {
-    reportResults.tests(conf.metrics_prefix, 'foo', conf.target,
+    reportResults.tests(conf.metrics_prefix, conf.metrics_agent_host,
+        conf.metrics_agent_port, 'foo', conf.target,
         testResultsInstanceData)
       .then((results) => {
         testsData = results;
-        reportResults.totals(conf.metrics_prefix, 'foo', conf.target,
+        reportResults.totals(conf.metrics_prefix, conf.metrics_agent_host,
+            conf.metrics_agent_port, 'foo', conf.target,
             totalsResultsData)
           .then((results) => {
             totalsData = results;

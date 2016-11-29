@@ -96,7 +96,8 @@ module.exports = (conf) => {
         //console.log(util.inspect(testInstanceResults, {depth: 15, colors: true}));
         log.reportResults =
           `sending test metrics: ${testInstanceResults.item.name}`;
-        reportResults.tests(conf.metrics_prefix, conf.metrics_default_name,
+        reportResults.tests(conf.metrics_prefix, conf.metrics_agent_host,
+            conf.metrics_agent_port, conf.metrics_default_name,
             target, testInstanceResults)
           .then((data, err) => {
             if (err) {
@@ -111,7 +112,8 @@ module.exports = (conf) => {
           reject(err, log);
         }
         log.reportResults = `sending total metrics`;
-        reportResults.totals(conf.metrics_prefix, conf.metrics_default_name,
+        reportResults.totals(conf.metrics_prefix, conf.metrics_agent_host,
+            conf.metrics_agent_port, conf.metrics_default_name,
             target, summary.run.stats)
           .then((data, err) => {
             if (err) {

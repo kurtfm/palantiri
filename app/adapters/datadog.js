@@ -3,10 +3,10 @@ var StatsD = require('hot-shots');
 const Promise = require('bluebird');
 const assert = require('assert');
 
-module.exports = function(metricsPrefix) {
+module.exports = function(metricsPrefix, metricsAgentHost, metricsAgentPort) {
   var mock = process.env.NODE_ENV === 'test' ? true : false;
-  //var mock = true;
-  var client = new StatsD('localhost', 8125, metricsPrefix, '', false, false,
+  var client = new StatsD(metricsAgentHost, metricsAgentPort, metricsPrefix,
+    '', false, false,
     mock);
 
   client.socket.on('error', function(error) {
