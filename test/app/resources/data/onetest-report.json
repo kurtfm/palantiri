@@ -1,92 +1,553 @@
 {
-    "id": "",
-    "name": "Default",
-    "timestamp": 1469581632663,
-    "collection_id": "2e885deb-a9c7-7758-8685-4bfb6cdc036f",
-    "folder_id": 0,
-    "target_type": "collection",
-    "count": 1,
-    "collection": {
-        "id": "2e885deb-a9c7-7758-8685-4bfb6cdc036f",
-        "name": "monitoring-agent-tests",
-        "description": "Simple test for mocking newman tests in monitoring tool.",
-        "order": [],
-        "folders": [
-            {
-                "id": "c16d054c-43df-2547-812e-200543b03e6f",
-                "name": "One Folder",
-                "description": "One folder",
-                "order": [
-                    "c438beca-6cc7-5bff-5f7f-dbe11af342e8"
-                ],
-                "owner": "197134"
-            }
-        ],
-        "timestamp": 1463694088994,
-        "owner": "197134",
-        "remoteLink": "",
-        "public": false,
-        "requests": [
-            {
-                "id": "c438beca-6cc7-5bff-5f7f-dbe11af342e8",
-                "headers": "",
-                "url": "localhost:33688/one",
-                "preRequestScript": null,
-                "pathVariables": {},
-                "method": "POST",
-                "data": null,
-                "dataMode": "params",
-                "tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                "currentHelper": "normal",
-                "helperAttributes": {},
-                "time": 1463694316434,
-                "name": "one test | c438beca-6cc7-5bff-5f7f-dbe11af342e8",
-                "description": "one test for testing",
-                "collectionId": "2e885deb-a9c7-7758-8685-4bfb6cdc036f",
-                "responses": []
-            }
-        ]
+  "collection": {
+    "info": {
+      "id": "e0476eb2-b70c-26e5-40e6-cdcbfbb17d67",
+      "name": "monitoring-agent-tests",
+      "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
     },
-    "folder": null,
-    "globals": {
-        "values": []
+    "event": [],
+    "variable": [],
+    "item": [{
+      "description": {
+        "content": "one_folder",
+        "type": "text/plain"
+      },
+      "id": "4a9153d1-d5f9-4baf-b8d7-bf6fcc4775b2",
+      "name": "One Folder",
+      "item": [{
+        "id": "5de3cac0-dca9-4dc5-a98e-2806d2ee73dd",
+        "name": "one test",
+        "request": {
+          "url": "localhost:33688/one",
+          "method": "POST",
+          "body": {
+            "mode": "formdata",
+            "formdata": []
+          },
+          "description": {
+            "content": "tags: [one_test,tester]",
+            "type": "text/plain"
+          }
+        },
+        "response": [],
+        "event": [{
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "tests[\"Status code is 200\"] = responseCode.code === 200;"
+            ]
+          }
+        }]
+      }],
+      "event": []
+    }]
+  },
+  "environment": {
+    "id": "7e1ea666-a81e-4615-bb9c-24eb4537d901",
+    "values": []
+  },
+  "globals": {
+    "id": "62437bfb-b789-462a-8b0f-d1128699194f",
+    "values": []
+  },
+  "run": {
+    "stats": {
+      "iterations": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "items": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "scripts": {
+        "total": 1,
+        "pending": 0,
+        "failed": 1
+      },
+      "prerequests": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "requests": {
+        "total": 1,
+        "pending": 0,
+        "failed": 1
+      },
+      "tests": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "assertions": {
+        "total": 0,
+        "pending": 0,
+        "failed": 0
+      },
+      "testScripts": {
+        "total": 1,
+        "pending": 0,
+        "failed": 1
+      },
+      "prerequestScripts": {
+        "total": 0,
+        "pending": 0,
+        "failed": 0
+      }
     },
-    "results": [
-        {
-            "id": "c438beca-6cc7-5bff-5f7f-dbe11af342e8",
-            "name": "one test | c438beca-6cc7-5bff-5f7f-dbe11af342e8",
-            "url": "localhost:33688/one",
-            "totalTime": 137,
-            "responseCode": {
-                "code": 200,
-                "name": "",
-                "detail": ""
-            },
-            "tests": {
-                "Status code is 200": true
-            },
-            "totalPassFailCounts": {
-                "pass": 1,
-                "fail": 0
-            },
-            "testPassFailCounts": {
-                "Status code is 200": {
-                    "pass": 1,
-                    "fail": 0
-                }
-            },
-            "times": [],
-            "allTests": [
-                {
-                    "Status code is 200": true
-                }
-            ],
-            "time": 137,
-            "meanResponseTime": 137
+    "timings": {
+      "responseAverage": 0,
+      "started": 1479252298982,
+      "completed": 1479252299602
+    },
+    "executions": [{
+      "cursor": {
+        "position": 0,
+        "iteration": 0,
+        "length": 1,
+        "cycles": 1,
+        "empty": false,
+        "eof": false,
+        "bof": true,
+        "cr": false,
+        "ref": "32d46e7a-035d-487b-84a9-700b9ec7b0cb"
+      },
+      "item": {
+        "id": "5de3cac0-dca9-4dc5-a98e-2806d2ee73dd",
+        "name": "one test",
+        "request": {
+          "url": "localhost:33688/one",
+          "method": "POST",
+          "body": {
+            "mode": "formdata",
+            "formdata": []
+          },
+          "description": {
+            "content": "tags: [one_test,tester]",
+            "type": "text/plain"
+          }
+        },
+        "response": [],
+        "event": [{
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "tests[\"Status code is 200\"] = responseCode.code === 200;"
+            ]
+          }
+        }]
+      },
+      "request": {
+        "url": "localhost:33688/one",
+        "method": "POST",
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "description": {
+          "content": "tags: [one_test,tester]",
+          "type": "text/plain"
         }
-    ],
-    "environment": {
-        "values": []
+      },
+      "response": {
+        "header": [],
+        "cookie": [],
+        "update": {},
+        "reason": {},
+        "text": {},
+        "json": {},
+        "mime": {},
+        "dataURI": {},
+        "size": {},
+        "describe": {},
+        "toObjectResolved": {},
+        "toJSON": {},
+        "meta": {}
+      },
+      "id": "5de3cac0-dca9-4dc5-a98e-2806d2ee73dd",
+      "requestError": {
+        "code": "ECONNREFUSED",
+        "errno": "ECONNREFUSED",
+        "syscall": "connect",
+        "address": "127.0.0.1",
+        "port": 33688
+      },
+      "testScript": [{
+        "error": {
+          "name": "ReferenceError",
+          "message": "responseCode is not defined",
+          "stack": "ReferenceError: responseCode is not defined\n    at Object.eval (eval at <anonymous> (evalmachine.<anonymous>:284:34), <anonymous>:3:31)\n    at evalmachine.<anonymous>:293:23\n    at evalmachine.<anonymous>:299:2\n    at Object.exports.runInContext (vm.js:44:17)\n    at _.extend._run (/Users/moeller/development/monitoring-prototype/node_modules/postman-runtime/lib/uvm/host.js:156:16)\n    at _.extend.execute (/Users/moeller/development/monitoring-prototype/node_modules/postman-runtime/lib/uvm/host.js:121:14)\n    at PostmanCollectionRun.<anonymous> (/Users/moeller/development/monitoring-prototype/node_modules/postman-runtime/lib/runner/extensions/event.command.js:179:27)\n    at /Users/moeller/development/monitoring-prototype/node_modules/postman-runtime/node_modules/async/dist/async.js:1144:13\n    at replenish (/Users/moeller/development/monitoring-prototype/node_modules/postman-runtime/node_modules/async/dist/async.js:1018:21)\n    at /Users/moeller/development/monitoring-prototype/node_modules/postman-runtime/node_modules/async/dist/async.js:1022:13",
+          "checksum": "c8374b127777dfbdf37eb91047548342",
+          "id": "d2475612-a6fc-40f1-8331-27dc6de10623",
+          "timestamp": 1479252299306,
+          "stacktrace": [{
+            "fileName": "<anonymous>",
+            "lineNumber": 3,
+            "functionName": "Object.eval (eval at <anonymous> (evalmachine.<anonymous>:284:34),",
+            "typeName": "Object",
+            "methodName": "eval (eval at <anonymous> (evalmachine.<anonymous>:284:34),",
+            "columnNumber": 31,
+            "native": false
+          }, {
+            "fileName": "evalmachine.<anonymous>",
+            "lineNumber": 293,
+            "functionName": null,
+            "typeName": null,
+            "methodName": null,
+            "columnNumber": 23,
+            "native": false
+          }, {
+            "fileName": "evalmachine.<anonymous>",
+            "lineNumber": 299,
+            "functionName": null,
+            "typeName": null,
+            "methodName": null,
+            "columnNumber": 2,
+            "native": false
+          }, {
+            "fileName": "vm.js",
+            "lineNumber": 44,
+            "functionName": "Object.exports.runInContext",
+            "typeName": "Object",
+            "methodName": "exports.runInContext",
+            "columnNumber": 17,
+            "native": false
+          }, {
+            "fileName": "/Users/moeller/development/monitoring-prototype/node_modules/postman-runtime/lib/uvm/host.js",
+            "lineNumber": 156,
+            "functionName": "_.extend._run",
+            "typeName": "_",
+            "methodName": "extend._run",
+            "columnNumber": 16,
+            "native": false
+          }, {
+            "fileName": "/Users/moeller/development/monitoring-prototype/node_modules/postman-runtime/lib/uvm/host.js",
+            "lineNumber": 121,
+            "functionName": "_.extend.execute",
+            "typeName": "_",
+            "methodName": "extend.execute",
+            "columnNumber": 14,
+            "native": false
+          }, {
+            "fileName": "/Users/moeller/development/monitoring-prototype/node_modules/postman-runtime/lib/runner/extensions/event.command.js",
+            "lineNumber": 179,
+            "functionName": "",
+            "typeName": "PostmanCollectionRun",
+            "methodName": null,
+            "columnNumber": 27,
+            "native": false
+          }, {
+            "fileName": "/Users/moeller/development/monitoring-prototype/node_modules/postman-runtime/node_modules/async/dist/async.js",
+            "lineNumber": 1144,
+            "functionName": null,
+            "typeName": null,
+            "methodName": null,
+            "columnNumber": 13,
+            "native": false
+          }, {
+            "fileName": "/Users/moeller/development/monitoring-prototype/node_modules/postman-runtime/node_modules/async/dist/async.js",
+            "lineNumber": 1018,
+            "functionName": "replenish",
+            "typeName": "Object",
+            "methodName": null,
+            "columnNumber": 21,
+            "native": false
+          }, {
+            "fileName": "/Users/moeller/development/monitoring-prototype/node_modules/postman-runtime/node_modules/async/dist/async.js",
+            "lineNumber": 1022,
+            "functionName": null,
+            "typeName": null,
+            "methodName": null,
+            "columnNumber": 13,
+            "native": false
+          }]
+        }
+      }]
+    }],
+    "transfers": {
+      "responseTotal": 0
     },
-    "delay": 0
+    "failures": [{
+      "error": {
+        "code": "ECONNREFUSED",
+        "errno": "ECONNREFUSED",
+        "syscall": "connect",
+        "address": "127.0.0.1",
+        "port": 33688,
+        "name": "Error",
+        "message": "connect ECONNREFUSED 127.0.0.1:33688",
+        "stack": "Error: connect ECONNREFUSED 127.0.0.1:33688\n    at Object.exports._errnoException (util.js:856:11)\n    at exports._exceptionWithHostPort (util.js:879:20)\n    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1053:14)",
+        "checksum": "26459d1a8c76ea8f5d4a5651e010f2c1",
+        "id": "d951ef8d-1820-4ed7-8016-8c4ba0d0ff92",
+        "timestamp": 1479252299023,
+        "stacktrace": [{
+          "fileName": "util.js",
+          "lineNumber": 856,
+          "functionName": "Object.exports._errnoException",
+          "typeName": "Object",
+          "methodName": "exports._errnoException",
+          "columnNumber": 11,
+          "native": false
+        }, {
+          "fileName": "util.js",
+          "lineNumber": 879,
+          "functionName": "exports._exceptionWithHostPort",
+          "typeName": "exports",
+          "methodName": "_exceptionWithHostPort",
+          "columnNumber": 20,
+          "native": false
+        }, {
+          "fileName": "net.js",
+          "lineNumber": 1053,
+          "functionName": "TCPConnectWrap.afterConnect [as oncomplete]",
+          "typeName": "TCPConnectWrap",
+          "methodName": "afterConnect [as oncomplete]",
+          "columnNumber": 14,
+          "native": false
+        }]
+      },
+      "at": "request",
+      "source": {
+        "id": "5de3cac0-dca9-4dc5-a98e-2806d2ee73dd",
+        "name": "one test",
+        "request": {
+          "url": "localhost:33688/one",
+          "method": "POST",
+          "body": {
+            "mode": "formdata",
+            "formdata": []
+          },
+          "description": {
+            "content": "tags: [one_test,tester]",
+            "type": "text/plain"
+          }
+        },
+        "response": [],
+        "event": [{
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "tests[\"Status code is 200\"] = responseCode.code === 200;"
+            ]
+          }
+        }]
+      },
+      "parent": {
+        "description": {
+          "content": "one_folder",
+          "type": "text/plain"
+        },
+        "id": "4a9153d1-d5f9-4baf-b8d7-bf6fcc4775b2",
+        "name": "One Folder",
+        "item": [{
+          "id": "5de3cac0-dca9-4dc5-a98e-2806d2ee73dd",
+          "name": "one test",
+          "request": {
+            "url": "localhost:33688/one",
+            "method": "POST",
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "description": {
+              "content": "tags: [one_test,tester]",
+              "type": "text/plain"
+            }
+          },
+          "response": [],
+          "event": [{
+            "listen": "test",
+            "script": {
+              "type": "text/javascript",
+              "exec": [
+                "tests[\"Status code is 200\"] = responseCode.code === 200;"
+              ]
+            }
+          }]
+        }],
+        "event": []
+      },
+      "cursor": {
+        "position": 0,
+        "iteration": 0,
+        "length": 1,
+        "cycles": 1,
+        "empty": false,
+        "eof": false,
+        "bof": true,
+        "cr": false,
+        "ref": "32d46e7a-035d-487b-84a9-700b9ec7b0cb"
+      }
+    }, {
+      "error": {
+        "name": "ReferenceError",
+        "message": "responseCode is not defined",
+        "stack": "ReferenceError: responseCode is not defined\n    at Object.eval (eval at <anonymous> (evalmachine.<anonymous>:284:34), <anonymous>:3:31)\n    at evalmachine.<anonymous>:293:23\n    at evalmachine.<anonymous>:299:2\n    at Object.exports.runInContext (vm.js:44:17)\n    at _.extend._run (/Users/moeller/development/monitoring-prototype/node_modules/postman-runtime/lib/uvm/host.js:156:16)\n    at _.extend.execute (/Users/moeller/development/monitoring-prototype/node_modules/postman-runtime/lib/uvm/host.js:121:14)\n    at PostmanCollectionRun.<anonymous> (/Users/moeller/development/monitoring-prototype/node_modules/postman-runtime/lib/runner/extensions/event.command.js:179:27)\n    at /Users/moeller/development/monitoring-prototype/node_modules/postman-runtime/node_modules/async/dist/async.js:1144:13\n    at replenish (/Users/moeller/development/monitoring-prototype/node_modules/postman-runtime/node_modules/async/dist/async.js:1018:21)\n    at /Users/moeller/development/monitoring-prototype/node_modules/postman-runtime/node_modules/async/dist/async.js:1022:13",
+        "checksum": "c8374b127777dfbdf37eb91047548342",
+        "id": "d2475612-a6fc-40f1-8331-27dc6de10623",
+        "timestamp": 1479252299306,
+        "stacktrace": [{
+          "fileName": "<anonymous>",
+          "lineNumber": 3,
+          "functionName": "Object.eval (eval at <anonymous> (evalmachine.<anonymous>:284:34),",
+          "typeName": "Object",
+          "methodName": "eval (eval at <anonymous> (evalmachine.<anonymous>:284:34),",
+          "columnNumber": 31,
+          "native": false
+        }, {
+          "fileName": "evalmachine.<anonymous>",
+          "lineNumber": 293,
+          "functionName": null,
+          "typeName": null,
+          "methodName": null,
+          "columnNumber": 23,
+          "native": false
+        }, {
+          "fileName": "evalmachine.<anonymous>",
+          "lineNumber": 299,
+          "functionName": null,
+          "typeName": null,
+          "methodName": null,
+          "columnNumber": 2,
+          "native": false
+        }, {
+          "fileName": "vm.js",
+          "lineNumber": 44,
+          "functionName": "Object.exports.runInContext",
+          "typeName": "Object",
+          "methodName": "exports.runInContext",
+          "columnNumber": 17,
+          "native": false
+        }, {
+          "fileName": "/Users/moeller/development/monitoring-prototype/node_modules/postman-runtime/lib/uvm/host.js",
+          "lineNumber": 156,
+          "functionName": "_.extend._run",
+          "typeName": "_",
+          "methodName": "extend._run",
+          "columnNumber": 16,
+          "native": false
+        }, {
+          "fileName": "/Users/moeller/development/monitoring-prototype/node_modules/postman-runtime/lib/uvm/host.js",
+          "lineNumber": 121,
+          "functionName": "_.extend.execute",
+          "typeName": "_",
+          "methodName": "extend.execute",
+          "columnNumber": 14,
+          "native": false
+        }, {
+          "fileName": "/Users/moeller/development/monitoring-prototype/node_modules/postman-runtime/lib/runner/extensions/event.command.js",
+          "lineNumber": 179,
+          "functionName": "",
+          "typeName": "PostmanCollectionRun",
+          "methodName": null,
+          "columnNumber": 27,
+          "native": false
+        }, {
+          "fileName": "/Users/moeller/development/monitoring-prototype/node_modules/postman-runtime/node_modules/async/dist/async.js",
+          "lineNumber": 1144,
+          "functionName": null,
+          "typeName": null,
+          "methodName": null,
+          "columnNumber": 13,
+          "native": false
+        }, {
+          "fileName": "/Users/moeller/development/monitoring-prototype/node_modules/postman-runtime/node_modules/async/dist/async.js",
+          "lineNumber": 1018,
+          "functionName": "replenish",
+          "typeName": "Object",
+          "methodName": null,
+          "columnNumber": 21,
+          "native": false
+        }, {
+          "fileName": "/Users/moeller/development/monitoring-prototype/node_modules/postman-runtime/node_modules/async/dist/async.js",
+          "lineNumber": 1022,
+          "functionName": null,
+          "typeName": null,
+          "methodName": null,
+          "columnNumber": 13,
+          "native": false
+        }]
+      },
+      "at": "test-script:1:31",
+      "source": {
+        "id": "5de3cac0-dca9-4dc5-a98e-2806d2ee73dd",
+        "name": "one test",
+        "request": {
+          "url": "localhost:33688/one",
+          "method": "POST",
+          "body": {
+            "mode": "formdata",
+            "formdata": []
+          },
+          "description": {
+            "content": "tags: [one_test,tester]",
+            "type": "text/plain"
+          }
+        },
+        "response": [],
+        "event": [{
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "tests[\"Status code is 200\"] = responseCode.code === 200;"
+            ]
+          }
+        }]
+      },
+      "parent": {
+        "description": {
+          "content": "one_folder",
+          "type": "text/plain"
+        },
+        "id": "4a9153d1-d5f9-4baf-b8d7-bf6fcc4775b2",
+        "name": "One Folder",
+        "item": [{
+          "id": "5de3cac0-dca9-4dc5-a98e-2806d2ee73dd",
+          "name": "one test",
+          "request": {
+            "url": "localhost:33688/one",
+            "method": "POST",
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "description": {
+              "content": "tags: [one_test,tester]",
+              "type": "text/plain"
+            }
+          },
+          "response": [],
+          "event": [{
+            "listen": "test",
+            "script": {
+              "type": "text/javascript",
+              "exec": [
+                "tests[\"Status code is 200\"] = responseCode.code === 200;"
+              ]
+            }
+          }]
+        }],
+        "event": []
+      },
+      "cursor": {
+        "position": 0,
+        "iteration": 0,
+        "length": 1,
+        "cycles": 1,
+        "empty": false,
+        "eof": false,
+        "bof": true,
+        "cr": false,
+        "ref": "32d46e7a-035d-487b-84a9-700b9ec7b0cb"
+      }
+    }],
+    "error": null
+  }
 }

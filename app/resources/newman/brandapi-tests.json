@@ -1,14 +1,14 @@
 {
 	"variables": [],
 	"info": {
-		"name": "Brand APIs: User Flows",
-		"_postman_id": "6673b7fe-2a80-b190-481f-454447d95573",
+		"name": "Brand APIs",
+		"_postman_id": "20bf6317-d506-5130-acb6-80ab71b2dbcb",
 		"description": "user_flows|monitor.brandapi",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "0. Application Access",
+			"name": "A0. Application Access",
 			"description": " application_access",
 			"item": [
 				{
@@ -62,14 +62,14 @@
 								}
 							]
 						},
-						"description": "oauth2,service_access_token"
+						"description": "tags: [oauth2,service_access_token,user_flows]"
 					},
 					"response": []
 				}
 			]
 		},
 		{
-			"name": "1. Register user with password",
+			"name": "A1. Register user with password",
 			"description": "register_users_flow",
 			"item": [
 				{
@@ -100,11 +100,6 @@
 								"description": ""
 							},
 							{
-								"key": "X-AOL-API-CTX",
-								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
-								"description": ""
-							},
-							{
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
@@ -114,7 +109,7 @@
 							"mode": "raw",
 							"raw": "{\"namespace\":\"{{namespace}}\",\"email\":\"{{create_user_email}}\"}"
 						},
-						"description": "does_user_exist"
+						"description": "tags: [does_user_exist,user_flows]"
 					},
 					"response": []
 				},
@@ -139,11 +134,6 @@
 								"description": ""
 							},
 							{
-								"key": "X-AOL-API-CTX",
-								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
-								"description": ""
-							},
-							{
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
@@ -153,7 +143,7 @@
 							"mode": "raw",
 							"raw": "{\"namespace\":\"{{namespace}}\",\"email\":\"{{create_user_email}}\"}"
 						},
-						"description": "validate_email"
+						"description": "tags: [validate_email,user_flows]"
 					},
 					"response": []
 				},
@@ -185,11 +175,6 @@
 								"description": ""
 							},
 							{
-								"key": "X-AOL-API-CTX",
-								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
-								"description": ""
-							},
-							{
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
@@ -199,7 +184,7 @@
 							"mode": "raw",
 							"raw": "{\"namespace\":\"{{namespace}}\",\"displayName\":\"{{create_user_displayname}}\"}"
 						},
-						"description": "validate_display_name"
+						"description": "tags: [validate_display_name,user_flows]"
 					},
 					"response": []
 				},
@@ -231,11 +216,6 @@
 								"description": ""
 							},
 							{
-								"key": "X-AOL-API-CTX",
-								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
-								"description": ""
-							},
-							{
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
@@ -245,7 +225,7 @@
 							"mode": "raw",
 							"raw": "{\"namespace\":\"{{namespace}}\",\"username\":\"{{create_user_email}}\",\"password\":\"{{create_user_password}}\"}"
 						},
-						"description": "validate_password"
+						"description": "tags: [validate_password,user_flows]"
 					},
 					"response": []
 				},
@@ -270,11 +250,6 @@
 								"description": ""
 							},
 							{
-								"key": "X-AOL-API-CTX",
-								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
-								"description": ""
-							},
-							{
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
@@ -284,7 +259,7 @@
 							"mode": "raw",
 							"raw": "{\"namespace\":\"{{namespace}}\",\"email\":\"{{create_user_email}}\",\"password\":\"{{create_user_password}}\",\"displayName\":\"{{create_user_displayname}}\",\"displayNameReservationId\":\"{{create_user_reservationid}}\"}"
 						},
-						"description": "create_user,user_with_password"
+						"description": "tags: [create_user,user_with_password,user_flows]"
 					},
 					"response": []
 				},
@@ -309,11 +284,6 @@
 								"description": ""
 							},
 							{
-								"key": "X-AOL-API-CTX",
-								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
-								"description": ""
-							},
-							{
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
@@ -323,7 +293,7 @@
 							"mode": "raw",
 							"raw": "{\"namespace\":\"{{namespace}}\",\n  \"transactionId\": \"{{txnid}}\"\n}"
 						},
-						"description": "get_token_by_txn_id"
+						"description": "tags: [get_token_by_txn_id,user_flows]"
 					},
 					"response": []
 				},
@@ -348,11 +318,6 @@
 								"description": ""
 							},
 							{
-								"key": "X-AOL-API-CTX",
-								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
-								"description": ""
-							},
-							{
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
@@ -362,14 +327,14 @@
 							"mode": "raw",
 							"raw": "{\"namespace\":\"{{namespace}}\",\n  \"token\": \"{{register_email_token}}\",\n  \"username\":\"{{create_user_email}}\"\n}"
 						},
-						"description": "confirm_email"
+						"description": "tags: [confirm_email,user_flows]"
 					},
 					"response": []
 				}
 			]
 		},
 		{
-			"name": "2. Register social user",
+			"name": "A2. Register social user",
 			"description": "register_social_flow",
 			"item": [
 				{
@@ -400,11 +365,6 @@
 								"description": ""
 							},
 							{
-								"key": "X-AOL-API-CTX",
-								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
-								"description": ""
-							},
-							{
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
@@ -414,14 +374,14 @@
 							"mode": "raw",
 							"raw": "{\"namespace\":\"{{namespace}}\",\"email\":\"{{create_social_email}}\",\"socialUser\":\"{{create_social_user}}\",\"socialPid\":\"{{social_user_provider}}\",\"confirmedEmail\":\"T\" }"
 						},
-						"description": "create_user,social_user"
+						"description": "tags: [create_user,social_user,user_flows]"
 					},
 					"response": []
 				}
 			]
 		},
 		{
-			"name": "3. OAuth2 user authentication",
+			"name": "A3. OAuth2 user authentication",
 			"description": "authentication_flow",
 			"item": [
 				{
@@ -442,11 +402,6 @@
 							{
 								"key": "Authorization",
 								"value": "Bearer {{service_access_token}}",
-								"description": ""
-							},
-							{
-								"key": "X-AOL-API-CTX",
-								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
 								"description": ""
 							}
 						],
@@ -479,7 +434,7 @@
 								}
 							]
 						},
-						"description": "oauth2,user_with_password"
+						"description": "tags: [oauth2,user_with_password,user_flows]"
 					},
 					"response": []
 				},
@@ -504,11 +459,6 @@
 								"description": ""
 							},
 							{
-								"key": "X-AOL-API-CTX",
-								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
-								"description": ""
-							},
-							{
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
@@ -518,7 +468,7 @@
 							"mode": "raw",
 							"raw": "{\"namespace\":\"{{namespace}}\"}"
 						},
-						"description": "get_user"
+						"description": "tags: [get_user,user_flows]"
 					},
 					"response": []
 				},
@@ -540,11 +490,6 @@
 							{
 								"key": "Authorization",
 								"value": "Bearer {{service_access_token}}",
-								"description": ""
-							},
-							{
-								"key": "X-AOL-API-CTX",
-								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
 								"description": ""
 							}
 						],
@@ -571,7 +516,7 @@
 								}
 							]
 						},
-						"description": "oauth2,refresh_token"
+						"description": "tags: [oauth2,refresh_token,user_flows]"
 					},
 					"response": []
 				},
@@ -593,11 +538,6 @@
 							{
 								"key": "Authorization",
 								"value": "Bearer {{service_access_token}}",
-								"description": ""
-							},
-							{
-								"key": "X-AOL-API-CTX",
-								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
 								"description": ""
 							}
 						],
@@ -630,7 +570,7 @@
 								}
 							]
 						},
-						"description": "oauth2,social_user"
+						"description": "tags: [oauth2,social_user,user_flows]"
 					},
 					"response": []
 				},
@@ -652,11 +592,6 @@
 							{
 								"key": "Authorization",
 								"value": "Bearer {{service_access_token}}",
-								"description": ""
-							},
-							{
-								"key": "X-AOL-API-CTX",
-								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
 								"description": ""
 							}
 						],
@@ -683,7 +618,7 @@
 								}
 							]
 						},
-						"description": "oauth2,social_user,refresh_token"
+						"description": "tags: [oauth2,social_user,refresh_token,user_flows]"
 					},
 					"response": []
 				},
@@ -708,11 +643,6 @@
 								"description": ""
 							},
 							{
-								"key": "X-AOL-API-CTX",
-								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
-								"description": ""
-							},
-							{
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
@@ -722,14 +652,14 @@
 							"mode": "raw",
 							"raw": "{\"namespace\":\"{{namespace}}\"}"
 						},
-						"description": "get_user"
+						"description": "tags: [get_user,user_flows]"
 					},
 					"response": []
 				}
 			]
 		},
 		{
-			"name": "4. Update user data",
+			"name": "A4. Update user data",
 			"description": "update_user_flow",
 			"item": [
 				{
@@ -753,11 +683,6 @@
 								"description": ""
 							},
 							{
-								"key": "X-AOL-API-CTX",
-								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
-								"description": ""
-							},
-							{
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
@@ -767,7 +692,7 @@
 							"mode": "raw",
 							"raw": "{\"namespace\":\"{{namespace}}\"}"
 						},
-						"description": "get_user"
+						"description": "tags: [get_user,user_flows]"
 					},
 					"response": []
 				},
@@ -799,11 +724,6 @@
 								"description": ""
 							},
 							{
-								"key": "X-AOL-API-CTX",
-								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
-								"description": ""
-							},
-							{
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
@@ -813,7 +733,7 @@
 							"mode": "raw",
 							"raw": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{new_user_id}}\",\"postCode\":\"{{user_update_postal}}\"}"
 						},
-						"description": "update_user"
+						"description": "tags: [update_user,user_flows]"
 					},
 					"response": []
 				},
@@ -838,11 +758,6 @@
 								"description": ""
 							},
 							{
-								"key": "X-AOL-API-CTX",
-								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
-								"description": ""
-							},
-							{
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
@@ -852,7 +767,7 @@
 							"mode": "raw",
 							"raw": "{\"namespace\":\"{{namespace}}\"}"
 						},
-						"description": "get_user"
+						"description": "tags: [get_user,user_flows]"
 					},
 					"response": []
 				},
@@ -877,11 +792,6 @@
 								"description": ""
 							},
 							{
-								"key": "X-AOL-API-CTX",
-								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
-								"description": ""
-							},
-							{
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
@@ -891,14 +801,14 @@
 							"mode": "raw",
 							"raw": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{new_user_id}}\",\"postCode\":\"\"}"
 						},
-						"description": "update_user"
+						"description": "tags: [update_user,user_flows]"
 					},
 					"response": []
 				}
 			]
 		},
 		{
-			"name": "5. Link Social User",
+			"name": "A5. Link Social User",
 			"description": "link_social_flow",
 			"item": [
 				{
@@ -929,11 +839,6 @@
 								"description": ""
 							},
 							{
-								"key": "X-AOL-API-CTX",
-								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
-								"description": ""
-							},
-							{
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
@@ -943,7 +848,7 @@
 							"mode": "raw",
 							"raw": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{new_user_id}}\",\"socialPid\":\"{{social_user_provider}}\",\"socialUsername\":\"{{link_social_user}}\"}"
 						},
-						"description": "link_social_user"
+						"description": "tags: [link_social_user,user_flows]"
 					},
 					"response": []
 				},
@@ -968,11 +873,6 @@
 								"description": ""
 							},
 							{
-								"key": "X-AOL-API-CTX",
-								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
-								"description": ""
-							},
-							{
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
@@ -982,7 +882,7 @@
 							"mode": "raw",
 							"raw": "{\"namespace\":\"{{namespace}}\"}"
 						},
-						"description": "get_user"
+						"description": "tags: [get_user,user_flows]"
 					},
 					"response": []
 				},
@@ -1007,11 +907,6 @@
 								"description": ""
 							},
 							{
-								"key": "X-AOL-API-CTX",
-								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
-								"description": ""
-							},
-							{
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
@@ -1021,7 +916,7 @@
 							"mode": "raw",
 							"raw": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{new_user_id}}\",\"socialPid\":\"{{social_user_provider}}\",\"socialUsername\":\"{{link_social_user}}\"}"
 						},
-						"description": "unlink_social_user"
+						"description": "tags: [unlink_social_user,user_flows]"
 					},
 					"response": []
 				},
@@ -1046,11 +941,6 @@
 								"description": ""
 							},
 							{
-								"key": "X-AOL-API-CTX",
-								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
-								"description": ""
-							},
-							{
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
@@ -1060,14 +950,14 @@
 							"mode": "raw",
 							"raw": "{\"namespace\":\"{{namespace}}\"}"
 						},
-						"description": "get_user"
+						"description": "tags: [get_user,user_flows]"
 					},
 					"response": []
 				}
 			]
 		},
 		{
-			"name": "7. passwordReset",
+			"name": "A7. passwordReset",
 			"description": "password_reset_flow",
 			"item": [
 				{
@@ -1091,11 +981,6 @@
 								"description": ""
 							},
 							{
-								"key": "X-AOL-API-CTX",
-								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
-								"description": ""
-							},
-							{
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
@@ -1105,7 +990,7 @@
 							"mode": "raw",
 							"raw": "{\"namespace\":\"{{namespace}}\",\"username\":\"{{create_user_email}}\"}"
 						},
-						"description": "send_password_reset"
+						"description": "tags: [send_password_reset,user_flows]"
 					},
 					"response": []
 				},
@@ -1130,11 +1015,6 @@
 								"description": ""
 							},
 							{
-								"key": "X-AOL-API-CTX",
-								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
-								"description": ""
-							},
-							{
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
@@ -1144,7 +1024,7 @@
 							"mode": "raw",
 							"raw": "{\"namespace\":\"{{namespace}}\",\n  \"transactionId\": \"{{pwd_txnid}}\"\n}"
 						},
-						"description": "get_token_by_txn_id"
+						"description": "tags: [get_token_by_txn_id,user_flows]"
 					},
 					"response": []
 				},
@@ -1176,11 +1056,6 @@
 								"description": ""
 							},
 							{
-								"key": "X-AOL-API-CTX",
-								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
-								"description": ""
-							},
-							{
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
@@ -1190,7 +1065,7 @@
 							"mode": "raw",
 							"raw": "{\"namespace\":\"{{namespace}}\",\n  \"token\": \"{{password_reset_token}}\",\n  \"username\":\"{{create_user_email}}\",\n  \"password\":\"{{reset_user_password}}\"\n}"
 						},
-						"description": "confirm_password_reset"
+						"description": "tags: [confirm_password_reset,user_flows]"
 					},
 					"response": []
 				},
@@ -1212,11 +1087,6 @@
 							{
 								"key": "Authorization",
 								"value": "Bearer {{service_access_token}}",
-								"description": ""
-							},
-							{
-								"key": "X-AOL-API-CTX",
-								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
 								"description": ""
 							}
 						],
@@ -1249,14 +1119,14 @@
 								}
 							]
 						},
-						"description": "oauth2,access_token"
+						"description": "tags: [oauth2,access_token,user_flows]"
 					},
 					"response": []
 				}
 			]
 		},
 		{
-			"name": "8. Confirm Email",
+			"name": "A8. Confirm Email",
 			"description": "confirm_email_flow",
 			"item": [
 				{
@@ -1280,11 +1150,6 @@
 								"description": ""
 							},
 							{
-								"key": "X-AOL-API-CTX",
-								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
-								"description": ""
-							},
-							{
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
@@ -1294,7 +1159,7 @@
 							"mode": "raw",
 							"raw": "{\"namespace\":\"{{namespace}}\",\"username\":\"{{create_user_email}}\"}"
 						},
-						"description": "send_confirm_email"
+						"description": "tags: [send_confirm_email,user_flows]"
 					},
 					"response": []
 				},
@@ -1319,11 +1184,6 @@
 								"description": ""
 							},
 							{
-								"key": "X-AOL-API-CTX",
-								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
-								"description": ""
-							},
-							{
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
@@ -1333,7 +1193,7 @@
 							"mode": "raw",
 							"raw": "{\"namespace\":\"{{namespace}}\",\n  \"transactionId\": \"{{email_txnid}}\"\n}"
 						},
-						"description": "get_token_by_txn_id"
+						"description": "tags: [get_token_by_txn_id,user_flows]"
 					},
 					"response": []
 				},
@@ -1358,11 +1218,6 @@
 								"description": ""
 							},
 							{
-								"key": "X-AOL-API-CTX",
-								"value": "eyJwZWVyX2lwIjoiMC4wLjAuMCIsImNoYWQiOiJhc2Zhc2RmIiwicmVmZXJyZXIiOiJodHRwOi8vd3d3LmVuZ2FkZ2V0LmNvbSIsInVhdXRoaWQiOiIzNDV3dzQ1MzQiLCJncmF2aXR5IjoieHh4eCJ9",
-								"description": ""
-							},
-							{
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
@@ -1372,14 +1227,14 @@
 							"mode": "raw",
 							"raw": "{\"namespace\":\"{{namespace}}\",\n  \"token\": \"{{email_confirm_token}}\",\n  \"username\":\"{{create_user_email}}\"\n}"
 						},
-						"description": "confirmEmail"
+						"description": "tags: [confirm_email,user_flows]"
 					},
 					"response": []
 				}
 			]
 		},
 		{
-			"name": "9. Delete Accounts",
+			"name": "A9. Delete Accounts",
 			"description": "delete_user_flow",
 			"item": [
 				{
@@ -1412,7 +1267,7 @@
 							"mode": "raw",
 							"raw": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{new_user_id}}\"\n}"
 						},
-						"description": "delete_user"
+						"description": "tags: [delete_user,user_flows]"
 					},
 					"response": []
 				},
@@ -1446,7 +1301,832 @@
 							"mode": "raw",
 							"raw": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{social_user_id}}\"\n}"
 						},
-						"description": "delete_user,social_user"
+						"description": "tags: [delete_user,social_user,user_flows]"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "B0. Application Access",
+			"description": "tags: [application_access]",
+			"item": [
+				{
+					"name": "authorize service",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar serviceAccessToken = typeof response.access_token !== 'undefined' ? response.access_token : 0;\npostman.setEnvironmentVariable(\"service_access_token\", serviceAccessToken);\n\n\n//tests\ntests[\"Success Response\"] = responseCode.code === 200;\ntests[\"Got Service access_token\"] = serviceAccessToken ? 1:0;"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "function base64url(source) {\n  encodedSource = CryptoJS.enc.Base64.stringify(source);\n  encodedSource = encodedSource.replace(/=+$/, '');\n  encodedSource = encodedSource.replace(/\\+/g, '-');\n  encodedSource = encodedSource.replace(/\\//g, '_');\n  \n  return encodedSource;\n}\nvar header = {\n  \"alg\": \"HS256\",\n  \"typ\": \"JWT\"\n};\nvar stringifiedHeader = CryptoJS.enc.Utf8.parse(JSON.stringify(header));\nvar encodedHeader = base64url(stringifiedHeader);\nvar now = new Date() / 1000;\n//var jwsLife = ( 24 * 60 * 60 );\nvar jwsLife = 10;\nvar body = {\n    \"iss\": postman.getEnvironmentVariable(\"client_id\"),\n    \"sub\": postman.getEnvironmentVariable(\"client_id\"),\n    \"aud\": postman.getEnvironmentVariable(\"oauth_server\"),\n    \"iat\": now,\n    \"exp\": now + jwsLife,\n};\n\nvar stringifiedBody = CryptoJS.enc.Utf8.parse(JSON.stringify(body));\nvar encodedBody = base64url(stringifiedBody);\nvar token = encodedHeader + \".\" + encodedBody;\nvar signature = CryptoJS.HmacSHA256(token, postman.getEnvironmentVariable(\"client_secret\"));\nsignature = base64url(signature);\nvar signedToken = token + \".\" + signature;\npostman.setEnvironmentVariable(\"jws\", signedToken);"
+							}
+						}
+					],
+					"request": {
+						"url": "{{oauth_server}}",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "client_assertion_type",
+									"value": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "scope",
+									"value": "brand_api ropc brand_api_customer_support brand_api_migration",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "client_assertion",
+									"value": "{{jws}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": "tags: [oauth2,service_access_token,migration_flow]"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "B1. Account Setup",
+			"description": "tags: [account_setup]",
+			"item": [
+				{
+					"name": "createUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\n\npostman.setEnvironmentVariable('new_user_id', userId);\n\npostman.setEnvironmentVariable('publicId', response.data.pubId);\n\npostman.setEnvironmentVariable(\"txnid\", postman.getResponseHeader(\"X-AOL-IDENTITY-TX-ID\"));\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\n\n//recovery\nvar count = typeof postman.getEnvironmentVariable('createUserTries') !== 'undefined' ? postman.getEnvironmentVariable('createUserTries') : 1;\n\nif(response.status !== 'success' && count < 3){\n    postman.setEnvironmentVariable('createUserTries', count++);\n    \n   postman.setEnvironmentVariable(\"create_user_email\", postman.getEnvironmentVariable(\"gmail_user\") \n    + \"+\" + postman.getEnvironmentVariable(\"namespace\") \n    + \".\" + Math.random().toString(36).substring(2) + _.random(20000, 100) + '@gmail.com');\n    \n    postman.setEnvironmentVariable(\"create_user_displayname\",Math.random().toString(36).substring(2)\n+ '-' +  (Math.floor(Math.random()* (_.random(20000,4000) - _.random(200,400)+ 1) + _.random(5,1000))) );\n\n    postman.setEnvironmentVariable(\"create_user_password\",\"nm###\" + _.random(100,900) );\n    \n    postman.setNextRequest('create_user');\n}"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"create_user_displayname\",Math.random().toString(36).substring(2)\n+ '-' +  (Math.floor(Math.random()* (_.random(20000,4000) - _.random(200,400)+ 1) + _.random(5,1000))) );\n\npostman.setEnvironmentVariable(\"create_user_password\",\"nm###123\");\n\npostman.setEnvironmentVariable(\"create_user_email\", postman.getEnvironmentVariable(\"gmail_user\") \n    + \"+\" + postman.getEnvironmentVariable(\"namespace\") \n    + \".\" + Math.random().toString(36).substring(2) + _.random(20000, 100) + '@gmail.com');"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}createUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"email\":\"{{create_user_email}}\",\"password\":\"{{create_user_password}}\",\"displayName\":\"{{create_user_displayname}}\"}"
+						},
+						"description": "tags: [create_user,migration_flow]"
+					},
+					"response": []
+				},
+				{
+					"name": "getTokenByTxnId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar token = typeof response.data !== 'undefined' ? response.data : 0;\n\npostman.setEnvironmentVariable('register_email_token', token);\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests['got confirmation token'] = token ? 1 : 0;\n\n//recovery\nvar count = typeof postman.getEnvironmentVariable('regGetTokenByTxnIdTries') !== 'undefined' ? postman.getEnvironmentVariable('regGetTokenByTxnIdTries') : 1;\n\nif(response.status !== 'success' && count < 3){\n    postman.setNextRequest('get_token_by_txn_id_reg_flow');\n    \n}"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}getTokenByTxnId",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\n  \"transactionId\": \"{{txnid}}\"\n}"
+						},
+						"description": "tags: [get_token_by_txn_id,migration_flow]"
+					},
+					"response": []
+				},
+				{
+					"name": "confirmEmail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\n"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}confirmEmail",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\n  \"token\": \"{{register_email_token}}\",\n  \"username\":\"{{create_user_email}}\"\n}"
+						},
+						"description": "tags: [confirm_email,migration_flow]"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "B2. Migrate User",
+			"description": "tags: [migration_flow]",
+			"item": [
+				{
+					"name": "migrationPasswordUpdate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"response code\"] = responseCode.code === 200;"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"migration_user_password\",eval(postman.getEnvironmentVariable(\"generate_password\")));"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}migrationPasswordUpdate",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"username\":\"{{create_user_email}}\",\"newPassword\":\"{{migration_user_password}}\"}"
+						},
+						"description": "tags: [migration_password_update,migration_flow]"
+					},
+					"response": []
+				},
+				{
+					"name": "authenticate migrated user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userAccessToken = typeof response.access_token !== 'undefined' ? response.access_token : 0;\nvar userRefreshToken = typeof response.refresh_token !== 'undefined' ? response.refresh_token : 0;\npostman.setEnvironmentVariable(\"user_access_token\", userAccessToken);\npostman.setEnvironmentVariable(\"user_refresh_token\", userRefreshToken);\n\n//tests\ntests[\"Success Response\"] = responseCode.code === 200;\ntests[\"Got user access_token\"] = userAccessToken ? 1 : 0;\ntests[\"Got user refresh_token\"] = userRefreshToken ? 1 : 0;\n"
+							}
+						}
+					],
+					"request": {
+						"url": "{{oauth_server}}",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "{{create_user_email}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "scope",
+									"value": "brand_api",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "password",
+									"value": "{{migration_user_password}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": "tags: [oauth2,access_token,migration_flow]"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "C0. Application Access",
+			"description": "application_access",
+			"item": [
+				{
+					"name": "authorize service",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar serviceAccessToken = typeof response.access_token !== 'undefined' ? response.access_token : 0;\npostman.setEnvironmentVariable(\"service_access_token\", serviceAccessToken);\n\n\n//tests\ntests[\"Success Response\"] = responseCode.code === 200;"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "function base64url(source) {\n  encodedSource = CryptoJS.enc.Base64.stringify(source);\n  encodedSource = encodedSource.replace(/=+$/, '');\n  encodedSource = encodedSource.replace(/\\+/g, '-');\n  encodedSource = encodedSource.replace(/\\//g, '_');\n  \n  return encodedSource;\n}\nvar header = {\n  \"alg\": \"HS256\",\n  \"typ\": \"JWT\"\n};\nvar stringifiedHeader = CryptoJS.enc.Utf8.parse(JSON.stringify(header));\nvar encodedHeader = base64url(stringifiedHeader);\nvar now = new Date() / 1000;\n//var jwsLife = ( 24 * 60 * 60 );\nvar jwsLife = 10;\nvar body = {\n    \"iss\": postman.getEnvironmentVariable(\"client_id\"),\n    \"sub\": postman.getEnvironmentVariable(\"client_id\"),\n    \"aud\": postman.getEnvironmentVariable(\"oauth_server\"),\n    \"iat\": now,\n    \"exp\": now + jwsLife,\n};\n\nvar stringifiedBody = CryptoJS.enc.Utf8.parse(JSON.stringify(body));\nvar encodedBody = base64url(stringifiedBody);\nvar token = encodedHeader + \".\" + encodedBody;\nvar signature = CryptoJS.HmacSHA256(token, postman.getEnvironmentVariable(\"client_secret\"));\nsignature = base64url(signature);\nvar signedToken = token + \".\" + signature;\npostman.setEnvironmentVariable(\"jws\", signedToken);"
+							}
+						}
+					],
+					"request": {
+						"url": "{{oauth_server}}",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "client_assertion_type",
+									"value": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "scope",
+									"value": "brand_api ropc brand_api_customer_support brand_api_migration",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "client_assertion",
+									"value": "{{jws}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": "tags: [oauth2,service_access_token,support_apis]"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "C1 Setup Accounts",
+			"description": "setup_accounts",
+			"item": [
+				{
+					"name": "createUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\n\npostman.setEnvironmentVariable('new_user_id', userId);\n\npostman.setEnvironmentVariable('publicId', response.data.pubId);\n\npostman.setEnvironmentVariable(\"txnid\", postman.getResponseHeader(\"X-AOL-IDENTITY-TX-ID\"));\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\n"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"create_user_displayname\",Math.random().toString(36).substring(2)\n+ '-' +  (Math.floor(Math.random()* (_.random(20000,4000) - _.random(200,400)+ 1) + _.random(5,1000))) );\n\npostman.setEnvironmentVariable(\"create_user_password\",\"nm###123\");\n\npostman.setEnvironmentVariable(\"create_user_email\", postman.getEnvironmentVariable('gmail_user') \n    + \"+\" + postman.getEnvironmentVariable(\"namespace\") \n    + \".\" + Math.random().toString(36).substring(2) + _.random(20000, 100) + '@gmail.com');"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}createUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"email\":\"{{create_user_email}}\",\"password\":\"{{create_user_password}}\",\"displayName\":\"{{create_user_displayname}}\"}"
+						},
+						"description": "tags: [create_user,support_apis]"
+					},
+					"response": []
+				},
+				{
+					"name": "getTokenByTxnId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar token = typeof response.data !== 'undefined' ? response.data : 0;\n\npostman.setEnvironmentVariable('register_email_token', token);\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests['got confirmation token'] = token ? 1 : 0;\n"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}getTokenByTxnId",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\n  \"transactionId\": \"{{txnid}}\"\n}"
+						},
+						"description": "tags: [get_token_by_txn_id,support_apis]"
+					},
+					"response": []
+				},
+				{
+					"name": "confirmEmail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\n"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}confirmEmail",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\n  \"token\": \"{{register_email_token}}\",\n  \"username\":\"{{create_user_email}}\"\n}"
+						},
+						"description": "tags: [confirm_email,support_apis]"
+					},
+					"response": []
+				},
+				{
+					"name": "createUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\npostman.setEnvironmentVariable(\"social_user_id\", userId);\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"New user created\"] = typeof response.status !== 'undefined' && response.status === 'success';"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"create_social_email\", postman.getEnvironmentVariable('gmail_user') \n    + \"+\" + postman.getEnvironmentVariable(\"namespace\") \n    + \".\" + Math.random().toString(36).substring(2) + _.random(20000, 100) + '@gmail.com');\n    \npostman.setEnvironmentVariable(\"create_social_user\", Math.random().toString(36).substring(2) + _.random(2000, 100));"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}createUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"email\":\"{{create_social_email}}\",\"socialUser\":\"{{create_social_user}}\",\"socialPid\":\"{{social_user_provider}}\",\"confirmedEmail\":\"T\" }"
+						},
+						"description": "tags: [create_user,social_user,support_apis]"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "C2. Get user data through support APIs",
+			"description": "get_user_by_support_apis",
+			"item": [
+				{
+					"name": "getUserByDisplayName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Got user data\"] = userId ? 1 : 0;\n"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}getUserByDisplayName",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"displayName\": \"{{create_user_displayname}}\"}"
+						},
+						"description": "tags: [get_user_by_display_name,support_apis]"
+					},
+					"response": []
+				},
+				{
+					"name": "getUserByEmail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Got user data\"] = userId ? 1 : 0;\n"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}getUserByEmail",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"email\": \"{{create_user_email}}\"}"
+						},
+						"description": "tags: [get_user_by_email,support_apis]"
+					},
+					"response": []
+				},
+				{
+					"name": "getUserById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Got user data\"] = userId ? 1 : 0;\n"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}getUserById",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"id\": \"{{new_user_id}}\"}"
+						},
+						"description": "tags: [get_user_by_id,support_apis]"
+					},
+					"response": []
+				},
+				{
+					"name": "getUserByPubId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Got user data\"] = userId ? 1 : 0;\n"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}getUserByPubId",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"publicId\": \"{{publicId}}\"}"
+						},
+						"description": "tags: [get_user_by_pub_id,support_apis]"
+					},
+					"response": []
+				},
+				{
+					"name": "getUserBySocialUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Got user data\"] = userId ? 1 : 0;\n"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}getUserBySocialUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"socialUser\": \"{{create_social_user}}\",\"socialPid\": \"facebook\"}"
+						},
+						"description": "tags: [get_user_by_social_user,support_apis]"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "C3. Update user through support APIs",
+			"description": "update_user_by_support_apis",
+			"item": [
+				{
+					"name": "updateUserById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Updated correct user\"] = response.data.id === postman.getEnvironmentVariable('new_user_id');\ntests[\"Updated data shows in profile\"] = response.data.profile.postCode === postman.getEnvironmentVariable('user_update_postal');"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": "postman.setEnvironmentVariable(\"user_update_postal\",\"94301\");"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}updateUserById",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{new_user_id}}\",\"postCode\":\"{{user_update_postal}}\",\"confirmEmail\": false}"
+						},
+						"description": "tags: [update_user_by_id,support_apis]"
+					},
+					"response": []
+				},
+				{
+					"name": "getUserById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\nvar postCode = typeof response.data.profile.postCode !== 'undefined' ? response.data.profile.postCode : 0;\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Got user data\"] = userId ? 1 : 0;\ntests[\"Got updated data\"] = postCode === postman.getEnvironmentVariable('user_update_postal');"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}getUserById",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"id\": \"{{new_user_id}}\"}"
+						},
+						"description": "tags: [get_user_by_id,support_apis]"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "C4. Delete user through support APIs",
+			"description": "delete_user_by_support_apis",
+			"item": [
+				{
+					"name": "deleteUserById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}deleteUserById",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{new_user_id}}\",\"removeImmediately\": true\n}"
+						},
+						"description": "tags: [delete_user_by_id,support_apis]"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUserById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';"
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}deleteUserById",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{social_user_id}}\"\n}"
+						},
+						"description": "tags: [delete_user_by_id,social_user,support_apis]"
 					},
 					"response": []
 				}
