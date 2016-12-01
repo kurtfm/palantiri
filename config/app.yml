@@ -13,22 +13,11 @@ verbose_file_end: -debug
 full_report_file_end: -full-report.json
 monitor_schedule:
   default: "* * * * *"
-slack_api: https://slack.com/api/
-slack_token: xoxb-40319046768-RsDQAkXW989SZmBfoXAVk3R2
-slack_message_options:
-  channel:  "#identity-site-alerts"
-  icon_emoji: ":loudspeaker:"
-  pretty: 1
-  link_names: 1
-slack_upload_options:
-  channels:  "#identity-alarms"
-  fileType: log
-disable_slack_notifications: false
-disable_metrics: false
-disable_info_notices: true
 metrics_prefix: test.
 metrics_agent_host: localhost
 metrics_agent_port: 8125
 metrics_default_name: monitor
+metrics_disabled: 0
 aws_s3_bucket: monitoring-debug-data
 aws_s3_file_expiration_days: 30
+aws_s3_push_disabled: 0

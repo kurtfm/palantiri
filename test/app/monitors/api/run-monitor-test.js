@@ -20,7 +20,7 @@ var stubReportResult = {};
 
 var runMonitor = proxyquire(app + 'run-monitor', {
   './report-results': stubReportResult,
-  './process-output': (conf, target, number) => {
+  './process-output': (conf, target, jsonReport) => {
     return new Promise((resolve, reject) => {
       resolve({});
     });
@@ -43,11 +43,13 @@ stubReportResult.totals = (prefix, host, port, name, target, results) => {
 
 describe('Run Monitor Tests', () => {
   var data;
-  before(function(done) {
+  before((done) => {
     runMonitor(conf)
       .then((results) => {
         data = results;
         done();
+      }).catch((error) => {
+        console.log(error.name, ":", error.message);
       });
     var onetestFake = nock('http://localhost:33688')
       .post('/one')

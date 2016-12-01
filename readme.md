@@ -1,5 +1,7 @@
-# monitoring agent
-Written in node mainly to take advantage of loading newman as a library to get a callback when it's finished with a test run.
+# monitoring app
+Written in node mainly to take advantage of loading newman as a library to get a
+callback when it's finished with a test run and report data to datadog and output
+detailed results to aws s3.
 
 ## dependencies
 Install NodeJs / npm
@@ -16,7 +18,7 @@ npm install
 ## run locally
 
 ```
-bin/api-monitor.js --target=brandapi-user
+bin/start-monitor.js --target=brandapi-user
 ```
 
 ## local task runner
@@ -36,7 +38,8 @@ gulp prepare-release [ver=major|minor|patch|prerelease]
 
 ```
 
-This will bump the version in the package.json using semver... so no getting weird versions. Default if no `ver` arg is passed in is `patch`
+This will bump the version in the package.json using semver... so no getting weird
+versions. Default if no `ver` arg is passed in is `patch`
 
 ### bundle up for distribution
 
@@ -68,6 +71,13 @@ gulp test
 If the tests look good then run with whatever version that is appropriate.
 
 ```
+gulp test-xunit
+```
+
+This will run unit tests outputting xunit.xml in the main app directory which
+can be used for passing/failing a build during pipelining.
+
+```
 gulp pre-release ver=prerelease
 ```
 
@@ -83,9 +93,8 @@ Later I will figure out how to bundle that all into one task.
 You can run each monitor individually
 
 ```
-* * * * * /data/servers/monitor-agent/bin/api-monitor.js --evironment=prod --target=brandapi-user >/dev/null
-* * * * * /data/servers/monitor-agent/bin/api-monitor.js --environment=prod --target=brandapi-support >/dev/null
-* * * * * /data/servers/monitor-agent/bin/api-monitor.js --environment=prod --target=brandapi-migration >/dev/null
+* * * * * /data/servers/monitor-agent/bin/start-monitor.js --evironment=prod --target=brandapi >/dev/null
+* * * * * /data/servers/monitor-agent/bin/start-monitor.js --environment=prod --target=brandapi-support >/dev/null
 ```
 
 ## start all supported monitors
@@ -95,5 +104,7 @@ You can start all the supported monitors using the start-all script...
 bin/start-all-monitors.js
 ``
 
-This will use the configuration from the YAML config supported_api_monitors and supported_ui_monitors.  It will look for the schedule for that monitor specifically in monitor_schedule or if not there use the 'default'.  The schedule is cron format.
-
+This will use the configuration from the YAML config supported_api_monitors and
+supported_ui_monitors.  It will look for the schedule for that monitor
+specifically in monitor_schedule or if not there use the 'default'.  The
+schedule is cron format.

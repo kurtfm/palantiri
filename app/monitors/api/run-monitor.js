@@ -56,7 +56,6 @@ module.exports = (conf) => {
         throw e;
       }
     }
-
     var tests = fileExists(testFile) ?
       require(testFile) :
       assert(false, "Could not find test file: " + testFile);
@@ -78,7 +77,6 @@ module.exports = (conf) => {
       }
     };
     log.newmanOptions = newmanOptions;
-
     newman.run(newmanOptions)
       .on('start', function(err, args) {
         if (err) {
@@ -87,47 +85,51 @@ module.exports = (conf) => {
         }
         log.startSummary =
           `Running ${args.cursor.length} request(s) and ${args.cursor.cycles} iteration(s)`;
-
       })
       .on('test', function(err, testInstanceResults) {
         if (err) {
           reject(err, log);
         }
         //console.log(util.inspect(testInstanceResults, {depth: 15, colors: true}));
-        log.reportResults =
-          `sending test metrics: ${testInstanceResults.item.name}`;
-        reportResults.tests(conf.metrics_prefix, conf.metrics_agent_host,
-            conf.metrics_agent_port, conf.metrics_default_name,
-            target, testInstanceResults)
-          .then((data, err) => {
-            if (err) {
-              console.log('error: ', err);
-            }
-            log.reportResults = data;
-          })
-
+        if (!conf.metrics_disabled) {
+          log.reportResults =
+            `sending test metrics: ${testInstanceResults.item.name}`;
+          reportResults.tests(conf.metrics_prefix, conf.metrics_agent_host,
+              conf.metrics_agent_port, conf.metrics_default_name,
+              target, testInstanceResults)
+            .then((data, err) => {
+              if (err) {
+                console.log('error: ', err);
+              }
+              log.reportResults = data;
+            })
+        }
       })
       .once('done', function(err, summary) {
         if (err) {
           reject(err, log);
         }
-        log.reportResults = `sending total metrics`;
-        reportResults.totals(conf.metrics_prefix, conf.metrics_agent_host,
-            conf.metrics_agent_port, conf.metrics_default_name,
-            target, summary.run.stats)
-          .then((data, err) => {
-            if (err) {
-              console.log('error: ', err);
-            }
-            log.reportResults = data;
-            processOutput(conf, target, jsonReport)
-          })
-          .then((data, err) => {
-            resolve(log, err);
-          })
-          .catch((error) => {
-            console.log(error.name, ":", error.message);
-          });
+        if (!conf.metrics_disabled) {
+          log.reportResults = `sending total metrics`;
+          reportResults.totals(conf.metrics_prefix, conf.metrics_agent_host,
+              conf.metrics_agent_port, conf.metrics_default_name,
+              target, summary.run.stats)
+            .then((data, err) => {
+              if (err) {
+                console.log('error: ', err);
+              }
+              log.reportResults = data;
+              processOutput(conf, target, jsonReport)
+            })
+            .then((data, err) => {
+              resolve(log, err);
+            })
+            .catch((error) => {
+              console.log(error.name, ":", error.message);
+            });
+        } else {
+          resolve(log);
+        }
 
       })
 

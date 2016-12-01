@@ -16,11 +16,16 @@
        var tags = testConfig.tags ? testConfig.tags : [];
        var metricName = name;
        var datadogCommands = [];
-       tags.push('request_url:' +
-         testResults.executions[0].result.globals.request.uri.href,
+       var requestUrl = typeof testResults.executions[0].result.globals
+         .request
+         .uri.href !== 'undefined' ? testResults.executions[0].result.globals
+         .request.uri.href : 'NO-URL';
+       var responseCode = typeof testResults.executions[0].result.globals
+         .responseCode.code !== 'undefined' ? testResults.executions[0]
+         .result.globals.responseCode.code : 'NO-RESPONSE-CODE';
+       tags.push('request_url:' + requestUrl,
          'app:' + target,
-         'response_code:' +
-         testResults.executions[0].result.globals.responseCode.code);
+         'response_code:' + responseCode);
        var responseTimeTags = tags.slice();
        responseTimeTags.push('response_time');
        var responseTime = testResults.executions[0].result.globals.responseTime;
