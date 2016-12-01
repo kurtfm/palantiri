@@ -1,41 +1,34 @@
 {
-	"id": "2e885deb-a9c7-7758-8685-4bfb6cdc036f",
-	"name": "monitoring-agent-tests",
-	"description": "Simple test for mocking newman tests in monitoring tool.",
-	"order": [],
-	"folders": [
-		{
-			"id": "c16d054c-43df-2547-812e-200543b03e6f",
-			"name": "One Folder",
-			"description": "One folder",
-			"order": [
-				"c438beca-6cc7-5bff-5f7f-dbe11af342e8"
-			],
-			"owner": "197134"
-		}
-	],
-	"timestamp": 1463694088994,
-	"owner": "197134",
-	"remoteLink": "",
-	"public": false,
-	"requests": [
-		{
-			"id": "c438beca-6cc7-5bff-5f7f-dbe11af342e8",
-			"headers": "",
-			"url": "localhost:33688/one",
-			"preRequestScript": null,
-			"pathVariables": {},
-			"method": "POST",
-			"data": null,
-			"dataMode": "params",
-			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1463694316434,
+	"variables": [],
+	"info": {
+		"name": "monitoring-agent-tests",
+		"_postman_id": "e0476eb2-b70c-26e5-40e6-cdcbfbb17d67",
+		"description": "monitor_tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [{
+		"name": "One Folder",
+		"description": "one_folder",
+		"item": [{
 			"name": "one test",
-			"description": "one test for testing",
-			"collectionId": "2e885deb-a9c7-7758-8685-4bfb6cdc036f",
-			"responses": []
-		}
-	]
+			"event": [{
+				"listen": "test",
+				"script": {
+					"type": "text/javascript",
+					"exec": "tests[\"Status code is 200\"] = responseCode.code === 200;"
+				}
+			}],
+			"request": {
+				"url": "http://localhost:33688/one",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": "tags: [one_test,tester]"
+			},
+			"response": []
+		}]
+	}]
 }

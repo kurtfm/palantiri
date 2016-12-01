@@ -1,3 +1,3 @@
-supported_api_monitors: [ brandapi-user, brandapi-support, brandapi-migration]
+supported_api_monitors: [ brandapi, brandapi-user, brandapi-support, brandapi-migration]
 slack_upload_options:
   channels:  "#identity-site-tester"
