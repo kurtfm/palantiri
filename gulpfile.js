@@ -32,24 +32,37 @@ gulp.task('test', function() {
 		.pipe(mocha());
 });
 
-gulp.task('clean', function() {
+gulp.task('dist-clean', function() {
 	return del(['dist/**/*', 'dist/*.tar.gz']);
 });
 
-gulp.task('source', ['clean'], function() {
+gulp.task('dist-source', ['clean'], function() {
 	var pkg = JSON.parse(fs.readFileSync('./package.json'));
 	return gulp.src(['**/*', '!test', '!test/**', '!dist', '!dist/**', '!.*',
 			'!*.*'
 		])
-		.pipe(gulp.dest('dist/monitor-agent'));
+		.pipe(gulp.dest('dist/monitoring-app'));
 });
 
-gulp.task('package', ['source', 'clean'], function() {
+gulp.task('dist-package', ['dist-source', 'dist-clean'], function() {
 	var pkg = JSON.parse(fs.readFileSync('./package.json'));
 	return gulp.src('dist/**/*')
 		.pipe(tar('monitor-' + pkg.version + '.tar'))
 		.pipe(gzip())
 		.pipe(gulp.dest('dist/'));
+});
+
+gulp.task('docker-clean', function() {
+	return del('docker/monitoring-app/**/*');
+});
+
+gulp.task('docker-source', ['docker-clean'], function() {
+	var pkg = JSON.parse(fs.readFileSync('./package.json'));
+	return gulp.src(['**/*', '!test', '!test/**', '!dist', '!dist/**',
+			'!docker/**', '!.*',
+			'!*.*'
+		])
+		.pipe(gulp.dest('docker/monitoring-app'));
 });
 
 gulp.task('prepare-release', function() {
@@ -70,4 +83,6 @@ gulp.task('prepare-release', function() {
 });
 
 
-gulp.task('dist', ['clean', 'test', 'package']);
+gulp.task('dist', ['dist-clean', 'test', 'dist-package']);
+
+gulp.task('docker-prep', ['docker-clean', 'docker-source']);

@@ -1,10 +1,11 @@
 # monitoring app
-Written in node mainly to take advantage of loading newman as a library to get a
-callback when it's finished with a test run and report data to datadog and output
-detailed results to aws s3.
+Loads Postman's Newman as a library to run tests against your API endpoints and
+send results to datadog and debug data to an aws s3 bucket.  Written in nodejs
+to be able to load newman as a library and send test results as they happen with
+better process control then just running command line.
 
 ## dependencies
-Install NodeJs / npm
+node, npm, gulp, newman v3, datadog, aws
 
 ## local setup
 Clone this repo and cd into it.
@@ -18,7 +19,7 @@ npm install
 ## run locally
 
 ```
-bin/start-monitor.js --target=brandapi-user
+bin/start-api-monitor.js --target=brandapi-user
 ```
 
 ## local task runner
@@ -87,24 +88,11 @@ Use git to commit these changes and push them to the remote branch, then bundle 
 gulp dist
 ```
 
-Later I will figure out how to bundle that all into one task.
+Use this to test and build app into 'dist' directory in preparation for deployment.
 
 ## cron setup
 You can run each monitor individually
 
 ```
-* * * * * /data/servers/monitor-agent/bin/start-monitor.js --evironment=prod --target=brandapi >/dev/null
-* * * * * /data/servers/monitor-agent/bin/start-monitor.js --environment=prod --target=brandapi-support >/dev/null
+* * * * * docker run --rm=true --network="host" -v ~/.aws:/root/.aws monitoring-app:latest --target=myapi --environment=dev --metricsagent=dockerhost >/dev/null
 ```
-
-## start all supported monitors
-You can start all the supported monitors using the start-all script...
-
-```
-bin/start-all-monitors.js
-``
-
-This will use the configuration from the YAML config supported_api_monitors and
-supported_ui_monitors.  It will look for the schedule for that monitor
-specifically in monitor_schedule or if not there use the 'default'.  The
-schedule is cron format.
