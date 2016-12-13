@@ -7,19 +7,82 @@ better process control then just running command line.
 ## dependencies
 node, npm, gulp, newman v3, datadog, aws
 
-## local setup
+## postman tests (API monitoring)
+### version
+This monitoring-app requires that you have tests in the postman v3 format.
+
+### custom metrics and tags for datadog
+The postman description can be used to pass a custom 'metric_name' or 'tags' in a YAML format which will get sent to datadog.
+
+e.g. in the description of a createUser API you might have the following tags
+
+```
+tags: [create_user,social_user,user_flows]
+```
+
+This gives you the ability to tag flows together across multiple tests.  I did try to utilize the description of folders to apply to all tests within it but at this point that is not working.
+
+### newman file naming conventions
+When the API monitor is started a 'target' value is passed in.  The tests, environment and global files are looked up based on the application defaults
+config/app.yaml
+particularly related to the newman files...
+```
+newman_folder: /app/resources/newman/
+...
+test_file: tests.json
+env_file: env.json
+global_file: globals.json
+```
+with the default config the API monitor will look for target tests like this:
+ <app root>/app/resources/newman/<target>-tests.json
+
+
+## running API monitor
+
+## run locally
+
+```
+bin/start-api-monitor.js --target=brandapi-user
+```
+| argument | example | description | possible values | default value |
+| -- | -- | -- | -- | -- |
+| -t, --target | example: 'bin/start-api-monitor.js --target=brandapi-user' | the app or service you want to test, note: there is a list of acceptable targets in the app config and each environment config may override| | |
+| -e, --environment | 'bin/start-api-monitor.js --environment=test'| the environment to use | dev', 'test', 'prod' | dev |
+| --disables3 | 'bin/start-api-monitor.js --disables3| disable pushing of run details to s3 | | false |
+| --disablemetrics' | 'bin/start-api-monitor.js --disablemetrics' | disable sending metrics to datadog | | false |
+| --metricsprefix' | 'bin/start-api-monitor.js --metricsprefix=beta' | override the metrics prefix to datadog metrics for testing | | |
+| --metricsagent' | 'bin/start-api-monitor.js --metricsagent=127.0.0.1' | override metrics agent default of localhost | | |
+| --disablenotification | 'bin/start-api-monitor.js --disablenotification' | disable notification to datadog when there is a failure' | | false |
+
+ ## docker stuff
+
+ Building an API monitoring-app docker image...
+ ```
+ docker build -t monitoring-app -f Dockerfile.api
+ ```
+
+ Running docker container...
+ ```
+ docker run --rm=true --network="host" -v ~/.aws:/root/.aws monitoring-app:latest --target=brandapi --environment=dev --metricsagent=dockerhost
+ ```
+ more details in the docker/readme
+
+ ## cron setup
+ You can run each monitor individually
+
+ ```
+ * * * * * docker run --rm=true --network="host" -v ~/.aws:/root/.aws monitoring-app:latest --target=myapi --environment=dev --metricsagent=dockerhost >/dev/null
+ ```
+
+
+
+## local dev setup
 Clone this repo and cd into it.
 Install dependencies... you will need to have node and npm installed first
 
 ```
 npm install -g gulp
 npm install
-```
-
-## run locally
-
-```
-bin/start-api-monitor.js --target=brandapi-user
 ```
 
 ## local task runner
@@ -89,10 +152,3 @@ gulp dist
 ```
 
 Use this to test and build app into 'dist' directory in preparation for deployment.
-
-## cron setup
-You can run each monitor individually
-
-```
-* * * * * docker run --rm=true --network="host" -v ~/.aws:/root/.aws monitoring-app:latest --target=myapi --environment=dev --metricsagent=dockerhost >/dev/null
-```
