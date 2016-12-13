@@ -1,13 +1,9 @@
 # monitoring app
-Loads Postman's Newman as a library to run tests against your API endpoints and
-send results to datadog and debug data to an aws s3 bucket.  Written in nodejs
-to be able to load newman as a library and send test results as they happen with
-better process control then just running command line.
+This was written to monitor apps from a customer perspective and report those results to a Datadog agent.
 
-## dependencies
-node, npm, gulp, newman v3, datadog, aws
+## API Monitoring
+In order to monitor APIs it loads Postman's Newman test runner as a nodejs library.  This was chosen because we already use Postman/Newman for our integration tests.
 
-## postman tests (API monitoring)
 ### version
 This monitoring-app requires that you have tests in the postman v3 format.
 
@@ -39,7 +35,10 @@ with the default config the API monitor will look for target tests like this:
 
 ## running API monitor
 
-## run locally
+### dependencies
+Run: node, npm, newman v3, datadog, aws sdk (unless you disable aws), gulp
+
+### run locally
 
 ```
 bin/start-api-monitor.js --target=brandapi-user
@@ -54,7 +53,7 @@ bin/start-api-monitor.js --target=brandapi-user
 | --metricsagent' | 'bin/start-api-monitor.js --metricsagent=127.0.0.1' | override metrics agent default of localhost | | |
 | --disablenotification | 'bin/start-api-monitor.js --disablenotification' | disable notification to datadog when there is a failure' | | false |
 
- ## docker stuff
+ ## dockerization
 
  Building an API monitoring-app docker image...
  ```
