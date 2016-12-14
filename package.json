@@ -1,5 +1,5 @@
 {
-  "name": "monitoring-agent",
+  "name": "monitoring-app",
   "version": "1.0.0",
   "description": "A monitoring agent that runs tests and pushes the results data where it needs to go",
   "repository": {
