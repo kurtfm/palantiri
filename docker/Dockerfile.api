@@ -1,0 +1,5 @@
+FROM mhart/alpine-node:5
+COPY monitoring-app /usr/local/monitoring-app
+COPY docker-api-startup.sh /usr/local/docker-entrypoint.sh
+RUN ["/bin/ash", "-c", "chmod +x /usr/local/docker-entrypoint.sh"]
+ENTRYPOINT ["/usr/local/docker-entrypoint.sh"]

@@ -25,10 +25,12 @@ var jsonReport = conf.application_root + conf.output_folder +
   target + conf.report_file_end;
 
 
+fs.copySync(reportData, jsonReport);
+
 mockAws.mock('S3', 'putObject', mockResults);
 
 var aws = proxyquire(conf.application_root + '/app/adapters/aws', {
-  'AWS': mockAws
+  'aws-sdk': mockAws
 });
 
 
@@ -36,12 +38,12 @@ describe('AWS Adapter Tests', function() {
   var data;
   before((done) => {
     aws.s3Upload(jsonReport, target, conf.aws_s3_bucket, conf.aws_s3_file_expiration_days)
-      .then(function(results) {
+      .then((results) => {
         data = results;
         done();
       });
   });
-  beforeEach(function() {
+  beforeEach(() => {
     fs.copySync(reportData, jsonReport);
   });
   it('should take a valid file do S3 putObject and return proper results', () => {
@@ -51,8 +53,13 @@ describe('AWS Adapter Tests', function() {
       .undefined;
 
   });
+  after((done) => {
+    fs.unlink(jsonReport, (err, data) => {
+      done();
+    });
+  });
   it('should take a valid file do S3 putObject and delete the file', () => {
-    fs.access(jsonReport, fs.F_OK, function(err) {
+    fs.access(jsonReport, fs.F_OK, (err) => {
       var success;
       if (!err) {
         success = false;

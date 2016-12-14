@@ -6,7 +6,6 @@ const _ = require('lodash');
 const app = conf.application_root + conf.api_monitor;
 const runTests = require(app + 'run-monitor');
 
-
 runTests(conf)
   .then((log, err) => {
     console.log('run complete!');

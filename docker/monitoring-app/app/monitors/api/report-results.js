@@ -15,8 +15,7 @@
        var testConfig = yaml.safeLoad(testResults.item.request.description
          .toString());
        var tags = testConfig.tags ? testConfig.tags : [];
-       var metricName = testConfig.metric_name ? testConfig.metric_name :
-         name;
+       var metricName = name;
        var datadogCommands = [];
        var requestUrl = typeof testResults.executions[0].result.globals
          .request
