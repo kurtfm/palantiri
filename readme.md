@@ -43,15 +43,18 @@ Run: node, npm, newman v3, datadog, aws sdk (unless you disable aws), gulp
 ```
 bin/start-api-monitor.js --target=brandapi-user
 ```
-| argument | example | description | possible values | default value |
-| -- | -- | -- | -- | -- |
-| -t, --target | example: 'bin/start-api-monitor.js --target=brandapi-user' | the app or service you want to test, note: there is a list of acceptable targets in the app config and each environment config may override | -- | -- |
+
+
+|argument|example|description|values|default|
+| -------- | -------- | -------- | -------- | -------- |
+| -t, --target (required)| example: 'bin/start-api-monitor.js --target=brandapi-user' | the app or service you want to test, note: there is a list of acceptable targets in the app config and each environment config may override |  |  |
 | -e, --environment | 'bin/start-api-monitor.js --environment=test'| the environment to use | dev', 'test', 'prod' | dev |
-| --disables3 | 'bin/start-api-monitor.js --disables3| disable pushing of run details to s3 | -- | false |
-| --disablemetrics' | 'bin/start-api-monitor.js --disablemetrics' | disable sending metrics to datadog | -- | false |
-| --metricsprefix' | 'bin/start-api-monitor.js --metricsprefix=beta' | override the metrics prefix to datadog metrics for testing | -- | -- |
-| --metricsagent' | 'bin/start-api-monitor.js --metricsagent=127.0.0.1' | override metrics agent default of localhost | -- | -- |
-| --disablenotification | 'bin/start-api-monitor.js --disablenotification' | disable notification to datadog when there is a failure' | -- | false |
+| --disables3 | 'bin/start-api-monitor.js --disables3| disable pushing of run details to s3 |  | false |
+| --disablemetrics' | 'bin/start-api-monitor.js --disablemetrics' | disable sending metrics to datadog |  | false |
+| --metricsprefix' | 'bin/start-api-monitor.js --metricsprefix=beta' | override the metrics prefix to datadog metrics for testing |  |  |
+| --metricsagent' | 'bin/start-api-monitor.js --metricsagent=127.0.0.1' | override metrics agent default of localhost |  |  |
+| --disablenotification | 'bin/start-api-monitor.js --disablenotification' | disable notification to datadog when there is a failure' |  | false |
+
 
  ## dockerization
 
