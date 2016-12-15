@@ -95,7 +95,7 @@ module.exports = (conf) => {
           log.reportResults =
             `sending test metrics: ${testInstanceResults.item.name}`;
           reportResults.tests(conf.metrics_prefix, conf.metrics_agent_host,
-              conf.metrics_agent_port, conf.metrics_default_name,
+              conf.metrics_agent_port, conf.metrics_default_api_name,
               target, testInstanceResults)
             .then((data, err) => {
               if (err) {
@@ -112,7 +112,7 @@ module.exports = (conf) => {
         if (!conf.datadog_failure_notification_disabled && summary.run.stats
           .assertions.failed > 0) {
           log.sendFailureNotice = 'sending failure notice to datadog';
-          reportResults.failureNotice(conf.metrics_prefix, conf.metrics_default_name,
+          reportResults.failureNotice(conf.metrics_prefix, conf.metrics_default_api_name,
               target, conf.aws_s3_bucket, outputId + conf.report_file_end,
               summary.run.stats
             )
@@ -126,7 +126,7 @@ module.exports = (conf) => {
         if (!conf.metrics_disabled) {
           log.reportResults = 'sending total metrics';
           reportResults.totals(conf.metrics_prefix, conf.metrics_agent_host,
-              conf.metrics_agent_port, conf.metrics_default_name,
+              conf.metrics_agent_port, conf.metrics_default_api_name,
               target, summary.run.stats)
             .then((data, err) => {
               if (err) {
