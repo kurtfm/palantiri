@@ -12,6 +12,7 @@ const del = require('del');
 const yargs = require('yargs');
 
 var packageJson = require('./package.json');
+var releaseVersion = packageJson.version;
 
 gulp.task('test-xunit', function() {
 	process.env.NODE_ENV = 'test';
@@ -94,7 +95,7 @@ gulp.task('udpate-version', function() {
 });
 
 gulp.task('git-create-release', function() {
-	git.checkout('release/' + packageJson.version, {
+	git.checkout('release/' + releaseVersion, {
 		args: '-b'
 	}, function(err) {
 		if (err) throw err;
@@ -108,14 +109,19 @@ gulp.task('git-tag-release', function() {
 });
 
 gulp.task('git-commit-version-update', function() {
-	return gulp.src('./*', {
-			buffer: false
-		})
-		.pipe(git.commit('"updated version"'));
+	return gulp.src('./package.json')
+		.pipe(git.commit('updated version'));
 });
 
+gulp.task('git-commit', function() {
+	gulp.src('./*')
+		.pipe(git.commit(undefined, {
+			args: '-am "pipeline update for release:' + releaseVersion + '"',
+			disableMessageRequirement: true
+		}));
+});
 gulp.task('git-push-release', function() {
-	git.push('origin', 'release/' + packageJson.version, function(err) {
+	git.push('origin', 'release/' + releaseVersion, function(err) {
 		if (err) throw err;
 	});
 });
@@ -138,11 +144,21 @@ gulp.task('git-checkout-master', function() {
 	});
 });
 
+gulp.task('git-merge-release', function() {
+	git.merge('release/' + releaseVersion, {
+		args: '--no-ff'
+	}, function(err) {
+		if (err) throw err;
+	});
+});
 gulp.task('dist', ['dist-clean', 'test', 'dist-package']);
 
 gulp.task('docker-prep', ['docker-clean', 'docker-source']);
 
-gulp.task('release-prep', ['git-create-release', 'git-tag-release',
-	'git-push-release', 'git-checkout-develop', 'bump-version',
-	'git-push-develop', 'git-checkout-master'
+gulp.task('git-release-prep', ['git-create-release', 'git-tag-release',
+	'git-commit-version-update', 'git-push-release'
 ]);
+gulp.task('git-update-snapshot', ['git-checkout-develop', 'bump-version',
+	'git-commit-version-update', 'git-push-develop'
+]);
+gulp.task('git-setup-master', ['git-checkout-master', 'git-merge-release'])
