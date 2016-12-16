@@ -5,10 +5,13 @@ const tar = require('gulp-tar');
 const gzip = require('gulp-gzip');
 const exec = require('gulp-exec');
 const bump = require('gulp-bump');
+const git = require('gulp-git');
 const fs = require('fs');
 const install = require("gulp-install");
 const del = require('del');
 const yargs = require('yargs');
+
+var packageJson = require('./package.json');
 
 gulp.task('test-xunit', function() {
 	process.env.NODE_ENV = 'test';
@@ -65,7 +68,15 @@ gulp.task('docker-source', ['docker-clean'], function() {
 		.pipe(gulp.dest('docker/monitoring-app'));
 });
 
-gulp.task('prepare-release', function() {
+gulp.task('bump-version', function() {
+	return gulp.src('./package.json')
+		.pipe(bump({
+			type: 'minor'
+		}))
+		.pipe(gulp.dest('./'));
+});
+
+gulp.task('udpate-version', function() {
 	var argv = yargs.argv;
 	var validBumpTypes = "major|minor|patch|prerelease".split("|");
 	var ver = (argv.ver || 'patch').toLowerCase();
@@ -82,7 +93,49 @@ gulp.task('prepare-release', function() {
 	}
 });
 
+gulp.task('git-create-release', function() {
+	git.checkout('release/' + packageJson.version, {
+		args: '-b'
+	}, function(err) {
+		if (err) throw err;
+	});
+});
+
+gulp.task('git-tag-release', function() {
+	git.tag(packageJson.version, '', function(err) {
+		if (err) throw err;
+	});
+});
+
+gulp.task('git-push-release', function() {
+	git.push('origin', 'release/' + packageJson.version, function(err) {
+		if (err) throw err;
+	});
+});
+
+gulp.task('git-checkout-develop', function() {
+	git.checkout('develop', function(err) {
+		if (err) throw err;
+	});
+});
+
+gulp.task('git-push-develop', function() {
+	git.push('origin', 'develop', function(err) {
+		if (err) throw err;
+	});
+});
+
+gulp.task('git-checkout-master', function() {
+	git.checkout('master', function(err) {
+		if (err) throw err;
+	});
+});
 
 gulp.task('dist', ['dist-clean', 'test', 'dist-package']);
 
 gulp.task('docker-prep', ['docker-clean', 'docker-source']);
+
+gulp.task('release-prep', ['git-create-release', 'git-tag-release',
+	'git-push-release', 'git-checkout-develop', 'bump-version',
+	'git-push-develop', 'git-checkout-master'
+]);
