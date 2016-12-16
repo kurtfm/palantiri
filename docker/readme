@@ -1,3 +1,6 @@
+# API monitor build docker image
+docker build -t monitoring-app -f Dockerfile.api .
+
 # API monitor docker run command with agent on host
 
 The will set the hosts IP in the etc hosts file as 'dockerhost' w
