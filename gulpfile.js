@@ -107,6 +107,13 @@ gulp.task('git-tag-release', function() {
 	});
 });
 
+gulp.task('git-commit-version-update', function() {
+	return gulp.src('./*', {
+			buffer: false
+		})
+		.pipe(git.commit('"updated version"'));
+});
+
 gulp.task('git-push-release', function() {
 	git.push('origin', 'release/' + packageJson.version, function(err) {
 		if (err) throw err;
