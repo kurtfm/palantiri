@@ -2,12 +2,4 @@ supported_api_monitors: [ onetest , badtest]
 newman_folder: /test/app/resources/newman/
 output_folder: /test/outputs/
 test_data: /test/app/resources/data/
-slack_message_options:
-  channel:  "#identity-monitor-tests"
-  icon_emoji: ":loudspeaker:"
-  pretty: 1
-  link_names: 1
-slack_upload_options:
-  channels:  "#id-monitor-test"
-  fileType: log
 disable_metrics: true

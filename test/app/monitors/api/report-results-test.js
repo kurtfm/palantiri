@@ -21,6 +21,54 @@ var testResultsInstanceData = require(conf.application_root + conf.test_data +
 var totalsResultsData = require(conf.application_root + conf.test_data +
   conf.target + '-totals-results');
 
+var statsData = {
+  "iterations": {
+    "total": 1,
+    "pending": 0,
+    "failed": 0
+  },
+  "items": {
+    "total": 1,
+    "pending": 0,
+    "failed": 0
+  },
+  "scripts": {
+    "total": 1,
+    "pending": 0,
+    "failed": 1
+  },
+  "prerequests": {
+    "total": 1,
+    "pending": 0,
+    "failed": 0
+  },
+  "requests": {
+    "total": 1,
+    "pending": 0,
+    "failed": 1
+  },
+  "tests": {
+    "total": 1,
+    "pending": 0,
+    "failed": 0
+  },
+  "assertions": {
+    "total": 0,
+    "pending": 0,
+    "failed": 0
+  },
+  "testScripts": {
+    "total": 1,
+    "pending": 0,
+    "failed": 1
+  },
+  "prerequestScripts": {
+    "total": 0,
+    "pending": 0,
+    "failed": 0
+  }
+};
+
 var stubDataDog = function() {
   this.sendCount = () => {
     return new Promise((resolve, reject) => {
@@ -40,7 +88,14 @@ var stubDataDog = function() {
     return new Promise((resolve, reject) => {
       resolve();
     });
-  }
+  };
+  this.sendEvent = () => {
+    return new Promise((resolve, reject) => {
+      resolve({
+        'bytes': 1234
+      });
+    });
+  };
 };
 
 var reportResults = proxyquire(app + 'report-results', {
@@ -100,9 +155,20 @@ describe('Report Results Tests', () => {
 
   it('should fail if test instance data is missing',
     function*() {
-      return reportResults.tests(conf.metrics_prefix, 'foo', conf.target)
+      return reportResults.tests(conf.metrics_prefix, conf.metrics_agent_host,
+          conf.metrics_agent_port, 'foo', conf.target)
         .catch((error) => {
           expect(error).to.be.defined;
+        });
+    });
+  it('should send failure report',
+    function*() {
+      return reportResults.failureNotice(conf.metrics_prefix, conf.metrics_agent_host,
+          conf.metrics_agent_port, conf.metrics_default_api_name,
+          conf.target, conf.aws_s3_bucket, 'foo', statsData)
+        .then((data) => {
+          expect(data.failureNoticeInitialized).to.be.true;
+          expect(data.datadogSendFailure).to.be.true;
         });
     });
 

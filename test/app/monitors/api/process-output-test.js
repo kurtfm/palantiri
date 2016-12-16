@@ -75,4 +75,15 @@ describe('Process Output Tests', () => {
     }
     expect(deleted).to.be.true;
   });
+  it('should fail if s3 push is disabled and I have a bogus file name',
+    function*() {
+      conf.aws_s3_disable_push = 1;
+      var bogusPath = 'bogus';
+      return processOutput(conf, target, bogusPath)
+        .catch((err, log) => {
+          expect(err.code).to.equal('ENOENT');
+          expect(err.syscall).to.equal('unlink');
+          expect(err.path).to.equal(bogusPath);
+        });
+    });
 });

@@ -101,7 +101,8 @@
 
      });
    },
-   failureNotice: (metricsPrefix, name, target, bucket, jsonReportName,
+   failureNotice: (metricsPrefix, metricsAgentHost, metricsAgentPort, name,
+     target, bucket, jsonReportName,
      testTotals) => {
      var log = {};
      log.failureNoticeInitialized = true;
@@ -122,7 +123,16 @@
        var datadog = new Datadog(metricsPrefix, metricsAgentHost,
          metricsAgentPort);
        datadog.sendEvent(title, message, runName, priority, alertType,
-         tags);
+           tags)
+         .then(res => {
+           log.datadogSendFailure = true;
+           resolve(log);
+         })
+         .catch(error => {
+           console.log('error: ', error);
+           log.datadogSendFailure = false;
+           resolve(log);
+         });
      });
 
    }

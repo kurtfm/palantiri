@@ -13,7 +13,8 @@ module.exports = (conf, target, jsonReport) => {
     if (conf.aws_s3_disable_push) {
       fs.unlink(jsonReport, (err, data) => {
         if (err) {
-          console.log(err);
+          log.resultsDeleted = false;
+          reject(err, log);
         } else {
           log.resultsDeleted = true;
           resolve(log);

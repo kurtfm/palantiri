@@ -7,3 +7,4 @@ xunit.xml
 .vagrant/*
 .vscode/*
 nbproject/
+coverage/

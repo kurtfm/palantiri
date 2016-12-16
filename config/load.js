@@ -78,7 +78,7 @@ var appRoot = function() {
 conf.application_root = appRoot();
 
 if (argv.disables3) {
-  conf.aws_s3_push_disabled = argv.disables3;
+  conf.aws_s3_disable_push = argv.disables3;
 }
 if (argv.disablemetrics) {
   conf.metrics_disabled = argv.disablemetrics;
