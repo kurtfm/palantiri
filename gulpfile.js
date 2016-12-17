@@ -159,16 +159,10 @@ gulp.task('dist', ['dist-clean', 'test', 'dist-package']);
 
 gulp.task('docker-prep', ['docker-clean', 'docker-source']);
 
-gulp.task('create-release-branch', ['git-create-release', 'git-tag-release',
-	'git-commit', 'git-push-release'
-]);
-gulp.task('update-snapshot', ['git-checkout-develop', 'bump-version',
-	'git-commit', 'git-push-develop'
-]);
-gulp.task('setup-master-for-release', ['git-checkout-master',
+gulp.task('setup-for-release', ['git-create-release', 'git-tag-release',
+	'git-commit', 'git-push-release', 'git-checkout-develop', 'bump-version',
+	'git-commit', 'git-push-develop', 'git-checkout-master',
 	'git-merge-release',
-	'git-commit', 'git-push-master'
-]);
-gulp.task('release-prep', ['create-release-branch', 'update-snapshot',
+	'git-commit', 'git-push-master', 'create-release-branch', 'update-snapshot',
 	'setup-master-for-release'
 ]);
