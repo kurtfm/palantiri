@@ -120,6 +120,15 @@ gulp.task('git-commit', function() {
 			disableMessageRequirement: true
 		}));
 });
+
+gulp.task('git-create-release', function() {
+	return git.checkout('release/' + packageJson.version, {
+		args: '-b'
+	}, function(err) {
+		if (err) throw err;
+	});
+});
+
 gulp.task('git-push-release', function() {
 	git.push('origin', 'release/' + releaseVersion, function(err) {
 		if (err) throw err;
@@ -159,10 +168,19 @@ gulp.task('dist', ['dist-clean', 'test', 'dist-package']);
 
 gulp.task('docker-prep', ['docker-clean', 'docker-source']);
 
-gulp.task('setup-for-release', ['git-create-release', 'git-tag-release',
-	'git-commit', 'git-push-release', 'git-checkout-develop', 'bump-version',
-	'git-commit', 'git-push-develop', 'git-checkout-master',
+gulp.task('setup-for-release', [
+	'git-create-release',
+	'git-tag-release',
+	'git-commit',
+	'git-push-release',
+	'git-checkout-develop',
 	'git-merge-release',
-	'git-commit', 'git-push-master', 'create-release-branch', 'update-snapshot',
-	'setup-master-for-release'
+	'git-commit',
+	'bump-version',
+	'git-commit',
+	'git-push-develop',
+	'git-checkout-master',
+	'git-merge-release',
+	'git-commit',
+	'git-push-master'
 ]);
