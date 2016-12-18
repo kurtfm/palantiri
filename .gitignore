@@ -8,3 +8,4 @@ xunit.xml
 .vscode/*
 nbproject/
 coverage/
+build.properties
