@@ -2,1745 +2,2770 @@
 	"variables": [],
 	"info": {
 		"name": "Brand APIs",
-		"_postman_id": "20bf6317-d506-5130-acb6-80ab71b2dbcb",
+		"_postman_id": "a19ca8a2-ac5d-7d34-b40b-ac3b0c6d4867",
 		"description": "user_flows|monitor.brandapi",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
-	"item": [{
-		"name": "A0. Application Access",
-		"description": " application_access",
-		"item": [{
-			"name": "authorize service",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar serviceAccessToken = typeof response.access_token !== 'undefined' ? response.access_token : 0;\npostman.setEnvironmentVariable(\"service_access_token\", serviceAccessToken);\n\n\n//tests\ntests[\"Success Response\"] = responseCode.code === 200;\ntests[\"Got Service access_token\"] = serviceAccessToken ? 1:0;"
+	"item": [
+		{
+			"name": "A0. Application Access",
+			"description": " application_access",
+			"item": [
+				{
+					"name": "authorize service",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"var serviceAccessToken = typeof response.access_token !== 'undefined' ? response.access_token : 0;",
+									"postman.setEnvironmentVariable(\"service_access_token\", serviceAccessToken);",
+									"",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = responseCode.code === 200;",
+									"tests[\"Got Service access_token\"] = serviceAccessToken ? 1:0;"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"function base64url(source) {",
+									"  encodedSource = CryptoJS.enc.Base64.stringify(source);",
+									"  encodedSource = encodedSource.replace(/=+$/, '');",
+									"  encodedSource = encodedSource.replace(/\\+/g, '-');",
+									"  encodedSource = encodedSource.replace(/\\//g, '_');",
+									"  ",
+									"  return encodedSource;",
+									"}",
+									"var header = {",
+									"  \"alg\": \"HS256\",",
+									"  \"typ\": \"JWT\"",
+									"};",
+									"var stringifiedHeader = CryptoJS.enc.Utf8.parse(JSON.stringify(header));",
+									"var encodedHeader = base64url(stringifiedHeader);",
+									"var now = new Date() / 1000;",
+									"//var jwsLife = ( 24 * 60 * 60 );",
+									"var jwsLife = 10;",
+									"var body = {",
+									"    \"iss\": postman.getEnvironmentVariable(\"client_id\"),",
+									"    \"sub\": postman.getEnvironmentVariable(\"client_id\"),",
+									"    \"aud\": postman.getEnvironmentVariable(\"oauth_server\"),",
+									"    \"iat\": now,",
+									"    \"exp\": now + jwsLife,",
+									"};",
+									"",
+									"var stringifiedBody = CryptoJS.enc.Utf8.parse(JSON.stringify(body));",
+									"var encodedBody = base64url(stringifiedBody);",
+									"var token = encodedHeader + \".\" + encodedBody;",
+									"var signature = CryptoJS.HmacSHA256(token, postman.getEnvironmentVariable(\"client_secret\"));",
+									"signature = base64url(signature);",
+									"var signedToken = token + \".\" + signature;",
+									"postman.setEnvironmentVariable(\"jws\", signedToken);"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{oauth_server}}",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "client_assertion_type",
+									"value": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "scope",
+									"value": "brand_api ropc brand_api_customer_support brand_api_migration",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "client_assertion",
+									"value": "{{jws}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": "tags: [endpoint:oauth2_service_access_token,flow:user,sub_flow:app_access]"
+					},
+					"response": []
 				}
-			}, {
-				"listen": "prerequest",
-				"script": {
-					"type": "text/javascript",
-					"exec": "function base64url(source) {\n  encodedSource = CryptoJS.enc.Base64.stringify(source);\n  encodedSource = encodedSource.replace(/=+$/, '');\n  encodedSource = encodedSource.replace(/\\+/g, '-');\n  encodedSource = encodedSource.replace(/\\//g, '_');\n  \n  return encodedSource;\n}\nvar header = {\n  \"alg\": \"HS256\",\n  \"typ\": \"JWT\"\n};\nvar stringifiedHeader = CryptoJS.enc.Utf8.parse(JSON.stringify(header));\nvar encodedHeader = base64url(stringifiedHeader);\nvar now = new Date() / 1000;\n//var jwsLife = ( 24 * 60 * 60 );\nvar jwsLife = 10;\nvar body = {\n    \"iss\": postman.getEnvironmentVariable(\"client_id\"),\n    \"sub\": postman.getEnvironmentVariable(\"client_id\"),\n    \"aud\": postman.getEnvironmentVariable(\"oauth_server\"),\n    \"iat\": now,\n    \"exp\": now + jwsLife,\n};\n\nvar stringifiedBody = CryptoJS.enc.Utf8.parse(JSON.stringify(body));\nvar encodedBody = base64url(stringifiedBody);\nvar token = encodedHeader + \".\" + encodedBody;\nvar signature = CryptoJS.HmacSHA256(token, postman.getEnvironmentVariable(\"client_secret\"));\nsignature = base64url(signature);\nvar signedToken = token + \".\" + signature;\npostman.setEnvironmentVariable(\"jws\", signedToken);"
-				}
-			}],
-			"request": {
-				"url": "{{oauth_server}}",
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [{
-						"key": "grant_type",
-						"value": "client_credentials",
-						"type": "text",
-						"enabled": true
-					}, {
-						"key": "client_assertion_type",
-						"value": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
-						"type": "text",
-						"enabled": true
-					}, {
-						"key": "scope",
-						"value": "brand_api ropc brand_api_customer_support brand_api_migration",
-						"type": "text",
-						"enabled": true
-					}, {
-						"key": "client_assertion",
-						"value": "{{jws}}",
-						"type": "text",
-						"enabled": true
-					}]
+			]
+		},
+		{
+			"name": "A1. Register user with password",
+			"description": "register_users_flow",
+			"item": [
+				{
+					"name": "doesUserExist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
+									"",
+									"if(response.data.doesExist === 'true'){",
+									"postman.setEnvironmentVariable(\"create_user_email\", postman.getEnvironmentVariable(\"gmail_user\") ",
+									"    + \"+\" + postman.getEnvironmentVariable(\"namespace\") ",
+									"    + \".\" + Math.random().toString(36).substring(2) + _.random(20000, 100) + '@gmail.com');",
+									"}",
+									""
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"postman.setEnvironmentVariable(\"create_user_email\", postman.getEnvironmentVariable(\"gmail_user\") ",
+									"    + \"+\" + postman.getEnvironmentVariable(\"namespace\") ",
+									"    + \".\" + Math.random().toString(36).substring(2) + _.random(20000, 100) + '@gmail.com');"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}doesUserExist",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"email\":\"{{create_user_email}}\"}"
+						},
+						"description": "tags: [endpoint:does_user_exist,flow:user,sub_flow:pwd_reg]"
+					},
+					"response": []
 				},
-				"description": "tags: [oauth2,service_access_token,user_flows]"
-			},
-			"response": []
-		}]
-	}, {
-		"name": "A1. Register user with password",
-		"description": "register_users_flow",
-		"item": [{
-			"name": "doesUserExist",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\n\nif(response.data.doesExist === 'true'){\npostman.setEnvironmentVariable(\"create_user_email\", postman.getEnvironmentVariable(\"gmail_user\") \n    + \"+\" + postman.getEnvironmentVariable(\"namespace\") \n    + \".\" + Math.random().toString(36).substring(2) + _.random(20000, 100) + '@gmail.com');\n}\n"
-				}
-			}, {
-				"listen": "prerequest",
-				"script": {
-					"type": "text/javascript",
-					"exec": "postman.setEnvironmentVariable(\"create_user_email\", postman.getEnvironmentVariable(\"gmail_user\") \n    + \"+\" + postman.getEnvironmentVariable(\"namespace\") \n    + \".\" + Math.random().toString(36).substring(2) + _.random(20000, 100) + '@gmail.com');"
-				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}doesUserExist",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{service_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\",\"email\":\"{{create_user_email}}\"}"
+				{
+					"name": "validateEmail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}validateEmail",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"email\":\"{{create_user_email}}\"}"
+						},
+						"description": "tags: [endpoint:validate_email,flow:user,sub_flow:pwd_reg]"
+					},
+					"response": []
 				},
-				"description": "tags: [does_user_exist,user_flows]"
-			},
-			"response": []
-		}, {
-			"name": "validateEmail",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\n"
-				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}validateEmail",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{service_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\",\"email\":\"{{create_user_email}}\"}"
+				{
+					"name": "validateDisplayName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"var resId = typeof response.data.reservationId !== 'undefined' ? response.data.reservationId : '';",
+									"postman.setEnvironmentVariable('create_user_reservationid', resId);",
+									"if(resId === '' ){",
+									"    postman.setEnvironmentVariable(\"create_user_displayname\",Math.random().toString(36).substring(2)",
+									"+ '-' +  (Math.floor(Math.random()* (_.random(20000,4000) - _.random(200,400)+ 1) + _.random(5,1000))) );",
+									"}",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"postman.setEnvironmentVariable(\"create_user_displayname\",Math.random().toString(36).substring(2)",
+									"+ '-' +  (Math.floor(Math.random()* (_.random(20000,4000) - _.random(200,400)+ 1) + _.random(5,1000))) );"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}validateDisplayName",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"displayName\":\"{{create_user_displayname}}\"}"
+						},
+						"description": "tags: [endpoint:validate_display_name,flow:user,sub_flow:pwd_reg]"
+					},
+					"response": []
 				},
-				"description": "tags: [validate_email,user_flows]"
-			},
-			"response": []
-		}, {
-			"name": "validateDisplayName",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar resId = typeof response.data.reservationId !== 'undefined' ? response.data.reservationId : '';\npostman.setEnvironmentVariable('create_user_reservationid', resId);\nif(resId === '' ){\n    postman.setEnvironmentVariable(\"create_user_displayname\",Math.random().toString(36).substring(2)\n+ '-' +  (Math.floor(Math.random()* (_.random(20000,4000) - _.random(200,400)+ 1) + _.random(5,1000))) );\n}\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';"
-				}
-			}, {
-				"listen": "prerequest",
-				"script": {
-					"type": "text/javascript",
-					"exec": "postman.setEnvironmentVariable(\"create_user_displayname\",Math.random().toString(36).substring(2)\n+ '-' +  (Math.floor(Math.random()* (_.random(20000,4000) - _.random(200,400)+ 1) + _.random(5,1000))) );"
-				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}validateDisplayName",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{service_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\",\"displayName\":\"{{create_user_displayname}}\"}"
+				{
+					"name": "validatePassword",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
+									"if(response.status === 'fail'){",
+									"    postman.setEnvironmentVariable(\"create_user_password\",\"hy%%%123\");",
+									"}"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"postman.setEnvironmentVariable(\"create_user_password\",\"nm###123\");"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}validatePassword",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"username\":\"{{create_user_email}}\",\"password\":\"{{create_user_password}}\"}"
+						},
+						"description": "tags: [endpoint:validate_password,flow:user,sub_flow:pwd_reg]"
+					},
+					"response": []
 				},
-				"description": "tags: [validate_display_name,user_flows]"
-			},
-			"response": []
-		}, {
-			"name": "validatePassword",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\nif(response.status === 'fail'){\n    postman.setEnvironmentVariable(\"create_user_password\",\"hy%%%123\");\n}"
-				}
-			}, {
-				"listen": "prerequest",
-				"script": {
-					"type": "text/javascript",
-					"exec": "postman.setEnvironmentVariable(\"create_user_password\",\"nm###123\");"
-				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}validatePassword",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{service_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\",\"username\":\"{{create_user_email}}\",\"password\":\"{{create_user_password}}\"}"
+				{
+					"name": "createUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"var userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;",
+									"",
+									"postman.setEnvironmentVariable('new_user_id', userId);",
+									"",
+									"postman.setEnvironmentVariable(\"txnid\", postman.getResponseHeader(\"X-AOL-IDENTITY-TX-ID\"));",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
+									"",
+									"//recovery",
+									"var count = typeof postman.getEnvironmentVariable('createUserTries') !== 'undefined' ? postman.getEnvironmentVariable('createUserTries') : 1;",
+									"",
+									"if(response.status !== 'success' && count < 3){",
+									"    postman.setEnvironmentVariable('createUserTries', count++);",
+									"    ",
+									"   postman.setEnvironmentVariable(\"create_user_email\", postman.getEnvironmentVariable(\"gmail_user\") ",
+									"    + \"+\" + postman.getEnvironmentVariable(\"namespace\") ",
+									"    + \".\" + Math.random().toString(36).substring(2) + _.random(20000, 100) + '@gmail.com');",
+									"    ",
+									"    postman.setEnvironmentVariable(\"create_user_displayname\",Math.random().toString(36).substring(2)",
+									"+ '-' +  (Math.floor(Math.random()* (_.random(20000,4000) - _.random(200,400)+ 1) + _.random(5,1000))) );",
+									"",
+									"    postman.setEnvironmentVariable(\"create_user_password\",\"nm###\" + _.random(100,900) );",
+									"    ",
+									"    postman.setNextRequest('create_user');",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}createUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"email\":\"{{create_user_email}}\",\"password\":\"{{create_user_password}}\",\"displayName\":\"{{create_user_displayname}}\",\"displayNameReservationId\":\"{{create_user_reservationid}}\"}"
+						},
+						"description": "tags: [endpoint:create_user,flow:user,sub_flow:pwd_reg]"
+					},
+					"response": []
 				},
-				"description": "tags: [validate_password,user_flows]"
-			},
-			"response": []
-		}, {
-			"name": "createUser",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\n\npostman.setEnvironmentVariable('new_user_id', userId);\n\npostman.setEnvironmentVariable(\"txnid\", postman.getResponseHeader(\"X-AOL-IDENTITY-TX-ID\"));\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\n\n//recovery\nvar count = typeof postman.getEnvironmentVariable('createUserTries') !== 'undefined' ? postman.getEnvironmentVariable('createUserTries') : 1;\n\nif(response.status !== 'success' && count < 3){\n    postman.setEnvironmentVariable('createUserTries', count++);\n    \n   postman.setEnvironmentVariable(\"create_user_email\", postman.getEnvironmentVariable(\"gmail_user\") \n    + \"+\" + postman.getEnvironmentVariable(\"namespace\") \n    + \".\" + Math.random().toString(36).substring(2) + _.random(20000, 100) + '@gmail.com');\n    \n    postman.setEnvironmentVariable(\"create_user_displayname\",Math.random().toString(36).substring(2)\n+ '-' +  (Math.floor(Math.random()* (_.random(20000,4000) - _.random(200,400)+ 1) + _.random(5,1000))) );\n\n    postman.setEnvironmentVariable(\"create_user_password\",\"nm###\" + _.random(100,900) );\n    \n    postman.setNextRequest('create_user');\n}"
-				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}createUser",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{service_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\",\"email\":\"{{create_user_email}}\",\"password\":\"{{create_user_password}}\",\"displayName\":\"{{create_user_displayname}}\",\"displayNameReservationId\":\"{{create_user_reservationid}}\"}"
+				{
+					"name": "getTokenByTxnId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"var token = typeof response.data !== 'undefined' ? response.data : 0;",
+									"",
+									"postman.setEnvironmentVariable('register_email_token', token);",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
+									"",
+									"//recovery",
+									"var count = typeof postman.getEnvironmentVariable('regGetTokenByTxnIdTries') !== 'undefined' ? postman.getEnvironmentVariable('regGetTokenByTxnIdTries') : 1;",
+									"",
+									"if(response.status !== 'success' && count < 3){",
+									"    postman.setNextRequest('get_token_by_txn_id_reg_flow');",
+									"    ",
+									"}",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}getTokenByTxnId",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\n  \"transactionId\": \"{{txnid}}\"\n}"
+						},
+						"description": "tags: [endpoint:get_token_by_txn_id,flow:user,sub_flow:pwd_reg]"
+					},
+					"response": []
 				},
-				"description": "tags: [create_user,user_with_password,user_flows]"
-			},
-			"response": []
-		}, {
-			"name": "getTokenByTxnId",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar token = typeof response.data !== 'undefined' ? response.data : 0;\n\npostman.setEnvironmentVariable('register_email_token', token);\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\n\n//recovery\nvar count = typeof postman.getEnvironmentVariable('regGetTokenByTxnIdTries') !== 'undefined' ? postman.getEnvironmentVariable('regGetTokenByTxnIdTries') : 1;\n\nif(response.status !== 'success' && count < 3){\n    postman.setNextRequest('get_token_by_txn_id_reg_flow');\n    \n}\n\n"
+				{
+					"name": "confirmEmail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}confirmEmail",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\n  \"token\": \"{{register_email_token}}\",\n  \"username\":\"{{create_user_email}}\"\n}"
+						},
+						"description": "tags: [endpoint:confirm_email,flow:user,sub_flow:pwd_reg]"
+					},
+					"response": []
 				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}getTokenByTxnId",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{service_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\",\n  \"transactionId\": \"{{txnid}}\"\n}"
+			]
+		},
+		{
+			"name": "A2. Register social user",
+			"description": "register_social_flow",
+			"item": [
+				{
+					"name": "createUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"var userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;",
+									"postman.setEnvironmentVariable(\"social_user_id\", userId);",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
+									"tests[\"New user created\"] = typeof response.status !== 'undefined' && response.status === 'success';"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"postman.setEnvironmentVariable(\"create_social_user\", Math.random().toString(36).substring(2) + _.random(2000, 100));",
+									"",
+									"postman.setEnvironmentVariable(\"create_social_email\", postman.getEnvironmentVariable(\"gmail_user\") ",
+									"    + \"+\" + postman.getEnvironmentVariable(\"namespace\") ",
+									"    + \".\" + Math.random().toString(36).substring(2) + _.random(20000, 100) + '@gmail.com');"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}createUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"email\":\"{{create_social_email}}\",\"socialUser\":\"{{create_social_user}}\",\"socialPid\":\"{{social_user_provider}}\",\"confirmedEmail\":\"T\" }"
+						},
+						"description": "tags: [endpoint:create_user,social_user,flow:user,sub_flow:social_reg]"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "A3. OAuth2 user authentication",
+			"description": "authentication_flow",
+			"item": [
+				{
+					"name": "auth user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"var userAccessToken = typeof response.access_token !== 'undefined' ? response.access_token : 0;",
+									"var userRefreshToken = typeof response.refresh_token !== 'undefined' ? response.refresh_token : 0;",
+									"postman.setEnvironmentVariable(\"user_access_token\", userAccessToken);",
+									"postman.setEnvironmentVariable(\"user_refresh_token\", userRefreshToken);",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = responseCode.code === 200;",
+									"tests[\"Got user access_token\"] = userAccessToken ? 1 : 0;",
+									"tests[\"Got user refresh_token\"] = userRefreshToken ? 1 : 0;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{oauth_server}}",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "{{create_user_email}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "scope",
+									"value": "brand_api",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "password",
+									"value": "{{create_user_password}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": "tags: [endpoint:oauth2_user_with_password,flow:user,sub_flow:auth]"
+					},
+					"response": []
 				},
-				"description": "tags: [get_token_by_txn_id,user_flows]"
-			},
-			"response": []
-		}, {
-			"name": "confirmEmail",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\n"
-				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}confirmEmail",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{service_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\",\n  \"token\": \"{{register_email_token}}\",\n  \"username\":\"{{create_user_email}}\"\n}"
+				{
+					"name": "getUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"var userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
+									"tests[\"Got user data\"] = userId ? 1 : 0;"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}getUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\"}"
+						},
+						"description": "tags: [endpoint:get_user,flow:user,sub_flow:auth]"
+					},
+					"response": []
 				},
-				"description": "tags: [confirm_email,user_flows]"
-			},
-			"response": []
-		}]
-	}, {
-		"name": "A2. Register social user",
-		"description": "register_social_flow",
-		"item": [{
-			"name": "createUser",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\npostman.setEnvironmentVariable(\"social_user_id\", userId);\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"New user created\"] = typeof response.status !== 'undefined' && response.status === 'success';"
-				}
-			}, {
-				"listen": "prerequest",
-				"script": {
-					"type": "text/javascript",
-					"exec": "postman.setEnvironmentVariable(\"create_social_user\", Math.random().toString(36).substring(2) + _.random(2000, 100));\n\npostman.setEnvironmentVariable(\"create_social_email\", postman.getEnvironmentVariable(\"gmail_user\") \n    + \"+\" + postman.getEnvironmentVariable(\"namespace\") \n    + \".\" + Math.random().toString(36).substring(2) + _.random(20000, 100) + '@gmail.com');"
-				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}createUser",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{service_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\",\"email\":\"{{create_social_email}}\",\"socialUser\":\"{{create_social_user}}\",\"socialPid\":\"{{social_user_provider}}\",\"confirmedEmail\":\"T\" }"
+				{
+					"name": "refresh user token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = responseCode.code === 200;",
+									"tests[\"Got user access_token\"] = typeof response.access_token !== 'undefined';",
+									"tests[\"Got user refresh_token\"] = typeof response.refresh_token !== 'undefined';"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{oauth_server}}",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "refresh_token",
+									"value": "{{user_refresh_token}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "grant_type",
+									"value": "refresh_token",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "scope",
+									"value": "brand_api",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": "tags: [endpoint:oauth2_refresh_token,flow:user,sub_flow:auth]"
+					},
+					"response": []
 				},
-				"description": "tags: [create_user,social_user,user_flows]"
-			},
-			"response": []
-		}]
-	}, {
-		"name": "A3. OAuth2 user authentication",
-		"description": "authentication_flow",
-		"item": [{
-			"name": "auth user",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userAccessToken = typeof response.access_token !== 'undefined' ? response.access_token : 0;\nvar userRefreshToken = typeof response.refresh_token !== 'undefined' ? response.refresh_token : 0;\npostman.setEnvironmentVariable(\"user_access_token\", userAccessToken);\npostman.setEnvironmentVariable(\"user_refresh_token\", userRefreshToken);\n\n//tests\ntests[\"Success Response\"] = responseCode.code === 200;\ntests[\"Got user access_token\"] = userAccessToken ? 1 : 0;\ntests[\"Got user refresh_token\"] = userRefreshToken ? 1 : 0;\n"
-				}
-			}],
-			"request": {
-				"url": "{{oauth_server}}",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{service_access_token}}",
-					"description": ""
-				}],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [{
-						"key": "username",
-						"value": "{{create_user_email}}",
-						"type": "text",
-						"enabled": true
-					}, {
-						"key": "grant_type",
-						"value": "password",
-						"type": "text",
-						"enabled": true
-					}, {
-						"key": "scope",
-						"value": "brand_api",
-						"type": "text",
-						"enabled": true
-					}, {
-						"key": "password",
-						"value": "{{create_user_password}}",
-						"type": "text",
-						"enabled": true
-					}]
+				{
+					"name": "auth social user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"var userAccessToken = typeof response.access_token !== 'undefined' ? response.access_token : 0;",
+									"var userRefreshToken = typeof response.refresh_token !== 'undefined' ? response.refresh_token : 0;",
+									"postman.setEnvironmentVariable(\"social_user_access_token\", userAccessToken);",
+									"postman.setEnvironmentVariable(\"social_user_refresh_token\", userRefreshToken);",
+									"//tests",
+									"tests[\"Success Response\"] = responseCode.code === 200;",
+									"tests[\"Got user access_token\"] = userAccessToken ? 1 : 0;",
+									"tests[\"Got user refresh_token\"] = userRefreshToken ? 1 : 0;"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{oauth_server}}",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "{{create_social_user}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "grant_type",
+									"value": "urn:x-aol:social:login",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "scope",
+									"value": "brand_api",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "provider",
+									"value": "{{social_user_provider}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": "tags: [endpoint:oauth2_social_user,flow:user,sub_flow:auth]"
+					},
+					"response": []
 				},
-				"description": "tags: [oauth2,user_with_password,user_flows]"
-			},
-			"response": []
-		}, {
-			"name": "getUser",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Got user data\"] = userId ? 1 : 0;"
-				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}getUser",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{user_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\"}"
+				{
+					"name": "refresh social user token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"//tests",
+									"tests[\"Success Response\"] = responseCode.code === 200;",
+									"tests[\"Got user access_token\"] = typeof response.access_token !== 'undefined';",
+									"tests[\"Got user refresh_token\"] = typeof response.refresh_token !== 'undefined';"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{oauth_server}}",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "refresh_token",
+									"value": "{{social_user_refresh_token}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "grant_type",
+									"value": "refresh_token",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "scope",
+									"value": "brand_api",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": "tags: [endpoint:oauth2_social_user_refresh_token,flow:user,sub_flow:auth]"
+					},
+					"response": []
 				},
-				"description": "tags: [get_user,user_flows]"
-			},
-			"response": []
-		}, {
-			"name": "refresh user token",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n\n//tests\ntests[\"Success Response\"] = responseCode.code === 200;\ntests[\"Got user access_token\"] = typeof response.access_token !== 'undefined';\ntests[\"Got user refresh_token\"] = typeof response.refresh_token !== 'undefined';"
+				{
+					"name": "getUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"var userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
+									"tests[\"Got user data\"] = userId ? 1 : 0;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}getUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{social_user_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\"}"
+						},
+						"description": "tags: [endpoint:get_user,flow:user,sub_flow:auth]"
+					},
+					"response": []
 				}
-			}],
-			"request": {
-				"url": "{{oauth_server}}",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{service_access_token}}",
-					"description": ""
-				}],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [{
-						"key": "refresh_token",
-						"value": "{{user_refresh_token}}",
-						"type": "text",
-						"enabled": true
-					}, {
-						"key": "grant_type",
-						"value": "refresh_token",
-						"type": "text",
-						"enabled": true
-					}, {
-						"key": "scope",
-						"value": "brand_api",
-						"type": "text",
-						"enabled": true
-					}]
+			]
+		},
+		{
+			"name": "A4. Update user data",
+			"description": "update_user_flow",
+			"item": [
+				{
+					"name": "getUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"var userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
+									"tests[\"Got user data\"] = userId ? 1 : 0;"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}getUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\"}"
+						},
+						"description": "tags: [endpoint:get_user,flow:user,sub_flow:update_user]"
+					},
+					"response": []
 				},
-				"description": "tags: [oauth2,refresh_token,user_flows]"
-			},
-			"response": []
-		}, {
-			"name": "auth social user",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userAccessToken = typeof response.access_token !== 'undefined' ? response.access_token : 0;\nvar userRefreshToken = typeof response.refresh_token !== 'undefined' ? response.refresh_token : 0;\npostman.setEnvironmentVariable(\"social_user_access_token\", userAccessToken);\npostman.setEnvironmentVariable(\"social_user_refresh_token\", userRefreshToken);\n//tests\ntests[\"Success Response\"] = responseCode.code === 200;\ntests[\"Got user access_token\"] = userAccessToken ? 1 : 0;\ntests[\"Got user refresh_token\"] = userRefreshToken ? 1 : 0;"
-				}
-			}],
-			"request": {
-				"url": "{{oauth_server}}",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{service_access_token}}",
-					"description": ""
-				}],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [{
-						"key": "username",
-						"value": "{{create_social_user}}",
-						"type": "text",
-						"enabled": true
-					}, {
-						"key": "grant_type",
-						"value": "urn:x-aol:social:login",
-						"type": "text",
-						"enabled": true
-					}, {
-						"key": "scope",
-						"value": "brand_api",
-						"type": "text",
-						"enabled": true
-					}, {
-						"key": "provider",
-						"value": "{{social_user_provider}}",
-						"type": "text",
-						"enabled": true
-					}]
+				{
+					"name": "updateUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"//tests",
+									"",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
+									"tests[\"Updated correct user\"] = response.data.id === postman.getEnvironmentVariable('new_user_id');",
+									"tests[\"Updated data shows in profile\"] = response.data.profile.postCode === postman.getEnvironmentVariable('user_update_postal');"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"postman.setEnvironmentVariable(\"user_update_postal\",\"94301\");"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}updateUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{new_user_id}}\",\"postCode\":\"{{user_update_postal}}\"}"
+						},
+						"description": "tags: [endoint:update_user,flow:user,sub_flow:udpate_user]"
+					},
+					"response": []
 				},
-				"description": "tags: [oauth2,social_user,user_flows]"
-			},
-			"response": []
-		}, {
-			"name": "refresh social user token",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n//tests\ntests[\"Success Response\"] = responseCode.code === 200;\ntests[\"Got user access_token\"] = typeof response.access_token !== 'undefined';\ntests[\"Got user refresh_token\"] = typeof response.refresh_token !== 'undefined';"
-				}
-			}],
-			"request": {
-				"url": "{{oauth_server}}",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{service_access_token}}",
-					"description": ""
-				}],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [{
-						"key": "refresh_token",
-						"value": "{{social_user_refresh_token}}",
-						"type": "text",
-						"enabled": true
-					}, {
-						"key": "grant_type",
-						"value": "refresh_token",
-						"type": "text",
-						"enabled": true
-					}, {
-						"key": "scope",
-						"value": "brand_api",
-						"type": "text",
-						"enabled": true
-					}]
+				{
+					"name": "getUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"var userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;",
+									"var postCode = typeof response.data.profile.postCode !== 'undefined' ? response.data.profile.postCode : 0;",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
+									"tests[\"Got user data\"] = userId ? 1 : 0;",
+									"tests[\"Got updated data\"] = postCode === postman.getEnvironmentVariable('user_update_postal');"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}getUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\"}"
+						},
+						"description": "tags: [endpoint:get_user,flow:user,sub_flow:update_user]"
+					},
+					"response": []
 				},
-				"description": "tags: [oauth2,social_user,refresh_token,user_flows]"
-			},
-			"response": []
-		}, {
-			"name": "getUser",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Got user data\"] = userId ? 1 : 0;\n"
+				{
+					"name": "updateUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
+									"tests[\"Updated correct user\"] = response.data.id === postman.getEnvironmentVariable('new_user_id');",
+									"tests[\"Updated data shows in profile\"] = response.data.profile.postCode === '';"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}updateUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{new_user_id}}\",\"postCode\":\"\"}"
+						},
+						"description": "tags: [endpoint:update_user,flow:user,sub_flow:update_user]"
+					},
+					"response": []
 				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}getUser",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{social_user_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\"}"
+			]
+		},
+		{
+			"name": "A5. Link Social User",
+			"description": "link_social_flow",
+			"item": [
+				{
+					"name": "linkSocialUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"var userId = typeof response.data.id !== 'undefined' ? response.data.id : '';",
+									"var socialUserExists = typeof response.data.social[0].puid !== 'undefined';",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
+									"tests[\"Got user data\"] = response.status === 'success';",
+									"tests[\"Link response correct user\"] = userId === postman.getEnvironmentVariable('new_user_id');",
+									"tests[\"Social User set in social array\"] =socialUserExists;",
+									"tests[\"Link success! Social user showing up in data.\"] = responseBody.has(postman.getEnvironmentVariable('link_social_user'));",
+									"",
+									""
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"postman.setEnvironmentVariable(\"link_social_user\", Math.random().toString(36).substring(2) + _.random(2000, 100));"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}linkSocialUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{new_user_id}}\",\"socialPid\":\"{{social_user_provider}}\",\"socialUsername\":\"{{link_social_user}}\"}"
+						},
+						"description": "tags: [endpoint:link_social_user,flow:user,sub_flow:social_link]"
+					},
+					"response": []
 				},
-				"description": "tags: [get_user,user_flows]"
-			},
-			"response": []
-		}]
-	}, {
-		"name": "A4. Update user data",
-		"description": "update_user_flow",
-		"item": [{
-			"name": "getUser",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Got user data\"] = userId ? 1 : 0;"
-				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}getUser",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{user_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\"}"
+				{
+					"name": "getUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
+									"tests[\"Link staying! Social user showing up in data.\"] = responseBody.has(postman.getEnvironmentVariable('link_social_user'));"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}getUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\"}"
+						},
+						"description": "tags: [endpoint:get_user,flow:user,sub_flow:social_link]"
+					},
+					"response": []
 				},
-				"description": "tags: [get_user,user_flows]"
-			},
-			"response": []
-		}, {
-			"name": "updateUser",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n//tests\n\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Updated correct user\"] = response.data.id === postman.getEnvironmentVariable('new_user_id');\ntests[\"Updated data shows in profile\"] = response.data.profile.postCode === postman.getEnvironmentVariable('user_update_postal');"
-				}
-			}, {
-				"listen": "prerequest",
-				"script": {
-					"type": "text/javascript",
-					"exec": "postman.setEnvironmentVariable(\"user_update_postal\",\"94301\");"
-				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}updateUser",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{user_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{new_user_id}}\",\"postCode\":\"{{user_update_postal}}\"}"
+				{
+					"name": "unlinkSocialUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"var userId = response.data.id !== 'undefined' ? response.data.id : 0;",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
+									"tests[\"unlink shows correct user\"] = userId === postman.getEnvironmentVariable('new_user_id');",
+									"tests[\"unlink successful\"] = !responseBody.has(postman.getEnvironmentVariable('link_social_user'));"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}unlinkSocialUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{new_user_id}}\",\"socialPid\":\"{{social_user_provider}}\",\"socialUsername\":\"{{link_social_user}}\"}"
+						},
+						"description": "tags: [endpoint:unlink_social_user,flow:user,sub_flow:social_link]"
+					},
+					"response": []
 				},
-				"description": "tags: [update_user,user_flows]"
-			},
-			"response": []
-		}, {
-			"name": "getUser",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\nvar postCode = typeof response.data.profile.postCode !== 'undefined' ? response.data.profile.postCode : 0;\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Got user data\"] = userId ? 1 : 0;\ntests[\"Got updated data\"] = postCode === postman.getEnvironmentVariable('user_update_postal');"
+				{
+					"name": "getUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"var userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
+									"tests[\"Got user data\"] = userId ? 1 : 0;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}getUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\"}"
+						},
+						"description": "tags: [endpoint:get_user,flow:user,sub_flow:social_link]"
+					},
+					"response": []
 				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}getUser",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{user_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\"}"
+			]
+		},
+		{
+			"name": "A7. passwordReset",
+			"description": "password_reset_flow",
+			"item": [
+				{
+					"name": "sendPasswordReset",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"",
+									"postman.setEnvironmentVariable(\"pwd_txnid\", postman.getResponseHeader(\"X-AOL-IDENTITY-TX-ID\"));",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}sendPasswordReset",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"username\":\"{{create_user_email}}\"}"
+						},
+						"description": "tags: [endpoint:send_password_reset,flow:user,sub_flow:pwd_reset]"
+					},
+					"response": []
 				},
-				"description": "tags: [get_user,user_flows]"
-			},
-			"response": []
-		}, {
-			"name": "updateUser",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Updated correct user\"] = response.data.id === postman.getEnvironmentVariable('new_user_id');\ntests[\"Updated data shows in profile\"] = response.data.profile.postCode === '';"
-				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}updateUser",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{user_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{new_user_id}}\",\"postCode\":\"\"}"
+				{
+					"name": "getTokenByTxnId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"var token = typeof response.data !== 'undefined' ? response.data : 0;",
+									"",
+									"postman.setEnvironmentVariable('password_reset_token', token);",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
+									"tests['got password reset token'] = token ? 1 : 0;",
+									"//recovery",
+									"var count = typeof postman.getEnvironmentVariable('pwdGetTokenByTxnIdTries') !== 'undefined' ? postman.getEnvironmentVariable('pwdGetTokenByTxnIdTries') : 1;",
+									"",
+									"if(response.status !== 'success' && count < 3){",
+									"    postman.setNextRequest('get_token_by_txn_id_pwd_reset_flow');",
+									"    ",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}getTokenByTxnId",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\n  \"transactionId\": \"{{pwd_txnid}}\"\n}"
+						},
+						"description": "tags: [endpoint:get_token_by_txn_id,flow:user,sub_flow:pwd_reset]"
+					},
+					"response": []
 				},
-				"description": "tags: [update_user,user_flows]"
-			},
-			"response": []
-		}]
-	}, {
-		"name": "A5. Link Social User",
-		"description": "link_social_flow",
-		"item": [{
-			"name": "linkSocialUser",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : '';\nvar socialUserExists = typeof response.data.social[0].puid !== 'undefined';\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Got user data\"] = response.status === 'success';\ntests[\"Link response correct user\"] = userId === postman.getEnvironmentVariable('new_user_id');\ntests[\"Social User set in social array\"] =socialUserExists;\ntests[\"Link success! Social user showing up in data.\"] = responseBody.has(postman.getEnvironmentVariable('link_social_user'));\n\n"
-				}
-			}, {
-				"listen": "prerequest",
-				"script": {
-					"type": "text/javascript",
-					"exec": "postman.setEnvironmentVariable(\"link_social_user\", Math.random().toString(36).substring(2) + _.random(2000, 100));"
-				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}linkSocialUser",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{user_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{new_user_id}}\",\"socialPid\":\"{{social_user_provider}}\",\"socialUsername\":\"{{link_social_user}}\"}"
+				{
+					"name": "confirmPasswordReset",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
+									""
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"postman.setEnvironmentVariable(\"reset_user_password\",eval(postman.getEnvironmentVariable(\"generate_password\")));"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}confirmPasswordReset",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\n  \"token\": \"{{password_reset_token}}\",\n  \"username\":\"{{create_user_email}}\",\n  \"password\":\"{{reset_user_password}}\"\n}"
+						},
+						"description": "tags: [endpoint:confirm_password_reset,flow:user,sub_flow:pwd_reset]"
+					},
+					"response": []
 				},
-				"description": "tags: [link_social_user,user_flows]"
-			},
-			"response": []
-		}, {
-			"name": "getUser",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Link staying! Social user showing up in data.\"] = responseBody.has(postman.getEnvironmentVariable('link_social_user'));"
+				{
+					"name": "authenticate user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"var userAccessToken = typeof response.access_token !== 'undefined' ? response.access_token : 0;",
+									"if(userAccessToken){",
+									"    postman.setEnvironmentVariable(\"user_access_token\", userAccessToken);",
+									"}",
+									"//tests",
+									"tests[\"Success Response\"] = responseCode.code === 200;",
+									"tests[\"Got user access_token\"] = userAccessToken ? 1 : 0;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{oauth_server}}",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "{{create_user_email}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "scope",
+									"value": "brand_api",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "password",
+									"value": "{{reset_user_password}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": "tags: [endpoint:oauth2_access_token,flow:user,sub_flow:pwd_reset]"
+					},
+					"response": []
 				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}getUser",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{user_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\"}"
+			]
+		},
+		{
+			"name": "A8. Confirm Email",
+			"description": "confirm_email_flow",
+			"item": [
+				{
+					"name": "sendEmailConfirmation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"",
+									"postman.setEnvironmentVariable(\"email_txnid\", postman.getResponseHeader(\"X-AOL-IDENTITY-TX-ID\"));",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}sendConfirmEmail",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"username\":\"{{create_user_email}}\"}"
+						},
+						"description": "tags: [endpoint:send_confirm_email,flow:user,sub_flow:confirm_email]"
+					},
+					"response": []
 				},
-				"description": "tags: [get_user,user_flows]"
-			},
-			"response": []
-		}, {
-			"name": "unlinkSocialUser",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = response.data.id !== 'undefined' ? response.data.id : 0;\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"unlink shows correct user\"] = userId === postman.getEnvironmentVariable('new_user_id');\ntests[\"unlink successful\"] = !responseBody.has(postman.getEnvironmentVariable('link_social_user'));"
-				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}unlinkSocialUser",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{user_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{new_user_id}}\",\"socialPid\":\"{{social_user_provider}}\",\"socialUsername\":\"{{link_social_user}}\"}"
+				{
+					"name": "getTokenByTxnId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"var token = typeof response.data !== 'undefined' ? response.data : 0;",
+									"",
+									"postman.setEnvironmentVariable('email_confirm_token', token);",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
+									"tests['got email token'] = token ? 1 : 0;",
+									"",
+									"//recovery",
+									"var count = typeof postman.getEnvironmentVariable('emailGetTokenByTxnIdTries') !== 'undefined' ? postman.getEnvironmentVariable('emailGetTokenByTxnIdTries') : 1;",
+									"",
+									"if(response.status !== 'success' && count < 3){",
+									"    postman.setNextRequest('get_token_by_txn_id_email_confirmation_flow');",
+									"    ",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}getTokenByTxnId",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\n  \"transactionId\": \"{{email_txnid}}\"\n}"
+						},
+						"description": "tags: [endpoint:get_token_by_txn_id,flow:user,sub_flow:confirm_email]"
+					},
+					"response": []
 				},
-				"description": "tags: [unlink_social_user,user_flows]"
-			},
-			"response": []
-		}, {
-			"name": "getUser",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Got user data\"] = userId ? 1 : 0;\n"
+				{
+					"name": "confirm_email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}confirmEmail",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\n  \"token\": \"{{email_confirm_token}}\",\n  \"username\":\"{{create_user_email}}\"\n}"
+						},
+						"description": "tags: [endpoint:confirm_email,flow:user,sub_flow:confirm_email]"
+					},
+					"response": []
 				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}getUser",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{user_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\"}"
+			]
+		},
+		{
+			"name": "A9. Delete Accounts",
+			"description": "delete_user_flow",
+			"item": [
+				{
+					"name": "deleteUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}deleteUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{new_user_id}}\"\n}"
+						},
+						"description": "tags: [endpoint:delete_user,flow:user,sub_flow:delete_user]"
+					},
+					"response": []
 				},
-				"description": "tags: [get_user,user_flows]"
-			},
-			"response": []
-		}]
-	}, {
-		"name": "A7. passwordReset",
-		"description": "password_reset_flow",
-		"item": [{
-			"name": "sendPasswordReset",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\npostman.setEnvironmentVariable(\"pwd_txnid\", postman.getResponseHeader(\"X-AOL-IDENTITY-TX-ID\"));\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\n\n"
+				{
+					"name": "deleteUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}deleteUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{social_user_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{social_user_id}}\"\n}"
+						},
+						"description": "tags: [endpoint:delete_user,flow:user,sub_flow:delete_social_user]"
+					},
+					"response": []
 				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}sendPasswordReset",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{service_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\",\"username\":\"{{create_user_email}}\"}"
+			]
+		},
+		{
+			"name": "B0. Application Access",
+			"description": "tags: [application_access]",
+			"item": [
+				{
+					"name": "authorize service",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"var serviceAccessToken = typeof response.access_token !== 'undefined' ? response.access_token : 0;",
+									"postman.setEnvironmentVariable(\"service_access_token\", serviceAccessToken);",
+									"",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = responseCode.code === 200;",
+									"tests[\"Got Service access_token\"] = serviceAccessToken ? 1:0;"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"function base64url(source) {",
+									"  encodedSource = CryptoJS.enc.Base64.stringify(source);",
+									"  encodedSource = encodedSource.replace(/=+$/, '');",
+									"  encodedSource = encodedSource.replace(/\\+/g, '-');",
+									"  encodedSource = encodedSource.replace(/\\//g, '_');",
+									"  ",
+									"  return encodedSource;",
+									"}",
+									"var header = {",
+									"  \"alg\": \"HS256\",",
+									"  \"typ\": \"JWT\"",
+									"};",
+									"var stringifiedHeader = CryptoJS.enc.Utf8.parse(JSON.stringify(header));",
+									"var encodedHeader = base64url(stringifiedHeader);",
+									"var now = new Date() / 1000;",
+									"//var jwsLife = ( 24 * 60 * 60 );",
+									"var jwsLife = 10;",
+									"var body = {",
+									"    \"iss\": postman.getEnvironmentVariable(\"client_id\"),",
+									"    \"sub\": postman.getEnvironmentVariable(\"client_id\"),",
+									"    \"aud\": postman.getEnvironmentVariable(\"oauth_server\"),",
+									"    \"iat\": now,",
+									"    \"exp\": now + jwsLife,",
+									"};",
+									"",
+									"var stringifiedBody = CryptoJS.enc.Utf8.parse(JSON.stringify(body));",
+									"var encodedBody = base64url(stringifiedBody);",
+									"var token = encodedHeader + \".\" + encodedBody;",
+									"var signature = CryptoJS.HmacSHA256(token, postman.getEnvironmentVariable(\"client_secret\"));",
+									"signature = base64url(signature);",
+									"var signedToken = token + \".\" + signature;",
+									"postman.setEnvironmentVariable(\"jws\", signedToken);"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{oauth_server}}",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "client_assertion_type",
+									"value": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "scope",
+									"value": "brand_api ropc brand_api_customer_support brand_api_migration",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "client_assertion",
+									"value": "{{jws}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": "tags: [endpoint:oauth2_service_access_token,flow:migration,sub_flow:app_access]"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "B1. Account Setup",
+			"description": "tags: [account_setup]",
+			"item": [
+				{
+					"name": "createUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"var userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;",
+									"",
+									"postman.setEnvironmentVariable('new_user_id', userId);",
+									"",
+									"postman.setEnvironmentVariable('publicId', response.data.pubId);",
+									"",
+									"postman.setEnvironmentVariable(\"txnid\", postman.getResponseHeader(\"X-AOL-IDENTITY-TX-ID\"));",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
+									"",
+									"//recovery",
+									"var count = typeof postman.getEnvironmentVariable('createUserTries') !== 'undefined' ? postman.getEnvironmentVariable('createUserTries') : 1;",
+									"",
+									"if(response.status !== 'success' && count < 3){",
+									"    postman.setEnvironmentVariable('createUserTries', count++);",
+									"    ",
+									"   postman.setEnvironmentVariable(\"create_user_email\", postman.getEnvironmentVariable(\"gmail_user\") ",
+									"    + \"+\" + postman.getEnvironmentVariable(\"namespace\") ",
+									"    + \".\" + Math.random().toString(36).substring(2) + _.random(20000, 100) + '@gmail.com');",
+									"    ",
+									"    postman.setEnvironmentVariable(\"create_user_displayname\",Math.random().toString(36).substring(2)",
+									"+ '-' +  (Math.floor(Math.random()* (_.random(20000,4000) - _.random(200,400)+ 1) + _.random(5,1000))) );",
+									"",
+									"    postman.setEnvironmentVariable(\"create_user_password\",\"nm###\" + _.random(100,900) );",
+									"    ",
+									"    postman.setNextRequest('create_user');",
+									"}"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"postman.setEnvironmentVariable(\"create_user_displayname\",Math.random().toString(36).substring(2)",
+									"+ '-' +  (Math.floor(Math.random()* (_.random(20000,4000) - _.random(200,400)+ 1) + _.random(5,1000))) );",
+									"",
+									"postman.setEnvironmentVariable(\"create_user_password\",\"nm###123\");",
+									"",
+									"postman.setEnvironmentVariable(\"create_user_email\", postman.getEnvironmentVariable(\"gmail_user\") ",
+									"    + \"+\" + postman.getEnvironmentVariable(\"namespace\") ",
+									"    + \".\" + Math.random().toString(36).substring(2) + _.random(20000, 100) + '@gmail.com');"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}createUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"email\":\"{{create_user_email}}\",\"password\":\"{{create_user_password}}\",\"displayName\":\"{{create_user_displayname}}\"}"
+						},
+						"description": "tags: [endpoint:create_user,flow:migration,sub_flow:account_setup]"
+					},
+					"response": []
 				},
-				"description": "tags: [send_password_reset,user_flows]"
-			},
-			"response": []
-		}, {
-			"name": "getTokenByTxnId",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar token = typeof response.data !== 'undefined' ? response.data : 0;\n\npostman.setEnvironmentVariable('password_reset_token', token);\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests['got password reset token'] = token ? 1 : 0;\n//recovery\nvar count = typeof postman.getEnvironmentVariable('pwdGetTokenByTxnIdTries') !== 'undefined' ? postman.getEnvironmentVariable('pwdGetTokenByTxnIdTries') : 1;\n\nif(response.status !== 'success' && count < 3){\n    postman.setNextRequest('get_token_by_txn_id_pwd_reset_flow');\n    \n}"
-				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}getTokenByTxnId",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{service_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\",\n  \"transactionId\": \"{{pwd_txnid}}\"\n}"
+				{
+					"name": "getTokenByTxnId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"var token = typeof response.data !== 'undefined' ? response.data : 0;",
+									"",
+									"postman.setEnvironmentVariable('register_email_token', token);",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
+									"tests['got confirmation token'] = token ? 1 : 0;",
+									"",
+									"//recovery",
+									"var count = typeof postman.getEnvironmentVariable('regGetTokenByTxnIdTries') !== 'undefined' ? postman.getEnvironmentVariable('regGetTokenByTxnIdTries') : 1;",
+									"",
+									"if(response.status !== 'success' && count < 3){",
+									"    postman.setNextRequest('get_token_by_txn_id_reg_flow');",
+									"    ",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}getTokenByTxnId",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\n  \"transactionId\": \"{{txnid}}\"\n}"
+						},
+						"description": "tags: [endpoint:get_token_by_txn_id,flow:migration,sub_flow:account_setup]"
+					},
+					"response": []
 				},
-				"description": "tags: [get_token_by_txn_id,user_flows]"
-			},
-			"response": []
-		}, {
-			"name": "confirmPasswordReset",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\n"
+				{
+					"name": "confirmEmail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}confirmEmail",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\n  \"token\": \"{{register_email_token}}\",\n  \"username\":\"{{create_user_email}}\"\n}"
+						},
+						"description": "tags: [endpoint:confirm_email,flow:migration,sub_flow:account_setup]"
+					},
+					"response": []
 				}
-			}, {
-				"listen": "prerequest",
-				"script": {
-					"type": "text/javascript",
-					"exec": "postman.setEnvironmentVariable(\"reset_user_password\",eval(postman.getEnvironmentVariable(\"generate_password\")));"
-				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}confirmPasswordReset",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{service_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\",\n  \"token\": \"{{password_reset_token}}\",\n  \"username\":\"{{create_user_email}}\",\n  \"password\":\"{{reset_user_password}}\"\n}"
+			]
+		},
+		{
+			"name": "B2. Migrate User",
+			"description": "tags: [migration_flow]",
+			"item": [
+				{
+					"name": "migrationPasswordUpdate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"",
+									"//tests",
+									"tests[\"response code\"] = responseCode.code === 200;"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"postman.setEnvironmentVariable(\"migration_user_password\",eval(postman.getEnvironmentVariable(\"generate_password\")));"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}migrationPasswordUpdate",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"username\":\"{{create_user_email}}\",\"newPassword\":\"{{migration_user_password}}\"}"
+						},
+						"description": "tags: [endpoint:migration_password_update,flow:migration,sub_flow:migrate_user]"
+					},
+					"response": []
 				},
-				"description": "tags: [confirm_password_reset,user_flows]"
-			},
-			"response": []
-		}, {
-			"name": "authenticate user",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userAccessToken = typeof response.access_token !== 'undefined' ? response.access_token : 0;\nif(userAccessToken){\n    postman.setEnvironmentVariable(\"user_access_token\", userAccessToken);\n}\n//tests\ntests[\"Success Response\"] = responseCode.code === 200;\ntests[\"Got user access_token\"] = userAccessToken ? 1 : 0;\n"
+				{
+					"name": "authenticate migrated user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"var userAccessToken = typeof response.access_token !== 'undefined' ? response.access_token : 0;",
+									"var userRefreshToken = typeof response.refresh_token !== 'undefined' ? response.refresh_token : 0;",
+									"postman.setEnvironmentVariable(\"user_access_token\", userAccessToken);",
+									"postman.setEnvironmentVariable(\"user_refresh_token\", userRefreshToken);",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = responseCode.code === 200;",
+									"tests[\"Got user access_token\"] = userAccessToken ? 1 : 0;",
+									"tests[\"Got user refresh_token\"] = userRefreshToken ? 1 : 0;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{oauth_server}}",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "{{create_user_email}}",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "scope",
+									"value": "brand_api",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "password",
+									"value": "{{migration_user_password}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": "tags: [endpoint:oauth2_user_access_token,flow:migration,sub_flow:migrate_user]"
+					},
+					"response": []
 				}
-			}],
-			"request": {
-				"url": "{{oauth_server}}",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{service_access_token}}",
-					"description": ""
-				}],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [{
-						"key": "username",
-						"value": "{{create_user_email}}",
-						"type": "text",
-						"enabled": true
-					}, {
-						"key": "grant_type",
-						"value": "password",
-						"type": "text",
-						"enabled": true
-					}, {
-						"key": "scope",
-						"value": "brand_api",
-						"type": "text",
-						"enabled": true
-					}, {
-						"key": "password",
-						"value": "{{reset_user_password}}",
-						"type": "text",
-						"enabled": true
-					}]
+			]
+		},
+		{
+			"name": "C0. Application Access",
+			"description": "application_access",
+			"item": [
+				{
+					"name": "authorize service",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"var serviceAccessToken = typeof response.access_token !== 'undefined' ? response.access_token : 0;",
+									"postman.setEnvironmentVariable(\"service_access_token\", serviceAccessToken);",
+									"",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = responseCode.code === 200;"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"function base64url(source) {",
+									"  encodedSource = CryptoJS.enc.Base64.stringify(source);",
+									"  encodedSource = encodedSource.replace(/=+$/, '');",
+									"  encodedSource = encodedSource.replace(/\\+/g, '-');",
+									"  encodedSource = encodedSource.replace(/\\//g, '_');",
+									"  ",
+									"  return encodedSource;",
+									"}",
+									"var header = {",
+									"  \"alg\": \"HS256\",",
+									"  \"typ\": \"JWT\"",
+									"};",
+									"var stringifiedHeader = CryptoJS.enc.Utf8.parse(JSON.stringify(header));",
+									"var encodedHeader = base64url(stringifiedHeader);",
+									"var now = new Date() / 1000;",
+									"//var jwsLife = ( 24 * 60 * 60 );",
+									"var jwsLife = 10;",
+									"var body = {",
+									"    \"iss\": postman.getEnvironmentVariable(\"client_id\"),",
+									"    \"sub\": postman.getEnvironmentVariable(\"client_id\"),",
+									"    \"aud\": postman.getEnvironmentVariable(\"oauth_server\"),",
+									"    \"iat\": now,",
+									"    \"exp\": now + jwsLife,",
+									"};",
+									"",
+									"var stringifiedBody = CryptoJS.enc.Utf8.parse(JSON.stringify(body));",
+									"var encodedBody = base64url(stringifiedBody);",
+									"var token = encodedHeader + \".\" + encodedBody;",
+									"var signature = CryptoJS.HmacSHA256(token, postman.getEnvironmentVariable(\"client_secret\"));",
+									"signature = base64url(signature);",
+									"var signedToken = token + \".\" + signature;",
+									"postman.setEnvironmentVariable(\"jws\", signedToken);"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{oauth_server}}",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "client_assertion_type",
+									"value": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "scope",
+									"value": "brand_api ropc brand_api_customer_support brand_api_migration",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "client_assertion",
+									"value": "{{jws}}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": "tags: [endpoint:oauth2_service_access_token,flow:support,sub_flow:app_access]"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "C1 Setup Accounts",
+			"description": "setup_accounts",
+			"item": [
+				{
+					"name": "createUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"var userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;",
+									"",
+									"postman.setEnvironmentVariable('new_user_id', userId);",
+									"",
+									"postman.setEnvironmentVariable('publicId', response.data.pubId);",
+									"",
+									"postman.setEnvironmentVariable(\"txnid\", postman.getResponseHeader(\"X-AOL-IDENTITY-TX-ID\"));",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
+									""
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"postman.setEnvironmentVariable(\"create_user_displayname\",Math.random().toString(36).substring(2)",
+									"+ '-' +  (Math.floor(Math.random()* (_.random(20000,4000) - _.random(200,400)+ 1) + _.random(5,1000))) );",
+									"",
+									"postman.setEnvironmentVariable(\"create_user_password\",\"nm###123\");",
+									"",
+									"postman.setEnvironmentVariable(\"create_user_email\", postman.getEnvironmentVariable('gmail_user') ",
+									"    + \"+\" + postman.getEnvironmentVariable(\"namespace\") ",
+									"    + \".\" + Math.random().toString(36).substring(2) + _.random(20000, 100) + '@gmail.com');"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}createUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"email\":\"{{create_user_email}}\",\"password\":\"{{create_user_password}}\",\"displayName\":\"{{create_user_displayname}}\"}"
+						},
+						"description": "tags: [endpoint:create_user,flow:support,sub_flow:account_setup]"
+					},
+					"response": []
 				},
-				"description": "tags: [oauth2,access_token,user_flows]"
-			},
-			"response": []
-		}]
-	}, {
-		"name": "A8. Confirm Email",
-		"description": "confirm_email_flow",
-		"item": [{
-			"name": "sendEmailConfirmation",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\npostman.setEnvironmentVariable(\"email_txnid\", postman.getResponseHeader(\"X-AOL-IDENTITY-TX-ID\"));\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';"
-				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}sendConfirmEmail",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{service_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\",\"username\":\"{{create_user_email}}\"}"
+				{
+					"name": "getTokenByTxnId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"var token = typeof response.data !== 'undefined' ? response.data : 0;",
+									"",
+									"postman.setEnvironmentVariable('register_email_token', token);",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
+									"tests['got confirmation token'] = token ? 1 : 0;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}getTokenByTxnId",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\n  \"transactionId\": \"{{txnid}}\"\n}"
+						},
+						"description": "tags: [endpoint:get_token_by_txn_id,flow:support,sub_flow:account_setup]"
+					},
+					"response": []
 				},
-				"description": "tags: [send_confirm_email,user_flows]"
-			},
-			"response": []
-		}, {
-			"name": "getTokenByTxnId",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar token = typeof response.data !== 'undefined' ? response.data : 0;\n\npostman.setEnvironmentVariable('email_confirm_token', token);\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests['got email token'] = token ? 1 : 0;\n\n//recovery\nvar count = typeof postman.getEnvironmentVariable('emailGetTokenByTxnIdTries') !== 'undefined' ? postman.getEnvironmentVariable('emailGetTokenByTxnIdTries') : 1;\n\nif(response.status !== 'success' && count < 3){\n    postman.setNextRequest('get_token_by_txn_id_email_confirmation_flow');\n    \n}"
-				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}getTokenByTxnId",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{service_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\",\n  \"transactionId\": \"{{email_txnid}}\"\n}"
+				{
+					"name": "confirmEmail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}confirmEmail",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\n  \"token\": \"{{register_email_token}}\",\n  \"username\":\"{{create_user_email}}\"\n}"
+						},
+						"description": "tags: [endpoint:confirm_email,flow:support,sub_flow:account_setup]"
+					},
+					"response": []
 				},
-				"description": "tags: [get_token_by_txn_id,user_flows]"
-			},
-			"response": []
-		}, {
-			"name": "confirm_email",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';"
+				{
+					"name": "createUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"var userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;",
+									"postman.setEnvironmentVariable(\"social_user_id\", userId);",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
+									"tests[\"New user created\"] = typeof response.status !== 'undefined' && response.status === 'success';"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"postman.setEnvironmentVariable(\"create_social_email\", postman.getEnvironmentVariable('gmail_user') ",
+									"    + \"+\" + postman.getEnvironmentVariable(\"namespace\") ",
+									"    + \".\" + Math.random().toString(36).substring(2) + _.random(20000, 100) + '@gmail.com');",
+									"    ",
+									"postman.setEnvironmentVariable(\"create_social_user\", Math.random().toString(36).substring(2) + _.random(2000, 100));"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}createUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"email\":\"{{create_social_email}}\",\"socialUser\":\"{{create_social_user}}\",\"socialPid\":\"{{social_user_provider}}\",\"confirmedEmail\":\"T\" }"
+						},
+						"description": "tags: [endpoint:create_social_user,flow:support,sub_flow:account_setup]"
+					},
+					"response": []
 				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}confirmEmail",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{service_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\",\n  \"token\": \"{{email_confirm_token}}\",\n  \"username\":\"{{create_user_email}}\"\n}"
+			]
+		},
+		{
+			"name": "C2. Get user data through support APIs",
+			"description": "get_user_by_support_apis",
+			"item": [
+				{
+					"name": "getUserByDisplayName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"var userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
+									"tests[\"Got user data\"] = userId ? 1 : 0;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}getUserByDisplayName",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"displayName\": \"{{create_user_displayname}}\"}"
+						},
+						"description": "tags: [endpoint:get_user_by_display_name,flow:support,sub_flow:get_user]"
+					},
+					"response": []
 				},
-				"description": "tags: [confirm_email,user_flows]"
-			},
-			"response": []
-		}]
-	}, {
-		"name": "A9. Delete Accounts",
-		"description": "delete_user_flow",
-		"item": [{
-			"name": "deleteUser",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';"
-				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}deleteUser",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{user_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{new_user_id}}\"\n}"
+				{
+					"name": "getUserByEmail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"var userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
+									"tests[\"Got user data\"] = userId ? 1 : 0;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}getUserByEmail",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"email\": \"{{create_user_email}}\"}"
+						},
+						"description": "tags: [endpoint:get_user_by_email,flow:support,sub_flow:get_user]"
+					},
+					"response": []
 				},
-				"description": "tags: [delete_user,user_flows]"
-			},
-			"response": []
-		}, {
-			"name": "deleteUser",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';"
-				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}deleteUser",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{social_user_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{social_user_id}}\"\n}"
+				{
+					"name": "getUserById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"var userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
+									"tests[\"Got user data\"] = userId ? 1 : 0;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}getUserById",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"id\": \"{{new_user_id}}\"}"
+						},
+						"description": "tags: [endpoint:get_user_by_id,flow:support,sub_flow:get_user]"
+					},
+					"response": []
 				},
-				"description": "tags: [delete_user,social_user,user_flows]"
-			},
-			"response": []
-		}]
-	}, {
-		"name": "B0. Application Access",
-		"description": "tags: [application_access]",
-		"item": [{
-			"name": "authorize service",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar serviceAccessToken = typeof response.access_token !== 'undefined' ? response.access_token : 0;\npostman.setEnvironmentVariable(\"service_access_token\", serviceAccessToken);\n\n\n//tests\ntests[\"Success Response\"] = responseCode.code === 200;\ntests[\"Got Service access_token\"] = serviceAccessToken ? 1:0;"
-				}
-			}, {
-				"listen": "prerequest",
-				"script": {
-					"type": "text/javascript",
-					"exec": "function base64url(source) {\n  encodedSource = CryptoJS.enc.Base64.stringify(source);\n  encodedSource = encodedSource.replace(/=+$/, '');\n  encodedSource = encodedSource.replace(/\\+/g, '-');\n  encodedSource = encodedSource.replace(/\\//g, '_');\n  \n  return encodedSource;\n}\nvar header = {\n  \"alg\": \"HS256\",\n  \"typ\": \"JWT\"\n};\nvar stringifiedHeader = CryptoJS.enc.Utf8.parse(JSON.stringify(header));\nvar encodedHeader = base64url(stringifiedHeader);\nvar now = new Date() / 1000;\n//var jwsLife = ( 24 * 60 * 60 );\nvar jwsLife = 10;\nvar body = {\n    \"iss\": postman.getEnvironmentVariable(\"client_id\"),\n    \"sub\": postman.getEnvironmentVariable(\"client_id\"),\n    \"aud\": postman.getEnvironmentVariable(\"oauth_server\"),\n    \"iat\": now,\n    \"exp\": now + jwsLife,\n};\n\nvar stringifiedBody = CryptoJS.enc.Utf8.parse(JSON.stringify(body));\nvar encodedBody = base64url(stringifiedBody);\nvar token = encodedHeader + \".\" + encodedBody;\nvar signature = CryptoJS.HmacSHA256(token, postman.getEnvironmentVariable(\"client_secret\"));\nsignature = base64url(signature);\nvar signedToken = token + \".\" + signature;\npostman.setEnvironmentVariable(\"jws\", signedToken);"
-				}
-			}],
-			"request": {
-				"url": "{{oauth_server}}",
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [{
-						"key": "grant_type",
-						"value": "client_credentials",
-						"type": "text",
-						"enabled": true
-					}, {
-						"key": "client_assertion_type",
-						"value": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
-						"type": "text",
-						"enabled": true
-					}, {
-						"key": "scope",
-						"value": "brand_api ropc brand_api_customer_support brand_api_migration",
-						"type": "text",
-						"enabled": true
-					}, {
-						"key": "client_assertion",
-						"value": "{{jws}}",
-						"type": "text",
-						"enabled": true
-					}]
+				{
+					"name": "getUserByPubId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"var userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
+									"tests[\"Got user data\"] = userId ? 1 : 0;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}getUserByPubId",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"publicId\": \"{{publicId}}\"}"
+						},
+						"description": "tags: [endpoint:get_user_by_pub_id,flow:support,sub_flow:get_user]"
+					},
+					"response": []
 				},
-				"description": "tags: [oauth2,service_access_token,migration_flow]"
-			},
-			"response": []
-		}]
-	}, {
-		"name": "B1. Account Setup",
-		"description": "tags: [account_setup]",
-		"item": [{
-			"name": "createUser",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\n\npostman.setEnvironmentVariable('new_user_id', userId);\n\npostman.setEnvironmentVariable('publicId', response.data.pubId);\n\npostman.setEnvironmentVariable(\"txnid\", postman.getResponseHeader(\"X-AOL-IDENTITY-TX-ID\"));\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\n\n//recovery\nvar count = typeof postman.getEnvironmentVariable('createUserTries') !== 'undefined' ? postman.getEnvironmentVariable('createUserTries') : 1;\n\nif(response.status !== 'success' && count < 3){\n    postman.setEnvironmentVariable('createUserTries', count++);\n    \n   postman.setEnvironmentVariable(\"create_user_email\", postman.getEnvironmentVariable(\"gmail_user\") \n    + \"+\" + postman.getEnvironmentVariable(\"namespace\") \n    + \".\" + Math.random().toString(36).substring(2) + _.random(20000, 100) + '@gmail.com');\n    \n    postman.setEnvironmentVariable(\"create_user_displayname\",Math.random().toString(36).substring(2)\n+ '-' +  (Math.floor(Math.random()* (_.random(20000,4000) - _.random(200,400)+ 1) + _.random(5,1000))) );\n\n    postman.setEnvironmentVariable(\"create_user_password\",\"nm###\" + _.random(100,900) );\n    \n    postman.setNextRequest('create_user');\n}"
+				{
+					"name": "getUserBySocialUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"var userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
+									"tests[\"Got user data\"] = userId ? 1 : 0;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}getUserBySocialUser",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"socialUser\": \"{{create_social_user}}\",\"socialPid\": \"facebook\"}"
+						},
+						"description": "tags: [endpoint:get_user_by_social_user,flow:support,sub_flow:get_user]"
+					},
+					"response": []
 				}
-			}, {
-				"listen": "prerequest",
-				"script": {
-					"type": "text/javascript",
-					"exec": "postman.setEnvironmentVariable(\"create_user_displayname\",Math.random().toString(36).substring(2)\n+ '-' +  (Math.floor(Math.random()* (_.random(20000,4000) - _.random(200,400)+ 1) + _.random(5,1000))) );\n\npostman.setEnvironmentVariable(\"create_user_password\",\"nm###123\");\n\npostman.setEnvironmentVariable(\"create_user_email\", postman.getEnvironmentVariable(\"gmail_user\") \n    + \"+\" + postman.getEnvironmentVariable(\"namespace\") \n    + \".\" + Math.random().toString(36).substring(2) + _.random(20000, 100) + '@gmail.com');"
-				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}createUser",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{service_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\",\"email\":\"{{create_user_email}}\",\"password\":\"{{create_user_password}}\",\"displayName\":\"{{create_user_displayname}}\"}"
+			]
+		},
+		{
+			"name": "C3. Update user through support APIs",
+			"description": "update_user_by_support_apis",
+			"item": [
+				{
+					"name": "updateUserById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
+									"tests[\"Updated correct user\"] = response.data.id === postman.getEnvironmentVariable('new_user_id');",
+									"tests[\"Updated data shows in profile\"] = response.data.profile.postCode === postman.getEnvironmentVariable('user_update_postal');"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"postman.setEnvironmentVariable(\"user_update_postal\",\"94301\");"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}updateUserById",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{new_user_id}}\",\"postCode\":\"{{user_update_postal}}\",\"confirmEmail\": false}"
+						},
+						"description": "tags: [endpoint:update_user_by_id,flow:support,sub_flow:update_user]"
+					},
+					"response": []
 				},
-				"description": "tags: [create_user,migration_flow]"
-			},
-			"response": []
-		}, {
-			"name": "getTokenByTxnId",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar token = typeof response.data !== 'undefined' ? response.data : 0;\n\npostman.setEnvironmentVariable('register_email_token', token);\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests['got confirmation token'] = token ? 1 : 0;\n\n//recovery\nvar count = typeof postman.getEnvironmentVariable('regGetTokenByTxnIdTries') !== 'undefined' ? postman.getEnvironmentVariable('regGetTokenByTxnIdTries') : 1;\n\nif(response.status !== 'success' && count < 3){\n    postman.setNextRequest('get_token_by_txn_id_reg_flow');\n    \n}"
+				{
+					"name": "getUserById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"var userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;",
+									"var postCode = typeof response.data.profile.postCode !== 'undefined' ? response.data.profile.postCode : 0;",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';",
+									"tests[\"Got user data\"] = userId ? 1 : 0;",
+									"tests[\"Got updated data\"] = postCode === postman.getEnvironmentVariable('user_update_postal');"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}getUserById",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"id\": \"{{new_user_id}}\"}"
+						},
+						"description": "tags: [endpoint:get_user_by_id,flow:support,sub_flow:update_user]"
+					},
+					"response": []
 				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}getTokenByTxnId",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{service_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\",\n  \"transactionId\": \"{{txnid}}\"\n}"
+			]
+		},
+		{
+			"name": "C4. Delete user through support APIs",
+			"description": "delete_user_by_support_apis",
+			"item": [
+				{
+					"name": "deleteUserById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}deleteUserById",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{new_user_id}}\",\"removeImmediately\": true\n}"
+						},
+						"description": "tags: [endpoint:delete_user_by_id,flow:support,sub_flow:delete_user]"
+					},
+					"response": []
 				},
-				"description": "tags: [get_token_by_txn_id,migration_flow]"
-			},
-			"response": []
-		}, {
-			"name": "confirmEmail",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\n"
+				{
+					"name": "deleteUserById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{brand_api_server}}deleteUserById",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{service_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{social_user_id}}\"\n}"
+						},
+						"description": "tags: [endpoint:delete_user_by_id,flow:support,sub_flow:delete_user]"
+					},
+					"response": []
 				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}confirmEmail",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{service_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\",\n  \"token\": \"{{register_email_token}}\",\n  \"username\":\"{{create_user_email}}\"\n}"
-				},
-				"description": "tags: [confirm_email,migration_flow]"
-			},
-			"response": []
-		}]
-	}, {
-		"name": "B2. Migrate User",
-		"description": "tags: [migration_flow]",
-		"item": [{
-			"name": "migrationPasswordUpdate",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"response code\"] = responseCode.code === 200;"
-				}
-			}, {
-				"listen": "prerequest",
-				"script": {
-					"type": "text/javascript",
-					"exec": "postman.setEnvironmentVariable(\"migration_user_password\",eval(postman.getEnvironmentVariable(\"generate_password\")));"
-				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}migrationPasswordUpdate",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{service_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\",\"username\":\"{{create_user_email}}\",\"newPassword\":\"{{migration_user_password}}\"}"
-				},
-				"description": "tags: [migration_password_update,migration_flow]"
-			},
-			"response": []
-		}, {
-			"name": "authenticate migrated user",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userAccessToken = typeof response.access_token !== 'undefined' ? response.access_token : 0;\nvar userRefreshToken = typeof response.refresh_token !== 'undefined' ? response.refresh_token : 0;\npostman.setEnvironmentVariable(\"user_access_token\", userAccessToken);\npostman.setEnvironmentVariable(\"user_refresh_token\", userRefreshToken);\n\n//tests\ntests[\"Success Response\"] = responseCode.code === 200;\ntests[\"Got user access_token\"] = userAccessToken ? 1 : 0;\ntests[\"Got user refresh_token\"] = userRefreshToken ? 1 : 0;\n"
-				}
-			}],
-			"request": {
-				"url": "{{oauth_server}}",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{service_access_token}}",
-					"description": ""
-				}],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [{
-						"key": "username",
-						"value": "{{create_user_email}}",
-						"type": "text",
-						"enabled": true
-					}, {
-						"key": "grant_type",
-						"value": "password",
-						"type": "text",
-						"enabled": true
-					}, {
-						"key": "scope",
-						"value": "brand_api",
-						"type": "text",
-						"enabled": true
-					}, {
-						"key": "password",
-						"value": "{{migration_user_password}}",
-						"type": "text",
-						"enabled": true
-					}]
-				},
-				"description": "tags: [oauth2,access_token,migration_flow]"
-			},
-			"response": []
-		}]
-	}, {
-		"name": "C0. Application Access",
-		"description": "application_access",
-		"item": [{
-			"name": "authorize service",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar serviceAccessToken = typeof response.access_token !== 'undefined' ? response.access_token : 0;\npostman.setEnvironmentVariable(\"service_access_token\", serviceAccessToken);\n\n\n//tests\ntests[\"Success Response\"] = responseCode.code === 200;"
-				}
-			}, {
-				"listen": "prerequest",
-				"script": {
-					"type": "text/javascript",
-					"exec": "function base64url(source) {\n  encodedSource = CryptoJS.enc.Base64.stringify(source);\n  encodedSource = encodedSource.replace(/=+$/, '');\n  encodedSource = encodedSource.replace(/\\+/g, '-');\n  encodedSource = encodedSource.replace(/\\//g, '_');\n  \n  return encodedSource;\n}\nvar header = {\n  \"alg\": \"HS256\",\n  \"typ\": \"JWT\"\n};\nvar stringifiedHeader = CryptoJS.enc.Utf8.parse(JSON.stringify(header));\nvar encodedHeader = base64url(stringifiedHeader);\nvar now = new Date() / 1000;\n//var jwsLife = ( 24 * 60 * 60 );\nvar jwsLife = 10;\nvar body = {\n    \"iss\": postman.getEnvironmentVariable(\"client_id\"),\n    \"sub\": postman.getEnvironmentVariable(\"client_id\"),\n    \"aud\": postman.getEnvironmentVariable(\"oauth_server\"),\n    \"iat\": now,\n    \"exp\": now + jwsLife,\n};\n\nvar stringifiedBody = CryptoJS.enc.Utf8.parse(JSON.stringify(body));\nvar encodedBody = base64url(stringifiedBody);\nvar token = encodedHeader + \".\" + encodedBody;\nvar signature = CryptoJS.HmacSHA256(token, postman.getEnvironmentVariable(\"client_secret\"));\nsignature = base64url(signature);\nvar signedToken = token + \".\" + signature;\npostman.setEnvironmentVariable(\"jws\", signedToken);"
-				}
-			}],
-			"request": {
-				"url": "{{oauth_server}}",
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [{
-						"key": "grant_type",
-						"value": "client_credentials",
-						"type": "text",
-						"enabled": true
-					}, {
-						"key": "client_assertion_type",
-						"value": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
-						"type": "text",
-						"enabled": true
-					}, {
-						"key": "scope",
-						"value": "brand_api ropc brand_api_customer_support brand_api_migration",
-						"type": "text",
-						"enabled": true
-					}, {
-						"key": "client_assertion",
-						"value": "{{jws}}",
-						"type": "text",
-						"enabled": true
-					}]
-				},
-				"description": "tags: [oauth2,service_access_token,support_apis]"
-			},
-			"response": []
-		}]
-	}, {
-		"name": "C1 Setup Accounts",
-		"description": "setup_accounts",
-		"item": [{
-			"name": "createUser",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\n\npostman.setEnvironmentVariable('new_user_id', userId);\n\npostman.setEnvironmentVariable('publicId', response.data.pubId);\n\npostman.setEnvironmentVariable(\"txnid\", postman.getResponseHeader(\"X-AOL-IDENTITY-TX-ID\"));\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\n"
-				}
-			}, {
-				"listen": "prerequest",
-				"script": {
-					"type": "text/javascript",
-					"exec": "postman.setEnvironmentVariable(\"create_user_displayname\",Math.random().toString(36).substring(2)\n+ '-' +  (Math.floor(Math.random()* (_.random(20000,4000) - _.random(200,400)+ 1) + _.random(5,1000))) );\n\npostman.setEnvironmentVariable(\"create_user_password\",\"nm###123\");\n\npostman.setEnvironmentVariable(\"create_user_email\", postman.getEnvironmentVariable('gmail_user') \n    + \"+\" + postman.getEnvironmentVariable(\"namespace\") \n    + \".\" + Math.random().toString(36).substring(2) + _.random(20000, 100) + '@gmail.com');"
-				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}createUser",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{service_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\",\"email\":\"{{create_user_email}}\",\"password\":\"{{create_user_password}}\",\"displayName\":\"{{create_user_displayname}}\"}"
-				},
-				"description": "tags: [create_user,support_apis]"
-			},
-			"response": []
-		}, {
-			"name": "getTokenByTxnId",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar token = typeof response.data !== 'undefined' ? response.data : 0;\n\npostman.setEnvironmentVariable('register_email_token', token);\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests['got confirmation token'] = token ? 1 : 0;\n"
-				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}getTokenByTxnId",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{service_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\",\n  \"transactionId\": \"{{txnid}}\"\n}"
-				},
-				"description": "tags: [get_token_by_txn_id,support_apis]"
-			},
-			"response": []
-		}, {
-			"name": "confirmEmail",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\n"
-				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}confirmEmail",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{service_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\",\n  \"token\": \"{{register_email_token}}\",\n  \"username\":\"{{create_user_email}}\"\n}"
-				},
-				"description": "tags: [confirm_email,support_apis]"
-			},
-			"response": []
-		}, {
-			"name": "createUser",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\npostman.setEnvironmentVariable(\"social_user_id\", userId);\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"New user created\"] = typeof response.status !== 'undefined' && response.status === 'success';"
-				}
-			}, {
-				"listen": "prerequest",
-				"script": {
-					"type": "text/javascript",
-					"exec": "postman.setEnvironmentVariable(\"create_social_email\", postman.getEnvironmentVariable('gmail_user') \n    + \"+\" + postman.getEnvironmentVariable(\"namespace\") \n    + \".\" + Math.random().toString(36).substring(2) + _.random(20000, 100) + '@gmail.com');\n    \npostman.setEnvironmentVariable(\"create_social_user\", Math.random().toString(36).substring(2) + _.random(2000, 100));"
-				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}createUser",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{service_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\",\"email\":\"{{create_social_email}}\",\"socialUser\":\"{{create_social_user}}\",\"socialPid\":\"{{social_user_provider}}\",\"confirmedEmail\":\"T\" }"
-				},
-				"description": "tags: [create_user,social_user,support_apis]"
-			},
-			"response": []
-		}]
-	}, {
-		"name": "C2. Get user data through support APIs",
-		"description": "get_user_by_support_apis",
-		"item": [{
-			"name": "getUserByDisplayName",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Got user data\"] = userId ? 1 : 0;\n"
-				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}getUserByDisplayName",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{service_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\",\"displayName\": \"{{create_user_displayname}}\"}"
-				},
-				"description": "tags: [get_user_by_display_name,support_apis]"
-			},
-			"response": []
-		}, {
-			"name": "getUserByEmail",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Got user data\"] = userId ? 1 : 0;\n"
-				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}getUserByEmail",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{service_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\",\"email\": \"{{create_user_email}}\"}"
-				},
-				"description": "tags: [get_user_by_email,support_apis]"
-			},
-			"response": []
-		}, {
-			"name": "getUserById",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Got user data\"] = userId ? 1 : 0;\n"
-				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}getUserById",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{service_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\",\"id\": \"{{new_user_id}}\"}"
-				},
-				"description": "tags: [get_user_by_id,support_apis]"
-			},
-			"response": []
-		}, {
-			"name": "getUserByPubId",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Got user data\"] = userId ? 1 : 0;\n"
-				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}getUserByPubId",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{service_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\",\"publicId\": \"{{publicId}}\"}"
-				},
-				"description": "tags: [get_user_by_pub_id,support_apis]"
-			},
-			"response": []
-		}, {
-			"name": "getUserBySocialUser",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Got user data\"] = userId ? 1 : 0;\n"
-				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}getUserBySocialUser",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{service_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\",\"socialUser\": \"{{create_social_user}}\",\"socialPid\": \"facebook\"}"
-				},
-				"description": "tags: [get_user_by_social_user,support_apis]"
-			},
-			"response": []
-		}]
-	}, {
-		"name": "C3. Update user through support APIs",
-		"description": "update_user_by_support_apis",
-		"item": [{
-			"name": "updateUserById",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Updated correct user\"] = response.data.id === postman.getEnvironmentVariable('new_user_id');\ntests[\"Updated data shows in profile\"] = response.data.profile.postCode === postman.getEnvironmentVariable('user_update_postal');"
-				}
-			}, {
-				"listen": "prerequest",
-				"script": {
-					"type": "text/javascript",
-					"exec": "postman.setEnvironmentVariable(\"user_update_postal\",\"94301\");"
-				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}updateUserById",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{service_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{new_user_id}}\",\"postCode\":\"{{user_update_postal}}\",\"confirmEmail\": false}"
-				},
-				"description": "tags: [update_user_by_id,support_apis]"
-			},
-			"response": []
-		}, {
-			"name": "getUserById",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\nvar userId = typeof response.data.id !== 'undefined' ? response.data.id : 0;\nvar postCode = typeof response.data.profile.postCode !== 'undefined' ? response.data.profile.postCode : 0;\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';\ntests[\"Got user data\"] = userId ? 1 : 0;\ntests[\"Got updated data\"] = postCode === postman.getEnvironmentVariable('user_update_postal');"
-				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}getUserById",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{service_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\",\"id\": \"{{new_user_id}}\"}"
-				},
-				"description": "tags: [get_user_by_id,support_apis]"
-			},
-			"response": []
-		}]
-	}, {
-		"name": "C4. Delete user through support APIs",
-		"description": "delete_user_by_support_apis",
-		"item": [{
-			"name": "deleteUserById",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';"
-				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}deleteUserById",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{service_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{new_user_id}}\",\"removeImmediately\": true\n}"
-				},
-				"description": "tags: [delete_user_by_id,support_apis]"
-			},
-			"response": []
-		}, {
-			"name": "deleteUserById",
-			"event": [{
-				"listen": "test",
-				"script": {
-					"type": "text/javascript",
-					"exec": "var response = responseBody !== '' ? JSON.parse(responseBody) : {};\n\n//tests\ntests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';"
-				}
-			}],
-			"request": {
-				"url": "{{brand_api_server}}deleteUserById",
-				"method": "POST",
-				"header": [{
-					"key": "Authorization",
-					"value": "Bearer {{service_access_token}}",
-					"description": ""
-				}, {
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": ""
-				}],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"namespace\":\"{{namespace}}\",\"id\":\"{{social_user_id}}\"\n}"
-				},
-				"description": "tags: [delete_user_by_id,social_user,support_apis]"
-			},
-			"response": []
-		}]
-	}]
+			]
+		}
+	]
 }
