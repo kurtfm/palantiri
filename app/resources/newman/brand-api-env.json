@@ -1,58 +1,57 @@
 {
-  "id": "e54e42ce-40ba-d0cc-cefe-44ab0510e5c6",
-  "name": "brandapi-prod-monitor",
-  "values": [
-    {
-      "key": "brand_api_server",
-      "type": "text",
-      "value": "https://aolapis.com/brandapi/api/",
-      "enabled": true
-    },
-    {
-      "key": "oauth_server",
-      "type": "text",
-      "value": "https://i.aol.com/oauth2/token",
-      "enabled": true
-    },
-    {
-      "key": "client_id",
-      "type": "text",
-      "value": "hpukuzr8b9hkgqdqm2q63ydmtk4ffkt7",
-      "enabled": true
-    },
-    {
-      "key": "client_secret",
-      "type": "text",
-      "value": "gp748ex0am9lu79toa525rcvg2ng258o",
-      "enabled": true
-    },
-    {
-      "key": "namespace",
-      "type": "text",
-      "value": "brandapimonitor",
-      "enabled": true
-    },
-    {
-      "key": "social_user_provider",
-      "type": "text",
-      "value": "urn:x-aol:socialprovider:facebook",
-      "enabled": true
-    },
-    {
-      "key": "gmail_user",
-      "type": "text",
-      "value": "poorsoddy",
-      "enabled": true
-    },
-    {
-      "key": "generate_password",
-      "type": "text",
-      "value": "(Math.random().toString(36).substring(2)+_.sample(['&','&', '$','#','!','$','#','!','&','$','#','!','&','$','#','!'])+_.sample(['&','$','&','$','#','!','#','&','$', '#','!','!','&','$','#','!'])+Math.floor(_.random(500)*(_.random(200,400)-_.random(0,40)+ 1) + _.random(5,100))).toString().substring(0,32)",
-      "enabled": true
-    }
-  ],
-  "timestamp": 1478833804664,
-  "_postman_variable_scope": "environment",
-  "_postman_exported_at": "2016-11-11T03:10:34.467Z",
-  "_postman_exported_using": "Postman/4.8.0-canary.1"
+    "id": "e54e42ce-40ba-d0cc-cefe-44ab0510e5c6",
+    "name": "brandapi-prod-monitor",
+    "values": [{
+            "key": "brand_api_server",
+            "type": "text",
+            "value": "https://aolapis.com/brandapi/api/",
+            "enabled": true
+        },
+        {
+            "key": "oauth_server",
+            "type": "text",
+            "value": "https://i.aol.com/oauth2/token",
+            "enabled": true
+        },
+        {
+            "key": "client_id",
+            "type": "text",
+            "value": "hpukuzr8b9hkgqdqm2q63ydmtk4ffkt7",
+            "enabled": true
+        },
+        {
+            "key": "client_secret",
+            "type": "text",
+            "value": "gp748ex0am9lu79toa525rcvg2ng258o",
+            "enabled": true
+        },
+        {
+            "key": "namespace",
+            "type": "text",
+            "value": "brandapimonitor",
+            "enabled": true
+        },
+        {
+            "key": "social_user_provider",
+            "type": "text",
+            "value": "urn:x-aol:socialprovider:facebook",
+            "enabled": true
+        },
+        {
+            "key": "gmail_user",
+            "type": "text",
+            "value": "poorsoddy",
+            "enabled": true
+        },
+        {
+            "key": "generate_password",
+            "type": "text",
+            "value": "(Math.random().toString(36).substring(2)+_.sample(['&','&', '$','#','!','$','#','!','&','$','#','!','&','$','#','!'])+_.sample(['&','$','&','$','#','!','#','&','$', '#','!','!','&','$','#','!'])+Math.floor(_.random(500)*(_.random(200,400)-_.random(0,40)+ 1) + _.random(5,100))).toString().substring(0,32)",
+            "enabled": true
+        }
+    ],
+    "timestamp": 1478833804664,
+    "_postman_variable_scope": "environment",
+    "_postman_exported_at": "2016-11-11T03:10:34.467Z",
+    "_postman_exported_using": "Postman/4.8.0-canary.1"
 }

@@ -35,11 +35,10 @@
                  responseTime, responseTimeTags));
              log.collectingDatadogCommands = true;
              for (var key in testResults.executions[0].result.globals.tests) {
-                 var result = testResults.executions[0].result.globals.tests[
+                 var success = testResults.executions[0].result.globals.tests[
                      key] ? 1 : 0;
-                 tags.push(testResults.executions[0].result.globals.tests[
-                     key] ? 'result:pass' : 'result:fail');
-                 datadogCommands.push(datadog.sendCount(metricName, result,
+                 tags.push(success ? 'result:pass' : 'result:fail');
+                 datadogCommands.push(datadog.sendCount(metricName, 1,
                      tags));
              }
              Promise.all(datadogCommands)
