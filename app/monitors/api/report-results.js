@@ -108,14 +108,12 @@
          var log = {};
          log.failureNoticeInitialized = true;
          return new Promise((resolve, reject) => {
-             var title = target + ' ' + name + ': ' + testTotals.assertions.failed +
-                 ' out of ' + testTotals.assertions.total +
-                 ' tests failed on last run';
+             var title = target + ' ' + name + ': tests failed on last run';
              var message =
                  'At least one test failed.  See debug info in s3 bucket: ' +
                  bucket + ' folder: ' + target + ' file:' + jsonReportName;
              var priority = 'normal';
-             var alertType = 'info';
+             var alertType = 'error';
              var tags = [metricsPrefix + name,
                  'app:' + target
              ];

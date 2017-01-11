@@ -90,7 +90,6 @@ module.exports = (conf) => {
                 if (err) {
                     reject(err, log);
                 }
-                //console.log(util.inspect(testInstanceResults, {depth: 15, colors: true}));
                 if (!conf.metrics_disabled) {
                     log.reportResults =
                         `sending test metrics: ${testInstanceResults.item.name}`;
@@ -114,8 +113,7 @@ module.exports = (conf) => {
                     log.sendFailureNotice = 'sending failure notice to datadog';
                     reportResults.failureNotice(conf.metrics_prefix, conf.metricsAgentHost, conf.metrics_agent_port, conf.metrics_default_api_name,
                             target, conf.aws_s3_bucket, outputId + conf.report_file_end,
-                            summary.run.stats
-                        )
+                            summary.run.stats)
                         .then((data, err) => {
                             log.sendFailureNoticeResults = data;
                         })

@@ -19,67 +19,84 @@ conf.target = 'onetest';
 var stubReportResult = {};
 
 var runMonitor = proxyquire(app + 'run-monitor', {
-  './report-results': stubReportResult,
-  './process-output': (conf, target, jsonReport) => {
-    return new Promise((resolve, reject) => {
-      resolve({});
-    });
-  }
+    './report-results': stubReportResult,
+    './process-output': (conf, target, jsonReport) => {
+        return new Promise((resolve, reject) => {
+            resolve({});
+        });
+    }
 });
 stubReportResult.tests = (prefix, host, port, name, target, number) => {
-  return new Promise((resolve, reject) => {
-    resolve({
-      'finished': true
+    console.log('stub test report result');
+    return new Promise((resolve, reject) => {
+        resolve({
+            'finished': true
+        });
     });
-  });
 };
 stubReportResult.totals = (prefix, host, port, name, target, results) => {
-  return new Promise((resolve, reject) => {
-    resolve({
-      'finished': true
+    console.log('stub totals report result');
+    return new Promise((resolve, reject) => {
+        resolve({
+            'finished': true
+        });
     });
-  });
+};
+stubReportResult.failureNotice = (prefix, host, port, name, target, bucket, file, stats) => {
+    console.log('stub failure report result');
+    return new Promise((resolve, reject) => {
+        resolve({
+            'finished': true
+        });
+    });
 };
 
-describe('Run Monitor Tests', () => {
-  var data;
-  before((done) => {
-    runMonitor(conf)
-      .then((results) => {
-        data = results;
-        done();
-      }).catch((error) => {
-        console.log(error.name, ":", error.message);
-      });
-    var onetestFake = nock('http://localhost:33688')
-      .post('/one')
-      .reply(200, '');
-  });
-  after(() => {
-    fs.unlink(data.jsonReport, (err) => {
-      if (err) {
-        console.log(err);
-      }
-    });
-  });
-  it('should run monitor and return log object', () => {
-    expect(data).to.have.property('start');
-  });
-  it('should set file locations', () => {
-    expect(data).to.include.keys('jsonReport',
-      'testFile', 'envFile', 'globalFile');
+describe('Run Monitor Tests', function() {
+    this.timeout(5000);
+    var data;
+    before((done) => {
+        var onetestFake = nock('http://localhost:33688')
+            .post('/one')
+            .reply(200, '');
 
-  });
-  it('should set newman options', () => {
-    expect(data).to.have.property(
-      'newmanOptions')
-  });
-  it('should have gotten to summary', () => {
-    expect(data).to.have.property(
-      'startSummary')
-  });
-  it('should have gotten to report results', () => {
-    expect(data).to.have.property(
-      'reportResults')
-  });
+        runMonitor(conf)
+            .then((results, err) => {
+                data = results;
+                done();
+            }).catch((error) => {
+                console.log(error.name, ":", error.message);
+            });
+
+
+    });
+    after((done) => {
+        fs.unlink(data.jsonReport, (err) => {
+            if (err) {
+                console.log(err);
+                done();
+            } else {
+                done();
+            }
+        });
+    });
+    it('should run monitor and return log object', () => {
+        expect(data).to.have.property('start');
+    });
+    it('should set file locations', () => {
+        expect(data).to.include.keys('jsonReport',
+            'testFile', 'envFile', 'globalFile');
+
+    });
+    it('should set newman options', () => {
+        expect(data).to.have.property(
+            'newmanOptions')
+    });
+    it('should have gotten to summary', () => {
+        expect(data).to.have.property(
+            'startSummary')
+    });
+    it('should have gotten to report results', () => {
+        expect(data).to.have.property(
+            'reportResults')
+    });
 });
