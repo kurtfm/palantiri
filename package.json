@@ -1,7 +1,7 @@
 {
   "name": "monitoring-app",
    "version": "1.8.0",
-  "state": "SNAPSHOT",
+  "state": "RELEASE",
   "description": "A monitoring agent that runs tests and pushes the results data where it needs to go",
   "repository": {
     "type": "git",
