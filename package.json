@@ -1,6 +1,6 @@
 {
   "name": "monitoring-app",
-   "version": "1.9.0",
+   "version": "1.10.0",
   "state": "SNAPSHOT",
   "description": "A monitoring agent that runs tests and pushes the results data where it needs to go",
   "repository": {
