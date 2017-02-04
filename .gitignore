@@ -4,6 +4,7 @@ outputs/*
 dist/*
 xunit.xml
 .idea/*
+*.iml
 .vagrant/*
 .vscode/*
 nbproject/

@@ -34,7 +34,6 @@ module.exports = (conf) => {
             "The API passed in must be configured in the " + conf.env +
             " environment: " + target + " is unsupported.");
 
-
         var jsonReport = outputFolder + conf.report_file_end;
         log.jsonReport = jsonReport;
         var testFile = newmanFolder + conf.test_file;
@@ -46,7 +45,7 @@ module.exports = (conf) => {
 
         function fileExists(path) {
             try {
-                log.fileExists = `file ${path} exists`
+                log.fileExists = `file ${path} exists`;
                 return fs.statSync(path).isFile();
             } catch (e) {
                 if (e.code === 'ENOENT') {
@@ -101,7 +100,7 @@ module.exports = (conf) => {
                                 console.log('error: ', err);
                             }
                             log.reportResults = data;
-                        })
+                        });
                 }
             })
             .once('done', function(err, summary) {
@@ -131,7 +130,7 @@ module.exports = (conf) => {
                                 console.log('error: ', err);
                             }
                             log.reportResults = data;
-                            processOutput(conf, target, jsonReport)
+                            processOutput(conf, target, jsonReport);
                         })
                         .then((data, err) => {
                             resolve(log, err);

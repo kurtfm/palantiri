@@ -5,7 +5,7 @@ const _ = require('lodash');
 var argv = require('yargs')
   .option('t', {
     alias: 'target',
-    example: 'bin/start-api-monitor.js --target=brandapi-user',
+    example: 'bin/start-api-monitor.js --target=brand-api',
     describe: 'the app or service you want to test'
   })
   .option('e', {

@@ -27,7 +27,6 @@ var runMonitor = proxyquire(app + 'run-monitor', {
     }
 });
 stubReportResult.tests = (prefix, host, port, name, target, number) => {
-    console.log('stub test report result');
     return new Promise((resolve, reject) => {
         resolve({
             'finished': true
@@ -35,7 +34,6 @@ stubReportResult.tests = (prefix, host, port, name, target, number) => {
     });
 };
 stubReportResult.totals = (prefix, host, port, name, target, results) => {
-    console.log('stub totals report result');
     return new Promise((resolve, reject) => {
         resolve({
             'finished': true
@@ -43,7 +41,6 @@ stubReportResult.totals = (prefix, host, port, name, target, results) => {
     });
 };
 stubReportResult.failureNotice = (prefix, host, port, name, target, bucket, file, stats) => {
-    console.log('stub failure report result');
     return new Promise((resolve, reject) => {
         resolve({
             'finished': true
@@ -100,3 +97,40 @@ describe('Run Monitor Tests', function() {
             'reportResults')
     });
 });
+
+/*
+describe('Run Monitor Tests - Fails', function() {
+    this.timeout(5000);
+    var data;
+    before((done) => {
+        conf.target = 'onetestfail';
+        var onetestFake = nock('http://localhost:33688')
+            .post('/one')
+            .reply(200, '');
+
+        runMonitor(conf)
+            .then((results, err) => {
+                data = results;
+                done();
+            }).catch((error) => {
+                console.log(error.name, ":", error.message);
+            });
+
+
+    });
+    after((done) => {
+        fs.unlink(data.jsonReport, (err) => {
+            if (err) {
+                console.log(err);
+                done();
+            } else {
+                done();
+            }
+        });
+    });
+    it('should send failure report with a fail result', () => {
+        expect(data).to.have.property(
+            'sendFailureNotice')
+    });
+});
+*/
