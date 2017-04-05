@@ -11,3 +11,4 @@ coverage/
 build.properties
 docker/monitoring-app/
 test/outputs/onetest/
+*.iml
