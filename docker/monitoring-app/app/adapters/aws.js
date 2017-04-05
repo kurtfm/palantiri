@@ -30,7 +30,6 @@ module.exports = {
       var s3 = new AWS.S3({
         apiVersion: '2006-03-01'
       });
-      console.log(file);
       var fileBuffer = fs.readFileSync(file);
       var params = {
         Bucket: bucket,
