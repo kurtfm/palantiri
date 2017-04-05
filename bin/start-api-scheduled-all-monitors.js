@@ -8,7 +8,7 @@ var apiMonitors = conf.supported_api_monitors;
 
 const appRoot = conf.application_root;
 
-var apiMonitorStarter = appRoot + '/bin/api-monitor.js';
+var apiMonitorStarter = appRoot + '/bin/start-api-monitor.js';
 
 
 for (var i = 0, total = apiMonitors.length; i < total; i++) {

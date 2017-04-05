@@ -5,7 +5,7 @@ const _ = require('lodash');
 var argv = require('yargs')
   .option('t', {
     alias: 'target',
-    example: 'bin/start-api-monitor.js --target=brandapi-user',
+    example: 'bin/start-api-monitor.js --target=brand-api',
     describe: 'the app or service you want to test'
   })
   .option('e', {
@@ -78,7 +78,7 @@ var appRoot = function() {
 conf.application_root = appRoot();
 
 if (argv.disables3) {
-  conf.aws_s3_push_disabled = argv.disables3;
+  conf.aws_s3_disable_push = argv.disables3;
 }
 if (argv.disablemetrics) {
   conf.metrics_disabled = argv.disablemetrics;

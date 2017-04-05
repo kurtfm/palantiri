@@ -6,14 +6,20 @@ docker build -t monitoring-app -f Dockerfile.api .
 The will set the hosts IP in the etc hosts file as 'dockerhost' w
 
 ```
-docker run --rm=true --network="host" -v ~/.aws:/root/.aws monitoring-app:latest --target=brandapi --environment=dev --metricsagent=dockerhost
+docker run --rm=true --network="host" -v ~/.aws:/root/.aws monitoring-app:latest --target=brand-api --environment=dev --metricsagent=dockerhost
 ```
 
 # API monitor docker run link to datadog agent
 If you want to run the monitor and have it report to datadog docker agent
 
 ```
-docker run --rm=true -v ~/.aws:/root/.aws --link dd-agent:dd-agent monitoring-app:latest --target=brandapi --environment=dev --metricsagent=dd-agent
+docker run --rm=true -v ~/.aws:/root/.aws --link dd-agent:dd-agent monitoring-app:latest --target=brand-api --environment=dev --metricsagent=dd-agent
+```
+
+# API monitor docker run link to datadog stand alone statsd
+
+```
+docker run --rm=true --link dogstatsd:dogstatsd monitoring-app:latest --disables3=true --target=brand-api --environment=prod --metricsagent=dogstatsd
 ```
 
 
