@@ -2856,7 +2856,7 @@
 								}
 							]
 						},
-						"description": "tags: [endpoint:oauth2_revoke_social_user_refresh_token,flow:clean_up"
+						"description": "tags: [endpoint:oauth2_revoke_social_user_refresh_token,flow:clean_up]"
 					},
 					"response": []
 				},
@@ -2945,7 +2945,7 @@
 								}
 							]
 						},
-						"description": "tags: [endpoint:oauth2_revoke_user_refresh_token,flow:clean_up"
+						"description": "tags: [endpoint:oauth2_revoke_user_refresh_token,flow:clean_up]"
 					},
 					"response": []
 				},
@@ -3034,7 +3034,7 @@
 								}
 							]
 						},
-						"description": "tags: [endpoint:oauth2_revoke_service_access_token,flow:clean_up"
+						"description": "tags: [endpoint:oauth2_revoke_service_access_token,flow:clean_up]"
 					},
 					"response": []
 				}
