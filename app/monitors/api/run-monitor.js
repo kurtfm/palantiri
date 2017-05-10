@@ -107,8 +107,7 @@ module.exports = (conf) => {
                 if (err) {
                     reject(err, log);
                 }
-                if (!conf.datadog_failure_notification_disabled && summary.run.stats
-                    .assertions.failed > 0) {
+                if (!conf.datadog_failure_notification_disabled && summary.run.stats.assertions.failed > 0) {
                     log.sendFailureNotice = 'sending failure notice to datadog';
                     reportResults.failureNotice(conf.metrics_prefix, conf.metricsAgentHost, conf.metrics_agent_port, conf.metrics_default_api_name,
                             target, conf.aws_s3_bucket, outputId + conf.report_file_end,
