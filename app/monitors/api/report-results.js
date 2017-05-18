@@ -4,19 +4,18 @@
  const yaml = require('js-yaml');
 
  module.exports = {
-     tests: (metricsPrefix, metricsAgentHost, metricsAgentPort, name, target,
-         testResults) => {
+     tests: (conf, target, testResults) => {
          var log = {};
          log.testsMethodInvoked = true;
          return new Promise((resolve, reject) => {
              log.testsPromiseInitialized = true;
-             var datadog = new Datadog(metricsPrefix, metricsAgentHost,
-                 metricsAgentPort);
+             var datadog = new Datadog(conf.metrics_prefix, conf.metrics_agent_host,
+                 conf.metrics_agent_port);
              var testConfig = yaml.safeLoad(testResults.item.request.description
                  .toString());
              var tags = testConfig.tags ? testConfig.tags : [];
              var metricName = testConfig.metric_name ? testConfig.metric_name :
-                 name;
+                 conf.metrics_default_api_name;
              var datadogCommands = [];
              var requestUrl = typeof testResults.executions[0].result.globals
                  .request
@@ -59,15 +58,14 @@
 
          });
      },
-     totals: (metricsPrefix, metricsAgentHost, metricsAgentPort, name, target,
-         testTotals) => {
+     totals: (conf, target, testTotals) => {
          var log = {};
          log.totalsInitialized = true;
          return new Promise((resolve, reject) => {
              log.totalsPromiseInitialized = true;
-             var datadog = new Datadog(metricsPrefix, metricsAgentHost,
-                 metricsAgentPort);
-             var metricName = name;
+             var datadog = new Datadog(conf.metrics_prefix, conf.metrics_agent_host,
+                 conf.metrics_agent_port);
+             var metricName = conf.metrics_default_api_name;
              var datadogCommands = [];
              var runTotalTags = ['run_total_tests', 'app:' + target];
              var runPassesTags = ['run_passes', 'app:' + target];
@@ -102,25 +100,24 @@
 
          });
      },
-     failureNotice: (metricsPrefix, metricsAgentHost, metricsAgentPort, name,
-         target, bucket, jsonReportName,
-         testTotals) => {
+     failureNotice: (conf, target, outputId, testTotals) => {
          var log = {};
          log.failureNoticeInitialized = true;
+
          return new Promise((resolve, reject) => {
-             var title = target + ' ' + name + ': tests failed on last run';
-             var message =
-                 'At least one test failed.  See debug info in s3 bucket: ' +
-                 bucket + ' folder: ' + target + ' file:' + jsonReportName;
+             var title = target + ' ' + conf.metrics_default_api_name + ': tests failed on last run';
+             var message = testTotals.assertions.failed + ' out of ' + testTotals.assertions.total + ' failed '+
+                 ( conf.aws_s3_disable_push ? '' : 'See debug info in s3 bucket: ' +
+                 conf.aws_s3_bucket + ' folder: ' + target + ' file:' + outputId + conf.report_file_end);
              var priority = 'normal';
              var alertType = 'error';
-             var tags = [metricsPrefix + name,
-                 'app:' + target
-             ];
+             var tags = [conf.metrics_prefix + conf.metrics_default_api_name,
+                 'app:' + target];
 
-             var runName = metricsPrefix + '.' + name;
-             var datadog = new Datadog(metricsPrefix, metricsAgentHost,
-                 metricsAgentPort);
+             var runName = conf.metrics_prefix + '.' + conf.metrics_default_api_name;
+             var datadog = new Datadog(conf.metrics_prefix, conf.metrics_agent_host,
+                 conf.metrics_agent_port);
+
              datadog.sendEvent(title, message, runName, priority, alertType,
                      tags)
                  .then(res => {

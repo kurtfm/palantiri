@@ -92,9 +92,7 @@ module.exports = (conf) => {
                 if (!conf.metrics_disabled) {
                     log.reportResults =
                         `sending test metrics: ${testInstanceResults.item.name}`;
-                    reportResults.tests(conf.metrics_prefix, conf.metrics_agent_host,
-                            conf.metrics_agent_port, conf.metrics_default_api_name,
-                            target, testInstanceResults)
+                    reportResults.tests(conf, target, testInstanceResults)
                         .then((data, err) => {
                             if (err) {
                                 console.log('error: ', err);
@@ -109,9 +107,7 @@ module.exports = (conf) => {
                 }
                 if (!conf.datadog_failure_notification_disabled && summary.run.stats.assertions.failed > 0) {
                     log.sendFailureNotice = 'sending failure notice to datadog';
-                    reportResults.failureNotice(conf.metrics_prefix, conf.metricsAgentHost, conf.metrics_agent_port, conf.metrics_default_api_name,
-                            target, conf.aws_s3_bucket, outputId + conf.report_file_end,
-                            summary.run.stats)
+                    reportResults.failureNotice(conf,target,outputId,summary.run.stats)
                         .then((data, err) => {
                             log.sendFailureNoticeResults = data;
                         })
@@ -121,9 +117,7 @@ module.exports = (conf) => {
                 }
                 if (!conf.metrics_disabled) {
                     log.reportResults = 'sending total metrics';
-                    reportResults.totals(conf.metrics_prefix, conf.metrics_agent_host,
-                            conf.metrics_agent_port, conf.metrics_default_api_name,
-                            target, summary.run.stats)
+                    reportResults.totals(conf, target, summary.run.stats)
                         .then((data, err) => {
                             if (err) {
                                 console.log('error: ', err);

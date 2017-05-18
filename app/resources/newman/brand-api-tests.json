@@ -561,7 +561,7 @@
 						}
 					],
 					"request": {
-						"url": "{{oauth_server}}/token",
+						"url": "{{oauth_server}}token",
 						"method": "POST",
 						"header": [
 							{
@@ -722,7 +722,7 @@
 						}
 					],
 					"request": {
-						"url": "{{oauth_server}}/token",
+						"url": "{{oauth_server}}token",
 						"method": "POST",
 						"header": [
 							{
@@ -2016,7 +2016,7 @@
 						}
 					],
 					"request": {
-						"url": "{{oauth_server}}",
+						"url": "{{oauth_server}}token",
 						"method": "POST",
 						"header": [
 							{

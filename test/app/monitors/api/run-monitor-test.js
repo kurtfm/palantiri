@@ -26,21 +26,21 @@ var runMonitor = proxyquire(app + 'run-monitor', {
         });
     }
 });
-stubReportResult.tests = (prefix, host, port, name, target, number) => {
+stubReportResult.tests = (conf, target, number) => {
     return new Promise((resolve, reject) => {
         resolve({
             'finished': true
         });
     });
 };
-stubReportResult.totals = (prefix, host, port, name, target, results) => {
+stubReportResult.totals = (conf, target, results) => {
     return new Promise((resolve, reject) => {
         resolve({
             'finished': true
         });
     });
 };
-stubReportResult.failureNotice = (prefix, host, port, name, target, bucket, file, stats) => {
+stubReportResult.failureNotice = (conf, target,  stats) => {
     return new Promise((resolve, reject) => {
         resolve({
             'finished': true

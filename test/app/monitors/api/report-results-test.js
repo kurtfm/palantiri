@@ -107,14 +107,10 @@ describe('Report Results Tests', () => {
   var testsData;
   var totalsData;
   before((done) => {
-    reportResults.tests(conf.metrics_prefix, conf.metrics_agent_host,
-        conf.metrics_agent_port, 'foo', conf.target,
-        testResultsInstanceData)
+    reportResults.tests(conf, conf.target, testResultsInstanceData)
       .then((results) => {
         testsData = results;
-        reportResults.totals(conf.metrics_prefix, conf.metrics_agent_host,
-            conf.metrics_agent_port, 'foo', conf.target,
-            totalsResultsData)
+        reportResults.totals(conf, conf.target, totalsResultsData)
           .then((results) => {
             totalsData = results;
             done();
@@ -155,17 +151,14 @@ describe('Report Results Tests', () => {
 
   it('should fail if test instance data is missing',
     function*() {
-      return reportResults.tests(conf.metrics_prefix, conf.metrics_agent_host,
-          conf.metrics_agent_port, 'foo', conf.target)
+      return reportResults.tests(conf, conf.target)
         .catch((error) => {
           expect(error).to.be.defined;
         });
     });
   it('should send failure report',
     function*() {
-      return reportResults.failureNotice(conf.metrics_prefix, conf.metrics_agent_host,
-          conf.metrics_agent_port, conf.metrics_default_api_name,
-          conf.target, conf.aws_s3_bucket, 'foo', statsData)
+      return reportResults.failureNotice(conf,'foo','foo', statsData)
         .then((data) => {
           expect(data.failureNoticeInitialized).to.be.true;
           expect(data.datadogSendFailure).to.be.true;
