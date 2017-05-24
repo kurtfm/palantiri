@@ -1,5 +1,5 @@
  'use strict';
- var Datadog = require('../../adapters/datadog');
+ var Datadog = require('../adapters/datadog');
  const Promise = require('bluebird');
  const yaml = require('js-yaml');
 

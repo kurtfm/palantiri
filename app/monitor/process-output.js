@@ -3,7 +3,7 @@ const assert = require('assert');
 const JSON5 = require('json5');
 const fs = require('fs');
 const Promise = require('bluebird');
-const aws = require('../../adapters/aws.js');
+const aws = require('../adapters/aws.js');
 
 module.exports = (conf, target, jsonReport) => {
   var log = {};
