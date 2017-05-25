@@ -9,7 +9,7 @@ env_file: env.json
 global_file: globals.json
 report_file_end: -report.json
 monitor_schedule:
-  default: "* * * * *"
+  default: "*/5 * * * *"
 metrics_prefix: test.
 metrics_agent_host: localhost
 metrics_agent_port: 8125
@@ -18,4 +18,4 @@ metrics_disabled: 0
 datadog_failure_notification_disabled: 0
 aws_s3_bucket: monitoring-debug-data
 aws_s3_file_expiration_days: 30
-aws_s3_disable_push: 0
+aws_s3_disable_push: 1
