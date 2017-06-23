@@ -3,6 +3,7 @@
 var conf = require('../config/load');
 const spawn = require('child_process').spawn;;
 const cron = require('node-cron');
+const winston = require('winston');
 
 var apiMonitors = conf.supported_api_monitors;
 
@@ -23,7 +24,7 @@ for (var i = 0, total = apiMonitors.length; i < total; i++) {
         args.shift();
         args.shift();
         return cron.schedule(schedule, function() {
-            console.log(target + ": monitor started running with args: ", args );
+            winston.log('info', target + ': monitor started running with args: ' + args );
             
             var monitor = spawn(apiMonitorStarter, args);
             /*
@@ -32,11 +33,11 @@ for (var i = 0, total = apiMonitors.length; i < total; i++) {
             });
             */
             monitor.on('error', (data) => {
-                console.log(target + " error: " + data);
+                winston.log('error',target + ' error: ' + data);
             });
 
             monitor.on('exit', (exitCode) => {
-                console.log(target + ": monitor finished running.");
+                winston.log('info',target + ': monitor finished running.');
             });
 
         }, false);

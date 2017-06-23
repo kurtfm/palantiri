@@ -6,11 +6,13 @@ const Promise = require('bluebird');
 const newman = require('newman');
 const _ = require('lodash');
 const util = require('util');
+const winston = require('winston');
 
 const reportResults = require('./report-results');
 const processOutput = require('./process-output');
 
 module.exports = (conf) => {
+    winston.level = conf.log_level;
     return new Promise((resolve, reject) => {
         const target = conf.target;
         const time = Date.now();
@@ -20,49 +22,52 @@ module.exports = (conf) => {
             target + '-';
         const outputFolder = conf.application_root + conf.output_folder +
             target + "/" + outputId;
+        winston.log('info','start run');
 
-        var log = {};
-
-        log.start = 'assert target value is present';
         assert.strictEqual(
             typeof target,
             "string",
             "Pass API target when starting monitor example: --target=brandapi-user"
         );
+        winston.log('verbose','target value is present');
         assert(
             _.includes(conf.supported_api_monitors, target),
             "The API passed in must be configured in the " + conf.env +
             " environment: " + target + " is unsupported.");
+        winston.log('verbose','target value is supported');
 
         var jsonReport = outputFolder + conf.report_file_end;
-        log.jsonReport = jsonReport;
+        winston.log('verbose','jsonReport: '+jsonReport);
         var testFile = newmanFolder + conf.test_file;
-        log.testFile = testFile;
+        winston.log('verbose','testFile: '+ testFile);
         var envFile = newmanFolder + conf.env_file;
-        log.envFile = envFile;
+        winston.log('verbose','envFile: '+envFile);
         var globalFile = newmanFolder + conf.global_file;
-        log.globalFile = globalFile;
+        winston.log('verbose','globalFile: '+globalFile);
 
         function fileExists(path) {
             try {
-                log.fileExists = `file ${path} exists`;
+                winston.log('verbose',`file ${path} exists`);
                 return fs.statSync(path).isFile();
             } catch (e) {
                 if (e.code === 'ENOENT') {
                     return false;
                 }
-                console.log("Exception fs.statSync (" + path + "): " + e);
+                winston.log('error','Exception fs.statSync (' + path + '): ' + e);
                 throw e;
             }
         }
         var tests = fileExists(testFile) ?
             require(testFile) :
             assert(false, "Could not find test file: " + testFile);
+        winston.log('verbose','tests file loaded');
 
         var environment = fileExists(envFile) ?
             require(envFile) : {};
+        winston.log('verbose','environment file loaded');
         var globals = fileExists(globalFile) ?
             require(globalFile) : {};
+        winston.log('verbose','global environment file loaded');
 
         var newmanOptions = {
             collection: tests,
@@ -75,64 +80,72 @@ module.exports = (conf) => {
                 }
             }
         };
-        log.newmanOptions = newmanOptions;
+        winston.log('verbose','newmanOptions: ' + util.inspect(newmanOptions, {showHidden: false, depth: 2}));
         newman.run(newmanOptions)
             .on('start', function(err, args) {
                 if (err) {
-                    console.log(err);
-                    reject(err, log);
+                    winston.log('error','error on start: ' + err);
+                    reject(err);
                 }
-                log.startSummary =
-                    `Running ${args.cursor.length} request(s) and ${args.cursor.cycles} iteration(s)`;
+                winston.log('verbose',`Running ${args.cursor.length} request(s) and ${args.cursor.cycles} iteration(s)`);
             })
             .on('test', function(err, testInstanceResults) {
                 if (err) {
-                    reject(err, log);
+                    winston.log('error','error on test: ' + err);
+                    reject(err);
                 }
                 if (!conf.metrics_disabled) {
-                    log.reportResults =
-                        `sending test metrics: ${testInstanceResults.item.name}`;
+                    winston.log('verbose','reportResults: '+
+                        `sending test metrics: ${testInstanceResults.item.name}`);
                     reportResults.tests(conf, target, testInstanceResults)
                         .then((data, err) => {
                             if (err) {
-                                console.log('error: ', err);
+                                winston.log('error','error on reportResults: ' + err);
                             }
-                            log.reportResults = data;
+                            winston.log('verbose','reportResults data: ' + util.inspect(data, {showHidden: false, depth: null}));
                         });
                 }
             })
             .once('done', function(err, summary) {
                 if (err) {
-                    reject(err, log);
+                    winston.log('error','error on done: ' + err);
+                    reject(err);
                 }
                 if (!conf.datadog_failure_notification_disabled && summary.run.stats.assertions.failed > 0) {
-                    log.sendFailureNotice = 'sending failure notice to datadog';
+                    winston.log('verbose','sending failure notice to datadog');
                     reportResults.failureNotice(conf,target,outputId,summary.run.stats)
                         .then((data, err) => {
-                            log.sendFailureNoticeResults = data;
+                            if(err){
+                                winston.log('error','error on reportResults: '+ err);
+                            }
+                            winston.log('verbose','reportResults data: ' + util.inspect(data, {showHidden: false, depth: null}));
                         })
                         .catch((error) => {
-                            console.log(error.name, ":", error.message);
+                            winston.log('error','caught error during reportResults: '+error.name, ":", error.message);
                         });
                 }
                 if (!conf.metrics_disabled) {
-                    log.reportResults = 'sending total metrics';
+                    winston.log('verbose','sending total metrics');
                     reportResults.totals(conf, target, summary.run.stats)
                         .then((data, err) => {
                             if (err) {
-                                console.log('error: ', err);
+                                winston.log('error', err);
                             }
-                            log.reportResults = data;
+                            winston.log('verbose',data);
                             processOutput(conf, target, jsonReport);
                         })
                         .then((data, err) => {
-                            resolve(log, err);
+                            if (err) {
+                                winston.log('error', err);
+                            }
+                            winston.log('verbose',util.inspect(data, {showHidden: false, depth: null}));
+                            resolve();
                         })
                         .catch((error) => {
-                            console.log(error.name, ":", error.message);
+                            winston.log('error','caught error reportResults.totals' + error.name + '-' + error.message);
                         });
                 } else {
-                    resolve(log);
+                    resolve();
                 }
 
             });

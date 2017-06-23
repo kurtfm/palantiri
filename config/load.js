@@ -92,6 +92,9 @@ if (argv.disablenotification) {
 if (argv.metricsprefix) {
   conf.metrics_prefix = argv.metricsprefix;
 }
+if (process.env.NODE_LOG_LEVEL) {
+  conf.log_level = process.env.NODE_LOG_LEVEL;
+}
 conf.env = env;
 conf.target = argv.target ? argv.target : null;
 

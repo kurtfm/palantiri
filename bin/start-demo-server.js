@@ -5,7 +5,7 @@ const Hapi = require('hapi');
 
 const server = new Hapi.Server();
 
-const util = require('util')
+const util = require('util');
 
 //localhost:33688/demo
 

@@ -5,14 +5,12 @@ var conf = require('../config/load');
 const _ = require('lodash');
 const app = conf.application_root + conf.api_monitor;
 const runTests = require(app + 'run-monitor');
-
+const winston = require('winston');
+winston.level = conf.log_level;
 runTests(conf)
-  .then((log, err) => {
-    console.log('run complete!');
-    if (conf.env !== 'prod') {
-      console.log(log);
-    }
+  .then(() => {
+    winston.log('info', 'run complete');
   })
   .catch((error) => {
-    console.log(error.name, ":", error.message);
+    winston.log('error',error.name + ':' + error.message);
   });
