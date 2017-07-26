@@ -30,7 +30,7 @@ fs.writeFileSync(jsonReport, fs.readFileSync(
   testReportData));
 
 var processOutput = proxyquire(app + 'process-output', {
-  '../../adapters/aws.js': () => {
+  '../adapters/aws.js': () => {
     this.s3Upload = () => {
       return new Promise((resolve, reject) => {
         resolve({
