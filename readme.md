@@ -1,8 +1,8 @@
 # monitoring app
-This was written to monitor apps from a customer perspective and report those results to a Datadog agent.
+This was written to monitor APIs from a customer perspective using Postman's Newman and report those results to a Datadog (statsd) agent.
 
 ## API Monitoring
-In order to monitor APIs it loads Postman's Newman test runner as a nodejs library.  This was chosen because we already use Postman/Newman for our integration tests.
+In order to monitor APIs it loads Postman's Newman test runner as a nodejs library.  
 
 ### version
 This monitoring-app requires that you have tests in the postman v3 format.

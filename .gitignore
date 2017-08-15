@@ -10,6 +10,6 @@ xunit.xml
 nbproject/
 coverage/
 build.properties
-docker/monitoring-app/
+docker/monitoring-app
 test/outputs/onetest/
 *.iml

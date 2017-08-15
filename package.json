@@ -1,11 +1,11 @@
 {
-  "name": "monitoring-app",
-  "version": "1.11.0",
+  "name": "palantir",
+  "version": "1.0.0",
   "state": "SNAPSHOT",
   "description": "A monitoring agent that runs tests and pushes the results data where it needs to go",
   "repository": {
     "type": "git",
-    "url": "ssh://git@stash.ops.aol.com:2022/identity_services/monitoring-app.git"
+    "url": "https://github.com/kurtfm/palantir.git"
   },
   "author": "Kurt Moeller",
   "dependencies": {
