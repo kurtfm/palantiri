@@ -1,10 +1,21 @@
-# monitoring app
-This was written to monitor APIs from a customer perspective using Postman's Newman and report those results to a Datadog (statsd) agent.
+# Palantir
+This utility is designed monitor your application (currently just APIs) as if it was a customer.
 
-## API Monitoring
-In order to monitor APIs it loads Postman's Newman test runner as a nodejs library.  
+In order to monitor APIs it loads Postman's Newman test runner as a nodejs library. 
 
-### version
+It can push the results to a Datadog agent as well as save them in AWS S3.
+
+## Demo
+For all the demos using the target `monitor-app-demo` you will need to start a local server (hapijs) which has some generic endpoints.
+
+```
+bin/start-demo-server.js &
+```
+
+## Tests setup
+You will need to write, name, and setup the postman tests in a way that the app can use them.
+
+### requirements
 This monitoring-app requires that you have tests in the postman v3 format.
 
 ### custom metrics and tags for datadog
@@ -33,7 +44,7 @@ with the default config the API monitor will look for target tests like this:
  <app root>/app/resources/newman/<target>-tests.json
 
 
-## running API monitor
+## running
 
 ### dependencies
 Run: node, npm, newman v3, datadog, aws sdk (unless you disable aws), gulp
@@ -41,13 +52,13 @@ Run: node, npm, newman v3, datadog, aws sdk (unless you disable aws), gulp
 ### run locally
 
 ```
-bin/start-api-monitor.js --target=brandapi-user
+bin/start-api-monitor.js --target=monitor-app-demo
 ```
 
 
 |argument|example|description|values|default|
 | -------- | -------- | -------- | -------- | -------- |
-| -t, --target (required)| example: 'bin/start-api-monitor.js --target=brandapi-user' | the app or service you want to test, note: there is a list of acceptable targets in the app config and each environment config may override |  |  |
+| -t, --target (required)| example: 'bin/start-api-monitor.js --target=monitor-app-demo' | the app or service you want to test, note: there is a list of acceptable targets in the app config and each environment config may override |  |  |
 | -e, --environment | 'bin/start-api-monitor.js --environment=test'| the environment to use | dev', 'test', 'prod' | dev |
 | --disables3 | 'bin/start-api-monitor.js --disables3| disable pushing of run details to s3 |  | false |
 | --disablemetrics' | 'bin/start-api-monitor.js --disablemetrics' | disable sending metrics to datadog |  | false |
@@ -56,26 +67,20 @@ bin/start-api-monitor.js --target=brandapi-user
 | --disablenotification | 'bin/start-api-monitor.js --disablenotification' | disable notification to datadog when there is a failure' |  | false |
 
 
- ## dockerization
-
- Building an API monitoring-app docker image...
- ```
- docker build -t monitoring-app -f Dockerfile.api
- ```
-
- Running docker container...
- ```
- docker run --rm=true --network="host" -v ~/.aws:/root/.aws monitoring-app:latest --target=brandapi --environment=dev --metricsagent=dockerhost
- ```
- more details in the docker/readme
-
- ## cron setup
- You can run each monitor individually
+ ## scheduling / cron setup
+ You can run each monitor individually (getting AWS access to your docker container may be different)
 
  ```
- * * * * * docker run --rm=true --network="host" -v ~/.aws:/root/.aws monitoring-app:latest --target=myapi --environment=dev --metricsagent=dockerhost >/dev/null
+ * * * * * docker run --rm=true --network="host" -v ~/.aws:/root/.aws palantir:latest --target=monitor-app-demo --environment=dev --metricsagent=dockerhost >/dev/null
  ```
 
+You can also use the scheduler config combined with the `bin/start-api-scheduled-monitor.js`
+
+```
+bin/start-api-scheduled-monitor.js --target=monitor-app-demo
+```
+
+This will use the default schedule from the config or a specific one can be set for target.
 
 
 ## local dev setup
@@ -120,6 +125,7 @@ This will run the tests and bundle the core app and dependencies for distributio
 When you feel you have something ready to roll (tests look good).  Run this:
 
 ```
+npm prune
 npm shrinkwrap
 ```
 
@@ -154,3 +160,17 @@ gulp dist
 ```
 
 Use this to test and build app into 'dist' directory in preparation for deployment.
+
+ ## dockerization
+
+ Building a Palantir docker image...
+ ```
+ docker build -t palantir -f Dockerfile.api
+ ```
+ note: original design plan was to add in UI monitoring capability as well via headlesss browser which is why a specfic docker file name is used
+
+ Running docker container... (getting AWS access to your docker container may be different)
+ ```
+ docker run --rm=true --network="host" -v ~/.aws:/root/.aws palantir:latest --target=monitor-app-demo --environment=dev --metricsagent=dockerhost
+ ```
+ more details in the docker/readme
