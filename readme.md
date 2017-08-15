@@ -40,8 +40,9 @@ test_file: tests.json
 env_file: env.json
 global_file: globals.json
 ```
-with the default config the API monitor will look for target tests like this:
- <app root>/app/resources/newman/<target>-tests.json
+with the default config Palantir will look for target tests like this:
+ 
+ `<app root>/app/resources/newman/<target>-tests.json`
 
 
 ## running
