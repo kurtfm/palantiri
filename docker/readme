@@ -1,6 +1,9 @@
 # API monitor build docker image
 docker build -t monitoring-app -f Dockerfile.api .
 
+# run without connecting to Datadog or S3
+docker run --rm=true monitoring-app:latest --disables3=true --target=monitor-app-demo --environment=dev --disablemetrics=true
+
 # API monitor docker run command with agent on host
 
 The will set the hosts IP in the etc hosts file as 'dockerhost' w

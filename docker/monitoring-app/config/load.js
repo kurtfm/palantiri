@@ -5,7 +5,7 @@ const _ = require('lodash');
 var argv = require('yargs')
   .option('t', {
     alias: 'target',
-    example: 'bin/start-api-monitor.js --target=brand-api',
+    example: 'bin/start-api-monitor.js --target=monitor-app-demo',
     describe: 'the app or service you want to test'
   })
   .option('e', {
@@ -91,6 +91,9 @@ if (argv.disablenotification) {
 }
 if (argv.metricsprefix) {
   conf.metrics_prefix = argv.metricsprefix;
+}
+if (process.env.NODE_LOG_LEVEL) {
+  conf.log_level = process.env.NODE_LOG_LEVEL;
 }
 conf.env = env;
 conf.target = argv.target ? argv.target : null;

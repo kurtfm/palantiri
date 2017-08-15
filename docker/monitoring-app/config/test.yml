@@ -3,3 +3,7 @@ newman_folder: /test/app/resources/newman/
 output_folder: /test/outputs/
 test_data: /test/app/resources/data/
 disable_metrics: true
+log_level: verbose
+aws_s3_bucket: monitoring-debug-data
+aws_s3_file_expiration_days: 30
+aws_s3_disable_push: 0

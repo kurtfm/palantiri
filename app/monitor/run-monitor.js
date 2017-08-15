@@ -27,7 +27,7 @@ module.exports = (conf) => {
     assert.strictEqual(
       typeof target,
       "string",
-      "Pass API target when starting monitor example: --target=brandapi-user"
+      "Pass API target when starting monitor example: --target=monitor-app-demo"
     );
     assert(
       _.includes(conf.supported_api_monitors, target),
