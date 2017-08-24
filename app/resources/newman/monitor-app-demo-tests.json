@@ -1,0 +1,111 @@
+{
+	"variables": [],
+	"info": {
+		"name": "monitor-app-demo",
+		"_postman_id": "f695cab7-6878-eb55-7943-ad88e1ccfd65",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "REST Demos",
+			"description": "",
+			"item": [
+				{
+					"name": "GET Request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{api-base}}:{{api-port}}/demo/foo",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "tags: [endpoint:demo,id:foo]"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{api-base}}:{{api-port}}/demo/",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"foo\":\"bar\"}"
+						},
+						"description": "tags: [endpoint:demo,data:foo_bar]"
+					},
+					"response": []
+				},
+				{
+					"name": "POST Request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"",
+									"//tests",
+									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{api-base}}:{{api-port}}/demo/",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "foo",
+									"value": "bar",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": "tags: [endpoint:demo,data:foo_bar]"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,35 @@
+# API monitor build docker image
+docker build -t monitoring-app -f Dockerfile.api .
+
+# run without connecting to Datadog or S3
+docker run --rm=true monitoring-app:latest --disables3=true --target=monitor-app-demo --environment=dev --disablemetrics=true
+
+# API monitor docker run command with agent on host
+
+The will set the hosts IP in the etc hosts file as 'dockerhost' w
+
+```
+docker run --rm=true --network="host" -v ~/.aws:/root/.aws monitoring-app:latest --target=monitor-app-demo --environment=dev --metricsagent=dockerhost
+```
+
+# API monitor docker run link to datadog agent
+If you want to run the monitor and have it report to datadog docker agent
+
+```
+docker run --rm=true -v ~/.aws:/root/.aws --link dd-agent:dd-agent monitoring-app:latest --target=monitor-app-demo --environment=dev --metricsagent=dd-agent
+```
+
+# API monitor docker run link to datadog stand alone statsd
+
+```
+docker run --rm=true --link dogstatsd:dogstatsd monitoring-app:latest --disables3=true --target=monitor-app-demo --environment=prod --metricsagent=dogstatsd
+```
+
+
+# API monitor docker run debugging
+
+If you want to start the docker container without having it automatically run the monitor then use the command below.  This will NOT set the host in the etc hosts file so you will need to do that manually in order for the monitor to reach the datadog agent on the host.
+
+```
+docker run --rm=true --network="host" -v ~/.aws:/root/.aws --entrypoint=/bin/ash -it monitoring-app:latest
+```

@@ -1,0 +1,2 @@
+supported_api_monitors: ['monitor-app-demo']
+log_level: debug

@@ -1,0 +1,34 @@
+{
+    "variables": [],
+    "info": {
+        "name": "monitoring-agent-tests",
+        "_postman_id": "e0476eb2-b70c-26e5-40e6-cdcbfbb17d67",
+        "description": "monitor_tests",
+        "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+    },
+    "item": [{
+        "name": "One Folder",
+        "description": "one_folder",
+        "item": [{
+            "name": "one test",
+            "event": [{
+                "listen": "test",
+                "script": {
+                    "type": "text/javascript",
+                    "exec": "tests[\"Status code is 200\"] = responseCode.code === 200;"
+                }
+            }],
+            "request": {
+                "url": "http://localhost:33688/one",
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": []
+                },
+                "description": "tags: [one_test,tester]"
+            },
+            "response": []
+        }]
+    }]
+}

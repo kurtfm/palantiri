@@ -1,0 +1,15 @@
+.DS_Store
+node_modules/
+outputs/*
+dist/*
+xunit.xml
+.idea/*
+*.iml
+.vagrant/*
+.vscode/*
+nbproject/
+coverage/
+build.properties
+docker/monitoring-app
+test/outputs/onetest/
+*.iml
