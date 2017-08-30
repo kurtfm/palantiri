@@ -47,6 +47,8 @@ with the default config Palantir will look for target tests like this:
 
 ## running
 
+Requires node v6
+
 ### dependencies
 Run: node, npm, newman v3, datadog agent setup, aws access / node sdk (unless you disable aws), gulp
 
