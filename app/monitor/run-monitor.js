@@ -23,7 +23,7 @@ module.exports = (conf) => {
     const outputFolder = conf.application_root + conf.output_folder +
       target + "/" + outputId;
 
-    var eventLog = {};
+    const eventLog = {};
 
     eventLog.start = 'assert target value is present';
     assert.strictEqual(
@@ -36,13 +36,13 @@ module.exports = (conf) => {
       "The API passed in must be configured in the " + conf.env +
       " environment: " + target + " is unsupported.");
 
-    var jsonReport = outputFolder + conf.report_file_end;
+    const jsonReport = outputFolder + conf.report_file_end;
     eventLog.jsonReport = jsonReport;
-    var testFile = newmanFolder + conf.test_file;
+    const testFile = newmanFolder + conf.test_file;
     eventLog.testFile = testFile;
-    var envFile = newmanFolder + conf.env_file;
+    const envFile = newmanFolder + conf.env_file;
     eventLog.envFile = envFile;
-    var globalFile = newmanFolder + conf.global_file;
+    const globalFile = newmanFolder + conf.global_file;
     eventLog.globalFile = globalFile;
 
     function fileExists(path) {
@@ -57,16 +57,16 @@ module.exports = (conf) => {
         throw e;
       }
     }
-    var tests = fileExists(testFile) ?
+    const tests = fileExists(testFile) ?
       require(testFile) :
       assert(false, `Could not find test file: ${testFile}`);
 
-    var environment = fileExists(envFile) ?
+    const environment = fileExists(envFile) ?
       require(envFile) : {};
-    var globals = fileExists(globalFile) ?
+    const globals = fileExists(globalFile) ?
       require(globalFile) : {};
 
-    var newmanOptions = {
+    const newmanOptions = {
       collection: tests,
       environment: environment,
       globals: globals,

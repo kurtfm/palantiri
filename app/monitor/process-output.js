@@ -8,7 +8,7 @@ const winston = require('winston');
 
 module.exports = (conf, target, jsonReport) => {
   winston.level = conf.log_level;
-  var eventLog = {};
+  const eventLog = {};
   eventLog.moduleInitialized = true;
   return new Promise((resolve, reject) => {
     eventLog.promiseInitialized = true;

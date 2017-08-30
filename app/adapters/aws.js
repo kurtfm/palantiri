@@ -27,11 +27,11 @@ module.exports = {
         "undefined",
         "expiration must be defined"
       );
-      var s3 = new AWS.S3({
+      const s3 = new AWS.S3({
         apiVersion: '2006-03-01'
       });
-      var fileBuffer = fs.readFileSync(file);
-      var params = {
+      const fileBuffer = fs.readFileSync(file);
+      const params = {
         Bucket: bucket,
         Key: target + '/' + path.basename(file),
         Body: fileBuffer,

@@ -19,7 +19,7 @@
 							"script": {
 								"type": "text/javascript",
 								"exec": [
-									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"const response = responseBody !== '' ? JSON.parse(responseBody) : {};",
 									"",
 									"//tests",
 									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';"
@@ -44,7 +44,7 @@
 							"script": {
 								"type": "text/javascript",
 								"exec": [
-									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"const response = responseBody !== '' ? JSON.parse(responseBody) : {};",
 									"",
 									"//tests",
 									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';"
@@ -78,7 +78,7 @@
 							"script": {
 								"type": "text/javascript",
 								"exec": [
-									"var response = responseBody !== '' ? JSON.parse(responseBody) : {};",
+									"const response = responseBody !== '' ? JSON.parse(responseBody) : {};",
 									"",
 									"//tests",
 									"tests[\"Success Response\"] = typeof response.status !== 'undefined' && response.status == 'success';"

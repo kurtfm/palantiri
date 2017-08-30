@@ -1,15 +1,15 @@
 'use strict';
-var StatsD = require('hot-shots');
+const StatsD = require('hot-shots');
 const Promise = require('bluebird');
 const assert = require('assert');
 
 module.exports = function(metricsPrefix, metricsAgentHost, metricsAgentPort) {
-    var mock = process.env.NODE_ENV === 'test' ? true : false;
-    //var mock = true;
+    const mock = process.env.NODE_ENV === 'test' ? true : false;
+    //const mock = true;
 
-    var agentHost = metricsAgentHost ? metricsAgentHost : 'localhost';
-    var agentPort = metricsAgentPort ? metricsAgentPort : 8125;
-    var client = new StatsD(agentHost, agentPort, metricsPrefix,
+    const agentHost = metricsAgentHost ? metricsAgentHost : 'localhost';
+    const agentPort = metricsAgentPort ? metricsAgentPort : 8125;
+    const client = new StatsD(agentHost, agentPort, metricsPrefix,
         '', false, false,
         mock);
 
@@ -140,7 +140,7 @@ module.exports = function(metricsPrefix, metricsAgentHost, metricsAgentPort) {
         });
     };
     this.sendEvent = (title, message, runName, priority, alertType, tags) => {
-        var options = {
+        const options = {
             alert_type: alertType,
             aggregation_key: runName,
             priority: priority
