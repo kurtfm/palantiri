@@ -1,19 +1,59 @@
-# Palantir
+
+# Palantir (API Monitoring Utility)
+
 This utility is designed monitor your application (currently just APIs) as if it was a customer.
 
 In order to monitor APIs it loads Postman's Newman test runner as a nodejs library. 
 
 It can push the results to a Datadog agent as well as save them in AWS S3.
 
+## Table of Contents
+
+- [Dependencies](#dependencies)
+- [Demo](#demo)
+- [Tests](#tests)
+- [Usage](#usage)
+- [Configuration](#configuration)
+- [Scheduling](#scheduling)
+- [Deploying](#deploying)
+- [License](#license)
+
+## Dependencies
+
+### Node
+Requires node v6 and gulp to be installed globally for certain tasks.
+
+### External
+The current design only has two adapters for exporting the results from Newman AWS and Datadog. In the future additional adapters may be added to support other models.
+
+Note: local file system was not used as it was designed to be deployed in the cloud.
+
+
 ## Demo
+
+### Install
+
+```
+npm install
+npm install -g gulp
+```
+
+### Run Demo
 For all the demos using the target `monitor-app-demo` you will need to start a local server (hapijs) which has some generic endpoints.
 
 ```
 bin/start-demo-server.js &
 ```
 
-## Tests setup
-You will need to write, name, and setup the postman tests in a way that the app can use them.
+Then run
+
+```
+bin/start-api-monitor.js --target=monitor-app-demo
+```
+
+## Tests
+The key to this tool is that you can monitor your API endpionts with postman tests. You will need to write, name, and setup the postman tests in a way that the app can use them.
+
 
 ### requirements
 This monitoring-app requires that you have tests in the postman v3 format.
@@ -41,27 +81,32 @@ env_file: env.json
 global_file: globals.json
 ```
 with the default config Palantir will look for target tests like this:
- 
- `<app root>/app/resources/newman/<target>-tests.json`
 
+`<app root>/app/resources/newman/<target>-tests.json`
 
-## running
+## Usage
+Once you have enabled your API tests you can run the monitor locally or via Docker.
 
-Requires node v6
-
-### dependencies
-Run: node, npm, newman v3, datadog agent setup, aws access / node sdk (unless you disable aws), gulp
-
-### pre run
-```
-npm install
-```
-
-### run locally
+### Locally
+This can be run much like the example in the demo using.
 
 ```
 bin/start-api-monitor.js --target=monitor-app-demo
 ```
+
+You can also use the scheduler config combined with the `bin/start-api-scheduled-monitor.js`
+
+```
+bin/start-api-scheduled-monitor.js --target=monitor-app-demo
+```
+This will use the default schedule from the config or a specific one can be set for target.
+
+### Docker run
+Once you have built the Docker image you can run it for each target(getting AWS access to your docker container may be different).
+
+ ```
+ * * * * * docker run --rm=true --network="host" -v ~/.aws:/root/.aws palantir:latest --target=monitor-app-demo --environment=dev --metricsagent=dockerhost >/dev/null
+ ```
 
 ## configuration
 Configuration can be set via a default app config, an environment config or a run time argument (not all config values can be set at runtime... only the ones found useful so far)
@@ -131,19 +176,10 @@ bin/start-api-scheduled-monitor.js --target=monitor-app-demo
 
 This will use the default schedule from the config or a specific one can be set for target.
 
+## Deploying
+Palantir utlizes gulp for local dev tasks (like unit tests) but has also been setup for CDID deployment.
 
-## local dev setup
-Clone this repo and cd into it.
-Install dependencies... you will need to have node and npm installed first
-
-```
-npm install -g gulp
-npm install
-```
-
-## local task runner
-
-### run tests
+### run unit tests
 
 ```
 gulp test
@@ -170,7 +206,7 @@ gulp dist
 This will run the tests and bundle the core app and dependencies for distribution.
 
 
-## getting ready to bundle for a release
+### getting ready to bundle for a release
 When you feel you have something ready to roll (tests look good).  Run this:
 
 ```
@@ -210,7 +246,7 @@ gulp dist
 
 Use this to test and build app into 'dist' directory in preparation for deployment.
 
- ## dockerization
+ ### dockerization
 
  Building a Palantir docker image...
  ```
@@ -225,7 +261,7 @@ Use this to test and build app into 'dist' directory in preparation for deployme
  ```
  more details in the docker/readme
 
- ## code coverage
+ ### code coverage
 
  Uses Instabul for code coverage with the cobertura output to suck into jenkins.
 
@@ -237,3 +273,7 @@ Use this to test and build app into 'dist' directory in preparation for deployme
 istanbul cover gulp test
 ```
 Report will be in coverage will here: palantir/coverage/lcov-report/index.html
+
+## License
+
+[MIT LICENSE](../LICENSE)
