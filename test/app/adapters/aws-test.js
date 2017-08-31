@@ -1,4 +1,4 @@
-'use strict';
+
 require('mocha-generators').install();
 const chai = require('chai');
 const expect = chai.expect;

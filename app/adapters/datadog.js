@@ -1,4 +1,4 @@
-'use strict';
+
 const StatsD = require('hot-shots');
 const Promise = require('bluebird');
 const assert = require('assert');

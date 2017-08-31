@@ -1,5 +1,5 @@
 #! /usr/bin/env node
-'use strict';
+
 const conf = require('../config/load');
 const spawn = require('child_process').spawn;
 const exec = require('child_process').exec;

@@ -1,4 +1,4 @@
-'use strict';
+
 const assert = require('assert');
 const JSON5 = require('json5');
 const fs = require('fs');

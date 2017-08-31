@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 
-'use strict';
+
 var conf = require('../config/load');
 const _ = require('lodash');
 const app = conf.application_root + conf.api_monitor;

@@ -1,5 +1,5 @@
 #! /usr/bin/env node
-'use strict';
+
 var conf = require('../config/load');
 const spawn = require('child_process').spawn;;
 const cron = require('node-cron');
