@@ -12,13 +12,13 @@ const Promise = require('bluebird');
 const nock = require('nock');
 
 
-var conf = require('../../../../config/load');
+const conf = require('../../../../config/load');
 const app = conf.application_root + conf.api_monitor;
 conf.target = 'onetest';
 
-var stubReportResult = {};
+const stubReportResult = {};
 
-var runMonitor = proxyquire(app + 'run-monitor', {
+const runMonitor = proxyquire(app + 'run-monitor', {
   './report-results': stubReportResult,
   './process-output': (conf, target, jsonReport) => {
     return new Promise((resolve, reject) => {
@@ -50,9 +50,9 @@ stubReportResult.failureNotice = (conf, target, stats) => {
 
 describe('Run Monitor Tests', function() {
   this.timeout(5000);
-  var data;
+  const data = {};
   before((done) => {
-    var onetestFake = nock('http://localhost:33688')
+    const onetestFake = nock('http://localhost:33688')
       .post('/one')
       .reply(200, '');
 
@@ -101,10 +101,10 @@ describe('Run Monitor Tests', function() {
 /*
 describe('Run Monitor Tests - Fails', function() {
     this.timeout(5000);
-    var data;
+    const data;
     before((done) => {
         conf.target = 'onetestfail';
-        var onetestFake = nock('http://localhost:33688')
+        const onetestFake = nock('http://localhost:33688')
             .post('/one')
             .reply(200, '');
 

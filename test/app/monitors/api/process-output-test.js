@@ -12,24 +12,24 @@ const Promise = require('bluebird');
 
 
 
-var conf = require('../../../../config/load');
+const conf = require('../../../../config/load');
 const app = conf.application_root + conf.api_monitor;
-var target = 'onetest';
+const target = 'onetest';
 conf.target = target;
 const time = Date.now();
-var testReportData = conf.application_root + conf.test_data +
+const testReportData = conf.application_root + conf.test_data +
   conf.target + '-report.json';
-var outputId = time + "." + (Math.floor(Math.random() *
+const outputId = time + "." + (Math.floor(Math.random() *
   (999999 - 100000 + 1)) + 100000);
-var outputFolder = conf.application_root + conf.output_folder +
+const outputFolder = conf.application_root + conf.output_folder +
   target + "/" + outputId;
-var jsonReport = outputFolder + conf.report_file_end;
+const jsonReport = outputFolder + conf.report_file_end;
 
 
 fs.writeFileSync(jsonReport, fs.readFileSync(
   testReportData));
 
-var processOutput = proxyquire(app + 'process-output', {
+const processOutput = proxyquire(app + 'process-output', {
   '../adapters/aws.js': () => {
     this.s3Upload = () => {
       return new Promise((resolve, reject) => {
@@ -42,7 +42,7 @@ var processOutput = proxyquire(app + 'process-output', {
 });
 
 describe('Process Output Tests', () => {
-  var data;
+  const data = {};
   before((done) => {
     processOutput(conf, target, jsonReport)
       .then((results) => {
@@ -66,7 +66,7 @@ describe('Process Output Tests', () => {
     expect(data.resultsDeleted).to.be.true;
   });
   it('should have really deleted the file from the file system', () => {
-    var deleted;
+    const deleted = false;
     try {
       fs.accessSync(jsonReport, fs.F_OK);
       deleted = false;
@@ -78,7 +78,7 @@ describe('Process Output Tests', () => {
   it('should fail if s3 push is disabled and I have a bogus file name',
     function*() {
       conf.aws_s3_disable_push = 1;
-      var bogusPath = 'bogus';
+      const bogusPath = 'bogus';
       return processOutput(conf, target, bogusPath)
         .catch((err, log) => {
           expect(err.code).to.equal('ENOENT');

@@ -12,16 +12,16 @@ const Promise = require('bluebird');
 
 
 
-var conf = require('../../../../config/load');
+const conf = require('../../../../config/load');
 const app = conf.application_root + conf.api_monitor;
 conf.target = 'onetest';
-var testResultsInstanceData = require(conf.application_root + conf.test_data +
+const testResultsInstanceData = require(conf.application_root + conf.test_data +
   conf.target + '-test-results-instance');
 
-var totalsResultsData = require(conf.application_root + conf.test_data +
+const totalsResultsData = require(conf.application_root + conf.test_data +
   conf.target + '-totals-results');
 
-var statsData = {
+const statsData = {
   "iterations": {
     "total": 1,
     "pending": 0,
@@ -69,7 +69,7 @@ var statsData = {
   }
 };
 
-var stubDataDog = function() {
+const stubDataDog = function() {
   this.sendCount = () => {
     return new Promise((resolve, reject) => {
       resolve({
@@ -98,14 +98,14 @@ var stubDataDog = function() {
   };
 };
 
-var reportResults = proxyquire(app + 'report-results', {
+const reportResults = proxyquire(app + 'report-results', {
   '../../adapters/datadog': stubDataDog
 });
 
 
 describe('Report Results Tests', () => {
-  var testsData;
-  var totalsData;
+  const testsData = {};
+  const totalsData = {};
   before((done) => {
     reportResults.tests(conf, conf.target, testResultsInstanceData)
       .then((results) => {

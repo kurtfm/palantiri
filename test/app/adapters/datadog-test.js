@@ -9,14 +9,14 @@ const proxyquire = require('proxyquire');
 const EventEmitter = require('events');
 const util = require('util');
 
-var conf = require('../../../config/load');
+const conf = require('../../../config/load');
 const app = conf.application_root + conf.api_monitor;
 
 function stubDatadogClientError() {
     return true;
 };
 stubDatadogClientError.prototype.StatsD = () => {
-    var eventEmitter = new events.EventEmitter();
+    const eventEmitter = new events.EventEmitter();
     this.socket = () => {
         this.once = eventEmitter.once.bind(eventEmitter);
         this.on = () => {
@@ -43,8 +43,8 @@ stubDatadogClientError.prototype.close = (metric, count, tags, cb) => {
     cb({ 'ERROR': 'error from stub' });
 };
 
-var Datadog = require(conf.application_root + '/app/adapters/datadog.js');
-var datadog = new Datadog(conf.metrics_prefix);
+const Datadog = require(conf.application_root + '/app/adapters/datadog.js');
+const datadog = new Datadog(conf.metrics_prefix);
 
 describe('Datadog Adapter Tests', function() {
     it('should return some results for sendCount',
@@ -127,7 +127,7 @@ describe('Datadog Adapter Tests', function() {
         });
     it('should take a different metricsagenthost',
         function*() {
-            var datadog = new Datadog(conf.metrics_prefix, '127.0.0.1');
+            const datadog = new Datadog(conf.metrics_prefix, '127.0.0.1');
             return datadog.sendCount('mock', 1, ['bogus', 'tester'])
                 .then(function(results) {
                     expect(results.bytes).to.be.defined;
@@ -135,7 +135,7 @@ describe('Datadog Adapter Tests', function() {
         });
     it('should take a different metricsagentport',
         function*() {
-            var datadog = new Datadog(conf.metrics_prefix, 'localhost', '8125');
+            const datadog = new Datadog(conf.metrics_prefix, 'localhost', '8125');
             return datadog.sendCount('mock', 1, ['bogus', 'tester'])
                 .then(function(results) {
                     expect(results.bytes).to.be.defined;
