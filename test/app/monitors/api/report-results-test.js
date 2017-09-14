@@ -104,8 +104,8 @@ const reportResults = proxyquire(app + 'report-results', {
 
 
 describe('Report Results Tests', () => {
-  const testsData = {};
-  const totalsData = {};
+  let testsData;
+  let totalsData;
   before((done) => {
     reportResults.tests(conf, conf.target, testResultsInstanceData)
       .then((results) => {

@@ -50,7 +50,7 @@ stubReportResult.failureNotice = (conf, target, stats) => {
 
 describe('Run Monitor Tests', function() {
   this.timeout(5000);
-  const data = {};
+  let data;
   before((done) => {
     const onetestFake = nock('http://localhost:33688')
       .post('/one')

@@ -42,7 +42,7 @@ const processOutput = proxyquire(app + 'process-output', {
 });
 
 describe('Process Output Tests', () => {
-  const data = {};
+  let data;
   before((done) => {
     processOutput(conf, target, jsonReport)
       .then((results) => {
@@ -66,7 +66,7 @@ describe('Process Output Tests', () => {
     expect(data.resultsDeleted).to.be.true;
   });
   it('should have really deleted the file from the file system', () => {
-    const deleted = false;
+    let deleted;
     try {
       fs.accessSync(jsonReport, fs.F_OK);
       deleted = false;

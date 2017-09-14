@@ -9,9 +9,7 @@ const fs = require('fs-extra');
 const _ = require('lodash');
 const proxyquire = require('proxyquire');
 const mockAws = require('mock-aws');
-const mockResults = {
-  ETag: '"1224efc9c15f3363df0227e1c8bebfcd"'
-};
+const mockResults = {ETag: '"1224efc9c15f3363df0227e1c8bebfcd"'};
 
 const conf = require('../../../config/load');
 const app = conf.application_root + conf.api_monitor;
@@ -29,13 +27,11 @@ fs.copySync(reportData, jsonReport);
 
 mockAws.mock('S3', 'putObject', mockResults);
 
-const aws = proxyquire(conf.application_root + '/app/adapters/aws', {
-  'aws-sdk': mockAws
-});
+const aws = proxyquire(conf.application_root + '/app/adapters/aws', {'aws-sdk': mockAws});
 
 
 describe('AWS Adapter Tests', function() {
-  const data = {};
+  let data;
   before((done) => {
     aws.s3Upload(jsonReport, target, conf.aws_s3_bucket, conf.aws_s3_file_expiration_days)
       .then((results) => {
@@ -60,7 +56,7 @@ describe('AWS Adapter Tests', function() {
   });
   it('should take a valid file do S3 putObject and delete the file', () => {
     fs.access(jsonReport, fs.F_OK, (err) => {
-      const success = false;
+      let success;
       if (!err) {
         success = false;
       } else {
